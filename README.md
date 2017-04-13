@@ -17,15 +17,18 @@ To better understand the approaches that students use to manage their class time
 - Poor UX on mobile devices
 - Requires Navigation to login page, entering username and password, scrolling, panning and clicking See More to load calendar
 - No facility for notifications or export to calendar
+
 **Mobile screenshot of eVision timetable**
 - Static - does not capture changes to class times or locations or fortnightly tutorials etc.
 - Image is eventually submerged on user’s ‘camera roll’
 - No facility for notifications or export to calendar
+
 **Manual entry into calendar application**
 - Very time consuming relative to other options - large burden on user at beginning of each semester
 - Allows notifications
 - Requires accuracy and understanding of class behaviours e.g. no lab in first week, fortnightly tutorial etc.
 - Static - does not capture any changes in the timetable
+
 **Diary**
 - Involves transcribing timetable into diary
 - Unresponsive to changes in venue, fortnightly tutorials etc. unless you transcribe week by week
@@ -63,29 +66,80 @@ _William is leading our testing effort. With a particular interest in this area,
 ## How are we going to build this application
 _We’ve designed four high level components and identified tasks which are needed to assemble these._
 ### High Level Architecture Plan
-[Image](https://github.com/noisive/stoned-crone/raw/master/img/Architecture.png)
-```
-# Header 1
-## Header 2
-### Header 3
+![Image](https://github.com/noisive/stoned-crone/raw/master/img/Architecture.png)
 
-- Bulleted
-- List
+**Data Structure**
+- For each class store
+  - Name
+  - Type (tutorial, lab, lecture)
+  - Start and Finish time
 
-1. Numbered
-2. List
+**Fetcher**
+- Sends the login token to eVision
+- Fetches HTML calendar page with C++
+  - Parses and cleans this data and interfaces with the data structure object to create/update the events stored in it (time, place, colour, type)
+  
+**Getter / Setter**
+- Has methods to read and wipe data structure
+- Has methods to update certain parameters in the data structure e.g. a ‘reminder’ flag for each event
+- Has methods to do searches e.g. only BSNS115, date range
+- Passes data to Display in a sensible way so that it can be displayed to the user
 
-**Bold** and _Italic_ and `Code` text
+**Display**
+- Interfaces with setter/getter
+- Sets options e.g. reminder
+- Sends queries through getter e.g. day view, week view
+- Makes things look pretty (displays engagements in a chart format)
 
-[Link](url) and ![Image](src)
-```
+## Scheduling
+![Image](https://github.com/noisive/stoned-crone/raw/master/img/GANT1.jpeg)
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Testing
+We will be developing atoms to an agreed and documented specification. As we develop the components that make up each atom we will test them against the specification to ensure they “do what they say they do”. We have signed up for the Travis CI tool which will automatically compile and run tests as we push versions to our public github.
 
-### Jekyll Themes
+As in the gantt chart above, we are going to develop specifications for what we are building and then continually test what we have developed against those specifications. We will test each component of the application individually, trying to break it using edge cases as well as testings the application as a whole with a variety of users and devices.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/noisive/stoned-crone/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Code reviews will be carried out before any branch is merged into master; which can help reduce the number of bugs brought into the code.
 
-### Support or Contact
+## Feasibility
+**Technical**
+Successful execution of the project will require:
+- Experience in:
+  - C++
+  - iOS Development - Swift or Objective-C
+- Access to:
+  - macOS and xCode
+  - iOS based devices or suitable in-built emulators
+  
+The group is currently working on a series of proof of concepts in C++ and Swift with the aim of increasing our technical competence.
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+**Resources**
+Resources that can assist us with development are:
+- [Apple's UI Design Language](https://developer.apple.com/design)
+- [Apple’s Developer Application Programming Interface (API)](https://developer.apple.com/develop)
+- [cURL Library API](https://curl.haxx.se/libcurl/c/)
+- [C++ APIs](http://www.cplusplus.com/reference/)
+- Computers Laboratories at Otago University
+- Otago University Computer Science Faculty
+
+## Risks Assessment and Treatment Plans
+### Technical
+**Issues pulling eVision data into C++ with cURL**
+Alternative approaches to be explored
+Proof of feasibility for this is currently a priority task 
+Group to set go-no go milestone for this approach
+
+### Introduced
+**eVision (3rd party) update breaks code**
+- Due to encapsulation only fetcher code needs to change significantly
+- Monitor situation - they’ve recently performed a significant update so are perhaps unlikely to implement another significant one for some time
+
+**Natural disaster**
+- All team members have laptops and are able to work remotely
+
+### Human
+**People fall ill or are otherwise unavailable**
+- Agreed commenting standards
+- Documentation of architecture and methods
+- Central repository in Github
+- Tasks tracked in Asana
