@@ -63,7 +63,7 @@ _William is leading our testing effort. With a particular interest in this area,
 ## How are we going to build this application
 _We’ve designed four high level components and identified tasks which are needed to assemble these._
 ### High Level Architecture Plan
-[Image](https://github.com/noisive/stoned-crone/master/img/Architecture.png)
+[Image](https://github.com/noisive/stoned-crone/raw/master/img/Architecture.png)
 ```
 # Header 1
 ## Header 2
