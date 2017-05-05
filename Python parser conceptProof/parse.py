@@ -40,7 +40,7 @@ parseEndTags=[",","\"","\"","\"", "<","<","<","\"","<","<","<","<"]
 dataIndex = 0;
 dictKeyIndex = 1; # Start time is key
 currKey = ""
-for line in sys.stdin:
+for line in fileinput.input():
     parsedInfo = parse(line, parseStartTags[dataIndex], parseEndTags[dataIndex])
     
     if parsedInfo == None:
