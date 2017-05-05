@@ -1,6 +1,8 @@
 """ Returns error if text not found.
 Otherwise, searches text until it finds target, 
 then returns text between target and endTarget"""
+import sys
+import fileinput
 
 def parse(text, target, endTarget):
 	targetIndex = 0
@@ -27,15 +29,35 @@ def parse(text, target, endTarget):
 				currentlyMatching = False
 				targetIndex = 0
 					
-	#return out
+	return None
     
 data = {"10:00" : ["11:00", "lightgrey"]}
-dataLabels = ["Day of week", "start time","end time"]
-parseStartTags =["\"day\":", "\"start\":\"", "\"end\":\""]
-parseEndTags=[",","\"","\"", ]
-for line in inputFile:
+dataLabels = ["Day of timetable", "start time","end time", "colour", "Class type", "Paper code", "Paper name", "Map url", "Stream", "Room code", "Room name", "Building"]
+parseStartTags =["\"day\":", "\"start\":\"", "\"end\":\"","\"fcol\":\"", "\"info\":\"","Paper code:<\/strong> ", "Paper name:<\/strong> ", "href=\\\"", "Stream:<\/strong> ", "target=\\\"_blank\\\">", "Room:<\/strong> ","Building:<\/strong> "]
+parseEndTags=[",","\"","\"","\"", "<","<","<","\"","<","<","<","<"]
+
+
+dataIndex = 0;
+dictKeyIndex = 1; # Start time is key
+currKey = ""
+for line in sys.stdin:
+    parsedInfo = parse(line, parseStartTags[dataIndex], parseEndTags[dataIndex])
     
-
-
-testLine = raw_input()
-print parse(testLine, "\"info\":\"", "<")
+    if parsedInfo == None:
+        continue
+    else:
+        if dataIndex == dictKeyIndex:
+            currKey = parsedInfo
+            data[currKey] = []
+        else:
+            data[currKey].append(parsedInfo)
+        if dataIndex == dataLabels.length():
+            break
+            dataIndex = 0
+        else:
+            dataIndex += 1
+            
+    
+print data
+#testLine = raw_input()
+#print parse(testLine, "\"info\":\"", "<")
