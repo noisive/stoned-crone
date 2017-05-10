@@ -31,11 +31,22 @@ def parse(text, target, endTarget):
                     
     return None
     
-data = {"10:00" : ["11:00", "lightgrey"]}
+# Removes spaces from end of data
+def tidyData(dataDict):
+    for item in dataDict.iteritems():
+        for index in range(0, len(item)-1):
+            while item[index][len(item[index])-1] == " ":
+                dataDict[item][index] = item[index][0:len(item[index])-1]
+                # this is creating mutable COPY. Need to change original.
+
+    
+    
+# Only external array needs to be dynamic. Internal one can be set size.
+#data = [["10:00", "11:00", "lightgrey"], ["12:00", "13:00", "lightgrey"]]
 dataLabels = ["Day of timetable", "start time","end time", "colour", "Class type", "Paper code", "Paper name", "Map url", "Stream", "Room code", "Room name", "Building"]
 parseStartTags =["\"day\":", "\"start\":\"", "\"end\":\"","\"fcol\":\"", "\"info\":\"","Paper code:<\/strong> ", "Paper name:<\/strong> ", "href=\\\"", "Stream:<\/strong> ", "target=\\\"_blank\\\">", "Room:<\/strong> ","Building:<\/strong> "]
 parseEndTags=[",","\"","\"","\"", "<","<","<","\"","<","<","<","<"]
-
+data = {}
 
 
 
@@ -62,10 +73,11 @@ for line in fileinput.input():
             dataIndex += 1
     """
 
+    
     while True: #breaks if parsedInfo == None (no data)
         parsedInfo = parse(line, parseStartTags[dataIndex], parseEndTags[dataIndex])
         if parsedInfo == None:
-            break
+            break # Look in next line.
         
         if dataIndex == dictKeyIndex:
                 currKey = parsedInfo
@@ -73,14 +85,20 @@ for line in fileinput.input():
             data[currKey].append(parsedInfo)
         except KeyError:
             tempInfo.append(parsedInfo)
-    if dataIndex == len(dataLabels):
-        data[currKey] = tempInfo
-        break
-        dataIndex = 0
-    else:
-        dataIndex += 1
-    continue
-    
+            
+        if dataIndex == len(dataLabels)-1:
+            data[currKey] = tempInfo
+            dataIndex = 0
+            tempInfo = []
+            # Found all the individual parts of a single entry.
+            # Time for new entry.
+            break
+        else:
+            dataIndex += 1
+        #continue
+     
+#tidyData(data)
+print dataLabels
 print data
 #testLine = raw_input()
 #print parse(testLine, "\"info\":\"", "<")
