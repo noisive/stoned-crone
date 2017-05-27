@@ -1,22 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Marketplace
-Gist
- @BlueDrink9
- Sign out
- Unwatch 4
-  Unstar 1
- Fork 2 noisive/stoned-crone
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Settings Insights 
-Branch: 2d_array_parser Find file Copy pathstoned-crone/Python parser conceptProof/parse.py
-409fbfb  12 days ago
-@BlueDrink9 BlueDrink9 finished 2d array version of python parser
-1 contributor
-RawBlameHistory     
-85 lines (68 sloc)  2.95 KB
 """ Returns error if text not found.
 Otherwise, searches text until it finds target, 
 then returns text between target and endTarget"""
@@ -39,19 +20,19 @@ def parse(text, target, endTarget):
             if letter == endTarget:
                 return out
             else:
-                out+=letter
+                out += letter
         else:
-        
+            
             if letter == target[targetIndex]:
                 currentlyMatching = True
                 if targetIndex == targLength -1:
                     doExtract = True
-                targetIndex+=1
-                
+                targetIndex += 1
+            
             else:
                 currentlyMatching = False
                 targetIndex = 0
-                    
+    
     return None
     
 # Removes spaces from end of data
@@ -65,37 +46,66 @@ def tidyData(dataDict):
 
     
 
-# Converts the start and end date strings in array to plain numbers, of form ddmmyyyy
-def extractDateValues(data){
-    startDateString = data[1]
-    endDateString = data[2]
+# Converts the start and end date strings in array to plain numbers, 
+# of form ddmmyyyy
+def extractDateValues(data):
+    startDateString = data[0]
+    endDateString = data[1]
 
+    # Expected current format is dd\/Mmm\/yyyy,
+    # with month being the 3 letter month code.
+    # Python seems to be storing as 27\\/Mar\\/2017
     startDateNum = startDateString[0:2]
-    endDateNum
+    endDateNum = endDateString[0:2]
 
-    case(startDateString(4:7)){
-        ="Jan":
-            startDateNum += 01
-            break
-        ="Feb"
-            startDateNum += 02
-            break
-        
+
+    switcher={
+        "Jan" : "01",
+        "Feb" : "02",
+        "Mar" : "03",
+        "Apr" : "04",
+        "May" : "05",
+        "Jun" : "06",
+        "Jul" : "07",
+        "Aug" : "08",
+        "Sep" : "09",
+        "Oct" : "10",
+        "Nov" : "11",
+        "Dec" : "12"
     }
-}
+    startDateNum  +=  switcher[startDateString[4:7]] 
+    endDateNum  +=  switcher[endDateString[4:7]]
+
+    startDateNum  +=  startDateString[9:13]
+    endDateNum  +=  endDateString[9:13]
+
+    data[0][0] = startDateNum
+    data[0][1] = endDateNum
+
 
 
 # Only external array needs to be dynamic. Internal one can be set size.
-dataLabels = ["Date range start", "Date range end", "Day of timetable", "start time","end time", "colour", "Class type", "Paper code", "Paper name", "Map url", "Stream", "Room code", "Room name", "Building"]
-parseStartTags =["Now showing dates "," to ", "\"day\":", "\"start\":\"", "\"end\":\"","\"fcol\":\"", "\"info\":\"","Paper code:<\/strong> ", "Paper name:<\/strong> ", "href=\\\"", "Stream:<\/strong> ", "target=\\\"_blank\\\">", "Room:<\/strong> ","Building:<\/strong> "]
-parseEndTags=[" to ",")","\"","\"","\"", "<","<","<","\"","<","<","<","<"]
+dataLabels = ["Day of timetable", "start time", "end time", "hex colour", "Class type", "Paper code", "Paper name", "Map url", "Stream", "Room code", "Room name", "Building"]
+parseStartTags = ["\"day\":", "\"start\":\"", "\"end\":\"", "\"fcol\":\"", "\"info\":\"", "Paper code:<\/strong> ", "Paper name:<\/strong> ", "href=\\\"", "Stream:<\/strong> ", "target=\\\"_blank\\\">", "Room:<\/strong> ", "Building:<\/strong> "]
+parseEndTags = [",", "\"", "\"", "\"", "<", "<", "<", "\"", "<", "<", "<", "<"]
 data = []
-data.append([""]*(len(dataLabels)-1))
+data.append([""]*len(dataLabels))
+hasDates = False
+dateRange = ["",""]
+
+dateTags = ["Now showing dates ", " to ", " ",")"]
 
 dataIndex = 0
 for line in fileinput.input():
     entryIndex = 0
-    dictKeyIndex = 1 # Start time is key
+
+    if not hasDates:
+        parsedInfo = parse(line, dateTags[0], dateTags[2])
+        if parsedInfo != None:
+            dateRange[0] = parsedInfo
+            parsedInfo = parse(line, dateTags[1], dateTags[3])
+            dateRange[1] = parsedInfo
+            hasDates = True
 
 
     
@@ -110,17 +120,20 @@ for line in fileinput.input():
             # Found all the individual parts of a single entry.
             # Time for new entry.
             data.append([""]*(len(dataLabels)-1))
-            dataIndex+=1
+            dataIndex += 1
             break
         else:
             data[dataIndex][entryIndex] = parsedInfo
-            entryIndex += 1
+            entryIndex  +=  1
 del data[(len(data)-1)]
 
+if len(data[0]) < len(dataLabels):
+    raise EOFError("No input file, or insufficient data discovered in file.")
+dataLabels.append(["Start date range", "End date range"])
+data.append(dateRange)
 tidyData(data)
+extractDateValues(dateRange)
 print dataLabels
 print data
 #testLine = raw_input()
 #print parse(testLine, "\"info\":\"", "<")
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
