@@ -7,28 +7,36 @@ then returns text between target and endTarget"""
 
 import sys
 import fileinput
+from datetime import timedelta, date
 
 def parse(text, target, endTarget):
     targetIndex = 0
     targLength = len(target)
     currentlyMatching = False
     doExtract = False
+    skip = False
     out = ""
     for letter in text:
-            
+        
+        if doExtract == True:
+
             if letter == endTarget:
                 return out
             else:
                 out += letter
         else:
             
-            if letter == target[targetIndex]:
+            #if letter in "LectureComputer LabPracticalTutorial":
+                #skip = True
+            if letter == target[targetIndex]:# or skip:
                 currentlyMatching = True
                 if targetIndex == targLength -1:
                     doExtract = True
-                targetIndex += 1
+                if not skip:
+                    targetIndex += 1
             
             else:
+                skip = False
                 currentlyMatching = False
                 targetIndex = 0
     
@@ -36,14 +44,48 @@ def parse(text, target, endTarget):
     
 # Removes spaces from end of data
 # Uses string indexing.
-def tidyData(dataDict):
+def tidyData(data):
     for lecture in range(0, len(data)):
         for entry in range(0, len(data[lecture])):
             while data[lecture][entry][len(data[lecture][entry])-1] == " ":
                 data[lecture][entry] = data[lecture][entry][0:len(data[lecture][entry])-1]
-                # this is creating mutable COPY. Need to change original.
 
     
+def processDate(dateRange, dayInTimetable):
+    dayDelta = timedelta(dayInTimetable-1)
+    startDate = date(int(dateRange[0][4:8]), int(dateRange[0][2:4]), int(dateRange[0][0:2]))
+    startDate += dayDelta 
+    return startDate.strftime("%d%m")
+
+def processForCSV(data, dataLabels):
+    startTimeIndex = 1
+    endTimeIndex = 2
+    dateRangeIndex = 10
+    dayOfTimetableIndex = 0
+    dayStartDefinition = 8
+
+    for lesson in range(0, len(data)-1):
+        data[lesson][endTimeIndex] = int(data[lesson][endTimeIndex][0:2])\
+                - int(data[lesson][startTimeIndex][0:2])
+        data[lesson][startTimeIndex] = int(data[lesson][startTimeIndex][0:2]) - int(dayStartDefinition)
+        
+        data[lesson][-1] = (processDate(data[dateRangeIndex],
+                int(data[lesson][dayOfTimetableIndex])))
+
+    dataLabels.append("Date")
+    dataLabels[startTimeIndex] = "startInt"
+    dataLabels[endTimeIndex] = "Duration"
+
+def printCSV(data):
+    filename = "database.csv"
+    f = open(filename, "w")
+    for lesson in range(0,len(data)-1):
+        for item in range(0, len(data[lesson])-1):
+            f.write(str(data[lesson][item]))
+            f.write(",")
+        f.write("\n")
+    f.close()
+
 
 # Converts the start and end date strings in array to plain numbers, 
 # of form ddmmyyyy
@@ -62,7 +104,7 @@ def extractDateValues(data):
         "Jan" : "01",
         "Feb" : "02",
         "Mar" : "03",
-        "Apr" : "04",
+       "Apr" : "04",
         "May" : "05",
         "Jun" : "06",
         "Jul" : "07",
@@ -78,8 +120,8 @@ def extractDateValues(data):
     startDateNum  +=  startDateString[9:13]
     endDateNum  +=  endDateString[9:13]
 
-    data[0][0] = startDateNum
-    data[0][1] = endDateNum
+    data[0] = startDateNum
+    data[1] = endDateNum
 
 
 
@@ -88,7 +130,7 @@ dataLabels = ["Day of timetable", "start time", "end time", "hex colour", "Class
 parseStartTags = ["\"day\":", "\"start\":\"", "\"end\":\"", "\"fcol\":\"", "\"info\":\"", "Paper code:<\/strong> ", "Paper name:<\/strong> ", "href=\\\"", "Stream:<\/strong> ", "target=\\\"_blank\\\">", "Room:<\/strong> ", "Building:<\/strong> "]
 parseEndTags = [",", "\"", "\"", "\"", "<", "<", "<", "\"", "<", "<", "<", "<"]
 data = []
-data.append([""]*len(dataLabels))
+data.append(["0xCC"]*(len(dataLabels)+1))
 hasDates = False
 dateRange = ["",""]
 
@@ -115,10 +157,11 @@ for line in fileinput.input():
             
         # End of current entry.
         if entryIndex == len(dataLabels)-1:
+            data[dataIndex][entryIndex] = parsedInfo
             entryIndex = 0
             # Found all the individual parts of a single entry.
             # Time for new entry.
-            data.append([""]*(len(dataLabels)-1))
+            data.append(["0xCC"]*(len(dataLabels)))
             dataIndex += 1
             break
         else:
@@ -126,13 +169,15 @@ for line in fileinput.input():
             entryIndex  +=  1
 del data[(len(data)-1)]
 
-if len(data[0]) < len(dataLabels):
+if len(data) < 1 or len(data[0]) < len(dataLabels):
     raise EOFError("No input file, or insufficient data discovered in file.")
 dataLabels.append(["Start date range", "End date range"])
 data.append(dateRange)
 tidyData(data)
 extractDateValues(dateRange)
+processForCSV(data, dataLabels)
 print dataLabels
 print data
+printCSV(data)
 #testLine = raw_input()
 #print parse(testLine, "\"info\":\"", "<")
