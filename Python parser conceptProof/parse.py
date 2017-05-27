@@ -15,8 +15,7 @@ def parse(text, target, endTarget):
     doExtract = False
     out = ""
     for letter in text:
-        
-        if doExtract == True:
+            
             if letter == endTarget:
                 return out
             else:
