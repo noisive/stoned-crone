@@ -79,8 +79,8 @@ def processForCSV(data, dataLabels):
 def printCSV(data):
     filename = "database.csv"
     f = open(filename, "w")
-    for lesson in range(0,len(data)-1):
-        for item in range(0, len(data[lesson])-1):
+    for lesson in range(len(data)):
+        for item in range(len(data[lesson])):
             f.write(str(data[lesson][item]))
             f.write(",")
         f.write("\n")
@@ -130,7 +130,8 @@ dataLabels = ["Day of timetable", "start time", "end time", "hex colour", "Class
 parseStartTags = ["\"day\":", "\"start\":\"", "\"end\":\"", "\"fcol\":\"", "\"info\":\"", "Paper code:<\/strong> ", "Paper name:<\/strong> ", "href=\\\"", "Stream:<\/strong> ", "target=\\\"_blank\\\">", "Room:<\/strong> ", "Building:<\/strong> "]
 parseEndTags = [",", "\"", "\"", "\"", "<", "<", "<", "\"", "<", "<", "<", "<"]
 data = []
-data.append(["0xCC"]*(len(dataLabels)+1))
+lessonFieldNumber = len(dataLabels) + 1
+data.append(["0xCC"]*lessonFieldNumber)
 hasDates = False
 dateRange = ["",""]
 
@@ -161,7 +162,7 @@ for line in fileinput.input():
             entryIndex = 0
             # Found all the individual parts of a single entry.
             # Time for new entry.
-            data.append(["0xCC"]*(len(dataLabels)))
+            data.append(["0xCC"]*lessonFieldNumber)
             dataIndex += 1
             break
         else:
