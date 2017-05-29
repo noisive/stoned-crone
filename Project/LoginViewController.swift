@@ -33,16 +33,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     let webLogout = "document.getElementsByClassName('sv-navbar-text sv-visible-xs-block')[0].getElementsByTagName('a')[0].click()"
     
     let webInsertFunctions = "window.getJSArray = function() {\n" +
-                "return content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();}" +
-                                "\n" +
-                "window.getWeekStart = function() {" +
-                "var content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();" +
-                "var startIndex = content.indexOf('Now showing dates') + ('Now showing dates '.length);" +
-                "return content.substring(startIndex, startIndex + 12);}"
+                "return content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();}"
 
     let webGrabCode = "window.getJSArray()"
-    
-    let webGrabDate = "window.getWeekStart()"
     
     var once:Bool = false
     
@@ -100,14 +93,12 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             if (error) {
                 // Get the error given by eVision.
                 let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: webErrorReason)!) as String
-                print("Error detected on page: \(reason)")
                 loginReset(reason: reason)
                 return;
             }
             
             var header:String = NSString(string: webView.stringByEvaluatingJavaScript(from: webCheckHeader)!) as String
             header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-            print("PAGE HEADER: \(header)")
             
             if (header == "" && !once) {
                 usernameField.isHidden = false
@@ -121,12 +112,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             switch header {
                 
             case "System Message":
-                print("System Message no Danger Panel (probably Logout)")
                 spinner.startAnimating()
                 spinner.isHidden = true
-                _ = self.navigationController?.popToRootViewController(animated: true)
-                self.dismiss(animated: true, completion: nil)
-                
                 break;
                 
             case "Home":
@@ -134,20 +121,16 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 break;
                 
             case "Timetable":
-                print("Extracting Week")
                 webView.stringByEvaluatingJavaScript(from: webInsertFunctions)
-                let weekStart:String = NSString(string: webView.stringByEvaluatingJavaScript(from: webGrabDate)!) as String
                 let json:String = NSString(string: webView.stringByEvaluatingJavaScript(from: webGrabCode)!) as String
                 
                 // Here we can pass on the output timetable for one week with the printed date.
-                print(weekStart)
                 print(json)
                 parseTimetable(json.cString(using: String.Encoding.utf8));
                 
                 doneButton.isHidden = false
                 
-                webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
-                print("Logging out")
+                //webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
                 webView.stringByEvaluatingJavaScript(from: webLogout)
                 break;
                 
@@ -179,16 +162,5 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         spinner.startAnimating()
         webView.stringByEvaluatingJavaScript(from: webClickLogin)
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

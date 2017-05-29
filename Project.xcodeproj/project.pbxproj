@@ -204,7 +204,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Eli Labes";
+				ORGANIZATIONNAME = Noisive;
 				TargetAttributes = {
 					53F8A0071EC3D0010001604A = {
 						CreatedOnToolsVersion = 8.3.2;
