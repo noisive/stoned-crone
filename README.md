@@ -9,9 +9,11 @@ Lacking elevated permissions you can install with ```gem install cocoapods --use
 Once installed, navigate to the repository root (stoned-ctone), then the first Project sub directory and in terminal run ```pod install```
 
 ### Installation
-1. Clone the git repository from https://github.com/noisive/stoned-crone.git or the project homepage
-2. Open the project file stoned-crone/Project/Project.xcodeproj/ in Xcode
-3. Build the project and run it through the Simulator, or on a connected iOS device if available
+1. Clone the git repository from https://github.com/noisive/stoned-crone.git or the project homepage.
+2. Navigate to the Project/src folder using terminal and run ```make```.
+3. Open the project file stoned-crone/Project/Project.xcodeproj/ in Xcode.
+4. Build the project and run it through the Simulator\*, or on a connected iOS device if available.  
+\*Known to work with iPhone 7 simulator
 
 ### So what does WingIt do?
 WingIt is a iOS tool for managing University of Otago classes. It uses a webview in the app to log you in to eVision, injects JavaScript to navigate pages, then more JavaScript trickery to pull your timetable out of the webview.
