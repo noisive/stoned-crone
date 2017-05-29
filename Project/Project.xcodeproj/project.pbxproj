@@ -25,7 +25,6 @@
 		53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53F8A0151EC3D0010001604A /* Assets.xcassets */; };
 		53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F8A0171EC3D0010001604A /* LaunchScreen.storyboard */; };
 		53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A0201EC3DE930001604A /* DayCollectionViewCell.swift */; };
-		6FDB091A1ED7D3C8000F1B78 /* iphone7Splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB09191ED7D3C8000F1B78 /* iphone7Splash.png */; };
 		6FDB091C1ED7D63A000F1B78 /* SplashTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB091B1ED7D63A000F1B78 /* SplashTransparent.png */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +50,6 @@
 		53F8A0181EC3D0010001604A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		53F8A01A1EC3D0010001604A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53F8A0201EC3DE930001604A /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
-		6FDB09191ED7D3C8000F1B78 /* iphone7Splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone7Splash.png; sourceTree = "<group>"; };
 		6FDB091B1ED7D63A000F1B78 /* SplashTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashTransparent.png; sourceTree = "<group>"; };
 		6FDB80B0C587CAF6FB154090 /* Pods-Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.debug.xcconfig"; sourceTree = "<group>"; };
 		B11DD1DED2E528A8E7347703 /* Pods-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +92,7 @@
 				53F8A00D1EC3D0010001604A /* ViewController.swift */,
 				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
 				297C56921ED9126200C44420 /* LoginViewController.swift */,
+				53BB7A201ED1536C00370F7B /* DetailView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -128,12 +127,10 @@
 		53F8A00A1EC3D0010001604A /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				6FDB09191ED7D3C8000F1B78 /* iphone7Splash.png */,
 				53F8A00B1EC3D0010001604A /* AppDelegate.swift */,
 				53CDC1E51EDC1EC000A2ED5A /* Views */,
 				6FDB091B1ED7D63A000F1B78 /* SplashTransparent.png */,
 				53F8A00F1EC3D0010001604A /* Main.storyboard */,
-				53BB7A201ED1536C00370F7B /* DetailView.swift */,
 				53CDC1E41EDC1EB300A2ED5A /* Cells */,
 				53CDC1E61EDC1EC900A2ED5A /* Data Structures */,
 				53F8A0151EC3D0010001604A /* Assets.xcassets */,
@@ -231,7 +228,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */,
-				6FDB091A1ED7D3C8000F1B78 /* iphone7Splash.png in Resources */,
 				5399C9861EDC17C8009F85FA /* data.csv in Resources */,
 				53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */,
 				53F8A0111EC3D0010001604A /* Main.storyboard in Resources */,
@@ -438,7 +434,7 @@
 					"$(PROJECT_DIR)/Project",
 				);
 				INFOPLIST_FILE = Project/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nadja.Project;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -461,7 +457,7 @@
 					"$(PROJECT_DIR)/Project",
 				);
 				INFOPLIST_FILE = Project/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nadja.Project;
 				PRODUCT_NAME = "$(TARGET_NAME)";

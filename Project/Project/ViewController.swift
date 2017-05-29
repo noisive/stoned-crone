@@ -17,11 +17,13 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     
     @IBOutlet var ToggleSectionOutlet: UISegmentedControl!
     
-    @IBOutlet var TopToolbar: UIToolbar!
+  
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var menuButton: UIBarButtonItem!
     
     var lessonData = [Lesson]()
+    
+    var dateLabel : String = String()
     
     var hourData = [[(lesson: String?, lesson2: String?)?]](repeating: [(lesson: String?, lesson2: String?)?](repeating: nil, count: 14), count: 7)
     
@@ -42,26 +44,32 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        let dateLabel : UIBarButtonItem = {
-            
-            let label = UILabel()
-            label.text = "2/5"
-            label.textColor = Constants.Colors.Theme
-            label.font = UIFont.boldSystemFont(ofSize: 16)
-            label.frame = CGRect(x: 0, y: 0, width: 30, height: 28)
-            return UIBarButtonItem(customView: label)
-        }()
-        self.navigationItem.rightBarButtonItem = dateLabel
+        
+        calculateDayLabel()
+        
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        TopToolbar.delegate = self
+
         // Do any additional setup after loading the view, typically from a nib.
         
         makeMakeData()
+    }
+    
+    func createDateLabel(date: String) {
+        let dateLabel : UIBarButtonItem = {
+            let label = UILabel()
+            label.text = date
+            label.textColor = Constants.Colors.Theme
+            label.font = UIFont.boldSystemFont(ofSize: 16)
+            label.textAlignment = .right
+            label.frame = CGRect(x: 0, y: 0, width: 70, height: 28)
+            return UIBarButtonItem(customView: label)
+        }()
+        self.navigationItem.rightBarButtonItem = dateLabel
     }
     
     func getClassType(classString: String) -> classType {
@@ -80,6 +88,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     
     func makeMakeData() {
         
+
         guard let path = Bundle.main.path(forResource: "data", ofType: ".csv") else {return}
         
         let importer = CSVImporter<[String]>(path: path)
@@ -127,12 +136,19 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             
             
             self.collectionView.reloadData()
+            print(self.getDayOfWeek()!)
+            let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
+            self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
             
-
-            for data in self.lessonData {
-                print("Information passed to table view \(data.type)")
-            }
+            self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
         }
+    }
+    
+    func getDayOfWeek() -> Int? {
+        let todayDate = Date()
+        let myCalendar = Calendar(identifier: .gregorian)
+        let weekDay = myCalendar.component(.weekday, from: todayDate)
+        return weekDay - 2
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -173,29 +189,30 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
         let dayArray = Constants.Formats.dayArray
         let dayIndex = getCurrentXPage()
         self.navigationItem.title = dayArray[dayIndex]
+        
+        calculateDayLabel()
+    }
+    
+    func calculateDayLabel() {
+        
+        let today = Date()
+        let format = DateFormatter()
+        format.dateFormat = "dd/MM"
+        let offset = getDayOfWeek()! > getCurrentXPage() ? -getCurrentXPage() : getCurrentXPage()
+     
+        let offsetDate = Calendar.current.date(byAdding: .day, value: offset, to: today)
+        
+        createDateLabel(date: format.string(from: offsetDate!))
     }
     
     func getCurrentXPage() -> Int {
         let xOffset = collectionView.contentOffset.x
         let width = collectionView.bounds.size.width
         return Int(ceil(xOffset / width))
-    }
-    
-    @IBAction func yesterday(_ sender: Any) {
-        let indexPath = IndexPath(item: getCurrentXPage() - 1, section: 0)
-        if indexPath.row >= 0 && indexPath.row < 7 {
-            collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-        }
-    }
-    
-    @IBAction func tomorrow(_ sender: Any) {
-        
-        let indexPath = IndexPath(item: getCurrentXPage() + 1, section: 0)
-        collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -205,10 +222,6 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         let destinationVC = segue.destination as! DetailView
         destinationVC.lessonData = senderObject
         
-    }
-    
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
     }
 }
 

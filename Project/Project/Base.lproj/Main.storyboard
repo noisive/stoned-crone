@@ -446,7 +446,7 @@
             </objects>
             <point key="canvasLocation" x="2028" y="747.9760119940031"/>
         </scene>
-        <!--COSC345-->
+        <!--Detail View-->
         <scene sceneID="P4V-Z7-zem">
             <objects>
                 <tableViewController storyboardIdentifier="detail" id="bhx-dZ-ymS" customClass="DetailView" customModule="Project" customModuleProvider="target" sceneMemberID="viewController">
@@ -584,7 +584,7 @@
                             <outlet property="delegate" destination="bhx-dZ-ymS" id="QqT-um-aL8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="COSC345" id="QhG-ug-DhC"/>
+                    <navigationItem key="navigationItem" id="QhG-ug-DhC"/>
                     <connections>
                         <outlet property="mapView" destination="IaL-oZ-jzs" id="iLp-q8-8ai"/>
                         <outlet property="nameLabel" destination="7Tu-gc-LKO" id="W5l-DF-lyC"/>
