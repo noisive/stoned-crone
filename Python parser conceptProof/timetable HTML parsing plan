@@ -1,0 +1,48 @@
+Data available from (js?) part: start, end (hh:mm, 24h time), background colour, map, paper code, paper name, building, room.
+Day of week? or day shown?
+
+For code:
+Count number of items you will need, so you can initialise that as the array size. Array of arrays, so you can hold each bit of data.
+NO! struct/object to store event. Don't be silly.
+
+
+(Now showing dates 27\/Mar\/2017 to 02\/Apr\/2017)","start_day":1,"no_days":7,"start_time":8,"no_hours":14,"view":"DAY_BY_TIME","snap_mins":30,"view_toggle":"Y","show_time":"N","dim_on_select":false,"more_info":"<B>More<\/B>"};    
+
+var eventdata =
+
+
+
+[{"id":"YTTB1","day":1,"start":"10:00","end":"11:00","draggable":false,"resizable":false,"selected":false,"bcol":
+"lightgrey","fcol":"#121212","info":"Lecture<br\/>\nBIOC351<br \/>\n<a href=\"https:\/\/maps.google.com\/?q=-45.8645093545978,170.513062675081&ll=-45.8645093545978,170.513062675081&z=19&t=k\" target=\"_blank\">BISEM<\/a><br \/>","ttip":"\n<strong>Paper code:<\/strong> BIOC351 <br\/>\n<strong>Paper name:<\/strong> Advanced Protein Biochemistry  <br\/>\n<strong>Stream:<\/strong> K1 <br \/>\n<strong>Room:<\/strong> Biochemistry Seminar Rm.<\/br><strong>Building:<\/strong> Biochemistry Building<\/br>","preinfo":"","isnote":false,"extra":{"tts_seqn":3,"rcid":""}}
+
+
+
+
+"title":"Timetable for  Now showing dates 27\/Mar\/2017 to 02\/Apr"
+
+Maybe just use this string, then use the day number to arrange in calendar.
+C++ calendar libraries? Or swift...
+
+day within timetable: "day":[number],"
+
+Time parse: "start":"[hh]:[mm]",
+"end":"[hh]:[mm]",
+
+colour: "bcol":"[colour name]" (can maybe match these one by one, because only limited number of colours)
+Or, has "fcol":"######" could use hex.
+
+lectur/lab?:   "info":"[event type]<br
+
+Papercode:   Paper code:<\/strong> [code] <br\/>
+
+Paper name: Paper name:<\/strong> [name] <br
+
+map url: href=\"[url with "/"="\/"]"   Can just use text between quotes after href, still works as link.
+
+Stream:<\/strong> [stream (K1)]
+
+roomcode: target=\"_blank\">[code]<\/a>
+
+Room name :<\/strong> [room]<\/br>
+
+building: Building:<\/strong> [Building]<\/br>
