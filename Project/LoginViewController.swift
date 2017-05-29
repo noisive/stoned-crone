@@ -16,7 +16,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-
+    @IBOutlet weak var doneButton: UIButton!
+    
     let webCheckError = "document.getElementsByClassName('sv-panel-danger').length > 0;"
     
     let webErrorReason = "document.getElementsByClassName('sv-panel sv-panel-danger')[0].getElementsByTagName('strong')[0].innerHTML"
@@ -43,11 +44,17 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     
     let webGrabDate = "window.getWeekStart()"
     
+    var once:Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        spinner.isHidden = true
+        usernameField.isHidden = true
+        passwordField.isHidden = true
+        loginButton.isHidden = true
+        spinner.startAnimating()
         webView.delegate = self
         webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
+        
         
         loginButton.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
         usernameField.addTarget(self, action: #selector(self.textUpdated), for: .editingChanged)
@@ -58,9 +65,15 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
+
     @IBAction func passPrimaryActionTriggered(_ sender: UITextField) {
-        attemptLogin()
+        if (sender == usernameField) {
+            usernameField.resignFirstResponder()
+            passwordField.becomeFirstResponder()
+        } else if (sender == passwordField) {
+            passwordField.resignFirstResponder()
+            attemptLogin()
+        }
     }
     
     @objc private func textUpdated() {
@@ -96,6 +109,15 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
             print("PAGE HEADER: \(header)")
             
+            if (header == "" && !once) {
+                usernameField.isHidden = false
+                passwordField.isHidden = false
+                loginButton.isHidden = false
+                spinner.stopAnimating()
+                spinner.isHidden = true
+                once = true
+            }
+            
             switch header {
                 
             case "System Message":
@@ -121,6 +143,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 print(weekStart)
                 print(json)
                 parseTimetable(json.cString(using: String.Encoding.utf8));
+                
+                doneButton.isHidden = false
                 
                 webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
                 print("Logging out")
