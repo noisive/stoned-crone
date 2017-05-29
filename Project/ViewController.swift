@@ -90,7 +90,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
 
         //guard let path = Bundle.main.path(forResource: "data", ofType: ".csv") else {return}
-        let path = NSHomeDirectory()+"data.csv"
+        let path = NSHomeDirectory()+"/data.csv"
         
         let importer = CSVImporter<[String]>(path: path)
         importer.startImportingRecords { $0 }.onFinish { importedRecords in
