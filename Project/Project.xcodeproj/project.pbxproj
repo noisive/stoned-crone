@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06AF01201EDC538400855C8A /* src in Resources */ = {isa = PBXBuildFile; fileRef = 06AF011F1EDC538400855C8A /* src */; };
+		06AF01221EDC53ED00855C8A /* libParse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AF01211EDC53ED00855C8A /* libParse.a */; };
+		06AF012A1EDC57A500855C8A /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06AF01291EDC57A500855C8A /* wrapper.cpp */; };
 		130B07FE1C5A78D4C88A7766 /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */; };
 		297C56931ED9126200C44420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginViewController.swift */; };
 		5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06AF011F1EDC538400855C8A /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = Project/src; sourceTree = "<group>"; };
+		06AF01211EDC53ED00855C8A /* libParse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libParse.a; path = Project/src/libParse.a; sourceTree = "<group>"; };
+		06AF01291EDC57A500855C8A /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper.cpp; path = Project/src/wrapper.cpp; sourceTree = "<group>"; };
 		297C56921ED9126200C44420 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankCellTableViewCell.swift; sourceTree = "<group>"; };
 		535BDEC81EC48FB200B853C2 /* TimetableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableCell.swift; sourceTree = "<group>"; };
@@ -61,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06AF01221EDC53ED00855C8A /* libParse.a in Frameworks */,
 				130B07FE1C5A78D4C88A7766 /* Pods_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,6 +116,8 @@
 		53F89FFF1EC3D0010001604A = {
 			isa = PBXGroup;
 			children = (
+				06AF01291EDC57A500855C8A /* wrapper.cpp */,
+				06AF011F1EDC538400855C8A /* src */,
 				53F8A00A1EC3D0010001604A /* Project */,
 				53F8A0091EC3D0010001604A /* Products */,
 				BECEBC0B869AAA66D0B009DA /* Pods */,
@@ -149,6 +158,7 @@
 		9D76A468FCF7B393CEA24F56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06AF01211EDC53ED00855C8A /* libParse.a */,
 				DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */,
 			);
 			name = Frameworks;
@@ -230,6 +240,7 @@
 				53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */,
 				5399C9861EDC17C8009F85FA /* data.csv in Resources */,
 				53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */,
+				06AF01201EDC538400855C8A /* src in Resources */,
 				53F8A0111EC3D0010001604A /* Main.storyboard in Resources */,
 				6FDB091C1ED7D63A000F1B78 /* SplashTransparent.png in Resources */,
 			);
@@ -250,7 +261,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		D6E3C43162A45D9845AB3F74 /* [CP] Copy Pods Resources */ = {
@@ -301,6 +312,7 @@
 				53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */,
 				297C56931ED9126200C44420 /* LoginViewController.swift in Sources */,
 				5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */,
+				06AF012A1EDC57A500855C8A /* wrapper.cpp in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
 				53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */,
 			);
@@ -436,6 +448,10 @@
 				INFOPLIST_FILE = Project/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Project/src",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nadja.Project;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Project/Project-Bridging-Header.h";
@@ -459,6 +475,10 @@
 				INFOPLIST_FILE = Project/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Project/src",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nadja.Project;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Project/Project-Bridging-Header.h";

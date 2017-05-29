@@ -32,10 +32,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     let webLogout = "document.getElementsByClassName('sv-navbar-text sv-visible-xs-block')[0].getElementsByTagName('a')[0].click()"
     
     let webInsertFunctions = "window.getJSArray = function() {\n" +
-                "var content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();" +
-                "var startBlockIndex = content.indexOf('[');" +
-                "var endBlockIndex = content.indexOf(']') + 1;\nreturn content.substring(startBlockIndex, endBlockIndex);\n}" +
-                "\n" +
+                "return content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();}" +
+                                "\n" +
                 "window.getWeekStart = function() {" +
                 "var content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();" +
                 "var startIndex = content.indexOf('Now showing dates') + ('Now showing dates '.length);" +
@@ -122,6 +120,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 // Here we can pass on the output timetable for one week with the printed date.
                 print(weekStart)
                 print(json)
+                parseTimetable(json.cString(using: String.Encoding.utf8));
                 
                 webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
                 print("Logging out")

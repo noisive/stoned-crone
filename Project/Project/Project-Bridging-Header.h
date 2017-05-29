@@ -3,3 +3,5 @@
 //
 
 #import "SWRevealViewController.h"
+void parseTimetable(const char* data);
+void parse();
