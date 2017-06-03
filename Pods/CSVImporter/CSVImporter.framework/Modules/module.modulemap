@@ -1,0 +1,10 @@
+framework module CSVImporter {
+  umbrella header "CSVImporter-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module CSVImporter.Swift {
+    header "CSVImporter-Swift.h"
+}

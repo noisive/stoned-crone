@@ -1,0 +1,10 @@
+framework module HandySwift {
+  umbrella header "HandySwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module HandySwift.Swift {
+    header "HandySwift-Swift.h"
+}
