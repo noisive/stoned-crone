@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		065477111EE274760040B898 /* CSVImporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0654770E1EE274760040B898 /* CSVImporter.framework */; };
+		065477121EE274760040B898 /* HandySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0654770F1EE274760040B898 /* HandySwift.framework */; };
 		06AF01201EDC538400855C8A /* src in Resources */ = {isa = PBXBuildFile; fileRef = 06AF011F1EDC538400855C8A /* src */; };
 		06AF01221EDC53ED00855C8A /* libParse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AF01211EDC53ED00855C8A /* libParse.a */; };
 		06AF012A1EDC57A500855C8A /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06AF01291EDC57A500855C8A /* wrapper.cpp */; };
-		130B07FE1C5A78D4C88A7766 /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */; };
 		297C56931ED9126200C44420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginViewController.swift */; };
 		5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */; };
 		535BDEC91EC48FB200B853C2 /* TimetableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BDEC81EC48FB200B853C2 /* TimetableCell.swift */; };
@@ -32,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0654770E1EE274760040B898 /* CSVImporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CSVImporter.framework; path = "../../Library/Developer/Xcode/DerivedData/Project-favwkdymsnahrkbcoubjzxotohfn/Build/Products/Debug-iphoneos/CSVImporter/CSVImporter.framework"; sourceTree = "<group>"; };
+		0654770F1EE274760040B898 /* HandySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HandySwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Project-favwkdymsnahrkbcoubjzxotohfn/Build/Products/Debug-iphoneos/HandySwift/HandySwift.framework"; sourceTree = "<group>"; };
 		06AF011F1EDC538400855C8A /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = Project/src; sourceTree = "<group>"; };
 		06AF01211EDC53ED00855C8A /* libParse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libParse.a; path = Project/src/libParse.a; sourceTree = "<group>"; };
 		06AF01291EDC57A500855C8A /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper.cpp; path = Project/src/wrapper.cpp; sourceTree = "<group>"; };
@@ -59,7 +62,6 @@
 		6FDB091B1ED7D63A000F1B78 /* SplashTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashTransparent.png; sourceTree = "<group>"; };
 		6FDB80B0C587CAF6FB154090 /* Pods-Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.debug.xcconfig"; sourceTree = "<group>"; };
 		B11DD1DED2E528A8E7347703 /* Pods-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.release.xcconfig"; sourceTree = "<group>"; };
-		DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +69,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065477111EE274760040B898 /* CSVImporter.framework in Frameworks */,
+				065477121EE274760040B898 /* HandySwift.framework in Frameworks */,
 				06AF01221EDC53ED00855C8A /* libParse.a in Frameworks */,
-				130B07FE1C5A78D4C88A7766 /* Pods_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,8 +161,9 @@
 		9D76A468FCF7B393CEA24F56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0654770E1EE274760040B898 /* CSVImporter.framework */,
+				0654770F1EE274760040B898 /* HandySwift.framework */,
 				06AF01211EDC53ED00855C8A /* libParse.a */,
-				DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -208,7 +212,6 @@
 				TargetAttributes = {
 					53F8A0071EC3D0010001604A = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = A2GT2YZVPE;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -439,11 +442,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = A2GT2YZVPE;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Project",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Project/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
@@ -466,11 +470,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = A2GT2YZVPE;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Project",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = Project/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;

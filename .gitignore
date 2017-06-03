@@ -1,14 +1,9 @@
 # Compiled Object files
 ._stoned*
-*.slo
-*.lo
 
 # Precompiled Headers
-*.gch
-*.pch
 
 # Compiled Dynamic libraries
-*.so
 
 # Fortran module files
 *.mod
@@ -21,6 +16,7 @@
 
 # Misc crap
 *.DS_Store
+*.lock
 
 *.xcuserstate
 xcuserdata/
