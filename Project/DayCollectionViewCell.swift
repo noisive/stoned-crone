@@ -145,7 +145,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
             print("Color set to tutorial")
             return Constants.Colors.tutorialColor
         case .exam:
-            return .red
+            return Constants.Colors.examColor
         }
     }
     

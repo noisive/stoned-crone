@@ -24,6 +24,9 @@ struct Constants {
         //Tutorial Color
         static let tutorialColor = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
         
+        //Exam Color
+        static let examColor = UIColor(red:0.06, green:0.31, blue:0.55, alpha:1.0)
+        
     }
     struct Formats {
         static let dayArray = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
