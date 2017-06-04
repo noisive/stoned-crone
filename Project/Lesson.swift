@@ -12,6 +12,7 @@ enum classType {
     case lecture
     case lab
     case tutorial
+    case exam
 }
 
 struct Lesson {

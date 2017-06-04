@@ -65,7 +65,10 @@ class DetailView: UITableViewController, MKMapViewDelegate {
             return "Tutorial"
         case .lecture:
             return "Lecture"
+        case .exam:
+            return "Exam"
         }
+        
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -23,15 +23,9 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     
     var lessonData = [Lesson]()
     
-    var dateLabel : String = String()
+    
     
     var hourData = [[(lesson: String?, lesson2: String?)?]](repeating: [(lesson: String?, lesson2: String?)?](repeating: nil, count: 14), count: 7)
-    
-//    //Create an array of arrays that have nothing in them
-//    var data = [[(lesson: String?, lesson2: String?)?]](repeating: [(lesson: String?, lesson2: String?)?](repeating: (lesson: String?, lesson2: String?)?, count: 14), count: 7)
-//    
-//    //var hourData [[(lesson: String?, lesson2: String?)?]](repeatElement((lesson: String?, lesson2: String?)?, count: 14)
-//    //var hourData = [[(lesson: String?, lesson2: String?)?]])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +38,9 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        
-        calculateDayLabel()
+        let format = DateFormatter()
+        format.dateFormat = "dd/MM"
+        createDateLabel(date: format.string(from: Date()))
         
         
         collectionView.delegate = self
@@ -54,12 +49,14 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
 
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         makeMakeData()
     }
     
     func createDateLabel(date: String) {
+        print(date)
         let dateLabel : UIBarButtonItem = {
             let label = UILabel()
             label.text = date
@@ -80,6 +77,8 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             return .lab
         case "Tutorial":
             return .tutorial
+        case "Exam":
+            return .exam
         default:
             print("There was an error, return default lecture")
             return .lecture
@@ -94,7 +93,12 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         let importer = CSVImporter<[String]>(path: path)
         importer.startImportingRecords { $0 }.onFinish { importedRecords in
+            
+            var uniqueID : Int = 0
+            
             for record in importedRecords {
+                
+                print(record)
                 
                 //Define all data from CSV file and cast to correct data type.
                 let dayNumber = Int(record[0])! - 1 //Minus 1 as Monday should be 0
@@ -111,13 +115,16 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let buildingName = record[11]
                 let date = record[12]
                 
+                
                 //Create a new lesson
                 
-    
-                let newLesson = Lesson(classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
+                
+                let newLesson = Lesson(classID: "\(uniqueID)", start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
                 
                 //Insert new lesson into the correct day array
                 self.lessonData.append(newLesson)
+                
+                uniqueID += 1
             }
             
             for lesson in self.lessonData {
@@ -137,19 +144,23 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             
             
             self.collectionView.reloadData()
-            print(self.getDayOfWeek()!)
-            let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
+            print("Day of weeek", self.getDayOfWeek())
+            let indexPath = IndexPath(item: self.getDayOfWeek(), section: 0)
             self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
             
-            self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
+            
+            self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()]
         }
     }
     
-    func getDayOfWeek() -> Int? {
+    func getDayOfWeek() -> Int {
         let todayDate = Date()
         let myCalendar = Calendar(identifier: .gregorian)
         let weekDay = myCalendar.component(.weekday, from: todayDate)
-        return weekDay - 2
+        
+        let correctData = weekDay == 1 ? 6 : weekDay - 2
+        
+        return correctData
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -199,12 +210,12 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     }
     
     func calculateDayLabel() {
-        
         let today = Date()
         let format = DateFormatter()
         format.dateFormat = "dd/MM"
-        let offset = getDayOfWeek()! > getCurrentXPage() ? -getCurrentXPage() : getCurrentXPage()
-     
+        
+        let offset = getCurrentXPage() - getDayOfWeek()
+        
         let offsetDate = Calendar.current.date(byAdding: .day, value: offset, to: today)
         
         createDateLabel(date: format.string(from: offsetDate!))
