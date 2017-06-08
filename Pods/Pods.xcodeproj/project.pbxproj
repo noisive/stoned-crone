@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		01EA99320EABE906E24202C86B651275 /* HandySwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F89D99260C7C510E104D8DE454711 /* HandySwift-dummy.m */; };
+		063474371EE8ED0700F2B86B /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063474361EE8ED0700F2B86B /* Pods_Project.framework */; };
+		063474391EE8EEC000F2B86B /* CSVImporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 063474381EE8EEC000F2B86B /* CSVImporter.framework */; };
+		0634743C1EE8EEC900F2B86B /* HandySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0634743B1EE8EEC900F2B86B /* HandySwift.framework */; };
 		0B4AB9646AA81D017F91B609E6A7B24D /* FrequencyTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031A0A8028949547FDD1BBB2385A857B /* FrequencyTable.swift */; };
 		15292E308173A1F41CD2B7D189D01D23 /* CSVImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656F33E56C119618CA3D621B70F6A2B9 /* CSVImporter.swift */; };
 		18693ACD9CD43ECDC66FADD0B026E810 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5728333B43491EFF1FF7C88FB5781CE0 /* Foundation.framework */; };
@@ -59,6 +62,10 @@
 		0092B30B6DA8386851195393066A2A10 /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TimeIntervalExtension.swift; path = Sources/Extensions/TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		02EA30098D05E0526FE5697E5E7FC36D /* DictionaryExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DictionaryExtension.swift; path = Sources/Extensions/DictionaryExtension.swift; sourceTree = "<group>"; };
 		031A0A8028949547FDD1BBB2385A857B /* FrequencyTable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FrequencyTable.swift; path = Sources/Structs/FrequencyTable.swift; sourceTree = "<group>"; };
+		063474361EE8ED0700F2B86B /* Pods_Project.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pods_Project.framework; sourceTree = "<group>"; };
+		063474381EE8EEC000F2B86B /* CSVImporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CSVImporter.framework; path = CSVImporter/CSVImporter.framework; sourceTree = "<group>"; };
+		0634743A1EE8EEC000F2B86B /* CSVImporter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSVImporter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0634743B1EE8EEC900F2B86B /* HandySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HandySwift.framework; path = HandySwift/HandySwift.framework; sourceTree = "<group>"; };
 		0E2F1A8A60E1870341FF7D6A39C305D2 /* CSVImporter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CSVImporter.xcconfig; sourceTree = "<group>"; };
 		12CDF818E4345BAF04AC89B9F3964885 /* CSVImporter-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CSVImporter-umbrella.h"; sourceTree = "<group>"; };
 		2B81A2FF50492428F907374DBEE9345F /* ArrayExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArrayExtension.swift; path = Sources/Extensions/ArrayExtension.swift; sourceTree = "<group>"; };
@@ -66,7 +73,6 @@
 		37BCB46E6A2DE345BD88DD644161B67A /* SortedArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SortedArray.swift; path = Sources/Structs/SortedArray.swift; sourceTree = "<group>"; };
 		3892AE9A6A0437686FB5EBAA4F5B06E5 /* IntExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IntExtension.swift; path = Sources/Extensions/IntExtension.swift; sourceTree = "<group>"; };
 		39B7FC84CC494462CDFB94DB56D6C5B9 /* HandySwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = HandySwift.modulemap; sourceTree = "<group>"; };
-		3C0A58F54FAB4CE539A3734936018A6F /* CSVImporter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSVImporter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E9C515BC12FE3DD6F2ADD7BC6A8BD3A /* HandySwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HandySwift-umbrella.h"; sourceTree = "<group>"; };
 		52BEFD7F5209304BC22052218A73D98B /* Pods-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Project.release.xcconfig"; sourceTree = "<group>"; };
 		52E88B7D8243326439E2C3C584374E8F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,14 +84,14 @@
 		820B6A2EBBFEB492EFD66566BCFE145D /* Pods-Project-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Project-umbrella.h"; sourceTree = "<group>"; };
 		8987B25A25AD16AC075019862911E037 /* CSVImporter-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CSVImporter-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		964CE99E983816EAF06545926477417E /* HandySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HandySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		964CE99E983816EAF06545926477417E /* HandySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HandySwift.framework; path = "/home/cshome/w/wwarren/345/testclones/stoned-crone/Pods/../build/Debug-iphoneos/HandySwift/HandySwift.framework"; sourceTree = "<absolute>"; };
 		9945BF9107D7E76E1DE1479371A69E82 /* Pods-Project-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Project-frameworks.sh"; sourceTree = "<group>"; };
 		9A9CB8BA8653D8FC9CEF38160C2F838F /* Pods-Project.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Project.modulemap"; sourceTree = "<group>"; };
 		9AD32279DA9DA987B0A51172F95D54F8 /* TextFile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextFile.swift; path = Sources/Code/TextFile.swift; sourceTree = "<group>"; };
 		9B4FFAB825CBD7BA76E6EFC5A14824CE /* HandySwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HandySwift.xcconfig; sourceTree = "<group>"; };
 		A29E7A50191507BBFDE14D9521F6CE29 /* Globals.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = Sources/Globals.swift; sourceTree = "<group>"; };
 		B1497337E83FCD99EF23C54295CEB553 /* HandySwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HandySwift-prefix.pch"; sourceTree = "<group>"; };
-		B36B32DC841B96A6F7D21FBF583D6DC8 /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B36B32DC841B96A6F7D21FBF583D6DC8 /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Project.framework; path = "/home/cshome/w/wwarren/345/testclones/stoned-crone/Pods/../build/Debug-iphoneos/Pods_Project.framework"; sourceTree = "<absolute>"; };
 		C168C8401F00F191399EE83C8BD61170 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C84326C31A2ED1207B32019AF37339C4 /* Pods-Project-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Project-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E6A86F946CB8856673F6CCFF4D6C1FC8 /* CSVImporter.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CSVImporter.modulemap; sourceTree = "<group>"; };
@@ -119,6 +125,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0634743C1EE8EEC900F2B86B /* HandySwift.framework in Frameworks */,
+				063474391EE8EEC000F2B86B /* CSVImporter.framework in Frameworks */,
+				063474371EE8ED0700F2B86B /* Pods_Project.framework in Frameworks */,
 				61A79AD2A22A7AF6811699A13CD333AD /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,8 +182,8 @@
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				C4E9A3B88AE5C2C64284DDE340C77B2F /* Frameworks */,
 				ACA0F59DD1329B5710E3FA5F3943C904 /* Pods */,
-				D5B3D94D0151EF2923BFB9A8CE1DA7A4 /* Products */,
 				88E896A444A80B95060D8969121C9D01 /* Targets Support Files */,
+				0634743A1EE8EEC000F2B86B /* CSVImporter.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -240,19 +249,12 @@
 		C4E9A3B88AE5C2C64284DDE340C77B2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0634743B1EE8EEC900F2B86B /* HandySwift.framework */,
+				063474381EE8EEC000F2B86B /* CSVImporter.framework */,
+				063474361EE8ED0700F2B86B /* Pods_Project.framework */,
 				4CA2CD2D201901BA09AB8C3DD6E7DC70 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D5B3D94D0151EF2923BFB9A8CE1DA7A4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3C0A58F54FAB4CE539A3734936018A6F /* CSVImporter.framework */,
-				964CE99E983816EAF06545926477417E /* HandySwift.framework */,
-				B36B32DC841B96A6F7D21FBF583D6DC8 /* Pods_Project.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,7 +338,7 @@
 			);
 			name = CSVImporter;
 			productName = CSVImporter;
-			productReference = 3C0A58F54FAB4CE539A3734936018A6F /* CSVImporter.framework */;
+			productReference = 0634743A1EE8EEC000F2B86B /* CSVImporter.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -356,7 +358,7 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = D5B3D94D0151EF2923BFB9A8CE1DA7A4 /* Products */;
+			productRefGroup = 7DB346D0F39D3F0E887471402A8071AB;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -444,6 +446,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/HandySwift/HandySwift-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/HandySwift/Info.plist";
@@ -479,6 +485,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/CSVImporter",
+					"$(PROJECT_DIR)/HandySwift",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/CSVImporter/CSVImporter-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/CSVImporter/Info.plist";
@@ -514,6 +526,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-Project/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -553,6 +569,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/HandySwift/HandySwift-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/HandySwift/Info.plist";
@@ -587,6 +607,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/CSVImporter",
+					"$(PROJECT_DIR)/HandySwift",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/CSVImporter/CSVImporter-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/CSVImporter/Info.plist";
@@ -713,6 +739,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "Target Support Files/Pods-Project/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
