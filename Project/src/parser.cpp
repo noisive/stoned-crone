@@ -2,13 +2,27 @@
     @author Will Shaw - 2017
 */
 #include "parser.hpp"
+#include <cstring>
 
 Parser::Parser(void) {
     this->json = "0xCC";
 }
 
+/* Data obtained by calling javascript 
+window.getData = function() {
+    var content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();
+    return content.trim();
+    }
+window.getData();
+*/
+
 Parser::Parser(const char* data) {
     std::string j(data);
+    this->json = j;
+    this->weekStart = 0xCC;    
+}
+
+Parser::Parser(std::string j){
     this->json = j;
     this->weekStart = 0xCC;    
 }

@@ -33,3 +33,5 @@
 
 *.xcuserstate
 xcuserdata/
+.vscode/
+timetableFiles/

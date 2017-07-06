@@ -27,6 +27,8 @@ class Parser {
         Parser(void);
 
         Parser(const char* data);
+        
+        Parser(std::string j);
 
         void setJson(std::string json);
 

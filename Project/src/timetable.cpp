@@ -62,11 +62,18 @@ void Timetable::exportToFile(std::string fileName) {
 }
 
 void Timetable::exportToGoogleCalFile(std::string fileName) {
-    std::ofstream myfile;
+    std::fstream myfile;
     myfile.open (fileName);
+    std::string headerLine;
+    std::getline(myfile, headerLine);
     std::string output;
     /* First line is required headers for import to google cal. */
-    output = "Subject,Start Date, End Date, Start Time, End Time, Description, Location, Private\n"
+    output = "Subject,Start Date, End Date, Start Time, End Time, Description, Location, Private\n";
+    if(headerLine == output){
+        // File already exists, already has header.
+        // So don't add it again.
+        output = "";
+    }
     for (TimetableEvent event: tt) {
         output += "%s %s, %s, %s, %s, %s, %s in %s; %s, %s, True\n", event.getPaperCode(), event.getType(), event.getDate(), event.getDate(), event.getStartTime(), event.getEndTime(), event.getPaperName(), event.getRoomName(), event.getBuilding(), event.getRoomCode();
     }
