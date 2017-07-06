@@ -222,5 +222,8 @@ void Parser::parse() {
     std::string filename(buffer);
     filename += "/data.csv";
     timetable.exportToFile(filename);
+    std::string GoogleCalFilename(buffer);
+    GoogleCalFilename += "/GoogleCalFile.csv";
+    timetable.exportToGoogleCalFile(GoogleCalFilename);
 
 }

@@ -12,8 +12,6 @@ typedef TimetableEvent te;
      * 20 is a rough peak for number of classes in a week. */
 std::vector<te> tt(20);
     
-int startingDate = 27052017;
-
 Timetable::Timetable() {
 
 }
@@ -57,6 +55,20 @@ void Timetable::exportToFile(std::string fileName) {
 
     for (TimetableEvent event: tt) {
         output += event.toString();
+    }
+
+    myfile << output;
+    myfile.close();
+}
+
+void Timetable::exportToGoogleCalFile(std::string fileName) {
+    std::ofstream myfile;
+    myfile.open (fileName);
+    std::string output;
+    /* First line is required headers for import to google cal. */
+    output = "Subject,Start Date, End Date, Start Time, End Time, Description, Location, Private\n"
+    for (TimetableEvent event: tt) {
+        output += "%s %s, %s, %s, %s, %s, %s in %s; %s, %s, True\n", event.getPaperCode(), event.getType(), event.getDate(), event.getDate(), event.getStartTime(), event.getEndTime(), event.getPaperName(), event.getRoomName(), event.getBuilding(), event.getRoomCode();
     }
 
     myfile << output;

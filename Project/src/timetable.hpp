@@ -24,6 +24,7 @@ class Timetable {
         std::string toString();
         void printToCSV();
         void exportToFile(std::string fileName);
+        void exportToGoogleCalFile(std::string fileName);
        };
 
 #endif // TIMETABLE_H_
