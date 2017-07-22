@@ -228,6 +228,8 @@ void Parser::parse() {
    
         ttEvent.addDate(this->weekStart);
 
+        std::cout << ttEvent.getDay() << "and date: " << ttEvent.getDate() << std::endl;
+
         timetable.addEvent(ttEvent);
 
     }

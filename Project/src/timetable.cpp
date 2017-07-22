@@ -80,16 +80,26 @@ std::string dateFormat(std::string dateNumbers){
         return dateNumbers.substr(0,2) + "/" + dateNumbers.substr(2,2) + "/" + dateNumbers.substr(4,4); 
     }
 }
-std::string timeFormat(int timeNumber){
+std::string timeFormat(int timeNumber, bool isEndTime=false){
     std::string ampm;
     std::ostringstream oss;
+    if (isEndTime){
+        // reduce by 1, add 50 to minutes
+        timeNumber--;
+    }
    if (timeNumber > 12){
     ampm = "PM";
    }else{
        ampm = "AM";
    }
    timeNumber %= 12;
-   oss << timeNumber << ":" << "00:00 " << ampm;
+   std::string minsec;
+   if (isEndTime){
+       minsec = "50:00 ";
+   }else{
+       minsec = "00:00 ";
+   }
+   oss << timeNumber << ":" << minsec << ampm;
    return oss.str();
 }
 
@@ -115,7 +125,7 @@ void Timetable::exportToGoogleCalFile(std::string fileName) {
         myfilew << output;
         for (TimetableEvent event: tt) {
             std::string date = dateFormat(event.getDate());
-            myfilew << event.getPaperCode() << " " << event.getType() << "," << date << "," << date << "," << timeFormat(event.getStartTime()) << "," << timeFormat(event.getEndTime()) << "," << "\"" << event.getPaperName() << "\"" <<" in " << event.getRoomName() << "; " << event.getBuilding() << "," << event.getRoomCode() << "," << "True" << std::endl;         
+            myfilew << event.getPaperCode() << " " << event.getType() << "," << date << "," << date << "," << timeFormat(event.getStartTime()) << "," << timeFormat(event.getEndTime(), true) << "," << "\"" << event.getPaperName() << "\"" <<" in " << event.getRoomName() << ": " << event.getBuilding() << "," << event.getRoomCode() << "," << "True" << std::endl;         
         }
         
         myfilew.close();

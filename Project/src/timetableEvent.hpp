@@ -36,11 +36,10 @@ class TimetableEvent {
         TimetableEvent(void);
 
         void addDate(int startingDate);
+        std::string getDate() const;
 
         std::string getId() const;
         void setId(std::string id);
-
-        std::string getDate() const;
 
         int getDuration() const;
         void setDuration(const int duration);

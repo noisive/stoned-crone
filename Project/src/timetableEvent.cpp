@@ -5,6 +5,7 @@
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+#include <iostream>
 
 TimetableEvent::TimetableEvent(void) {
     this->id = "0xCC";
@@ -136,6 +137,7 @@ void TimetableEvent::addDate(int startingDate) {
     std::ostringstream sday;
     sday  << std::setw(2) << std::setfill( '0' ) << day;
 
+    std::cout << sday.str()+smonth.str()+syear.str() <<std::endl;
 
     setDate(sday.str()+smonth.str()+syear.str());
 }
