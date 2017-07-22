@@ -3,6 +3,10 @@
 */
 #include "timetable.hpp"
 #include <cstring>
+#include <iostream> 
+#include <fstream>
+#include <cmath>
+#include <sstream>
 
 /* Defines implementation for timetable. Stores array of TimetableEvents */
 
@@ -51,33 +55,72 @@ std::string Timetable::toString() {
 void Timetable::exportToFile(std::string fileName) {
     std::ofstream myfile;
     myfile.open (fileName);
-    std::string output;
+    if (myfile.is_open()){
+        std::string output;
 
-    for (TimetableEvent event: tt) {
-        output += event.toString();
+        for (TimetableEvent event: tt) {
+            output += event.toString();
+        }
+
+        myfile << output;
+        myfile.close();
+    }else{
+        // Error opening file
+        std::cout << "Unable to open file \"" << fileName <<"\"\n";
     }
+}
 
-    myfile << output;
-    myfile.close();
+/* These next two methods purely for turning an event toString
+    into a format accepted by Google.
+*/
+std::string dateFormat(std::string dateNumbers){
+    if (dateNumbers.length() != 8){
+        return "error";
+    }else{
+        return dateNumbers.substr(0,2) + "/" + dateNumbers.substr(2,2) + "/" + dateNumbers.substr(4,4); 
+    }
+}
+std::string timeFormat(int timeNumber){
+    std::string ampm;
+    std::ostringstream oss;
+   if (timeNumber > 12){
+    ampm = "PM";
+   }else{
+       ampm = "AM";
+   }
+   timeNumber %= 12;
+   oss << timeNumber << ":" << "00:00 " << ampm;
+   return oss.str();
 }
 
 void Timetable::exportToGoogleCalFile(std::string fileName) {
-    std::fstream myfile;
-    myfile.open (fileName);
-    std::string headerLine;
-    std::getline(myfile, headerLine);
-    std::string output;
-    /* First line is required headers for import to google cal. */
-    output = "Subject,Start Date, End Date, Start Time, End Time, Description, Location, Private\n";
-    if(headerLine == output){
-        // File already exists, already has header.
-        // So don't add it again.
-        output = "";
+    std::ofstream myfilew;
+    std::ifstream myfiler;
+    std::string output = "Subject,Start Date,End Date,Start Time,End Time,Description,Location,Private\n";
+    myfiler.open (fileName); 
+    if (myfiler.is_open()){
+        std::string headerLine;
+        std::getline(myfiler, headerLine);
+        headerLine+="\n";
+        // First line is required headers for import to google cal.
+        if(headerLine == output){
+            // File already exists, already has header.
+            // So don't add it again.
+            output = "";
+        }
     }
-    for (TimetableEvent event: tt) {
-        output += "%s %s, %s, %s, %s, %s, %s in %s; %s, %s, True\n", event.getPaperCode(), event.getType(), event.getDate(), event.getDate(), event.getStartTime(), event.getEndTime(), event.getPaperName(), event.getRoomName(), event.getBuilding(), event.getRoomCode();
+    myfiler.close();
+    myfilew.open(fileName,std::ofstream::app);
+    if (myfilew.is_open()){
+        myfilew << output;
+        for (TimetableEvent event: tt) {
+            std::string date = dateFormat(event.getDate());
+            myfilew << event.getPaperCode() << " " << event.getType() << "," << date << "," << date << "," << timeFormat(event.getStartTime()) << "," << timeFormat(event.getEndTime()) << "," << "\"" << event.getPaperName() << "\"" <<" in " << event.getRoomName() << "; " << event.getBuilding() << "," << event.getRoomCode() << "," << "True" << std::endl;         
+        }
+        
+        myfilew.close();
+    }else{
+        // Error opening file
+        std::cout << "Unable to open file \"" << fileName <<"\"\n";
     }
-
-    myfile << output;
-    myfile.close();
 }
