@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; };
 		06AF01201EDC538400855C8A /* src in Resources */ = {isa = PBXBuildFile; fileRef = 06AF011F1EDC538400855C8A /* src */; };
-		06AF01221EDC53ED00855C8A /* libParse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06AF01211EDC53ED00855C8A /* libParse.a */; };
 		06AF012A1EDC57A500855C8A /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06AF01291EDC57A500855C8A /* wrapper.cpp */; };
 		130B07FE1C5A78D4C88A7766 /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */; };
 		297C56931ED9126200C44420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginViewController.swift */; };
@@ -32,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06A5475D1F7B1D9600967FD7 /* libBackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBackend.a; path = "../../Library/Developer/Xcode/DerivedData/Project-faabexjzkhonsfdsetxpryushahl/Build/Products/Debug-iphonesimulator/libBackend.a"; sourceTree = "<group>"; };
 		06AF011F1EDC538400855C8A /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = Project/src; sourceTree = "<group>"; };
 		06AF01211EDC53ED00855C8A /* libParse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libParse.a; path = Project/src/libParse.a; sourceTree = "<group>"; };
 		06AF01291EDC57A500855C8A /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper.cpp; path = Project/src/wrapper.cpp; sourceTree = "<group>"; };
@@ -67,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06AF01221EDC53ED00855C8A /* libParse.a in Frameworks */,
+				06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */,
 				130B07FE1C5A78D4C88A7766 /* Pods_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +159,7 @@
 		9D76A468FCF7B393CEA24F56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				06A5475D1F7B1D9600967FD7 /* libBackend.a */,
 				06AF01211EDC53ED00855C8A /* libParse.a */,
 				DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */,
 			);
