@@ -5,10 +5,11 @@
 #include "parser.hpp"
 
 int main(int argc, char** argv) {
-
-    // Read the dummy data from file.
-  
-    std::ifstream fileStream("../data.txt");
+    
+    // Get the home directory for checking files.
+    std::string home = getenv("HOME"); 
+    
+    std::ifstream fileStream("./test/ttb.txt");
     std::string dataString;
 
     fileStream.seekg(0, std::ios::end);   
@@ -18,9 +19,21 @@ int main(int argc, char** argv) {
     dataString.assign((std::istreambuf_iterator<char>(fileStream)),
     std::istreambuf_iterator<char>()); 
 
-    const char* data = "something"; 
+    std::cout << "\e[33mRunning parse on evision mess.\e[0m" << std::endl;
+
     Parser parser(dataString);
     parser.parse();
+
+    std::cout << "[\033[32mOK\033[0m] Check file://" + home + 
+        "/data.csv has been parsed." << std::endl << std::endl;
+    
+
+    std::cout << "\e[33mRunning parse on created CSV file.\e[0m" << std::endl;
+
+    parser = Parser(true);
+    
+    std::cout << "[\e[32mOK\e[0m] Check that the "
+        "above looks correct." << std::endl << std::endl;
 
     return 0;
 }

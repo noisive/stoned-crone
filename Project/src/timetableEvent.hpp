@@ -35,6 +35,7 @@ class TimetableEvent {
 
         TimetableEvent(void);
 
+        // Wraps the setDate function to parse into a standard format.
         void addDate(int startingDate);
         std::string getDate() const;
 
@@ -81,8 +82,10 @@ class TimetableEvent {
         void setColor(std::string hexColor);
 
         std::string toString() const;
-        
+
         std::string toCSVRow() const;
+
+        bool equals(TimetableEvent other) const;
 };
 
 #endif // TIMETABLEEVENT_H_

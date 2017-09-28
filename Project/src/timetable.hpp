@@ -9,23 +9,39 @@
 #include "timetableEvent.hpp"
 #include <fstream>
 
-typedef TimetableEvent te;
+typedef TimetableEvent ttEvent;
 
 class Timetable {
     private:
-        std::vector<te> tt;
+        // eVision events list.
+        std::vector<ttEvent> eventList;
+        // Custom events list.
+        std::vector<ttEvent> customEvents;
+        
+        void clean(std::vector<ttEvent> &list);
+        void removeEvent(ttEvent t, std::vector<ttEvent> &list);
 
     public:
+        // Constructors
         Timetable();
-        void addEvent(te t);
-        void removeEvent(te t);
-        void updateEvent(te t);
+
+        // Base Functions
+        void addEvent(ttEvent t);
+        void addEvent(ttEvent t, bool custom);
+        void removeEvent(ttEvent t);
+        void removeEvent(ttEvent t, bool custom);
+        void updateEvent(ttEvent t, bool custom);
         int size();
         std::string toString();
+
+        // Integration
+        const char* getByDate(const char* date);
+
+        // Exporting
         void printToCSV();
         void exportToFile(std::string fileName);
         void exportToGoogleCalFile(std::string fileName);
-       };
+
+};
 
 #endif // TIMETABLE_H_
-

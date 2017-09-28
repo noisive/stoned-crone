@@ -121,6 +121,14 @@ struct tm TimetableEvent::createDate(int day, int month, int year) {
     return date;
 }
 
+bool TimetableEvent::equals(TimetableEvent other) const {
+
+    if (this->id != "0xCC" && this->id == other.getId()) {
+        return true;
+    }
+    return false;
+}
+
 void TimetableEvent::addDate(int startingDate) {
     // Get sets of digits out of int.
     int year = startingDate % 10000;
@@ -136,8 +144,6 @@ void TimetableEvent::addDate(int startingDate) {
     smonth  << std::setw(2) << std::setfill( '0' ) << month;
     std::ostringstream sday;
     sday  << std::setw(2) << std::setfill( '0' ) << day;
-
-    std::cout << sday.str()+smonth.str()+syear.str() <<std::endl;
 
     setDate(sday.str()+smonth.str()+syear.str());
 }
@@ -158,4 +164,6 @@ std::string TimetableEvent::toString() const {
         "," + getRoomName() +
         "," + getBuilding() +
         "," + getDate() + "\n";
+
 }
+

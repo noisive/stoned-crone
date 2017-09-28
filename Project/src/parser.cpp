@@ -8,6 +8,14 @@ Parser::Parser(void) {
     this->json = "0xCC";
 }
 
+Parser::Parser(bool init) {
+    char buffer[265];
+    strcpy(buffer, getenv("HOME")); 
+    std::string filename (buffer);
+    filename += "/data.csv";
+    parseFile(filename, "csv"); 
+}
+
 /* Data obtained by calling javascript 
 window.getData = function() {
     var content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();
@@ -36,16 +44,7 @@ std::string Parser::getJson() {
 }
 
 int Parser::indexOf(std::string data, std::string pattern) {
-    int patternIndex = 0;
-    for (int i = 0; i < data.size(); i++) {
-        if (data[i] == pattern[patternIndex]) {
-            if (patternIndex == pattern.size() - 1) return (i - patternIndex);
-            patternIndex++;
-        } else {
-            patternIndex = 0;
-        }            
-    }
-    return -1;
+    return this->indexOf(data, pattern, 0);
 }
 
 int Parser::indexOf(std::string data, std::string pattern, int startIndex) {
@@ -94,7 +93,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     endIndex = indexOf(infoSegment, "<br>", startIndex);
     ttEvent.setPaperCode(
         infoSegment.substr(startIndex, endIndex - startIndex));
-   
+
     // Set maps url    
     startIndex = indexOf(infoSegment, "\"", endIndex) + 1;
     endIndex = indexOf(infoSegment, "\"", startIndex);
@@ -117,7 +116,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
         infoSegment.substr(startIndex, endIndex - startIndex));
     
     // Set paper name
-    startIndex = indexOf(infoSegment, "9'", endIndex) + 13;
+    startIndex = indexOf(infoSegment, "9'", endIndex) + 11;
     endIndex = indexOf(infoSegment, "<\\/", startIndex);
     ttEvent.setPaperName(
         infoSegment.substr(startIndex, endIndex - startIndex));
@@ -135,8 +134,8 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // Set building name
     c = 0;
     while (c < 2) {
-        startIndex = indexOf(infoSegment, "<span>", endIndex) + 7;
-        endIndex = indexOf(infoSegment, "<\\", startIndex) - 1;
+        startIndex = indexOf(infoSegment, "<span>", endIndex) + 6;
+        endIndex = indexOf(infoSegment, "<\\", startIndex);
         c++;
     }
     ttEvent.setBuilding(
@@ -153,6 +152,95 @@ void Parser::getWeekStart() {
                                 date.substr(8,4));
 }
 
+void Parser::parseFile(std::string fileName, std::string format) {
+
+    Timetable timetable;
+
+    if (format.compare("csv") == 0) {
+
+        std::string line;
+        std::ifstream file (fileName);
+        if (file.is_open()) {
+            while (getline(file, line)) {
+                if (line.length() > 1) {
+                    timetable.addEvent(parseCSVLine(line));
+                }
+            }
+            file.close();
+        }
+
+        else std::cerr << "Unable to open file" << std::endl;
+
+    }
+
+    else std::cerr << "Format not supported" << std::endl;
+    
+    std::cout << timetable.toString() << std::endl;
+
+}
+
+TimetableEvent Parser::parseCSVLine(std::string line) {
+
+    int column = 0;
+    std::string build = "";
+    TimetableEvent ttEvent;    
+
+    for (int i = 0; i < line.length();  i++) {
+        if (line.at(i) == ',') {
+            switch (column) {
+                case 0:
+                    ttEvent.setDay(stoi(build));
+                    break;
+                case 1:
+                    ttEvent.setStartTime(stoi(build));
+                    break;
+                case 2:
+                    ttEvent.setDuration(stoi(build));
+                    break;
+                case 3:
+                    ttEvent.setColor(build);
+                    break;
+                case 4:
+                    ttEvent.setType(build);
+                    break;
+                case 5:
+                    ttEvent.setPaperCode(build);
+                    break;
+                case 6:
+                    ttEvent.setPaperName(build);
+                    break;
+                case 7:
+                    ttEvent.setMapLat(build);
+                    break;
+                case 8:
+                    ttEvent.setMapLong(build);
+                    break;
+                case 9:
+                    ttEvent.setRoomCode(build);
+                    break;
+                case 10:
+                    ttEvent.setRoomName(build);
+                    break;
+                case 11:
+                    ttEvent.setBuilding(build);
+                    break;
+            }  
+            column++;
+            build = ""; 
+        } else {
+            build += line.at(i);
+        }
+    }
+
+    // Add the trailing column.
+    ttEvent.addDate(stoi(build));
+
+    std::cout << ttEvent.toString();
+
+    return ttEvent;
+
+}
+
 void Parser::parse() {
 
     Timetable timetable;
@@ -161,7 +249,7 @@ void Parser::parse() {
         std::cerr << "No data given" << std::endl;
         return;
     }
-        
+
     getWeekStart();
 
     if (this->weekStart == 0xCC) {
@@ -170,7 +258,7 @@ void Parser::parse() {
     }
 
     extractJsonArray();
-
+    
     int length = getObjectCount(json);
 
     int startIndex = 0;
@@ -227,17 +315,19 @@ void Parser::parse() {
         endIndex = startIndex + 1;
    
         ttEvent.addDate(this->weekStart);
-
-        std::cout << ttEvent.getDay() << "and date: " << ttEvent.getDate() << std::endl;
-
+        
         timetable.addEvent(ttEvent);
 
     }
+
+    // Setup saving to device HOME.
     char buffer[265];
     strcpy(buffer, getenv("HOME"));
+    // Export to CSV file format.
     std::string filename(buffer);
     filename += "/data.csv";
     timetable.exportToFile(filename);
+    // Export to Google Calendar file format.
     std::string GoogleCalFilename(buffer);
     GoogleCalFilename += "/GoogleCalFile.csv";
     timetable.exportToGoogleCalFile(GoogleCalFilename);
