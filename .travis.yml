@@ -20,4 +20,4 @@ podfile: ./Podfile
 script:
   - set -o pipefail
   - pod install
-  - xcodebuild -workspace Project.xcworkspace -scheme TravisBuild -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+  - xcodebuild -workspace Project.xcworkspace -scheme Project -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
