@@ -1,4 +1,5 @@
 # WingIt
+[![Build Status](https://travis-ci.org/noisive/stoned-crone.svg?branch=master)](https://travis-ci.org/noisive/stoned-crone)
 ## README
 For more background information, see our [first assignment](ProjectInfo.md)
 
