@@ -16,8 +16,8 @@ before_install:
   - gem install cocoapods
   
 podfile: ./Podfile
-pod install
 
 script:
   - set -o pipefail
+  - pod install
   - xcodebuild -workspace Project.xcworkspace -scheme TravisBuild -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
