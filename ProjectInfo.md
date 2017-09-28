@@ -1,4 +1,4 @@
-### COSC345
+### COSC345 [HOME](README.md)
 # Timetable App Project Codename: stoned-crone
 ## Assignment One
 
@@ -141,3 +141,5 @@ Group to set go-no go milestone for this approach
 - Documentation of architecture and methods
 - Central repository in Github
 - Tasks tracked in Asana
+
+### [HOME](README.md)
