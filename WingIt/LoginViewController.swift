@@ -62,6 +62,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         usernameField.isHidden = true
         passwordField.isHidden = true
         loginButton.isHidden = true
@@ -104,7 +105,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         spinner.isHidden = true
         spinner.stopAnimating()
         passwordField.text = ""
-        errorLabel.textColor = UIColor.red
+        errorLabel.textColor = errorColor
         errorLabel.text = "\(reason)"
     }
     
