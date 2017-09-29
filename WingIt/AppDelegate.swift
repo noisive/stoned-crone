@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Project
+//  WingIt
 //
 //  Created by Eli Labes on 11/05/17.
 //  Copyright © 2017 Eli Labes. All rights reserved.
