@@ -190,7 +190,7 @@
                         <outlet property="spinner" destination="HIl-wc-waP" id="mhe-9b-VV6"/>
                         <outlet property="usernameField" destination="dkB-Uh-avX" id="3c7-3P-KK7"/>
                         <outlet property="webView" destination="1c5-uh-vDW" id="EEv-kz-Xy1"/>
-                        <segue destination="QRJ-3s-2Y0" kind="show" identifier="LoginDoneSegue" id="0yp-yP-7EJ"/>
+                        <segue destination="QRJ-3s-2Y0" kind="showDetail" identifier="LoginDoneSegue" action="showViewController:sender:" id="0yp-yP-7EJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7W-WX-gOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
