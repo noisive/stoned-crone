@@ -4,16 +4,15 @@
 #include "parser.hpp"
 #include <cstring>
 
+std::string dataPath = ((std::string) getenv("HOME")) + "/Documents/data.csv";
+std::string gCalPath = ((std::string) getenv("HOME")) + "/Documents/GoogleCalFile.csv";
+
 Parser::Parser(void) {
     this->json = "0xCC";
 }
 
-Parser::Parser(bool init) {
-    char buffer[265];
-    strcpy(buffer, getenv("HOME")); 
-    std::string filename (buffer);
-    filename += "/data.csv";
-    parseFile(filename, "csv"); 
+Parser::Parser(bool init) { 
+    parseFile(dataPath, "csv"); 
 }
 
 /* Data obtained by calling javascript 
@@ -32,7 +31,7 @@ Parser::Parser(const char* data) {
 
 Parser::Parser(std::string j){
     this->json = j;
-    this->weekStart = 0xCC;    
+    this->weekStart = 0xCC;
 }
 
 void Parser::setJson(std::string json) {
@@ -266,7 +265,7 @@ void Parser::parse() {
 
     std::string infoSegment;
 
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i <= length; i++) {
         TimetableEvent ttEvent;
 
         // Set each id
@@ -320,16 +319,10 @@ void Parser::parse() {
 
     }
 
-    // Setup saving to device HOME.
-    char buffer[265];
-    strcpy(buffer, getenv("HOME"));
-    // Export to CSV file format.
-    std::string filename(buffer);
-    filename += "/Documents/data.csv";
-    timetable.exportToFile(filename);
-    // Export to Google Calendar file format.
-    std::string GoogleCalFilename(buffer);
-    GoogleCalFilename += "/Documents/GoogleCalFile.csv";
-    timetable.exportToGoogleCalFile(GoogleCalFilename);
+    // Save to CSV formatted file. 
+    timetable.exportToFile(dataPath);
+  
+    // Save to Google Calendar Formatted file.
+    timetable.exportToGoogleCalFile(gCalPath);
 
 }

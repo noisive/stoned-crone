@@ -1,6 +1,6 @@
 /* Timetable Domain Class.
-    @author W. Warren - 2017
-*/
+   @author W. Warren - 2017
+   */
 #include "timetable.hpp"
 #include <cstring>
 #include <ctime>
@@ -8,14 +8,17 @@
 #include <fstream>
 #include <cmath>
 #include <sstream>
-    
+
 /* Set initial vector size.
-     
-* 20 is a rough peak for number of classes in a week. */
+
+ * 20 is a rough peak for number of classes in a week. */
 std::vector<TimetableEvent> eventList(20);
 std::vector<TimetableEvent> customList(20);
 
-Timetable::Timetable() {}
+Timetable::Timetable() {
+    eventList.clear();
+    customList.clear();
+}
 
 void Timetable::addEvent(TimetableEvent t) {
     this->addEvent(t, false);
@@ -55,10 +58,9 @@ void Timetable::removeEvent(TimetableEvent t) {
 void Timetable::clean(std::vector<TimetableEvent> &list) { 
     time_t gmt = time(0);
     struct tm* now = localtime(&gmt); 
-    
+
     for (int i = 0; i < list.size(); i++) {
         if (list[i].getStartTime() + list[i].getDuration() < now->tm_hour) {
-            //std::cerr << "Removing expired event." << std::endl;
             this->removeEvent(list[i]);
             // Decrement i to account for concurrent modification.
             i--;
@@ -85,13 +87,13 @@ int Timetable::size() {
 
 std::string Timetable::toString() {
     std::string out = "Timetable of size: " + 
-                    std::to_string(size()) + " with elements: ";
-    
+        std::to_string(size()) + " with elements: ";
+
     /* Uncomment to delete events in the past.
-    this->clean(eventList);
-    this->clean(customList);
-    */
-    
+       this->clean(eventList);
+       this->clean(customList);
+       */
+
     for (TimetableEvent event : eventList) {
         if (event.getId() != "OxCC") {
             out += event.getPaperCode() + ", ";
@@ -112,23 +114,20 @@ void Timetable::exportToFile(std::string fileName) {
     myfile.open (fileName);
     if (myfile.is_open()) {
         std::string output;
-        
+
         /* Uncomment to delete events in the past.
-        this->clean(eventList);
-        this->clean(customList);
-        */
+           this->clean(eventList);
+           this->clean(customList);
+           */
 
         for (TimetableEvent event: eventList) {
-            if (event.getId() != "0xCC") {
-                output += event.toString();
-            }
+            output += event.toString();
         }
-        
+
         for (TimetableEvent event: customList) {
-            if (event.getId() != "0xCC") {
-                output += event.toString();
-            }
+            output += event.toString();
         }
+
         myfile << output;
         myfile.close();
 
@@ -139,8 +138,8 @@ void Timetable::exportToFile(std::string fileName) {
 }
 
 /* These next two methods purely for turning an event toString
-    into a format accepted by Google.
-*/
+   into a format accepted by Google.
+   */
 std::string dateFormat(std::string dateNumbers) {
     if (dateNumbers.length() != 8) {
         return "error";
@@ -155,20 +154,20 @@ std::string timeFormat(int timeNumber, bool isEndTime=false) {
         // reduce by 1, add 50 to minutes
         timeNumber--;
     }
-   if (timeNumber > 12) {
+    if (timeNumber > 12) {
         ampm = "PM";
-   } else {
-       ampm = "AM";
-   }
-   timeNumber %= 12;
-   std::string minsec;
-   if (isEndTime) {
-       minsec = "50:00 ";
-   } else {
-       minsec = "00:00 ";
-   }
-   oss << timeNumber << ":" << minsec << ampm;
-   return oss.str();
+    } else {
+        ampm = "AM";
+    }
+    timeNumber %= 12;
+    std::string minsec;
+    if (isEndTime) {
+        minsec = "50:00 ";
+    } else {
+        minsec = "00:00 ";
+    }
+    oss << timeNumber << ":" << minsec << ampm;
+    return oss.str();
 }
 
 void Timetable::exportToGoogleCalFile(std::string fileName) {
@@ -189,7 +188,7 @@ void Timetable::exportToGoogleCalFile(std::string fileName) {
     }
     myfiler.close();
     myfilew.open(fileName,std::ofstream::app);
-    
+
     if (myfilew.is_open()) {
         myfilew << output;
         for (TimetableEvent event: eventList) {
@@ -200,7 +199,7 @@ void Timetable::exportToGoogleCalFile(std::string fileName) {
                 << event.getBuilding() << "," << event.getRoomCode() << "," << "True" << std::endl;         
         }
         myfilew.close();
-    
+
     } else {
         // Error opening file
         std::cerr << "Unable to open file \"" << fileName <<"\"\n";
