@@ -4,8 +4,8 @@
 #include "parser.hpp"
 #include <cstring>
 
-std::string dataPath = ((std::string) getenv("HOME")) + "/Documents/data.csv";
-std::string gCalPath = ((std::string) getenv("HOME")) + "/Documents/GoogleCalFile.csv";
+std::string dataPath = ((std::string) getenv("HOME")) + "/Library/Caches/data.csv";
+std::string gCalPath = ((std::string) getenv("HOME")) + "/Library/Caches/GoogleCalFile.csv";
 
 Parser::Parser(void) {
     this->json = "0xCC";
