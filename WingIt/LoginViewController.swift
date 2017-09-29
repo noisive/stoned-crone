@@ -129,6 +129,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 parseTimetable(json.cString(using: String.Encoding.utf8));
                 
                 doneButton.isHidden = false
+                self.performSegue(withIdentifier: "LoginDoneSegue", sender: self)
                 
                 //webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
                 webView.stringByEvaluatingJavaScript(from: webLogout)

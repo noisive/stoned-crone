@@ -171,7 +171,7 @@
                                 <rect key="frame" x="16" y="318" width="343" height="30"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
-                                    <segue destination="QRJ-3s-2Y0" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="ePY-gw-6Lo"/>
+                                    <segue destination="QRJ-3s-2Y0" kind="custom" identifier="LoginDoneSegue" customClass="SWRevealViewControllerSeguePushController" id="ePY-gw-6Lo"/>
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ayn-rG-QWd">
@@ -181,7 +181,7 @@
                                     <navigationItem title="Log in to eVision" id="XKm-2K-n0K">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="l7h-td-XK0">
                                             <connections>
-                                                <segue destination="QRJ-3s-2Y0" kind="presentation" id="PXH-wo-5I9"/>
+                                                <segue destination="QRJ-3s-2Y0" kind="presentation" identifier="CancelLoginSegue" id="PXH-wo-5I9"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -204,6 +204,7 @@
                         <outlet property="spinner" destination="HIl-wc-waP" id="mhe-9b-VV6"/>
                         <outlet property="usernameField" destination="dkB-Uh-avX" id="3c7-3P-KK7"/>
                         <outlet property="webView" destination="1c5-uh-vDW" id="EEv-kz-Xy1"/>
+                        <segue destination="QRJ-3s-2Y0" kind="show" id="0yp-yP-7EJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7W-WX-gOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -650,6 +651,6 @@
         <image name="Menu" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ePY-gw-6Lo"/>
+        <segue reference="0yp-yP-7EJ"/>
     </inferredMetricsTieBreakers>
 </document>
