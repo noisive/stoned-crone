@@ -31,15 +31,15 @@
 
 /* Begin PBXFileReference section */
 		06A547191F7B12B400967FD7 /* libBackend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBackend.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		06A547251F7B149700967FD7 /* parseDate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parseDate.cpp; path = ../../Project/src/parseDate.cpp; sourceTree = "<group>"; };
-		06A547261F7B149700967FD7 /* parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = ../../Project/src/parser.cpp; sourceTree = "<group>"; };
-		06A547271F7B149700967FD7 /* parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = parser.hpp; path = ../../Project/src/parser.hpp; sourceTree = "<group>"; };
-		06A547281F7B149700967FD7 /* parsertest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parsertest.cpp; path = ../../Project/src/parsertest.cpp; sourceTree = "<group>"; };
-		06A547291F7B149700967FD7 /* testtimetable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = testtimetable.cpp; path = ../../Project/src/testtimetable.cpp; sourceTree = "<group>"; };
-		06A5472A1F7B149700967FD7 /* timetable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timetable.cpp; path = ../../Project/src/timetable.cpp; sourceTree = "<group>"; };
-		06A5472B1F7B149700967FD7 /* timetable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = timetable.hpp; path = ../../Project/src/timetable.hpp; sourceTree = "<group>"; };
-		06A5472C1F7B149700967FD7 /* timetableEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timetableEvent.cpp; path = ../../Project/src/timetableEvent.cpp; sourceTree = "<group>"; };
-		06A5472D1F7B149700967FD7 /* timetableEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = timetableEvent.hpp; path = ../../Project/src/timetableEvent.hpp; sourceTree = "<group>"; };
+		06A547251F7B149700967FD7 /* parseDate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parseDate.cpp; path = src/parseDate.cpp; sourceTree = "<group>"; };
+		06A547261F7B149700967FD7 /* parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = src/parser.cpp; sourceTree = "<group>"; };
+		06A547271F7B149700967FD7 /* parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = parser.hpp; path = src/parser.hpp; sourceTree = "<group>"; };
+		06A547281F7B149700967FD7 /* parsertest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parsertest.cpp; path = src/parsertest.cpp; sourceTree = "<group>"; };
+		06A547291F7B149700967FD7 /* testtimetable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = testtimetable.cpp; path = src/testtimetable.cpp; sourceTree = "<group>"; };
+		06A5472A1F7B149700967FD7 /* timetable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timetable.cpp; path = src/timetable.cpp; sourceTree = "<group>"; };
+		06A5472B1F7B149700967FD7 /* timetable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = timetable.hpp; path = src/timetable.hpp; sourceTree = "<group>"; };
+		06A5472C1F7B149700967FD7 /* timetableEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timetableEvent.cpp; path = src/timetableEvent.cpp; sourceTree = "<group>"; };
+		06A5472D1F7B149700967FD7 /* timetableEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = timetableEvent.hpp; path = src/timetableEvent.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +285,7 @@
 				06A547241F7B12B400967FD7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; };
-		06AF01201EDC538400855C8A /* src in Resources */ = {isa = PBXBuildFile; fileRef = 06AF011F1EDC538400855C8A /* src */; };
-		06AF012A1EDC57A500855C8A /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06AF01291EDC57A500855C8A /* wrapper.cpp */; };
 		130B07FE1C5A78D4C88A7766 /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */; };
 		297C56931ED9126200C44420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginViewController.swift */; };
 		5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */; };
@@ -29,14 +27,14 @@
 		53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F8A0171EC3D0010001604A /* LaunchScreen.storyboard */; };
 		53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A0201EC3DE930001604A /* DayCollectionViewCell.swift */; };
 		6FDB091C1ED7D63A000F1B78 /* SplashTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB091B1ED7D63A000F1B78 /* SplashTransparent.png */; };
+		8538FA3384C3EB1935ADCC45 /* Pods_WingIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DDE59806EBB057CD9CAB87 /* Pods_WingIt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		06A5475D1F7B1D9600967FD7 /* libBackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBackend.a; path = "../../Library/Developer/Xcode/DerivedData/Project-faabexjzkhonsfdsetxpryushahl/Build/Products/Debug-iphonesimulator/libBackend.a"; sourceTree = "<group>"; };
-		06AF011F1EDC538400855C8A /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = Project/src; sourceTree = "<group>"; };
 		06AF01211EDC53ED00855C8A /* libParse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libParse.a; path = Project/src/libParse.a; sourceTree = "<group>"; };
-		06AF01291EDC57A500855C8A /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper.cpp; path = Project/src/wrapper.cpp; sourceTree = "<group>"; };
 		297C56921ED9126200C44420 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2E94981C9D449D4D6A2CA89C /* Pods-WingIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WingIt/Pods-WingIt.debug.xcconfig"; sourceTree = "<group>"; };
 		5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankCellTableViewCell.swift; sourceTree = "<group>"; };
 		535BDEC81EC48FB200B853C2 /* TimetableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableCell.swift; sourceTree = "<group>"; };
 		5399C9851EDC17C8009F85FA /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.csv; sourceTree = "<group>"; };
@@ -48,7 +46,7 @@
 		53C7D03B1EC9B79E00D0BD9C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = ../MenuTableViewController.swift; sourceTree = "<group>"; };
-		53F8A0081EC3D0010001604A /* Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		53F8A0081EC3D0010001604A /* WingIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WingIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F8A00B1EC3D0010001604A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F8A00D1EC3D0010001604A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		53F8A0101EC3D0010001604A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,8 +56,8 @@
 		53F8A01A1EC3D0010001604A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53F8A0201EC3DE930001604A /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
 		6FDB091B1ED7D63A000F1B78 /* SplashTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashTransparent.png; sourceTree = "<group>"; };
-		6FDB80B0C587CAF6FB154090 /* Pods-Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.debug.xcconfig"; sourceTree = "<group>"; };
-		B11DD1DED2E528A8E7347703 /* Pods-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.release.xcconfig"; sourceTree = "<group>"; };
+		712F9B15AD162FE77B246C59 /* Pods-WingIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-WingIt/Pods-WingIt.release.xcconfig"; sourceTree = "<group>"; };
+		B2DDE59806EBB057CD9CAB87 /* Pods_WingIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WingIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -70,6 +68,7 @@
 			files = (
 				06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */,
 				130B07FE1C5A78D4C88A7766 /* Pods_Project.framework in Frameworks */,
+				8538FA3384C3EB1935ADCC45 /* Pods_WingIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,9 +116,7 @@
 		53F89FFF1EC3D0010001604A = {
 			isa = PBXGroup;
 			children = (
-				06AF01291EDC57A500855C8A /* wrapper.cpp */,
-				06AF011F1EDC538400855C8A /* src */,
-				53F8A00A1EC3D0010001604A /* Project */,
+				53F8A00A1EC3D0010001604A /* WingIt */,
 				53F8A0091EC3D0010001604A /* Products */,
 				BECEBC0B869AAA66D0B009DA /* Pods */,
 				9D76A468FCF7B393CEA24F56 /* Frameworks */,
@@ -129,12 +126,12 @@
 		53F8A0091EC3D0010001604A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				53F8A0081EC3D0010001604A /* Project.app */,
+				53F8A0081EC3D0010001604A /* WingIt.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		53F8A00A1EC3D0010001604A /* Project */ = {
+		53F8A00A1EC3D0010001604A /* WingIt */ = {
 			isa = PBXGroup;
 			children = (
 				53F8A00B1EC3D0010001604A /* AppDelegate.swift */,
@@ -153,7 +150,7 @@
 				5399C9851EDC17C8009F85FA /* data.csv */,
 				53BA20E41EDB8E6E0063E603 /* CSV Parser */,
 			);
-			path = Project;
+			path = WingIt;
 			sourceTree = "<group>";
 		};
 		9D76A468FCF7B393CEA24F56 /* Frameworks */ = {
@@ -162,6 +159,7 @@
 				06A5475D1F7B1D9600967FD7 /* libBackend.a */,
 				06AF01211EDC53ED00855C8A /* libParse.a */,
 				DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */,
+				B2DDE59806EBB057CD9CAB87 /* Pods_WingIt.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,8 +167,8 @@
 		BECEBC0B869AAA66D0B009DA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6FDB80B0C587CAF6FB154090 /* Pods-Project.debug.xcconfig */,
-				B11DD1DED2E528A8E7347703 /* Pods-Project.release.xcconfig */,
+				2E94981C9D449D4D6A2CA89C /* Pods-WingIt.debug.xcconfig */,
+				712F9B15AD162FE77B246C59 /* Pods-WingIt.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -178,9 +176,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		53F8A0071EC3D0010001604A /* Project */ = {
+		53F8A0071EC3D0010001604A /* WingIt */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 53F8A01D1EC3D0010001604A /* Build configuration list for PBXNativeTarget "Project" */;
+			buildConfigurationList = 53F8A01D1EC3D0010001604A /* Build configuration list for PBXNativeTarget "WingIt" */;
 			buildPhases = (
 				47A427338759BFB156C8782E /* [CP] Check Pods Manifest.lock */,
 				53F8A0041EC3D0010001604A /* Sources */,
@@ -193,9 +191,9 @@
 			);
 			dependencies = (
 			);
-			name = Project;
+			name = WingIt;
 			productName = Project;
-			productReference = 53F8A0081EC3D0010001604A /* Project.app */;
+			productReference = 53F8A0081EC3D0010001604A /* WingIt.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -216,7 +214,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 53F8A0031EC3D0010001604A /* Build configuration list for PBXProject "Project" */;
+			buildConfigurationList = 53F8A0031EC3D0010001604A /* Build configuration list for PBXProject "WingIt" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -229,7 +227,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				53F8A0071EC3D0010001604A /* Project */,
+				53F8A0071EC3D0010001604A /* WingIt */,
 			);
 		};
 /* End PBXProject section */
@@ -242,7 +240,6 @@
 				53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */,
 				5399C9861EDC17C8009F85FA /* data.csv in Resources */,
 				53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */,
-				06AF01201EDC538400855C8A /* src in Resources */,
 				53F8A0111EC3D0010001604A /* Main.storyboard in Resources */,
 				6FDB091C1ED7D63A000F1B78 /* SplashTransparent.png in Resources */,
 			);
@@ -278,7 +275,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Project/Pods-Project-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WingIt/Pods-WingIt-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F02B585B3F4B61024EEE456E /* [CP] Embed Pods Frameworks */ = {
@@ -293,7 +290,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Project/Pods-Project-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WingIt/Pods-WingIt-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -314,7 +311,6 @@
 				53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */,
 				297C56931ED9126200C44420 /* LoginViewController.swift in Sources */,
 				5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */,
-				06AF012A1EDC57A500855C8A /* wrapper.cpp in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
 				53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */,
 			);
@@ -437,7 +433,7 @@
 		};
 		53F8A01E1EC3D0010001604A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6FDB80B0C587CAF6FB154090 /* Pods-Project.debug.xcconfig */;
+			baseConfigurationReference = 2E94981C9D449D4D6A2CA89C /* Pods-WingIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -447,16 +443,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Project",
 				);
-				INFOPLIST_FILE = Project/Info.plist;
+				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Project/src",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nadja.Project;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nadja.WingIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Project/Project-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "WingIt/Project-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -464,7 +460,7 @@
 		};
 		53F8A01F1EC3D0010001604A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B11DD1DED2E528A8E7347703 /* Pods-Project.release.xcconfig */;
+			baseConfigurationReference = 712F9B15AD162FE77B246C59 /* Pods-WingIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -474,16 +470,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Project",
 				);
-				INFOPLIST_FILE = Project/Info.plist;
+				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Project/src",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nadja.Project;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nadja.WingIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Project/Project-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "WingIt/Project-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -491,7 +487,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		53F8A0031EC3D0010001604A /* Build configuration list for PBXProject "Project" */ = {
+		53F8A0031EC3D0010001604A /* Build configuration list for PBXProject "WingIt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				53F8A01B1EC3D0010001604A /* Debug */,
@@ -500,7 +496,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		53F8A01D1EC3D0010001604A /* Build configuration list for PBXNativeTarget "Project" */ = {
+		53F8A01D1EC3D0010001604A /* Build configuration list for PBXNativeTarget "WingIt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				53F8A01E1EC3D0010001604A /* Debug */,

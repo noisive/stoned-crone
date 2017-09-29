@@ -13,6 +13,7 @@
 *.so
 *.dylib
 *.dll
+*.framework
 
 # Fortran module files
 *.mod
@@ -22,6 +23,7 @@
 *.lai
 *.la
 *.lib
+*.a
 
 # Executables
 *.exe
