@@ -188,39 +188,41 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
         if (line.at(i) == ',') {
             switch (column) {
                 case 0:
-                    ttEvent.setDay(stoi(build));
                     break;
                 case 1:
-                    ttEvent.setStartTime(stoi(build));
+                    ttEvent.setDay(stoi(build));
                     break;
                 case 2:
-                    ttEvent.setDuration(stoi(build));
+                    ttEvent.setStartTime(stoi(build));
                     break;
                 case 3:
-                    ttEvent.setColor(build);
+                    ttEvent.setDuration(stoi(build));
                     break;
                 case 4:
-                    ttEvent.setType(build);
+                    ttEvent.setColor(build);
                     break;
                 case 5:
-                    ttEvent.setPaperCode(build);
+                    ttEvent.setType(build);
                     break;
                 case 6:
-                    ttEvent.setPaperName(build);
+                    ttEvent.setPaperCode(build);
                     break;
                 case 7:
-                    ttEvent.setMapLat(build);
+                    ttEvent.setPaperName(build);
                     break;
                 case 8:
-                    ttEvent.setMapLong(build);
+                    ttEvent.setMapLat(build);
                     break;
                 case 9:
-                    ttEvent.setRoomCode(build);
+                    ttEvent.setMapLong(build);
                     break;
                 case 10:
-                    ttEvent.setRoomName(build);
+                    ttEvent.setRoomCode(build);
                     break;
                 case 11:
+                    ttEvent.setRoomName(build);
+                    break;
+                case 12:
                     ttEvent.setBuilding(build);
                     break;
             }  
@@ -233,6 +235,9 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
 
     // Add the trailing column.
     ttEvent.addDate(stoi(build));
+
+    // Once all the data is loaded, generate the UID();
+    ttEvent.genUID();
 
     std::cout << ttEvent.toString();
 
@@ -314,7 +319,11 @@ void Parser::parse() {
         endIndex = startIndex + 1;
    
         ttEvent.addDate(this->weekStart);
-        
+       
+        ttEvent.genUID();
+
+        std::cout << ttEvent.toString() << std::endl;
+
         timetable.addEvent(ttEvent);
 
     }

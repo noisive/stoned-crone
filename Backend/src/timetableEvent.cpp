@@ -8,6 +8,7 @@
 #include <iostream>
 
 TimetableEvent::TimetableEvent(void) {
+    this->uid = 0xCC;
     this->id = "0xCC";
     this->date = "0xCC";
     this->day = 0xCC;
@@ -22,6 +23,37 @@ TimetableEvent::TimetableEvent(void) {
     this->roomName = "0xCC";
     this->building = "0xCC";
     this->type = "0xCC";
+}
+
+unsigned long TimetableEvent::hash() {
+    unsigned long hash = 3; 
+    int val = 0;
+    for (int i = 0; i < this->paperName.length(); i++) {
+        val += ((int) this->paperName[i]);
+    } 
+    hash = hash * 3 + val;
+    val = 0;
+    hash = hash * 3 + this->day;
+    for (int i = 0; i < this->type.length(); i++) {
+        val += ((int) this->type[i]);
+    }
+    hash = hash * 3 + val;
+    val = 0;
+    hash = hash * 3 + this->startTime;
+    hash = hash * 3 + this->duration;
+    for (int i = 0; i < this->date.length(); i++) {
+        val += ((int) this->date[i]);
+    }
+    hash = hash * 3 + val;
+    return hash;
+}
+
+unsigned long TimetableEvent::getUID() {
+    return this->uid;
+}
+
+void TimetableEvent::genUID() {
+    this->uid = this->hash();
 }
 
 /* Accessor Functions */
@@ -122,8 +154,7 @@ struct tm TimetableEvent::createDate(int day, int month, int year) {
 }
 
 bool TimetableEvent::equals(TimetableEvent other) const {
-
-    if (this->id != "0xCC" && this->id == other.getId()) {
+    if (this->uid != 0xCC && this->uid == other.getUID()) {
         return true;
     }
     return false;
@@ -151,19 +182,19 @@ void TimetableEvent::addDate(int startingDate) {
 /* To std::string function */
 
 std::string TimetableEvent::toString() const {
-        return std::to_string(getDay()) + 
-        "," + std::to_string(getStartTime()) + 
-        "," + std::to_string(getDuration()) + 
-        "," + getColor() +  
-        "," + getType() + 
-        "," + getPaperCode() + 
-        "," + getPaperName() + 
-        "," + getMapLat() + 
-        "," + getMapLong() + 
-        "," + getRoomCode() +
-        "," + getRoomName() +
-        "," + getBuilding() +
-        "," + getDate() + "\n";
-
+        return std::to_string(this->uid) + 
+        "," + std::to_string(this->day) + 
+        "," + std::to_string(this->startTime) + 
+        "," + std::to_string(this->duration) + 
+        "," + this->color +  
+        "," + this->type + 
+        "," + this->paperCode + 
+        "," + this->paperName + 
+        "," + this->mapLat + 
+        "," + this->mapLong + 
+        "," + this->roomCode +
+        "," + this->roomName +
+        "," + this->building +
+        "," + this->date + "\n";
 }
 
