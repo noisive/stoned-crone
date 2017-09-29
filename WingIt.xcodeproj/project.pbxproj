@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; };
-		130B07FE1C5A78D4C88A7766 /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */; };
+		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
 		297C56931ED9126200C44420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginViewController.swift */; };
 		5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */; };
 		535BDEC91EC48FB200B853C2 /* TimetableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BDEC81EC48FB200B853C2 /* TimetableCell.swift */; };
@@ -27,12 +27,11 @@
 		53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F8A0171EC3D0010001604A /* LaunchScreen.storyboard */; };
 		53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A0201EC3DE930001604A /* DayCollectionViewCell.swift */; };
 		6FDB091C1ED7D63A000F1B78 /* SplashTransparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDB091B1ED7D63A000F1B78 /* SplashTransparent.png */; };
-		8538FA3384C3EB1935ADCC45 /* Pods_WingIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DDE59806EBB057CD9CAB87 /* Pods_WingIt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		06A5475D1F7B1D9600967FD7 /* libBackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBackend.a; path = "../../Library/Developer/Xcode/DerivedData/Project-faabexjzkhonsfdsetxpryushahl/Build/Products/Debug-iphonesimulator/libBackend.a"; sourceTree = "<group>"; };
-		06AF01211EDC53ED00855C8A /* libParse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libParse.a; path = Project/src/libParse.a; sourceTree = "<group>"; };
+		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
 		297C56921ED9126200C44420 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2E94981C9D449D4D6A2CA89C /* Pods-WingIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WingIt/Pods-WingIt.debug.xcconfig"; sourceTree = "<group>"; };
 		5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -57,8 +56,6 @@
 		53F8A0201EC3DE930001604A /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
 		6FDB091B1ED7D63A000F1B78 /* SplashTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashTransparent.png; sourceTree = "<group>"; };
 		712F9B15AD162FE77B246C59 /* Pods-WingIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-WingIt/Pods-WingIt.release.xcconfig"; sourceTree = "<group>"; };
-		B2DDE59806EBB057CD9CAB87 /* Pods_WingIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WingIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,8 +64,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */,
-				130B07FE1C5A78D4C88A7766 /* Pods_Project.framework in Frameworks */,
-				8538FA3384C3EB1935ADCC45 /* Pods_WingIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +129,7 @@
 		53F8A00A1EC3D0010001604A /* WingIt */ = {
 			isa = PBXGroup;
 			children = (
+				06A637F81F7DD15F00C5F15F /* wrapper.cpp */,
 				53F8A00B1EC3D0010001604A /* AppDelegate.swift */,
 				53CDC1E51EDC1EC000A2ED5A /* Views */,
 				6FDB091B1ED7D63A000F1B78 /* SplashTransparent.png */,
@@ -157,9 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				06A5475D1F7B1D9600967FD7 /* libBackend.a */,
-				06AF01211EDC53ED00855C8A /* libParse.a */,
-				DFB2A7E91488D5F6A5377C9F /* Pods_Project.framework */,
-				B2DDE59806EBB057CD9CAB87 /* Pods_WingIt.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -311,6 +304,7 @@
 				53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */,
 				297C56931ED9126200C44420 /* LoginViewController.swift in Sources */,
 				5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */,
+				06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
 				53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */,
 			);
@@ -441,15 +435,11 @@
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Project",
+					"$(PROJECT_DIR)/WingIt",
 				);
 				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Project/src",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nadja.WingIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WingIt/Project-Bridging-Header.h";
@@ -468,15 +458,11 @@
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Project",
+					"$(PROJECT_DIR)/WingIt",
 				);
 				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Project/src",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nadja.WingIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "WingIt/Project-Bridging-Header.h";

@@ -28,7 +28,6 @@
 		B4B8EF0099CA9A0B69DB32F434AECAF6 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092B30B6DA8386851195393066A2A10 /* TimeIntervalExtension.swift */; };
 		B967B596FF5D3672E85A7B1D90A6D1AA /* CSVImporter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8987B25A25AD16AC075019862911E037 /* CSVImporter-dummy.m */; };
 		CFB33AD1FC1088E8A9926E19AF89EE9A /* Pods-WingIt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 15FB7B917BB6B5272D60E77E31B3244D /* Pods-WingIt-dummy.m */; };
-		EECCA60D9625D9DE11FC6DBF60B72C4E /* HandySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC7DD64DAE6EDA3ECF68760361CF8788 /* HandySwift.framework */; };
 		F8CA972CEB856E31EBA8AD07EC2DBA8E /* DispatchTimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8FBF3E16D91B1F1716D20E222F8AE3 /* DispatchTimeIntervalExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,7 +87,6 @@
 		9B4FFAB825CBD7BA76E6EFC5A14824CE /* HandySwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HandySwift.xcconfig; sourceTree = "<group>"; };
 		9B6E2E4D2D2564E090721BF571892A3C /* Pods_WingIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WingIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A29E7A50191507BBFDE14D9521F6CE29 /* Globals.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = Sources/Globals.swift; sourceTree = "<group>"; };
-		AC7DD64DAE6EDA3ECF68760361CF8788 /* HandySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HandySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1497337E83FCD99EF23C54295CEB553 /* HandySwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HandySwift-prefix.pch"; sourceTree = "<group>"; };
 		BF40622FA870F93F9D10013294596BF7 /* Pods-WingIt-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WingIt-acknowledgements.markdown"; sourceTree = "<group>"; };
 		CCFD7061574114400AADAECA981FFD9E /* CSVImporter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSVImporter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,7 +120,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				61A79AD2A22A7AF6811699A13CD333AD /* Foundation.framework in Frameworks */,
-				EECCA60D9625D9DE11FC6DBF60B72C4E /* HandySwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +240,6 @@
 		C4E9A3B88AE5C2C64284DDE340C77B2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AC7DD64DAE6EDA3ECF68760361CF8788 /* HandySwift.framework */,
 				4CA2CD2D201901BA09AB8C3DD6E7DC70 /* iOS */,
 			);
 			name = Frameworks;
