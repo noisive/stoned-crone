@@ -12,7 +12,6 @@
 		297C56931ED9126200C44420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginViewController.swift */; };
 		5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */; };
 		535BDEC91EC48FB200B853C2 /* TimetableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BDEC81EC48FB200B853C2 /* TimetableCell.swift */; };
-		5399C9861EDC17C8009F85FA /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 5399C9851EDC17C8009F85FA /* data.csv */; };
 		53BB7A171ED133A900370F7B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB7A161ED133A900370F7B /* Constants.swift */; };
 		53BB7A191ED14C3800370F7B /* ClashCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB7A181ED14C3700370F7B /* ClashCell.swift */; };
 		53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB7A201ED1536C00370F7B /* DetailView.swift */; };
@@ -37,7 +36,6 @@
 		2E94981C9D449D4D6A2CA89C /* Pods-WingIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WingIt/Pods-WingIt.debug.xcconfig"; sourceTree = "<group>"; };
 		5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankCellTableViewCell.swift; sourceTree = "<group>"; };
 		535BDEC81EC48FB200B853C2 /* TimetableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableCell.swift; sourceTree = "<group>"; };
-		5399C9851EDC17C8009F85FA /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.csv; sourceTree = "<group>"; };
 		53BB7A161ED133A900370F7B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		53BB7A181ED14C3700370F7B /* ClashCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClashCell.swift; sourceTree = "<group>"; };
 		53BB7A201ED1536C00370F7B /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 				53C7D03B1EC9B79E00D0BD9C /* SWRevealViewController.h */,
 				53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */,
 				53C7D03A1EC9B79D00D0BD9C /* Project-Bridging-Header.h */,
-				5399C9851EDC17C8009F85FA /* data.csv */,
 				53BA20E41EDB8E6E0063E603 /* CSV Parser */,
 			);
 			path = WingIt;
@@ -235,7 +232,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */,
-				5399C9861EDC17C8009F85FA /* data.csv in Resources */,
 				53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */,
 				53F8A0111EC3D0010001604A /* Main.storyboard in Resources */,
 				6FDB091C1ED7D63A000F1B78 /* SplashTransparent.png in Resources */,
