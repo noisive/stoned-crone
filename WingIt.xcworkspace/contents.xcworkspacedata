@@ -5,9 +5,12 @@
       location = "group:Backend.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/home/cshome/w/wwarren/345/stoned-crone/WingIt.xcodeproj">
+      location = "container:WingIt.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WingIt.xcodeproj">
    </FileRef>
 </Workspace>

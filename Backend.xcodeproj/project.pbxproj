@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		06A5475C1F7B1D7100967FD7 /* libBackend.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06A547191F7B12B400967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		06D026601F7DE061001B79FD /* makefile in Sources */ = {isa = PBXBuildFile; fileRef = 06D026541F7DE061001B79FD /* makefile */; };
-		06D026611F7DE061001B79FD /* parseDate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D026551F7DE061001B79FD /* parseDate.cpp */; };
 		06D026621F7DE061001B79FD /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D026561F7DE061001B79FD /* parser.cpp */; };
 		06D026631F7DE061001B79FD /* parsertest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D026581F7DE061001B79FD /* parsertest.cpp */; };
 		06D026641F7DE061001B79FD /* testtimetable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265A1F7DE061001B79FD /* testtimetable.cpp */; };
@@ -34,7 +32,6 @@
 /* Begin PBXFileReference section */
 		06A547191F7B12B400967FD7 /* libBackend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBackend.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		06D026541F7DE061001B79FD /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = src/makefile; sourceTree = "<group>"; };
-		06D026551F7DE061001B79FD /* parseDate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parseDate.cpp; path = src/parseDate.cpp; sourceTree = "<group>"; };
 		06D026561F7DE061001B79FD /* parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = src/parser.cpp; sourceTree = "<group>"; };
 		06D026571F7DE061001B79FD /* parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = parser.hpp; path = src/parser.hpp; sourceTree = "<group>"; };
 		06D026581F7DE061001B79FD /* parsertest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parsertest.cpp; path = src/parsertest.cpp; sourceTree = "<group>"; };
@@ -78,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				06D026541F7DE061001B79FD /* makefile */,
-				06D026551F7DE061001B79FD /* parseDate.cpp */,
 				06D026561F7DE061001B79FD /* parser.cpp */,
 				06D026571F7DE061001B79FD /* parser.hpp */,
 				06D026581F7DE061001B79FD /* parsertest.cpp */,
@@ -151,10 +147,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				06D026631F7DE061001B79FD /* parsertest.cpp in Sources */,
-				06D026601F7DE061001B79FD /* makefile in Sources */,
 				06D026641F7DE061001B79FD /* testtimetable.cpp in Sources */,
 				06D026621F7DE061001B79FD /* parser.cpp in Sources */,
-				06D026611F7DE061001B79FD /* parseDate.cpp in Sources */,
 				06D026671F7DE061001B79FD /* wrapper.cpp in Sources */,
 				06D026661F7DE061001B79FD /* timetableEvent.cpp in Sources */,
 				06D026651F7DE061001B79FD /* timetable.cpp in Sources */,

@@ -82,7 +82,7 @@ void Timetable::updateEvent(TimetableEvent t, bool custom) {
 }
 
 int Timetable::size() {
-    return eventList.size();
+    return (int) eventList.size();
 }
 
 std::string Timetable::toString() {
