@@ -100,7 +100,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let dayNumber = Int(record[0])! - 1 //Minus 1 as Monday should be 0
                 let startTime = Int(record[1])! - 8
                 let duration = Int(record[2])
-                let hexColor = record[3]
+                _ = record[3]
                 let types = self.getClassType(classString: record[4])
                 let paperCode = record[5]
                 let paperName = record[6]
@@ -108,8 +108,8 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let longitude = Double(record[8])
                 let roomCode = record[9]
                 let roomName = record[10]
-                let buildingName = record[11]
-                let date = record[12]
+                _ = record[11]
+                _ = record[12]
                 
                 //Create a new lesson
                 
@@ -193,8 +193,10 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         let dayArray = Constants.Formats.dayArray
         let dayIndex = getCurrentXPage()
-        self.navigationItem.title = dayArray[dayIndex]
-        
+        if dayIndex < 7 {
+            self.navigationItem.title = dayArray[dayIndex]
+        }
+    
         calculateDayLabel()
     }
     

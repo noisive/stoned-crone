@@ -6,6 +6,24 @@
 //  Copyright © 2017 Eli Labes. All rights reserved.
 //
 
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
+}
+
 import UIKit
 
 class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate {
@@ -17,6 +35,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var doneButton: UIButton!
+    
+    let errorColor: UIColor = UIColor(rgb: 0xFF0013)
+    let infoColor: UIColor = UIColor(rgb: 0x0052FF)
     
     let webCheckError = "document.getElementsByClassName('sv-panel-danger').length > 0;"
     
@@ -83,6 +104,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         spinner.isHidden = true
         spinner.stopAnimating()
         passwordField.text = ""
+        errorLabel.textColor = UIColor.red
         errorLabel.text = "\(reason)"
     }
     
@@ -101,6 +123,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
             
             if (header == "" && !once) {
+                errorLabel.text = "Enter your eVision details"
                 usernameField.isHidden = false
                 passwordField.isHidden = false
                 loginButton.isHidden = false
@@ -112,12 +135,13 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             switch header {
                 
             case "System Message":
-                spinner.startAnimating()
+                spinner.stopAnimating()
                 spinner.isHidden = true
                 break;
                 
             case "Home":
                 webView.stringByEvaluatingJavaScript(from: webClickTimetable)
+                errorLabel.text = "Retrieving your timetable"
                 break;
                 
             case "Timetable":
@@ -127,6 +151,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 // Here we can pass on the output timetable for one week with the printed date.
                 print(json)
                 parseTimetable(json.cString(using: String.Encoding.utf8));
+                
+                errorLabel.text = "Done!"
                 
                 self.performSegue(withIdentifier: "LoginDoneSegue", sender: self)
                 
@@ -160,6 +186,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         loginButton.isHidden = true
         spinner.isHidden = false
         spinner.startAnimating()
+        errorLabel.textColor = infoColor
+        errorLabel.text = "Logging you in"
         webView.stringByEvaluatingJavaScript(from: webClickLogin)
     }
     
