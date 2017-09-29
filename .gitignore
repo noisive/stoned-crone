@@ -32,6 +32,8 @@
 
 # Misc crap
 *.DS_Store
+*.swp
+._*
 
 *.xcuserstate
 xcuserdata/
