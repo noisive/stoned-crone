@@ -19,6 +19,7 @@
 		53C7D0391EC9B6A500D0BD9C /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7D0381EC9B6A500D0BD9C /* Lesson.swift */; };
 		53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */; };
 		53C7D03F1EC9BD8400D0BD9C /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */; };
+		53EB6F3478A0289F86295889 /* Pods_WingIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F3CDAA8A18E6D0CC4CFB0D /* Pods_WingIt.framework */; };
 		53F8A00C1EC3D0010001604A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A00B1EC3D0010001604A /* AppDelegate.swift */; };
 		53F8A00E1EC3D0010001604A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A00D1EC3D0010001604A /* ViewController.swift */; };
 		53F8A0111EC3D0010001604A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F8A00F1EC3D0010001604A /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 		53F8A0201EC3DE930001604A /* DayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCollectionViewCell.swift; sourceTree = "<group>"; };
 		6FDB091B1ED7D63A000F1B78 /* SplashTransparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashTransparent.png; sourceTree = "<group>"; };
 		712F9B15AD162FE77B246C59 /* Pods-WingIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-WingIt/Pods-WingIt.release.xcconfig"; sourceTree = "<group>"; };
+		E2F3CDAA8A18E6D0CC4CFB0D /* Pods_WingIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WingIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */,
+				53EB6F3478A0289F86295889 /* Pods_WingIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				06A5475D1F7B1D9600967FD7 /* libBackend.a */,
+				E2F3CDAA8A18E6D0CC4CFB0D /* Pods_WingIt.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

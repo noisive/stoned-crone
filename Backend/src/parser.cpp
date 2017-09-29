@@ -325,11 +325,11 @@ void Parser::parse() {
     strcpy(buffer, getenv("HOME"));
     // Export to CSV file format.
     std::string filename(buffer);
-    filename += "/data.csv";
+    filename += "/Documents/data.csv";
     timetable.exportToFile(filename);
     // Export to Google Calendar file format.
     std::string GoogleCalFilename(buffer);
-    GoogleCalFilename += "/GoogleCalFile.csv";
+    GoogleCalFilename += "/Documents/GoogleCalFile.csv";
     timetable.exportToGoogleCalFile(GoogleCalFilename);
 
 }
