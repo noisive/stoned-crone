@@ -1,6 +1,6 @@
 //
 //  LoginViewController.swift
-//  Project
+//  WingIt
 //
 //  Created by William Shaw on 5/27/17.
 //  Copyright © 2017 Eli Labes. All rights reserved.
