@@ -179,15 +179,13 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Log in to eVision" id="XKm-2K-n0K">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="l7h-td-XK0"/>
-                                        <connections>
-                                            <outlet property="titleView" destination="ayn-rG-QWd" id="dRR-i3-huT"/>
-                                        </connections>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="l7h-td-XK0">
+                                            <connections>
+                                                <segue destination="QRJ-3s-2Y0" kind="presentation" id="PXH-wo-5I9"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
-                                <connections>
-                                    <outlet property="delegate" destination="XKm-2K-n0K" id="lMh-ob-wm9"/>
-                                </connections>
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -651,4 +649,7 @@
     <resources>
         <image name="Menu" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ePY-gw-6Lo"/>
+    </inferredMetricsTieBreakers>
 </document>
