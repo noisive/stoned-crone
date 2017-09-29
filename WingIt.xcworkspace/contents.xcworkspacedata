@@ -8,9 +8,6 @@
       location = "group:/home/cshome/w/wwarren/345/stoned-crone/WingIt.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:WingIt.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
