@@ -8,6 +8,7 @@
 #include <fstream>
 #include <cmath>
 #include <sstream>
+#include <algorithm>
 
 /* Set initial vector size.
 
@@ -66,6 +67,22 @@ void Timetable::clean(std::vector<TimetableEvent> &list) {
             i--;
         }
     }
+}
+
+int Timetable::merge() {
+    int numRemoved = 0;
+    for (int i = 0; i < eventList.size(); i++) {
+        for (int c = 0; c < customList.size(); c++) {
+            if (eventList[i].equals(customList[c])) {
+                std::cerr << "Removing overridden event." << std::endl;
+                removeEvent(eventList[i]);
+                numRemoved++;
+                i--;
+
+            }
+        }
+    }
+    return numRemoved;
 }
 
 const char* Timetable::getByDate(const char* date) {

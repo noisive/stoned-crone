@@ -36,6 +36,7 @@ class Timetable {
 
         // Integration
         const char* getByDate(const char* date);
+        int merge();
 
         // Exporting
         void printToCSV();

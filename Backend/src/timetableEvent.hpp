@@ -91,9 +91,7 @@ class TimetableEvent {
 
         std::string toString() const;
 
-        std::string toCSVRow() const;
-
-        bool equals(TimetableEvent other) const;
+        std::string toCSVRow() const; 
 };
 
 #endif // TIMETABLEEVENT_H_

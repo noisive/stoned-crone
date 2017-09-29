@@ -153,7 +153,7 @@ struct tm TimetableEvent::createDate(int day, int month, int year) {
     return date;
 }
 
-bool TimetableEvent::equals(TimetableEvent other) const {
+bool TimetableEvent::equals(TimetableEvent other) {
     if (this->uid != 0xCC && this->uid == other.getUID()) {
         return true;
     }
