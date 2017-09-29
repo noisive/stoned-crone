@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Backend.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:/home/cshome/w/wwarren/345/stoned-crone/WingIt.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:WingIt.xcodeproj">
+   </FileRef>
+</Workspace>
