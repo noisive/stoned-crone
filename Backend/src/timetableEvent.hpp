@@ -32,7 +32,7 @@ class TimetableEvent {
         void setDate(std::string date);
 
     public:
-
+    
         TimetableEvent(void);
 
         // Wraps the setDate function to parse into a standard format.
