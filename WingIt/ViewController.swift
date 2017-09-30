@@ -97,19 +97,19 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             for record in importedRecords {
                 
                 //Define all data from CSV file and cast to correct data type.
-                let dayNumber = Int(record[0])! - 1 //Minus 1 as Monday should be 0
-                let startTime = Int(record[1])! - 8
-                let duration = Int(record[2])
-                _ = record[3]
-                let types = self.getClassType(classString: record[4])
-                let paperCode = record[5]
-                let paperName = record[6]
-                let latitude = Double(record[7])
-                let longitude = Double(record[8])
-                let roomCode = record[9]
-                let roomName = record[10]
-                _ = record[11]
+                let dayNumber = Int(record[1])! - 1 //Minus 1 as Monday should be 0
+                let startTime = Int(record[2])! - 8
+                let duration = Int(record[3])
+                _ = record[4]
+                let types = self.getClassType(classString: record[5])
+                let paperCode = record[6]
+                let paperName = record[7]
+                let latitude = Double(record[8])
+                let longitude = Double(record[9])
+                let roomCode = record[10]
+                let roomName = record[11]
                 _ = record[12]
+                _ = record[13]
                 
                 //Create a new lesson
                 

@@ -58,6 +58,29 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
 
     let webGrabCode = "window.getJSArray()"
     
+    let monitorScript = "var intervalHandle" +
+                        "var monitorState = 0" +
+                        "window.monitorUpdate = function(cb) {" +
+                            "intervalHandle = setInterval(() => {" +
+                                "var newDate = document.getElementsByClassName('sitsjqtttitle')[0].innerHTML" +
+                                "if (newDate.indexOf('Updating') !== -1) {" +
+                                    "monitorState = 1" +
+                                "} else if (monitorState === 1) {" +
+                                    "monitorState = 0" +
+                                    "clearInterval(intervalHandle)" +
+                                    "cb()" +
+                                "}" +
+                            "}, 50)" +
+                        "}" +
+                        "window.loadNextWeek = function() {" +
+                            "ttb_timetable_move('N')" +
+                            "monitorUpdate(() => {" +
+                                "window.location.href = 'https://com.noisive'" +
+                            "})" +
+                        "}"
+    
+    let loadNextWeek = "window.loadNextWeek()"
+    
     var once:Bool = false
     
     override func viewDidLoad() {
@@ -109,6 +132,16 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         errorLabel.text = "\(reason)"
     }
     
+//    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+//        print("CALLED \(String(describing: request.url?.absoluteString))")
+//        
+//        if request.url?.absoluteString == "https://com.noisive" {
+//            print("JS CALLBACK")
+//            return false
+//        }
+//        return true
+//    }
+    
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if (!webView.isLoading) {
             
@@ -149,15 +182,18 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 webView.stringByEvaluatingJavaScript(from: webInsertFunctions)
                 let json:String = NSString(string: webView.stringByEvaluatingJavaScript(from: webGrabCode)!) as String
                 
+                //webView.stringByEvaluatingJavaScript(from: monitorScript)
+                //webView.stringByEvaluatingJavaScript(from: loadNextWeek)
+                
                 // Here we can pass on the output timetable for one week with the printed date.
-                print(json)
+                //print(json)
                 parseTimetable(json.cString(using: String.Encoding.utf8));
                 
                 errorLabel.text = "Done!"
                 
                 self.performSegue(withIdentifier: "LoginDoneSegue", sender: self)
                 
-                //webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
+                webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
                 webView.stringByEvaluatingJavaScript(from: webLogout)
                 break;
                 
