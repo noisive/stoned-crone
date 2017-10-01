@@ -19,12 +19,24 @@ class Date {
         Date(int y, int m, int d);
 
         Date(int dateNum);
-     
+    
+        Date(std::string date);
+
+        Date(const char* date);
+
+        void dateFromString(std::string date);
+
+        int compare(Date other);
+        
         bool isLeapYear();
         
         void addDays(int days);
 
         tm tmDate();
+
+        int getYear();
+        int getMonth();
+        int getDay();
 
         std::string format(const char* format);
         

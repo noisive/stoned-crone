@@ -24,6 +24,51 @@ Date::Date(int dateNum) {
     this->day = (dateNum % 100000000 - year - month) / 1000000;  
 }
 
+Date::Date(std::string date) { 
+    dateFromString(date);
+}
+
+Date::Date(const char* date) {
+    std::string d(date);
+    dateFromString(d);
+}
+
+void Date::dateFromString(std::string date) { 
+    if (date.length() > 8) {
+        // Date from ISO date.
+        this->year = stoi(date.substr(0, 4)) - 1900;
+        this->month = stoi(date.substr(5, 2));
+        this->day = stoi(date.substr(8, 2));
+    } else {
+        // Date from out legacy date.
+        this->day = stoi(date.substr(0, 2));
+        this->month = stoi(date.substr(2, 2));
+        this->year = stoi(date.substr(4)) - 1900;        
+    }
+}
+
+int Date::getYear() { return this->year; };
+
+int Date::getMonth() { return this->month; };
+
+int Date::getDay() { return this->day; };
+
+int Date::compare(Date other) {
+    if (this->year == other.getYear()) {
+        if (this->month == other.getMonth()) {
+            if (this->day == other.getDay()) {
+                return 0;
+            } else {
+                return (this->day > other.getDay()) ? 1 : -1;
+            }
+        } else {
+            return (this->month > other.getMonth()) ? 1 : -1;
+        }
+    } else {
+        return (this->year > other.getYear()) ? 1 : -1;
+    }
+}
+
 bool Date::isLeapYear() {
     if (this->year % 4 == 0) {
         if (this->year % 100 == 0) {
