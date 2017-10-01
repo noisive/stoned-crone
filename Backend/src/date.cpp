@@ -14,7 +14,7 @@ Date::Date() {
 
 Date::Date(int d, int m, int y) {
     this->year = y - 1900;
-    this->month - m;
+    this->month = m;
     this->day = d;
 }
 
