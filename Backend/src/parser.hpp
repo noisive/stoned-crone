@@ -23,14 +23,12 @@ class Parser {
 
         // Parsing Functions
         int getObjectCount(std::string json);
-        void parseFile(std::string filename, std::string format);
         TimetableEvent parseCSVLine(std::string line);
         TimetableEvent parseInfo(std::string infoString, TimetableEvent ttEvent);
 
     public:
         // Constructors
         Parser(void);
-        Parser(bool init);
         Parser(const char* data);
         Parser(std::string j);
 
@@ -39,7 +37,9 @@ class Parser {
         std::string getJson();
 
         // Parsing
-        void parse();
+        Timetable parse();
+        Timetable parseCachedFile();
+        Timetable parseFile(std::string filename, std::string format);
 
 };
 

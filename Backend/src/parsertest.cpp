@@ -28,9 +28,15 @@ int main(int argc, char** argv) {
         "/Library/Caches/data.csv has been parsed." << std::endl << std::endl;    
 
     std::cout << "\e[33mRunning parse on created CSV file.\e[0m" << std::endl;
-
-    parser = Parser(true);
     
+    Timetable timetable = parser.parseCachedFile();
+  
+    std::vector<TimetableEvent> events = timetable.getByDate("2017-09-28");
+
+    for (TimetableEvent event : events) {
+        std::cout << event.toString();
+    }
+
     std::cout << "[\e[32mOK\e[0m] Check that the "
         "above looks correct." << std::endl << std::endl;
 

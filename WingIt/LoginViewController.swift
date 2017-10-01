@@ -189,6 +189,10 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 //print(json)
                 parseTimetable(json.cString(using: String.Encoding.utf8));
                 
+                let str = String(cString: getEventsByDate("2017-09-28".cString(using: String.Encoding.utf8)))
+                
+                print("\(str)")
+                
                 errorLabel.text = "Done!"
                 
                 self.performSegue(withIdentifier: "LoginDoneSegue", sender: self)

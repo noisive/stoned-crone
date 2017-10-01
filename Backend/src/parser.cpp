@@ -11,10 +11,6 @@ Parser::Parser(void) {
     this->json = "0xCC";
 }
 
-Parser::Parser(bool init) {
-    parseFile(dataPath, "csv");
-}
-
 Parser::Parser(const char *data) {
     std::string j(data);
     this->json = j;
@@ -147,7 +143,11 @@ void Parser::getWeekStart() {
                                 date.substr(8, 4));
 }
 
-void Parser::parseFile(std::string fileName, std::string format) {
+Timetable Parser::parseCachedFile() {
+    return parseFile(dataPath, "csv");
+}
+
+Timetable Parser::parseFile(std::string fileName, std::string format) {
 
     Timetable timetable;
 
@@ -169,7 +169,9 @@ void Parser::parseFile(std::string fileName, std::string format) {
     else
         std::cerr << "Format not supported" << std::endl;
 
-    std::cout << timetable.toString() << std::endl;
+    //std::cout << timetable.toString() << std::endl;
+
+    return timetable;
 }
 
 TimetableEvent Parser::parseCSVLine(std::string line) {
@@ -234,25 +236,25 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
     // Once all the data is loaded, generate the UID();
     ttEvent.genUID();
 
-    std::cout << ttEvent.toString();
+    //std::cout << ttEvent.toString();
 
     return ttEvent;
 }
 
-void Parser::parse() {
+Timetable Parser::parse() {
 
     Timetable timetable;
 
     if (this->json == "0xCC") {
         std::cerr << "No data given" << std::endl;
-        return;
+        return Timetable();
     }
 
     getWeekStart();
 
     if (this->weekStart == 0xCC) {
         std::cerr << "No data given" << std::endl;
-        return;
+        return Timetable();
     }
 
     extractJsonArray();
@@ -316,7 +318,7 @@ void Parser::parse() {
 
         ttEvent.genUID();
 
-        std::cout << ttEvent.toString();
+        //std::cout << ttEvent.toString();
 
         timetable.addEvent(ttEvent);
     }
@@ -326,5 +328,7 @@ void Parser::parse() {
 
     // Save to Google Calendar Formatted file.
     timetable.exportToGoogleCalFile(gCalPath);
+    
+    return timetable;
 }
 
