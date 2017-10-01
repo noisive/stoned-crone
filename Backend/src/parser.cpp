@@ -234,7 +234,8 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
     }
 
     // Add the trailing column.
-    ttEvent.addDate(stoi(build));
+    // Here set date is used as the date has already been converted.
+    ttEvent.setDate(build);
 
     // Once all the data is loaded, generate the UID();
     ttEvent.genUID();

@@ -30,7 +30,6 @@ class TimetableEvent {
 
         void datePlusDays( struct tm* date, int days );
         struct tm createDate(int day, int month, int year);
-        void setDate(std::string date);
         unsigned long hash();
     
     public:
@@ -46,6 +45,7 @@ class TimetableEvent {
         // Wraps the setDate function to parse into a standard format.
         void addDate(int startingDate);
         std::string getDate() const;
+        void setDate(std::string date);
 
         std::string getId() const;
         void setId(std::string id);

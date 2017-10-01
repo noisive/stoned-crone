@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <sstream>
 #include <iostream>
+#include "date.hpp"
 
 TimetableEvent::TimetableEvent(void) {
     this->uid = 0xCC;
@@ -128,31 +129,6 @@ void TimetableEvent::setDay(int day) { this->day = day; }
 
 void TimetableEvent::setColor(std::string hexColor) { this->color = hexColor; }
 
-
-// Adjust date by a number of days +/-
-// source: user Clifford, StackOverflow, 2010.
-// https://stackoverflow.com/questions/2344330/algorithm-to-add-or-subtract-days-from-a-date
-void TimetableEvent::datePlusDays(struct tm* date, int days) {
-    const time_t ONE_DAY = 24 * 60 * 60;
-
-    // Seconds since start of epoch
-    time_t date_seconds = mktime(date) + (days * ONE_DAY);
-
-    // Update caller's date
-    // Use localtime because mktime converts to UTC so may change date
-    *date = *localtime(&date_seconds);
-}
-
-// Adapted from Clifford (2010)
-struct tm TimetableEvent::createDate(int day, int month, int year) {
-    struct tm date = { 0, 0, 12 };  // nominal time midday (arbitrary).
-    // Set up the date structure
-    date.tm_year = year - 1900;
-    date.tm_mon = month - 1;  // note: zero indexed
-    date.tm_mday = day;       // note: not zero indexed
-    return date;
-}
-
 bool TimetableEvent::equals(TimetableEvent other) {
     if (this->uid != 0xCC && this->uid == other.getUID()) {
         return true;
@@ -160,27 +136,13 @@ bool TimetableEvent::equals(TimetableEvent other) {
     return false;
 }
 
-void TimetableEvent::addDate(int startingDate) {
-    // Get sets of digits out of int.
-    int year = startingDate % 10000;
-    int month = (startingDate % 1000000 - year) / 10000;
-    int day = (startingDate % 100000000 - year - month) / 1000000;
-
-    struct tm date = createDate(day, month, year);
-    datePlusDays(&date, this->day);
-
-    std::ostringstream syear;
-    syear  << std::setw(4) << std::setfill( '0' ) << year;
-    std::ostringstream smonth;
-    smonth  << std::setw(2) << std::setfill( '0' ) << month;
-    std::ostringstream sday;
-    sday  << std::setw(2) << std::setfill( '0' ) << day;
-
-    setDate(sday.str()+smonth.str()+syear.str());
+void TimetableEvent::addDate(int startingDate) {    
+    Date date(startingDate);
+    date.addDays(this->day - 1); // 1 on eVision is the first day.
+    setDate(date.legacyDate()); 
 }
 
-/* To std::string function */
-
+/* Output a string representation of this event. */
 std::string TimetableEvent::toString() const {
         return std::to_string(this->uid) + 
         "," + std::to_string(this->day) + 

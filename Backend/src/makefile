@@ -1,14 +1,17 @@
 parsertest.out : libParse.a parsertest.cpp
 	g++ -std=c++11 -g parsertest.cpp -L. -lm -lParse -o parsertest.out
 
-libParse.a : parser.o timetableEvent.o timetable.o 
-	ar r libParse.a parser.o timetable.o timetableEvent.o 
+libParse.a : parser.o timetableEvent.o timetable.o date.o
+	ar r libParse.a parser.o timetable.o timetableEvent.o date.o
 
 timetable.o : timetable.cpp
 	g++ -std=c++11 -g -c timetable.cpp
 
 timetableEvent.o : timetableEvent.cpp 
 	g++ -std=c++11 -g -c timetableEvent.cpp 
+
+date.o : date.cpp
+	g++ -std=c++11 -g -c date.cpp
 
 parser.o : parser.cpp 
 	g++ -std=c++11 -g -c parser.cpp

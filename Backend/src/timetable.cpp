@@ -8,7 +8,6 @@
 #include <fstream>
 #include <cmath>
 #include <sstream>
-#include <algorithm>
 
 /* Set initial vector size.
 
