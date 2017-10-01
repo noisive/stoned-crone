@@ -14,6 +14,7 @@
 		06D026651F7DE061001B79FD /* timetable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265B1F7DE061001B79FD /* timetable.cpp */; };
 		06D026661F7DE061001B79FD /* timetableEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265D1F7DE061001B79FD /* timetableEvent.cpp */; };
 		06D026671F7DE061001B79FD /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265F1F7DE061001B79FD /* wrapper.cpp */; };
+		BEE32B4C1F8191E9005AA683 /* date.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEE32B4A1F8191E9005AA683 /* date.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,8 @@
 		06D0265D1F7DE061001B79FD /* timetableEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timetableEvent.cpp; path = src/timetableEvent.cpp; sourceTree = "<group>"; };
 		06D0265E1F7DE061001B79FD /* timetableEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = timetableEvent.hpp; path = src/timetableEvent.hpp; sourceTree = "<group>"; };
 		06D0265F1F7DE061001B79FD /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper.cpp; path = src/wrapper.cpp; sourceTree = "<group>"; };
+		BEE32B4A1F8191E9005AA683 /* date.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = date.cpp; path = src/date.cpp; sourceTree = "<group>"; };
+		BEE32B4B1F8191E9005AA683 /* date.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = date.hpp; path = src/date.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,8 @@
 		06A5471B1F7B12B400967FD7 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				BEE32B4A1F8191E9005AA683 /* date.cpp */,
+				BEE32B4B1F8191E9005AA683 /* date.hpp */,
 				06D026541F7DE061001B79FD /* makefile */,
 				06D026561F7DE061001B79FD /* parser.cpp */,
 				06D026571F7DE061001B79FD /* parser.hpp */,
@@ -146,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEE32B4C1F8191E9005AA683 /* date.cpp in Sources */,
 				06D026631F7DE061001B79FD /* parsertest.cpp in Sources */,
 				06D026641F7DE061001B79FD /* testtimetable.cpp in Sources */,
 				06D026621F7DE061001B79FD /* parser.cpp in Sources */,
