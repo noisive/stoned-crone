@@ -92,6 +92,6 @@ std::string Date::ISODate() {
 }
 
 std::string Date::legacyDate() {
-    return format("%d%m%y");
+    return format("%d%m%Y");
 }
 
