@@ -78,10 +78,12 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             return .lecture
         case "Practical":
             return .lab
+        case "Computer Lab":
+            return .lab
         case "Tutorial":
             return .tutorial
         default:
-            print("There was an error, return default lecture")
+            print("Error, unknown class type. Return default: lecture")
             return .lecture
         }
     }
