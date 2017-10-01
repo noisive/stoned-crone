@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     parser.parse();
 
     std::cout << "[\033[32mOK\033[0m] Check file://" + home + 
-        "/Documents/data.csv has been parsed." << std::endl << std::endl;    
+        "/Library/Caches/data.csv has been parsed." << std::endl << std::endl;    
 
     std::cout << "\e[33mRunning parse on created CSV file.\e[0m" << std::endl;
 
