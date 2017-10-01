@@ -10,10 +10,8 @@
 		06A5475C1F7B1D7100967FD7 /* libBackend.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06A547191F7B12B400967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		06D026621F7DE061001B79FD /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D026561F7DE061001B79FD /* parser.cpp */; };
 		06D026631F7DE061001B79FD /* parsertest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D026581F7DE061001B79FD /* parsertest.cpp */; };
-		06D026641F7DE061001B79FD /* testtimetable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265A1F7DE061001B79FD /* testtimetable.cpp */; };
 		06D026651F7DE061001B79FD /* timetable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265B1F7DE061001B79FD /* timetable.cpp */; };
 		06D026661F7DE061001B79FD /* timetableEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265D1F7DE061001B79FD /* timetableEvent.cpp */; };
-		06D026671F7DE061001B79FD /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265F1F7DE061001B79FD /* wrapper.cpp */; };
 		BEE32B4C1F8191E9005AA683 /* date.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEE32B4A1F8191E9005AA683 /* date.cpp */; };
 /* End PBXBuildFile section */
 
@@ -37,12 +35,10 @@
 		06D026571F7DE061001B79FD /* parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = parser.hpp; path = src/parser.hpp; sourceTree = "<group>"; };
 		06D026581F7DE061001B79FD /* parsertest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parsertest.cpp; path = src/parsertest.cpp; sourceTree = "<group>"; };
 		06D026591F7DE061001B79FD /* test */ = {isa = PBXFileReference; lastKnownFileType = folder; name = test; path = src/test; sourceTree = "<group>"; };
-		06D0265A1F7DE061001B79FD /* testtimetable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = testtimetable.cpp; path = src/testtimetable.cpp; sourceTree = "<group>"; };
 		06D0265B1F7DE061001B79FD /* timetable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timetable.cpp; path = src/timetable.cpp; sourceTree = "<group>"; };
 		06D0265C1F7DE061001B79FD /* timetable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = timetable.hpp; path = src/timetable.hpp; sourceTree = "<group>"; };
 		06D0265D1F7DE061001B79FD /* timetableEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timetableEvent.cpp; path = src/timetableEvent.cpp; sourceTree = "<group>"; };
 		06D0265E1F7DE061001B79FD /* timetableEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = timetableEvent.hpp; path = src/timetableEvent.hpp; sourceTree = "<group>"; };
-		06D0265F1F7DE061001B79FD /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper.cpp; path = src/wrapper.cpp; sourceTree = "<group>"; };
 		BEE32B4A1F8191E9005AA683 /* date.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = date.cpp; path = src/date.cpp; sourceTree = "<group>"; };
 		BEE32B4B1F8191E9005AA683 /* date.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = date.hpp; path = src/date.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,12 +80,10 @@
 				06D026571F7DE061001B79FD /* parser.hpp */,
 				06D026581F7DE061001B79FD /* parsertest.cpp */,
 				06D026591F7DE061001B79FD /* test */,
-				06D0265A1F7DE061001B79FD /* testtimetable.cpp */,
 				06D0265B1F7DE061001B79FD /* timetable.cpp */,
 				06D0265C1F7DE061001B79FD /* timetable.hpp */,
 				06D0265D1F7DE061001B79FD /* timetableEvent.cpp */,
 				06D0265E1F7DE061001B79FD /* timetableEvent.hpp */,
-				06D0265F1F7DE061001B79FD /* wrapper.cpp */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -153,9 +147,7 @@
 			files = (
 				BEE32B4C1F8191E9005AA683 /* date.cpp in Sources */,
 				06D026631F7DE061001B79FD /* parsertest.cpp in Sources */,
-				06D026641F7DE061001B79FD /* testtimetable.cpp in Sources */,
 				06D026621F7DE061001B79FD /* parser.cpp in Sources */,
-				06D026671F7DE061001B79FD /* wrapper.cpp in Sources */,
 				06D026661F7DE061001B79FD /* timetableEvent.cpp in Sources */,
 				06D026651F7DE061001B79FD /* timetable.cpp in Sources */,
 			);
