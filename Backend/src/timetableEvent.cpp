@@ -1,6 +1,6 @@
 /* TimetableEvent Implementation class.
-    @author Will Shaw - 2017
-*/
+   @author Will Shaw - 2017
+   */
 #include "timetableEvent.hpp"
 #include <ctime>
 #include <iomanip>
@@ -11,7 +11,7 @@
 TimetableEvent::TimetableEvent(void) {
     this->uid = 0xCC;
     this->id = "0xCC";
-    this->date = "0xCC";
+    this->date = Date();
     this->day = 0xCC;
     this->duration = 0xCC;
     this->startTime = 0xCC;
@@ -42,8 +42,9 @@ unsigned long TimetableEvent::hash() {
     val = 0;
     hash = hash * 3 + this->startTime;
     hash = hash * 3 + this->duration;
-    for (int i = 0; i < this->date.length(); i++) {
-        val += ((int) this->date[i]);
+    std::string isoDate = this->date.ISODate();
+    for (int i = 0; i < isoDate.length(); i++) {
+        val += ((int) isoDate[i]);
     }
     hash = hash * 3 + val;
     return hash;
@@ -61,7 +62,7 @@ void TimetableEvent::genUID() {
 
 std::string TimetableEvent::getId() const { return this->id; }
 
-std::string TimetableEvent::getDate() const { return this->date; }
+Date TimetableEvent::getDate() { return this->date; }
 
 int TimetableEvent::getDuration() const { return this->duration; }
 
@@ -94,25 +95,25 @@ std::string TimetableEvent::getColor() const { return this->color; }
 
 void TimetableEvent::setId(std::string id) { this->id = id; }
 
-void TimetableEvent::setDate(std::string date) { this->date = date; }
+void TimetableEvent::setDate(Date date) { this->date = date; }
 
 void TimetableEvent::setDuration(const int duration) 
-                                    { this->duration = duration; }
+{ this->duration = duration; }
 
 void TimetableEvent::setPaperCode(std::string paperCode) 
-                                    { this->paperCode = paperCode; }
+{ this->paperCode = paperCode; }
 
 void TimetableEvent::setPaperName(std::string paperName) 
-                                    { this->paperName = paperName; }
+{ this->paperName = paperName; }
 
 void TimetableEvent::setRoomCode(std::string roomCode) 
-                                    { this->roomCode = roomCode; }
+{ this->roomCode = roomCode; }
 
 void TimetableEvent::setRoomName(std::string roomName) 
-                                    { this->roomName = roomName; }
+{ this->roomName = roomName; }
 
 void TimetableEvent::setBuilding(std::string building) 
-                                    { this->building = building; }
+{ this->building = building; }
 
 void TimetableEvent::setMapLat(std::string mapLat) { this->mapLat = mapLat; }
 
@@ -121,7 +122,7 @@ void TimetableEvent::setMapLong(std::string mapLong) { this->mapLong = mapLong; 
 void TimetableEvent::setType(std::string type) { this->type = type; }
 
 void TimetableEvent::setStartTime(int startTime) 
-                                    { this->startTime = startTime; }
+{ this->startTime = startTime; }
 
 void TimetableEvent::setEndTime(int endTime) { this->endTime = endTime; }
 
@@ -136,15 +137,15 @@ bool TimetableEvent::equals(TimetableEvent other) {
     return false;
 }
 
-void TimetableEvent::addDate(int startingDate) {    
+void TimetableEvent::fixDate(int startingDate) {    
     Date date(startingDate);
     date.addDays(this->day - 1); // 1 on eVision is the first day.
     setDate(date.legacyDate()); 
 }
 
 /* Output a string representation of this event. */
-std::string TimetableEvent::toString() const {
-        return std::to_string(this->uid) + 
+std::string TimetableEvent::toString() { 
+    return std::to_string(this->uid) + 
         "," + std::to_string(this->day) + 
         "," + std::to_string(this->startTime) + 
         "," + std::to_string(this->duration) + 
@@ -157,6 +158,6 @@ std::string TimetableEvent::toString() const {
         "," + this->roomCode +
         "," + this->roomName +
         "," + this->building +
-        "," + this->date + "\n";
+        "," + this->date.ISODate() + "\n";
 }
 

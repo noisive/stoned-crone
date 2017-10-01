@@ -6,12 +6,13 @@
 #define TIMETABLEEVENT_H_
 
 #include <string>
+#include "date.hpp"
 
 class TimetableEvent {
     private:
         unsigned long uid;
         std::string id;
-        std::string date;
+        Date date;
         int duration;
         int mapZoom;
         int startTime;
@@ -27,9 +28,7 @@ class TimetableEvent {
         std::string building;
         std::string mapUrl;
         std::string type;
-
-        void datePlusDays( struct tm* date, int days );
-        struct tm createDate(int day, int month, int year);
+ 
         unsigned long hash();
     
     public:
@@ -42,10 +41,10 @@ class TimetableEvent {
         
         void genUID();
         
-        // Wraps the setDate function to parse into a standard format.
-        void addDate(int startingDate);
-        std::string getDate() const;
-        void setDate(std::string date);
+        // Wraps the setDate function to parse and add days from evision.
+        void fixDate(int startingDate);
+        Date getDate();
+        void setDate(Date date);
 
         std::string getId() const;
         void setId(std::string id);
@@ -89,7 +88,7 @@ class TimetableEvent {
         std::string getColor() const;
         void setColor(std::string hexColor);
 
-        std::string toString() const;
+        std::string toString();
 
         std::string toCSVRow() const; 
 };
