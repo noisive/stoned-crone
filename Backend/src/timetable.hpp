@@ -35,8 +35,10 @@ class Timetable {
         std::string toString();
 
         // Integration
-        const char* getByDate(const char* date);
+        std::vector<ttEvent> getByDate(const char* date);
         int merge();
+        TimetableEvent getByUID(const char* id);
+        void addEvent(const char* event);
 
         // Exporting
         void printToCSV();

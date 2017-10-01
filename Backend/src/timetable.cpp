@@ -24,6 +24,11 @@ void Timetable::addEvent(TimetableEvent t) {
     this->addEvent(t, false);
 }
 
+void Timetable::addEvent(const char* event) {
+    // An event comes from swift as a string (CSV).
+    // we can parse and add it here.
+}
+
 void Timetable::addEvent(TimetableEvent t, bool custom) {
     if (custom) {
         customList.push_back(t);
@@ -77,19 +82,38 @@ int Timetable::merge() {
                 removeEvent(eventList[i]);
                 numRemoved++;
                 i--;
-
             }
         }
     }
     return numRemoved;
 }
 
-const char* Timetable::getByDate(const char* date) {
-    std::string filterDate(date); // Preferred date format 'YYYY-MM-DD HH:MM'
+std::vector<TimetableEvent> Timetable::getByDate(const char* date) {
+    Date d(date);
+    std::vector<TimetableEvent> matchedEvents; 
+    for (TimetableEvent event : eventList) {
+        if (d.compare(event.getDate()) == 0) {
+            matchedEvents.push_back(event); 
+        }
+    }
+    return matchedEvents;
+}
 
-    std::cout << filterDate << std::endl;
+TimetableEvent Timetable::getByUID(const char* id) {
+    char* pEnd;
+    unsigned long uid = strtoul(id,&pEnd,10);
+    for (TimetableEvent event : eventList) {
+        if (event.getUID() == uid) {
+            return event;
+        }
+    }
 
-    return "x";
+    for (TimetableEvent event : customList) {
+        if (event.getUID() == uid) {
+            return event;
+        }
+    }
+    return TimetableEvent();
 }
 
 void Timetable::updateEvent(TimetableEvent t, bool custom) {
@@ -111,15 +135,11 @@ std::string Timetable::toString() {
        */
 
     for (TimetableEvent event : eventList) {
-        if (event.getId() != "OxCC") {
-            out += event.getPaperCode() + ", ";
-        }
+        out += event.getPaperCode() + ", ";
     }
 
-    for (TimetableEvent event : customList) {
-        if (event.getId() != "0xCC") {
-            out += event.getPaperCode() + ", ";
-        }
+    for (TimetableEvent event : customList) { 
+        out += event.getPaperCode() + ", ";
     }
 
     return out.substr(0, out.size() - 2); 
@@ -208,7 +228,7 @@ void Timetable::exportToGoogleCalFile(std::string fileName) {
     if (myfilew.is_open()) {
         myfilew << output;
         for (TimetableEvent event: eventList) {
-            std::string date = dateFormat(event.getDate());
+            std::string date = event.getDate().ISODate();
             myfilew << event.getPaperCode() << " " << event.getType() << "," << date << "," << date 
                 << "," << timeFormat(event.getStartTime()) << "," << timeFormat(event.getEndTime(), true) 
                 << "," << "\"" << event.getPaperName() << "\"" <<" in " << event.getRoomName() << ": " 
