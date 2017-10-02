@@ -5,7 +5,6 @@
 //  Created by Eli Labes on 11/05/17.
 //  Copyright © 2017 Eli Labes. All rights reserved.
 //
-
 import UIKit
 
 class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource {
@@ -14,9 +13,8 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     
     var passDelegate : PassData?
     
-    
     //Create an array of arrays that have nothing in them
-    var hourData = [(lesson: String?, lesson2: String?)?](repeatElement(nil, count: 14))
+    var hourData = [(lesson: CLong?, lesson2: CLong?)?](repeatElement(nil, count: 14))
     
     var tableViewData = [Lesson]()
     
@@ -24,7 +22,6 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 0)
-   
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,8 +34,6 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dataPath = hourData[indexPath.row]
-        
-        
         
         var cell : UITableViewCell = UITableViewCell()
         
@@ -53,12 +48,9 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
             let singleCell : TimetableCell = tableView.dequeueReusableCell(withIdentifier:
                 "TimetableCell", for: indexPath) as! TimetableCell
             
-            if let lessonData = findData(classID: (dataPath?.lesson)!) {
+            if let lessonData = findData(uid: (dataPath?.lesson)!) {
                 singleCell.lessonCode.text = lessonData.code
                 singleCell.lessonRoom.text = lessonData.roomShort
-                
-                
-                print("This is type \(lessonData.type)")
                 
                 //Setup time table, color and style.
                 setupCell(Appearance: singleCell, indexPath: indexPath, type: lessonData.type)
@@ -71,7 +63,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
                 "ClashCell", for: indexPath) as! ClashCell
             clashCell.leftLesson.backgroundColor = Constants.Colors.labColor
             
-            if let lessonData1 = findData(classID: (dataPath?.lesson)!), let lessonData2 = findData(classID: (dataPath?.lesson2)!) {
+            if let lessonData1 = findData(uid: (dataPath?.lesson)!), let lessonData2 = findData(uid: (dataPath?.lesson2)!) {
                 clashCell.leftLessonLabel.text = lessonData1.code
                 clashCell.rightLessonLabel.text = lessonData2.code
             }
@@ -84,11 +76,9 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         return cell
     }
     
-   
-    
-    //Find the lesson object that matches the class code
-    func findData(classID: String) -> Lesson? {
-        if let data = tableViewData.filter({$0.classID == classID}).first {
+    //Find the lesson object that matches event uid
+    func findData(uid: CLong) -> Lesson? {
+        if let data = tableViewData.filter({$0.uid == uid}).first {
             return data
         }
         return nil
@@ -114,7 +104,6 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
                 }
 
             case hourData[indexPath.row + 1]?.lesson == lessonData?.lesson:
-                
                 roundEdges(view: cell.colorView, corners: [.topLeft, .topRight])
                 
             default:
@@ -150,33 +139,19 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         }
     }
     
-    // MAJOR BUG if you are in the menu and click somewhere, crashes. Something to do with this bit?
-    // I think it is when a cell is clicked, but that index doesn't have a lecture.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //do{
-            
         if hourData[indexPath.row] != nil{
-            if let pass = findData(classID: (hourData[indexPath.row]?.lesson)!) { // This line is where the crash happens. Hourdata doesn't have data
+            if let pass = findData(uid: (hourData[indexPath.row]?.lesson)!) {
                 self.passDelegate?.performSegue(with: pass)
             }else{
                 print("cell without data tapped")
             }
         }
-        /*
-            // Catching every error? Defs bad, dk how else.
-        } catch let error {
-            print(error.localizedDescription)
-            return
-        }*/
-        
     }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 100
     }
-    
-    
     
 }

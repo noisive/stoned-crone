@@ -30,8 +30,8 @@ struct Lesson {
     var latitude : Double!
     var longitude : Double!
     
-    init(classID: String, start : Int, length: Int, code: String, type: classType, roomShort: String, roomFull : String, paperName: String, day: Int, latitude: Double, longitude: Double) {
-        
+    init(uid: CLong, classID: String, start : Int, length: Int, code: String, type: classType, roomShort: String, roomFull : String, paperName: String, day: Int, latitude: Double, longitude: Double) {
+        self.uid = uid;
         self.classID = classID
         self.startTime = start
         self.length = length
@@ -44,22 +44,6 @@ struct Lesson {
         self.latitude = latitude
         self.longitude = longitude
         
-    }
-    
-    init(data: [String]) {
-        self.init(classID: data[6],
-                  start: Int(data[2])!,
-                  length: Int(data[3])!,
-                  code: data[6],
-                  type: ViewController.getClassType(classString: data[5]),
-                  roomShort: data[10],
-                  roomFull:data[11],
-                  paperName: data[7],
-                  day: Int(data[1])!,
-                  latitude: Double(data[8])!,
-                  longitude: Double(data[9])!
-        )
-        self.uid = CLong(data[0])!
     }
     
 }

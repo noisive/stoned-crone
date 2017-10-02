@@ -23,7 +23,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     
     var dateLabel : String = String()
     
-    var hourData = [[(lesson: String?, lesson2: String?)?]](repeating: [(lesson: String?, lesson2: String?)?](repeating: nil, count: 14), count: 7)
+    var hourData = [[(lesson: CLong?, lesson2: CLong?)?]](repeating: [(lesson: CLong?, lesson2: CLong?)?](repeating: nil, count: 14), count: 7)
  
     /** Adds the events retrieved from the C++ lib into the correct timeslots. */
     func loadWeekData() {
@@ -46,6 +46,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let eventArr = event.components(separatedBy: ",")
             
                 //Define all data from CSV file and cast to correct data type.
+                let uid = CLong(eventArr[0])!
                 let dayNumber = Int(eventArr[1])! - 1 //Minus 1 as Monday should be 0
                 let startTime = Int(eventArr[2])! - 8
                 let duration = Int(eventArr[3])
@@ -57,7 +58,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let roomCode = eventArr[10]
                 let roomName = eventArr[11]
                 
-                let lesson = Lesson(classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
+                let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
                 
                 let hour = lesson.startTime!
                 
@@ -66,9 +67,9 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 
                 for i in 0..<iterations {
                     if (self.hourData[day][hour + i]?.lesson == nil) {
-                        hourData[day][hour + i] = (lesson: lesson.classID, nil)
+                        hourData[day][hour + i] = (lesson: lesson.uid, nil)
                     } else {
-                        hourData[day][hour]?.lesson2 = lesson.classID
+                        hourData[day][hour]?.lesson2 = lesson.uid
                     }
                 }
             }
