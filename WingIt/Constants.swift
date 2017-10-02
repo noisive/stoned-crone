@@ -12,10 +12,7 @@ import Foundation
 
 struct Constants {
     struct Colors {
-        //Navy Blue
-        static let Theme = UIColor(red:0.06, green:0.16, blue:0.31, alpha:1.0)
-        
-        //Lab Color
+        //Comp lab Color
         static let labColor = UIColor(red:0.04, green:0.73, blue:0.97, alpha:1.0)
         
         //Lecture Color
@@ -23,6 +20,9 @@ struct Constants {
         
         //Tutorial Color
         static let tutorialColor = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
+        
+        //Practical Color
+        static let Theme = UIColor(red:0.06, green:0.16, blue:0.31, alpha:1.0)
         
     }
     struct Formats {
@@ -32,6 +32,7 @@ struct Constants {
             case lecture
             case lab
             case tutorial
+            case practical
         }
     }
     
