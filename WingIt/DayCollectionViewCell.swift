@@ -147,8 +147,10 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         }
     }
     
+    // MAJOR BUG if you are in the menu and click somewhere, crashes. Something to do with this bit?
+    // I think it is when a cell is clicked, but that index doesn't have a lecture.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+        
         if let pass = findData(classID: (hourData[indexPath.row]?.lesson)!) {
             self.passDelegate?.performSegue(with: pass)
         }
