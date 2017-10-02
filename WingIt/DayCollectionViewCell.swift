@@ -155,12 +155,14 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //do{
             
-        
+        if hourData[indexPath.row] != nil{
             if let pass = findData(classID: (hourData[indexPath.row]?.lesson)!) { // This line is where the crash happens. Hourdata doesn't have data
                 self.passDelegate?.performSegue(with: pass)
             }else{
                 print("cell without data tapped")
-            }/*
+            }
+        }
+        /*
             // Catching every error? Defs bad, dk how else.
         } catch let error {
             print(error.localizedDescription)
