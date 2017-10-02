@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		06A5475C1F7B1D7100967FD7 /* libBackend.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06A547191F7B12B400967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		06D026621F7DE061001B79FD /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D026561F7DE061001B79FD /* parser.cpp */; };
-		06D026631F7DE061001B79FD /* parsertest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D026581F7DE061001B79FD /* parsertest.cpp */; };
 		06D026651F7DE061001B79FD /* timetable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265B1F7DE061001B79FD /* timetable.cpp */; };
 		06D026661F7DE061001B79FD /* timetableEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265D1F7DE061001B79FD /* timetableEvent.cpp */; };
 		BEE32B4C1F8191E9005AA683 /* date.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEE32B4A1F8191E9005AA683 /* date.cpp */; };
@@ -146,7 +145,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEE32B4C1F8191E9005AA683 /* date.cpp in Sources */,
-				06D026631F7DE061001B79FD /* parsertest.cpp in Sources */,
 				06D026621F7DE061001B79FD /* parser.cpp in Sources */,
 				06D026661F7DE061001B79FD /* timetableEvent.cpp in Sources */,
 				06D026651F7DE061001B79FD /* timetable.cpp in Sources */,
