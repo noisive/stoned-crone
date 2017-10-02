@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CSVImporter
 
 protocol PassData {
     func performSegue(with data: Lesson)

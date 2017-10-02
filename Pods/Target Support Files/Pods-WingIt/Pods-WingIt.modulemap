@@ -1,6 +1,0 @@
-framework module Pods_WingIt {
-  umbrella header "Pods-WingIt-umbrella.h"
-
-  export *
-  module * { export * }
-}
