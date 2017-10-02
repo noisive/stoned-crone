@@ -241,9 +241,9 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SDAV2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7QH-pq-aCm">
-                                                                                <rect key="frame" x="241" y="12" width="56" height="21"/>
+                                                                                <rect key="frame" x="114" y="12" width="183" height="21"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="width" constant="56" id="D99-gm-kqj"/>
+                                                                                    <constraint firstAttribute="width" constant="183" id="D99-gm-kqj"/>
                                                                                     <constraint firstAttribute="height" constant="21" id="P1g-Jc-7mg"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
