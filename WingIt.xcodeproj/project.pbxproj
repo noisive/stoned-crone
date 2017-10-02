@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; };
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
+		06B38A381F82361E009EDC60 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* Helper.swift */; };
 		297C56931ED9126200C44420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginViewController.swift */; };
 		5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */; };
 		535BDEC91EC48FB200B853C2 /* TimetableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BDEC81EC48FB200B853C2 /* TimetableCell.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		06A5475D1F7B1D9600967FD7 /* libBackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBackend.a; path = "../../Library/Developer/Xcode/DerivedData/Project-faabexjzkhonsfdsetxpryushahl/Build/Products/Debug-iphonesimulator/libBackend.a"; sourceTree = "<group>"; };
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
+		06B38A371F82361E009EDC60 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		297C56921ED9126200C44420 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2E94981C9D449D4D6A2CA89C /* Pods-WingIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WingIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WingIt/Pods-WingIt.debug.xcconfig"; sourceTree = "<group>"; };
 		5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankCellTableViewCell.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */,
 				53C7D03A1EC9B79D00D0BD9C /* Project-Bridging-Header.h */,
 				53BA20E41EDB8E6E0063E603 /* CSV Parser */,
+				06B38A371F82361E009EDC60 /* Helper.swift */,
 			);
 			path = WingIt;
 			sourceTree = "<group>";
@@ -198,7 +201,7 @@
 				TargetAttributes = {
 					53F8A0071EC3D0010001604A = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 9L3BH5LC27;
+						DevelopmentTeam = UY5WX2EN9V;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -299,6 +302,7 @@
 			files = (
 				53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */,
 				53F8A00E1EC3D0010001604A /* ViewController.swift in Sources */,
+				06B38A381F82361E009EDC60 /* Helper.swift in Sources */,
 				53F8A0141EC3D0010001604A /* Project.xcdatamodeld in Sources */,
 				53BB7A191ED14C3800370F7B /* ClashCell.swift in Sources */,
 				53F8A00C1EC3D0010001604A /* AppDelegate.swift in Sources */,
@@ -436,7 +440,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 9L3BH5LC27;
+				DEVELOPMENT_TEAM = UY5WX2EN9V;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -462,7 +466,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = 9L3BH5LC27;
+				DEVELOPMENT_TEAM = UY5WX2EN9V;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
