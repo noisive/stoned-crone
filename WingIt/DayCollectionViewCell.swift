@@ -144,6 +144,9 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         case .tutorial:
             print("Color set to tutorial")
             return Constants.Colors.tutorialColor
+        case .practical:
+            print("Color set to practical")
+            return Constants.Colors.practicalColor
         }
     }
     

@@ -65,6 +65,8 @@ class DetailView: UITableViewController, MKMapViewDelegate {
             return "Tutorial"
         case .lecture:
             return "Lecture"
+        case .practical:
+            return "Practical"
         }
     }
 

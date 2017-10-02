@@ -22,6 +22,9 @@ struct Constants {
         static let tutorialColor = UIColor(red:1.00, green:0.60, blue:0.00, alpha:1.0)
         
         //Practical Color
+        static let practicalColor = UIColor(red:0.06, green:0.16, blue:0.31, alpha:1.0)
+        
+        //Navy Blue
         static let Theme = UIColor(red:0.06, green:0.16, blue:0.31, alpha:1.0)
         
     }
