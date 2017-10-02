@@ -78,10 +78,12 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             return .lecture
         case "Practical":
             return .lab
+        case "Computer Lab":
+            return .lab
         case "Tutorial":
             return .tutorial
         default:
-            print("There was an error, return default lecture")
+            print("Error, unknown class type. Return default: lecture")
             return .lecture
         }
     }
@@ -189,17 +191,20 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
     }
     
+    // FEATURE This may need to change if we are extending the number of days?? - WW
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         let dayArray = Constants.Formats.dayArray
         let dayIndex = getCurrentXPage()
-        if dayIndex < 7 {
+        if dayIndex < 7 { //ALERT, MAGIC NUM
             self.navigationItem.title = dayArray[dayIndex]
         }
     
         calculateDayLabel()
     }
     
+    // BUG This should change, there is a bug here. Date starts at current day, should start at Monday.
+    // FEATURE Will also have to change if we are extending the number of days.
     func calculateDayLabel() {
         
         let today = Date()
