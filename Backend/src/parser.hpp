@@ -14,8 +14,11 @@ class Parser {
         // Member variables.
         std::string json;
         int weekStart;
+        std::string dataPath;
+        std::string gCalPath;
 
         // Base Functions
+        void setPaths();
         void extractJsonArray();
         void getWeekStart();
         int indexOf(std::string data, std::string pattern);

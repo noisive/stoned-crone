@@ -4,26 +4,32 @@
 #include "parser.hpp"
 #include <cstring>
 
-std::string dataPath = ((std::string)getenv("HOME")) + "/Library/Caches/data.csv";
-std::string gCalPath = ((std::string)getenv("HOME")) + "/Library/Caches/GoogleCalFile.csv";
-
 Parser::Parser(void) {
-    this->json = "0xCC";
+    setPaths();
+    parseCachedFile();
 }
 
 Parser::Parser(const char *data) {
     std::string j(data);
+    setPaths();
     this->json = j;
     this->weekStart = 0xCC;
 }
 
 Parser::Parser(std::string j) {
+    setPaths();
     this->json = j;
     this->weekStart = 0xCC;
 }
 
 void Parser::setJson(std::string json) {
+    setPaths();
     this->json = json;
+}
+
+void Parser::setPaths() {
+    this->dataPath = ((std::string)getenv("HOME")) + "/Library/Caches/data.csv";
+    this->gCalPath = ((std::string)getenv("HOME")) + "/Library/Caches/GoogleCalFile.csv";
 }
 
 std::string Parser::getJson() {
@@ -144,7 +150,7 @@ void Parser::getWeekStart() {
 }
 
 Timetable Parser::parseCachedFile() {
-    return parseFile(dataPath, "csv");
+    return parseFile(this->dataPath, "csv");
 }
 
 Timetable Parser::parseFile(std::string fileName, std::string format) {
@@ -324,10 +330,10 @@ Timetable Parser::parse() {
     }
 
     // Save to CSV formatted file.
-    timetable.exportToFile(dataPath);
+    timetable.exportToFile(this->dataPath);
 
     // Save to Google Calendar Formatted file.
-    timetable.exportToGoogleCalFile(gCalPath);
+    timetable.exportToGoogleCalFile(this->gCalPath);
     
     return timetable;
 }
