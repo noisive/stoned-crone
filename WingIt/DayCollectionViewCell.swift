@@ -125,16 +125,12 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     func calculateLessonColor(classType: classType) -> UIColor {
         switch classType {
         case .lab:
-            print("Color set to lab")
             return Constants.Colors.labColor
         case .lecture:
-            print("Color set to lecture")
             return Constants.Colors.lectureColor
         case .tutorial:
-            print("Color set to tutorial")
             return Constants.Colors.tutorialColor
         case .practical:
-            print("Color set to practical")
             return Constants.Colors.practicalColor
         }
     }

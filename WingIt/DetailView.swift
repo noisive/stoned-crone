@@ -71,7 +71,6 @@ class DetailView: UITableViewController, MKMapViewDelegate {
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        print("called")
         let view = UIView()
         view.backgroundColor = .clear
         return view

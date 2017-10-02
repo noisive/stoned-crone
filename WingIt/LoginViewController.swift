@@ -189,26 +189,26 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 //print(json)
                 parseTimetable(json.cString(using: String.Encoding.utf8));
                 
-                /// _________________________________________ EXAMPLE CPP LIB USAGE
-                
-                let date = Date()
-                let formatter = DateFormatter()
-                
-                formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
-                
-                let today = formatter.string(from: date)
-                
-                let cstr = getEventsByDate(today.cString(using: String.Encoding.utf8), 0)
-                
-                let str = String(cString: cstr!)
-                
-                free(UnsafeMutablePointer(mutating: cstr)) // We must free the memory that C++ created for the pointer.
-                
-                print("\(str)")
-                
-                print("NUM EVENTS = \(numEvents("2017-10-02".cString(using: String.Encoding.utf8)))")
-                
-                /// _________________________________________
+//                /// _________________________________________ EXAMPLE CPP LIB USAGE
+//                
+//                let date = Date()
+//                let formatter = DateFormatter()
+//                
+//                formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
+//                
+//                let today = formatter.string(from: date)
+//                
+//                let cstr = getEventsByDate(today.cString(using: String.Encoding.utf8), 0)
+//                
+//                let str = String(cString: cstr!)
+//                
+//                free(UnsafeMutablePointer(mutating: cstr)) // We must free the memory that C++ created for the pointer.
+//                
+//                print("\(str)")
+//                
+//                print("NUM EVENTS = \(numEvents("2017-10-02".cString(using: String.Encoding.utf8)))")
+//                
+//                /// _________________________________________
  
                 errorLabel.text = "Done!"
                 
