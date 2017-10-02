@@ -28,7 +28,6 @@
 		B4B8EF0099CA9A0B69DB32F434AECAF6 /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0092B30B6DA8386851195393066A2A10 /* TimeIntervalExtension.swift */; };
 		B967B596FF5D3672E85A7B1D90A6D1AA /* CSVImporter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8987B25A25AD16AC075019862911E037 /* CSVImporter-dummy.m */; };
 		CFB33AD1FC1088E8A9926E19AF89EE9A /* Pods-WingIt-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 15FB7B917BB6B5272D60E77E31B3244D /* Pods-WingIt-dummy.m */; };
-		EECCA60D9625D9DE11FC6DBF60B72C4E /* HandySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC7DD64DAE6EDA3ECF68760361CF8788 /* HandySwift.framework */; };
 		F8CA972CEB856E31EBA8AD07EC2DBA8E /* DispatchTimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8FBF3E16D91B1F1716D20E222F8AE3 /* DispatchTimeIntervalExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,14 +64,14 @@
 		0E2F1A8A60E1870341FF7D6A39C305D2 /* CSVImporter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CSVImporter.xcconfig; sourceTree = "<group>"; };
 		12CDF818E4345BAF04AC89B9F3964885 /* CSVImporter-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CSVImporter-umbrella.h"; sourceTree = "<group>"; };
 		15FB7B917BB6B5272D60E77E31B3244D /* Pods-WingIt-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WingIt-dummy.m"; sourceTree = "<group>"; };
-		1ADA82474BECC28B373F5B4A0AB3B678 /* Pods-WingIt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-WingIt.modulemap"; sourceTree = "<group>"; };
+		1ADA82474BECC28B373F5B4A0AB3B678 /* Pods-WingIt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-WingIt.modulemap"; sourceTree = "<group>"; };
 		1CB8AA4885D391614F09EF27CEBADE21 /* Pods-WingIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WingIt.debug.xcconfig"; sourceTree = "<group>"; };
 		2B81A2FF50492428F907374DBEE9345F /* ArrayExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArrayExtension.swift; path = Sources/Extensions/ArrayExtension.swift; sourceTree = "<group>"; };
 		2F8FBF3E16D91B1F1716D20E222F8AE3 /* DispatchTimeIntervalExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DispatchTimeIntervalExtension.swift; path = Sources/Extensions/DispatchTimeIntervalExtension.swift; sourceTree = "<group>"; };
 		37BCB46E6A2DE345BD88DD644161B67A /* SortedArray.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SortedArray.swift; path = Sources/Structs/SortedArray.swift; sourceTree = "<group>"; };
 		3892AE9A6A0437686FB5EBAA4F5B06E5 /* IntExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IntExtension.swift; path = Sources/Extensions/IntExtension.swift; sourceTree = "<group>"; };
-		39B7FC84CC494462CDFB94DB56D6C5B9 /* HandySwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = HandySwift.modulemap; sourceTree = "<group>"; };
-		46A73471F0824F0770BD55EA9A01AD20 /* HandySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = HandySwift.framework; path = HandySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		39B7FC84CC494462CDFB94DB56D6C5B9 /* HandySwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = HandySwift.modulemap; sourceTree = "<group>"; };
+		46A73471F0824F0770BD55EA9A01AD20 /* HandySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HandySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E9C515BC12FE3DD6F2ADD7BC6A8BD3A /* HandySwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HandySwift-umbrella.h"; sourceTree = "<group>"; };
 		52E88B7D8243326439E2C3C584374E8F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		533DBA93F8BFE7D02C487A4DFD823CA1 /* Pods-WingIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WingIt.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,17 +82,16 @@
 		673CDAAC16727B22555C53A27920E630 /* Pods-WingIt-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WingIt-frameworks.sh"; sourceTree = "<group>"; };
 		710E24AFDB0D01B6AE3CF79092A9EDF8 /* CSVImporter-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CSVImporter-prefix.pch"; sourceTree = "<group>"; };
 		8987B25A25AD16AC075019862911E037 /* CSVImporter-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CSVImporter-dummy.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9AD32279DA9DA987B0A51172F95D54F8 /* TextFile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TextFile.swift; path = Sources/Code/TextFile.swift; sourceTree = "<group>"; };
 		9B4FFAB825CBD7BA76E6EFC5A14824CE /* HandySwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HandySwift.xcconfig; sourceTree = "<group>"; };
-		9B6E2E4D2D2564E090721BF571892A3C /* Pods_WingIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WingIt.framework; path = "Pods-WingIt.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B6E2E4D2D2564E090721BF571892A3C /* Pods_WingIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WingIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A29E7A50191507BBFDE14D9521F6CE29 /* Globals.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = Sources/Globals.swift; sourceTree = "<group>"; };
-		AC7DD64DAE6EDA3ECF68760361CF8788 /* HandySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HandySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1497337E83FCD99EF23C54295CEB553 /* HandySwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HandySwift-prefix.pch"; sourceTree = "<group>"; };
 		BF40622FA870F93F9D10013294596BF7 /* Pods-WingIt-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WingIt-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CCFD7061574114400AADAECA981FFD9E /* CSVImporter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CSVImporter.framework; path = CSVImporter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCFD7061574114400AADAECA981FFD9E /* CSVImporter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSVImporter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD06B5976C3E543632D55FF439E70D09 /* Pods-WingIt-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WingIt-resources.sh"; sourceTree = "<group>"; };
-		E6A86F946CB8856673F6CCFF4D6C1FC8 /* CSVImporter.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = CSVImporter.modulemap; sourceTree = "<group>"; };
+		E6A86F946CB8856673F6CCFF4D6C1FC8 /* CSVImporter.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CSVImporter.modulemap; sourceTree = "<group>"; };
 		EA24F7F39AD7F6F0B82D845FA6F51FDB /* CharacterViewExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CharacterViewExtension.swift; path = Sources/Extensions/CharacterViewExtension.swift; sourceTree = "<group>"; };
 		F40EF0B1D41381D7941031D4AEA7649A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FBD29E99D3113C58F52068D753EB5630 /* StringExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StringExtension.swift; path = Sources/Extensions/StringExtension.swift; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				61A79AD2A22A7AF6811699A13CD333AD /* Foundation.framework in Frameworks */,
-				EECCA60D9625D9DE11FC6DBF60B72C4E /* HandySwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +142,6 @@
 				0092B30B6DA8386851195393066A2A10 /* TimeIntervalExtension.swift */,
 				7C8C65ADB9AFA67CD82CED131D9431AE /* Support Files */,
 			);
-			name = HandySwift;
 			path = HandySwift;
 			sourceTree = "<group>";
 		};
@@ -238,14 +234,12 @@
 				9AD32279DA9DA987B0A51172F95D54F8 /* TextFile.swift */,
 				A944FCBDF33354E845BC08E0BE4B19F3 /* Support Files */,
 			);
-			name = CSVImporter;
 			path = CSVImporter;
 			sourceTree = "<group>";
 		};
 		C4E9A3B88AE5C2C64284DDE340C77B2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AC7DD64DAE6EDA3ECF68760361CF8788 /* HandySwift.framework */,
 				4CA2CD2D201901BA09AB8C3DD6E7DC70 /* iOS */,
 			);
 			name = Frameworks;
