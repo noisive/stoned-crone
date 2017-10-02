@@ -198,7 +198,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 
                 let today = formatter.string(from: date)
                 
-                let cstr = getEventsByDate(today.cString(using: String.Encoding.utf8))
+                let cstr = getEventsByDate(today.cString(using: String.Encoding.utf8), 0)
                 
                 let str = String(cString: cstr!)
                 

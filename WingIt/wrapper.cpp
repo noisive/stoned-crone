@@ -23,19 +23,17 @@ extern "C" int numEvents(const char* dateString) {
     return (int) timetable.getByDate(dateString).size();
 }
 
-extern "C" const char* getEventsByDate(const char* dateString) {
+extern "C" const char* getEventsByDate(const char* dateString, int index) {
     std::vector<TimetableEvent> events = timetable.getByDate(dateString);
     
     std::string data = "";
     
     size_t bufferSize =  0;
     
-    for (TimetableEvent ev :events ) {
-        bufferSize += ev.toString().length();
-        data += ev.toString();
-    }
+    bufferSize += events[index].toString().length();
+    data += events[index].toString();
     
-    bufferSize += 200;
+    bufferSize += 20;
     
     char buffer[bufferSize];
     
@@ -43,5 +41,3 @@ extern "C" const char* getEventsByDate(const char* dateString) {
     
     return strdup(buffer);
 }
-
-

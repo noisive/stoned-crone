@@ -16,8 +16,6 @@ protocol PassData {
 class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PassData {
     
     @IBOutlet var ToggleSectionOutlet: UISegmentedControl!
-    
-  
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var menuButton: UIBarButtonItem!
     
@@ -26,17 +24,83 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     var dateLabel : String = String()
     
     var hourData = [[(lesson: String?, lesson2: String?)?]](repeating: [(lesson: String?, lesson2: String?)?](repeating: nil, count: 14), count: 7)
+ 
+    /** Adds the events retrieved from the C++ lib into the correct timeslots. */
+    func loadWeekData() {
+        let date = Date()
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
+        
+        let weekday = Calendar.current.component(.weekday, from: date)
+        
+        var dayIndex = 0;
+        
+        while (dayIndex < 7) {
+            
+            let lookupDay = Calendar.current.date(byAdding: .day, value: -(weekday - 2) + dayIndex, to: date)!
+            let day = Calendar.current.component(.day, from: lookupDay) - (weekday)
+            
+            for event in getEventsForDay(date: formatter.string(from: lookupDay)) {
+                
+                let eventArr = event.components(separatedBy: ",")
+            
+                //Define all data from CSV file and cast to correct data type.
+                let dayNumber = Int(eventArr[1])! - 1 //Minus 1 as Monday should be 0
+                let startTime = Int(eventArr[2])! - 8
+                let duration = Int(eventArr[3])
+                let types = ViewController.getClassType(classString: eventArr[5])
+                let paperCode = eventArr[6]
+                let paperName = eventArr[7]
+                let latitude = Double(eventArr[8])
+                let longitude = Double(eventArr[9])
+                let roomCode = eventArr[10]
+                let roomName = eventArr[11]
+                
+                let lesson = Lesson(classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
+                
+                let hour = lesson.startTime!
+                
+                self.lessonData.append(lesson)
+                let iterations = lesson.length!
+                
+                for i in 0..<iterations {
+                    if (self.hourData[day][hour + i]?.lesson == nil) {
+                        hourData[day][hour + i] = (lesson: lesson.classID, nil)
+                    } else {
+                        hourData[day][hour]?.lesson2 = lesson.classID
+                    }
+                }
+            }
+            dayIndex += 1
+        }
+        
+        self.collectionView.reloadData()
+        let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
+        self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+        
+        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
+    }
     
-//    //Create an array of arrays that have nothing in them
-//    var data = [[(lesson: String?, lesson2: String?)?]](repeating: [(lesson: String?, lesson2: String?)?](repeating: (lesson: String?, lesson2: String?)?, count: 14), count: 7)
-//    
-//    //var hourData [[(lesson: String?, lesson2: String?)?]](repeatElement((lesson: String?, lesson2: String?)?, count: 14)
-//    //var hourData = [[(lesson: String?, lesson2: String?)?]])
+    /** Retrieves the events for a given date from the C++ library. */
+    func getEventsForDay(date: String) -> [String] {
+        var arr = [String]()
+        
+        let num = numEvents(date.cString(using: String.Encoding.utf8))
+        var index: Int32 = 0
+        
+        while (index < num) {
+            let cstr = getEventsByDate(date.cString(using: String.Encoding.utf8), index)
+            let str = String(cString: cstr!)
+            free(UnsafeMutablePointer(mutating: cstr)) // We must free the memory that C++ created for the pointer.
+            arr.append(str)
+            index += 1
+        }
+        return arr
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
@@ -44,9 +108,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        
         calculateDayLabel()
-        
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -56,7 +118,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
 
         // Do any additional setup after loading the view, typically from a nib.
         
-        makeMakeData()
+        loadWeekData()
     }
     
     func createDateLabel(date: String) {
@@ -72,7 +134,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         self.navigationItem.rightBarButtonItem = dateLabel
     }
     
-    func getClassType(classString: String) -> classType {
+    static func getClassType(classString: String) -> classType {
         switch classString {
         case "Lecture":
             return .lecture
@@ -85,65 +147,6 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         default:
             print("Error, unknown class type. Return default color: lecture")
             return .lecture
-        }
-    }
-    
-    func makeMakeData() {
-        
-
-        //guard let path = Bundle.main.path(forResource: "data", ofType: ".csv") else {return}
-        let path = NSHomeDirectory()+"/Library/Caches/data.csv"
-        
-        let importer = CSVImporter<[String]>(path: path)
-        importer.startImportingRecords { $0 }.onFinish { importedRecords in
-            for record in importedRecords {
-                
-                //Define all data from CSV file and cast to correct data type.
-                let dayNumber = Int(record[1])! - 1 //Minus 1 as Monday should be 0
-                let startTime = Int(record[2])! - 8
-                let duration = Int(record[3])
-                _ = record[4]
-                let types = self.getClassType(classString: record[5])
-                let paperCode = record[6]
-                let paperName = record[7]
-                let latitude = Double(record[8])
-                let longitude = Double(record[9])
-                let roomCode = record[10]
-                let roomName = record[11]
-                _ = record[12]
-                _ = record[13]
-                
-                //Create a new lesson
-                
-    
-                let newLesson = Lesson(classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
-                
-                //Insert new lesson into the correct day array
-                self.lessonData.append(newLesson)
-            }
-            
-            for lesson in self.lessonData {
-                let lessonID = lesson.classID
-                let startIndex = lesson.startTime
-                let iterations = lesson.length!
-                let dayOfWeek = lesson.day
-                
-                for i in 0..<iterations {
-                    if self.hourData[dayOfWeek!][startIndex! + i] == nil {
-                        self.hourData[dayOfWeek!][startIndex! + i] = (lesson: lessonID, nil)
-                    } else {
-                        self.hourData[dayOfWeek!][startIndex! + i]?.lesson2 = lessonID
-                    }
-                }
-            }
-            
-            
-            self.collectionView.reloadData()
-            print(self.getDayOfWeek()!)
-            let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
-            self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
-            
-            self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
         }
     }
     
