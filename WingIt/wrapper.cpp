@@ -15,20 +15,33 @@ extern "C" void parseTimetable(const char* data) {
     timetable = parser.parse();
 }
 
-extern "C" void parseCachedFile() {
+extern "C" void initParser() {
     timetable = parser.parseCachedFile();
 }
 
+extern "C" int numEvents(const char* dateString) {
+    return (int) timetable.getByDate(dateString).size();
+}
+
 extern "C" const char* getEventsByDate(const char* dateString) {
-    
     std::vector<TimetableEvent> events = timetable.getByDate(dateString);
     
-    std::string returnData = "";
+    std::string data = "";
+    
+    size_t bufferSize =  0;
     
     for (TimetableEvent ev :events ) {
-        returnData += ev.toString();
+        bufferSize += ev.toString().length();
+        data += ev.toString();
     }
-    return returnData.c_str();
+    
+    bufferSize += 200;
+    
+    char buffer[bufferSize];
+    
+    snprintf(buffer, sizeof(buffer), "%s", data.c_str());
+    
+    return strdup(buffer);
 }
 
 
