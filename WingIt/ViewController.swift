@@ -31,16 +31,15 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
         
-        let weekday = Calendar.current.component(.weekday, from: date)
+        let todayDay = Calendar.current.component(.weekday, from: date) - 2 // wtf
         
         var dayIndex = 0;
         
         while (dayIndex < 7) {
             
-            let lookupDay = Calendar.current.date(byAdding: .day, value: -(weekday - 2) + dayIndex, to: date)!
-            let day = Calendar.current.component(.day, from: lookupDay) - (weekday)
+            let searchDate = Calendar.current.date(byAdding: .day, value: (-todayDay) + dayIndex, to: date)!
             
-            for event in getEventsForDay(date: formatter.string(from: lookupDay)) {
+            for event in getEventsForDay(date: formatter.string(from: searchDate)) {
                 
                 let eventArr = event.components(separatedBy: ",")
             
@@ -65,10 +64,10 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let iterations = lesson.length!
                 
                 for i in 0..<iterations {
-                    if (self.hourData[day][hour + i]?.lesson == nil) {
-                        hourData[day][hour + i] = (lesson: lesson.uid, nil)
+                    if (self.hourData[dayIndex][hour + i]?.lesson == nil) {
+                        hourData[dayIndex][hour + i] = (lesson: lesson.uid, nil)
                     } else {
-                        hourData[day][hour]?.lesson2 = lesson.uid
+                        hourData[dayIndex][hour]?.lesson2 = lesson.uid
                     }
                 }
             }
