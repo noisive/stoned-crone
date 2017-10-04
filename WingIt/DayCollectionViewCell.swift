@@ -91,7 +91,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         
         if indexPath.row > 0 {
             switch true {
-            // If the cell above is equal, connect the two and remove exces data
+            // If the cell above is equal, connect the two and remove excess data
             case lessonData?.lesson == hourData[indexPath.row - 1]?.lesson:
                 cell.colorView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 0).isActive = true
                 cell.seperatorLine.isHidden = true

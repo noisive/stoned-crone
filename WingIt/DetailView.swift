@@ -39,7 +39,7 @@ class DetailView: UITableViewController, MKMapViewDelegate {
         
         //Setup map
         mapView.delegate = self
-        mapView.mapType = .satellite
+        mapView.mapType = .hybrid
         
         //Create region for map to show
         let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)

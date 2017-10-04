@@ -31,7 +31,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
         
-        let todayDay = Calendar.current.component(.weekday, from: date) - 2 // wtf
+       let todayDay = Calendar.current.component(.weekday, from: date) - 2 // wtf
         
         var dayIndex = 0;
         
@@ -57,6 +57,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let roomName = eventArr[11]
                 
                 let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
+                setNotification(event: lesson)
                 
                 let hour = lesson.startTime!
                 
@@ -108,6 +109,21 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         }
         
         calculateDayLabel()
+        
+        // Autoscroll to current hour on startup
+        //Get the current page
+        if let cellSelected = collectionView.indexPathsForSelectedItems?.first {
+            
+            let indexPath = IndexPath(row: cellSelected.row, section: 0)
+            
+            //Get the current cell object for the current page
+            let cell : DayCollectionViewCell = collectionView.cellForItem(at: indexPath) as! DayCollectionViewCell
+        let currentHour = Calendar.current.component(.hour, from: Date())
+        
+        let currentHourCell = IndexPath(row: currentHour - 8, section: 0)
+        
+        cell.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
+        }
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -175,8 +191,48 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         cell.tableView.reloadData()
         cell.passDelegate = self
         
+        //removed
 
         return cell
+    }
+    
+    
+    // Change neighbouring cell to currently scrolled-to hour
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        //get current offset of cell
+        
+        //Left and righ
+        //scrollView.contentOffset.x
+    
+        //collectionView.selectItem(at: <#T##IndexPath?#>, animated: <#T##Bool#>, scrollPosition: <#T##UICollectionViewScrollPosition#>)
+        
+        
+        //Get the current page
+        if let cellSelected = collectionView.indexPathsForSelectedItems?.first {
+            
+            let indexPath = IndexPath(row: cellSelected.row, section: 0)
+            
+            //Get the current cell object for the current page
+            let cell : DayCollectionViewCell = collectionView.cellForItem(at: indexPath) as! DayCollectionViewCell
+            
+            //could use collectionview.scrolloffest.width divide it by screen width -> round down to number
+            //Get the tableview offeset for the current cell objects tableview
+            let currentOffseyY = cell.tableView.contentOffset.y
+            
+            
+            //To Do: Check if its left and righ and if it is safe to do so
+            let indexPath2 = IndexPath(row: indexPath.row + 1, section: 0)
+            
+            let cell2 : DayCollectionViewCell = collectionView.cellForItem(at: indexPath2) as! DayCollectionViewCell
+            
+            cell2.tableView.contentOffset.y = currentOffseyY
+            
+            //to do
+            //check that you are not in the first or last
+            //check what wa
+            
+        }
+        
     }
     
     func performSegue(with data: Lesson)  {
