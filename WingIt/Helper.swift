@@ -16,15 +16,38 @@ func setNotification (event: Lesson){
     
     let minsBeforeNotification = 15
     
-    let dateFormatter = DateFormatter()
-    // Currently we don't have the date...
+    // Get Monday's date, then transform fire date based on lesson's weekday
+    var dateFormatter = DateFormatter()
+    let today = Date()
+    let todayWeekday: Int = Calendar.current.component(.weekday, from: today)
+    
+    // Gives date of most recent Monday
+    var mondaysDate: Date {
+        return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+    }
+    
+    // Add the day to monday
+    var interval = DateComponents()
+    interval.day = event.day - 1
+    let notificationDate = Calendar.current.date(byAdding: interval, to: mondaysDate)!
+    
     // DateFormatter.dateFormat = "yyyy-MM-dd'T'HH"
     dateFormatter.dateFormat = "HHmm"
     dateFormatter.timeZone = NSTimeZone.default
     
-    let notificationTime = (event.startTime-1)*100+60-minsBeforeNotification
+    // Start time plus 7 gives correct hours
+    let notificationTime = (event.startTime+7) * 100 + 60 - minsBeforeNotification
+    var notificationTimeString = String(notificationTime)
+    if notificationTimeString.characters.count < 4 {
+        notificationTimeString = "0" + notificationTimeString
+    }
+    // Concat date and time
+    dateFormatter.dateFormat = "ddMMyy"
+    let notificationTimeAndDateString = dateFormatter.string(from: notificationDate) + notificationTimeString
+    
+    dateFormatter.dateFormat = "ddMMyyHHmm"
     let localNotification = UILocalNotification()
-    localNotification.fireDate = dateFormatter.date(from: String(notificationTime))
+    localNotification.fireDate = dateFormatter.date(from: notificationTimeAndDateString)
     // Message example: COSC345 Lecture coming up at 11
     localNotification.alertBody = "\(event.code) \(event.type) coming up at \(event.startTime)"
     localNotification.timeZone = NSTimeZone.default
@@ -32,3 +55,5 @@ func setNotification (event: Lesson){
     //set the notification
     UIApplication.shared.scheduleLocalNotification(localNotification)
 }
+
+
