@@ -76,10 +76,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         }
         
         self.collectionView.reloadData()
-        let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
-        self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
-        
-        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
+
     }
     
     /** Retrieves the events for a given date from the C++ library. */
@@ -99,6 +96,42 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         return arr
     }
     
+    func scrollToCurrentDayTime(){
+        
+        // First scroll day
+        let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
+        self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+        
+        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
+        
+        /*
+         Have currently given up on scrolling to the current time on app open.
+         Too hard to figure out what 'cell' should be. Don't even know if the view is populated yet.
+         
+        //Get the current cell object for the current page
+        let cell : DayCollectionViewCell = self.collectionView.cellForItem(at: indexPath) as! DayCollectionViewCell
+        
+        
+        let currentHour = Calendar.current.component(.hour, from: Date())
+        
+        var currentHourCell: IndexPath
+        // Check if time to scroll to is reasonable
+        if currentHour >= 8 {
+            currentHourCell = IndexPath(row: currentHour - 8 + 24, section: 0)
+        } else {
+            currentHourCell = IndexPath(row: 8, section: 0)
+        }
+        
+        
+        cell.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
+ */
+        
+    }
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,22 +141,9 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
+        // Puts the current date label in
         calculateDayLabel()
         
-        // Autoscroll to current hour on startup
-        //Get the current page
-        if let cellSelected = collectionView.indexPathsForSelectedItems?.first {
-            
-            let indexPath = IndexPath(row: cellSelected.row, section: 0)
-            
-            //Get the current cell object for the current page
-            let cell : DayCollectionViewCell = collectionView.cellForItem(at: indexPath) as! DayCollectionViewCell
-        let currentHour = Calendar.current.component(.hour, from: Date())
-        
-        let currentHourCell = IndexPath(row: currentHour - 8, section: 0)
-        
-        cell.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
-        }
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -134,6 +154,10 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         // Do any additional setup after loading the view, typically from a nib.
         
         loadWeekData()
+        
+        // Autoscroll to current hour on startup
+        scrollToCurrentDayTime()
+        
     }
     
     func createDateLabel(date: String) {
@@ -181,6 +205,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         return 7
         //7 days
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell : DayCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCell", for: indexPath) as! DayCollectionViewCell
