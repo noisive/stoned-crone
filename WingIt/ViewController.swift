@@ -325,7 +325,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         let format = DateFormatter()
         format.dateFormat = "dd/MM"
-        let offset = getCurrentXPage()
+        let offset = getCurrentXPage() - 1
      
         let offsetDate = Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)
         

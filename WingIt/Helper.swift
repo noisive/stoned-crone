@@ -9,7 +9,7 @@
 import Foundation
 
 
-// Call this function when each item is initialised to schedule a 
+// Call this function when each item is initialised to schedule a
 // notification [minsBeforeNotification] minutes before that event.
 // @param the event struct to be used.
 func setNotification (event: Lesson){
@@ -33,7 +33,7 @@ func setNotification (event: Lesson){
     
     // DateFormatter.dateFormat = "yyyy-MM-dd'T'HH"
     dateFormatter.dateFormat = "HHmm"
-    dateFormatter.timeZone = NSTimeZone.default
+    dateFormatter.timeZone = TimeZone.autoupdatingCurrent
     
     // Start time plus 7 gives correct hours
     let notificationTime = (event.startTime+7) * 100 + 60 - minsBeforeNotification
@@ -47,10 +47,11 @@ func setNotification (event: Lesson){
     
     dateFormatter.dateFormat = "ddMMyyHHmm"
     let localNotification = UILocalNotification()
+    localNotification.timeZone = TimeZone.autoupdatingCurrent
     localNotification.fireDate = dateFormatter.date(from: notificationTimeAndDateString)
     // Message example: COSC345 Lecture coming up at 11
     localNotification.alertBody = "\(event.code) \(event.type) coming up at \(event.startTime)"
-    localNotification.timeZone = NSTimeZone.default
+    
     
     //set the notification
     UIApplication.shared.scheduleLocalNotification(localNotification)
