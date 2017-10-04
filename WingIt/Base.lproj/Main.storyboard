@@ -88,7 +88,7 @@
         <!--Login-->
         <scene sceneID="nyr-PF-7ss">
             <objects>
-                <viewController title="Login" id="PM4-zz-bZM" customClass="LoginViewController" customModule="WingIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" title="Login" id="PM4-zz-bZM" customClass="LoginViewController" customModule="WingIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HQp-gX-4Dh"/>
                         <viewControllerLayoutGuide type="bottom" id="jXX-ph-5Lw"/>
@@ -185,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7W-WX-gOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2767.1999999999998" y="39.130434782608695"/>
+            <point key="canvasLocation" x="2767" y="47"/>
         </scene>
         <!--Monday-->
         <scene sceneID="tne-QT-ifu">
