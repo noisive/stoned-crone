@@ -50,7 +50,8 @@ func setNotification (event: Lesson){
     localNotification.timeZone = TimeZone.autoupdatingCurrent
     localNotification.fireDate = dateFormatter.date(from: notificationTimeAndDateString)
     // Message example: COSC345 Lecture coming up at 11
-    localNotification.alertBody = "\(event.code) \(event.type) coming up at \(event.startTime)"
+    let notificationMessage = "\((event.code)!) \((event.type)!) coming up at \((event.startTime)! + 8)"
+    localNotification.alertBody = notificationMessage
     
     
     //set the notification
