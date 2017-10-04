@@ -135,6 +135,19 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         }
     }
     
+    /*
+    // On scroll, change neighbouring cells to currently scrolled-to hour
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+
+            let currentOffsetY = self.tableView.contentOffset.y
+            
+            for day in self..visibleCells as! [DayCollectionViewCell] {
+                day.tableView.contentOffset.y = currentOffsetY
+            }
+    }*/
+
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if hourData[indexPath.row] != nil{
             if let pass = findData(uid: (hourData[indexPath.row]?.lesson)!) {
