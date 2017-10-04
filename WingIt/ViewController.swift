@@ -60,7 +60,16 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let roomName = eventArr[11]
                 
                 let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
+                
                 setNotification(event: lesson)
+                
+                
+                // Debugging
+                for note in UIApplication.shared.scheduledLocalNotifications! {
+                    print(note)
+                    print("something happened")
+                }
+                
                 
                 let hour = lesson.startTime!
                 
@@ -158,7 +167,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         loadWeekData()
         
-        // Autoscroll to current hour on startup
+        // Autoscroll to current day and hour on startup
         scrollToCurrentDayTime()
         
     }
@@ -306,19 +315,23 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         calculateDayLabel()
     }
     
-    // BUG This should change, there is a bug here. Date starts at current day, should start at Monday.
     // FEATURE Will also have to change if we are extending the number of days.
     func calculateDayLabel() {
+
+        // Gives date of most recent Monday
+        var mondaysDate: Date {
+            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        }
         
-        let today = Date()
         let format = DateFormatter()
         format.dateFormat = "dd/MM"
-        let offset = getDayOfWeek()! > getCurrentXPage() ? -getCurrentXPage() : getCurrentXPage()
+        let offset = getCurrentXPage()
      
-        let offsetDate = Calendar.current.date(byAdding: .day, value: offset, to: today)
+        let offsetDate = Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)
         
         createDateLabel(date: format.string(from: offsetDate!))
     }
+    
     
     func getCurrentXPage() -> Int {
         let xOffset = collectionView.contentOffset.x
