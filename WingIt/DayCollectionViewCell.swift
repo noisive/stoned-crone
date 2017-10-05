@@ -115,7 +115,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         }
     }
     
-    func roundEdges(view: UIView, corners: UIRectCorner) {
+    @objc func roundEdges(view: UIView, corners: UIRectCorner) {
         let cellMask = CAShapeLayer()
         cellMask.path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: 2, height: 2)).cgPath
         view.layer.mask = cellMask
