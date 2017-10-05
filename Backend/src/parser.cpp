@@ -4,34 +4,8 @@
 #include "parser.hpp"
 
 Parser::Parser(void) {
-    init();
-    parseCachedFile();
-}
-
-Parser::Parser(const char *data) {
-    std::string j(data);
-    init();
-    this->json = j;
-}
-
-Parser::Parser(std::string j) {
-    init();
-    this->json = j;
-}
-
-/* This init() function is called by all constructors.
- * C++11 allows constructor overloading, but not all compilers support this yet.
- * In the mean time our init method will perform the common setup tasks.
- */
-void Parser::init() {
     this->colorMap["lightgrey"] = "#D3D3D3";
-    this->dataPath = ((std::string)getenv("HOME")) + "/Library/Caches/data.csv";
-    this->gCalPath = ((std::string)getenv("HOME")) + "/Library/Caches/GoogleCalFile.csv";
     this->weekStart = 0xCC;
-}
-
-std::string Parser::getJson() {
-    return this->json;
 }
 
 int Parser::indexOf(std::string data, std::string pattern) {
@@ -163,13 +137,9 @@ void Parser::getWeekStart() {
     }
 }
 
-Timetable Parser::parseCachedFile() {
-    return parseFile(this->dataPath, "csv");
-}
+std::vector<TimetableEvent> Parser::parseFile(std::string fileName, std::string format) {
 
-Timetable Parser::parseFile(std::string fileName, std::string format) {
-
-    Timetable timetable;
+    std::vector<TimetableEvent> events;
 
     if (format.compare("csv") == 0) {
 
@@ -178,7 +148,7 @@ Timetable Parser::parseFile(std::string fileName, std::string format) {
         if (file.is_open()) {
             while (getline(file, line)) {
                 if (line.length() > 1) {
-                    timetable.addEvent(parseCSVLine(line));
+                    events.push_back(parseCSVLine(line));
                 }
             }
             file.close();
@@ -189,7 +159,7 @@ Timetable Parser::parseFile(std::string fileName, std::string format) {
     else
         std::cerr << "Format not supported" << std::endl;
 
-    return timetable;
+    return events;
 }
 
 TimetableEvent Parser::parseCSVLine(std::string line) {
@@ -258,20 +228,26 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
     return ttEvent;
 }
 
-Timetable Parser::parse() {
+std::vector<TimetableEvent> Parser::parse(const char* data) {
+    std::string strData(data);
+    return parse(strData);
+}
 
-    Timetable timetable;
+std::vector<TimetableEvent> Parser::parse(std::string data) {
+    this->json = data;
+
+    std::vector<TimetableEvent> events;
 
     if (this->json == "0xCC") {
         std::cerr << "No data given" << std::endl;
-        return Timetable();
+        return events;
     }
 
     getWeekStart();
 
     if (this->weekStart == 0xCC) {
         std::cerr << "No data given" << std::endl;
-        return Timetable();
+        return events;
     }
 
     extractJsonArray();
@@ -341,15 +317,8 @@ Timetable Parser::parse() {
 
         ttEvent.genUID();
 
-        timetable.addEvent(ttEvent);
+        events.push_back(ttEvent);
     }
-
-    // Save to CSV formatted file.
-    timetable.exportToFile(this->dataPath);
-
-    // Save to Google Calendar Formatted file.
-    timetable.exportToGoogleCalFile(this->gCalPath);
-    
-    return timetable;
+    return events;
 }
 

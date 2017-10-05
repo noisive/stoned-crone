@@ -1,14 +1,15 @@
 /* Parser class.
     @author Will Shaw - 2017
 */
-#ifndef PARSER_H_
-#define PARSER_H_
+#ifndef PARSER_HPP_
+#define PARSER_HPP_
 
 #include <string>
 #include "timetableEvent.hpp"
-#include "timetable.hpp"
 #include <iostream>
+#include <fstream>
 #include <map>
+#include <vector>
 
 class Parser {
     private:
@@ -43,10 +44,9 @@ class Parser {
         std::string getJson();
 
         // Parsing
-        Timetable parse();
-        Timetable parseCachedFile();
-        Timetable parseFile(std::string filename, std::string format);
-
+        std::vector<TimetableEvent> parse(const char* data);
+        std::vector<TimetableEvent> parse(std::string data);
+        std::vector<TimetableEvent> parseFile(std::string filename, std::string format);
 };
 
-#endif  // PARSER_H_
+#endif  // PARSER_HPP_

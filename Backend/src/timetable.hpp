@@ -8,6 +8,7 @@
 #include <vector>
 #include "timetableEvent.hpp"
 #include <fstream>
+#include "parser.hpp"
 
 typedef TimetableEvent ttEvent;
 
@@ -17,7 +18,13 @@ class Timetable {
         std::vector<ttEvent> eventList;
         // Custom events list.
         std::vector<ttEvent> customEvents;
-        
+
+        // Save file paths.
+        std::string dataPath;
+        std::string gCalPath;
+
+        // Timetable Maintenance
+        void reset();
         void clean(std::vector<ttEvent> &list);
         void removeEvent(ttEvent t, std::vector<ttEvent> &list);
 
@@ -28,19 +35,27 @@ class Timetable {
         // Base Functions
         void addEvent(ttEvent t);
         void addEvent(ttEvent t, bool custom);
+        
+        void addMultiple(std::vector<ttEvent> events);
+        void addMultiple(std::vector<ttEvent> events, bool custom);
+
         void removeEvent(ttEvent t);
         void removeEvent(ttEvent t, bool custom);
+        
         void updateEvent(ttEvent t, bool custom);
         int size();
         std::string toString();
 
         // Integration
+        void parseEvents(std::string jumbledData);
         std::vector<ttEvent> getByDate(const char* date);
         int merge();
         TimetableEvent getByUID(const char* id);
         void addEvent(const char* event);
 
-        // Exporting
+        // Persistence
+        void save();
+        void restore();
         void printToCSV();
         void exportToFile(std::string fileName);
         void exportToGoogleCalFile(std::string fileName);

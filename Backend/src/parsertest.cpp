@@ -21,16 +21,19 @@ int main(int argc, char** argv) {
 
     std::cout << "\e[33mRunning parse on evision mess.\e[0m" << std::endl;
 
-    Parser parser(dataString);
-    parser.parse();
+    Timetable timetable;
+
+    timetable.parseEvents(dataString); 
+
+    timetable.save();
 
     std::cout << "[\033[32mOK\033[0m] Check file://" + home + 
         "/Library/Caches/data.csv has been parsed." << std::endl << std::endl;    
 
     std::cout << "\e[33mRunning parse on created CSV file.\e[0m" << std::endl;
-    
-    Timetable timetable = parser.parseCachedFile();
   
+    timetable.restore();
+
     std::vector<TimetableEvent> events = timetable.getByDate("2017-09-28");
 
     for (TimetableEvent event : events) {
