@@ -14,6 +14,16 @@
 		BEE32B4C1F8191E9005AA683 /* date.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BEE32B4A1F8191E9005AA683 /* date.cpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		069827611F863BB900777DAD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06934D6A1F86703400D308BD /* parserTests.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06934D601F86703400D308BD;
+			remoteInfo = parserTests;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		06A547171F7B12B400967FD7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -54,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0698275E1F863BB900777DAD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				069827621F863BB900777DAD /* parserTests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		06A547101F7B12B400967FD7 = {
 			isa = PBXGroup;
 			children = (
@@ -134,12 +152,28 @@
 			mainGroup = 06A547101F7B12B400967FD7;
 			productRefGroup = 06A5471A1F7B12B400967FD7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0698275E1F863BB900777DAD /* Products */;
+					ProjectRef = 06934D6A1F86703400D308BD /* parserTests.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				06A547181F7B12B400967FD7 /* Backend */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		069827621F863BB900777DAD /* parserTests */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = parserTests;
+			remoteRef = 069827611F863BB900777DAD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		06A547151F7B12B400967FD7 /* Sources */ = {
