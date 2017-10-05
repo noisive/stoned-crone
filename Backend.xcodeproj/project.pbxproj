@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06A4530F1F865175006CE0FE /* runParserTestCases.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A4530D1F865175006CE0FE /* runParserTestCases.cpp */; };
 		06A5475C1F7B1D7100967FD7 /* libBackend.a in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06A547191F7B12B400967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		06D026621F7DE061001B79FD /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D026561F7DE061001B79FD /* parser.cpp */; };
 		06D026651F7DE061001B79FD /* timetable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D0265B1F7DE061001B79FD /* timetable.cpp */; };
@@ -28,6 +29,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		06A4530D1F865175006CE0FE /* runParserTestCases.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = runParserTestCases.cpp; path = src/runParserTestCases.cpp; sourceTree = "<group>"; };
+		06A4530E1F865175006CE0FE /* runParserTestCases.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = runParserTestCases.hpp; path = src/runParserTestCases.hpp; sourceTree = "<group>"; };
 		06A547191F7B12B400967FD7 /* libBackend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBackend.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		06D026541F7DE061001B79FD /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = src/makefile; sourceTree = "<group>"; };
 		06D026561F7DE061001B79FD /* parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = src/parser.cpp; sourceTree = "<group>"; };
@@ -83,6 +86,8 @@
 				06D0265C1F7DE061001B79FD /* timetable.hpp */,
 				06D0265D1F7DE061001B79FD /* timetableEvent.cpp */,
 				06D0265E1F7DE061001B79FD /* timetableEvent.hpp */,
+				06A4530D1F865175006CE0FE /* runParserTestCases.cpp */,
+				06A4530E1F865175006CE0FE /* runParserTestCases.hpp */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 			files = (
 				BEE32B4C1F8191E9005AA683 /* date.cpp in Sources */,
 				06D026621F7DE061001B79FD /* parser.cpp in Sources */,
+				06A4530F1F865175006CE0FE /* runParserTestCases.cpp in Sources */,
 				06D026661F7DE061001B79FD /* timetableEvent.cpp in Sources */,
 				06D026651F7DE061001B79FD /* timetable.cpp in Sources */,
 			);

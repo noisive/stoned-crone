@@ -28,27 +28,17 @@ func setNotification (event: Lesson){
     
     // Add the day to monday
     var interval = DateComponents()
-    interval.day = event.day - 1
-    let notificationDate = Calendar.current.date(byAdding: interval, to: mondaysDate)!
+    interval.day = event.day
     
-    // DateFormatter.dateFormat = "yyyy-MM-dd'T'HH"
-    dateFormatter.dateFormat = "HHmm"
-    dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+    // Start time plus 7 gives correct hours for before lecture
+    interval.hour = event.startTime + 7 - 7
+    interval.minute = 60 - minsBeforeNotification - 6
     
-    // Start time plus 7 gives correct hours
-    let notificationTime = (event.startTime+7) * 100 + 60 - minsBeforeNotification
-    var notificationTimeString = String(notificationTime)
-    if notificationTimeString.characters.count < 4 {
-        notificationTimeString = "0" + notificationTimeString
-    }
-    // Concat date and time
-    dateFormatter.dateFormat = "ddMMyy"
-    let notificationTimeAndDateString = dateFormatter.string(from: notificationDate) + notificationTimeString
+    let notificationTimeAndDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: interval, to: mondaysDate)!)
     
-    dateFormatter.dateFormat = "ddMMyyHHmm"
     let localNotification = UILocalNotification()
     localNotification.timeZone = TimeZone(identifier: "NZST")
-    localNotification.fireDate = dateFormatter.date(from: notificationTimeAndDateString)
+    localNotification.fireDate = notificationTimeAndDate
     // Message example: COSC345 Lecture coming up at 11
     let notificationMessage = "\((event.code)!) \((event.type)!) coming up at \((event.startTime)! + 8)"
     localNotification.alertBody = notificationMessage
@@ -58,4 +48,12 @@ func setNotification (event: Lesson){
     UIApplication.shared.scheduleLocalNotification(localNotification)
 }
 
+// Account for the default UMT time, which is giving wrong date regardless of how the timezone is set!!!
+func convertUMTtoNZT(current: Date) -> Date{
+    var timeDiff = DateComponents()
+    //NZ is + 13. Will break for DST, should try to get proper timezones working eventually.
+    timeDiff.hour = 13
+    let updated = Calendar.current.date(byAdding: timeDiff, to: current)
+    return (updated)!
+}
 

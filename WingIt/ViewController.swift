@@ -40,6 +40,9 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         while (dayIndex < 7) {
             
+            // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
+            UIApplication.shared.cancelAllLocalNotifications()
+            
             let searchDate = Calendar.current.date(byAdding: .day, value: (-todayDay) + dayIndex, to: date)!
             
             for event in getEventsForDay(date: formatter.string(from: searchDate)) {
@@ -336,10 +339,9 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
          //       print(format.string(from: mondaysDate))
         
-        let offsetDate = Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)
+        let offsetDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!)
         
-        format.timeZone = TimeZone(identifier: "NZST")
-        createDateLabel(date: format.string(from: offsetDate!))
+        createDateLabel(date: format.string(from: offsetDate))
     }
     
     
