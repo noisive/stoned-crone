@@ -2,34 +2,32 @@
     @author Will Shaw - 2017
 */
 #include "parser.hpp"
-#include <cstring>
 
 Parser::Parser(void) {
-    setPaths();
+    init();
     parseCachedFile();
 }
 
 Parser::Parser(const char *data) {
     std::string j(data);
-    setPaths();
+    init();
     this->json = j;
-    this->weekStart = 0xCC;
 }
 
 Parser::Parser(std::string j) {
-    setPaths();
+    init();
     this->json = j;
-    this->weekStart = 0xCC;
 }
 
-void Parser::setJson(std::string json) {
-    setPaths();
-    this->json = json;
-}
-
-void Parser::setPaths() {
+/* This init() function is called by all constructors.
+ * C++11 allows constructor overloading, but not all compilers support this yet.
+ * In the mean time our init method will perform the common setup tasks.
+ */
+void Parser::init() {
+    this->colorMap["lightgrey"] = "#D3D3D3";
     this->dataPath = ((std::string)getenv("HOME")) + "/Library/Caches/data.csv";
     this->gCalPath = ((std::string)getenv("HOME")) + "/Library/Caches/GoogleCalFile.csv";
+    this->weekStart = 0xCC;
 }
 
 std::string Parser::getJson() {
@@ -332,12 +330,16 @@ Timetable Parser::parse() {
 
         startIndex = indexOf(json, "}},", endIndex) + 2;
         endIndex = startIndex + 1;
+   
+        // This will search the colorMap and replace the web color with it's mapped HEX color.
+        std::map<std::string, std::string>::iterator it = colorMap.find(ttEvent.getColor());
+        if (it != colorMap.end()) {
+            ttEvent.setColor(it->second);
+        }
 
         ttEvent.fixDate(this->weekStart);
 
         ttEvent.genUID();
-
-        //std::cout << ttEvent.toString();
 
         timetable.addEvent(ttEvent);
     }

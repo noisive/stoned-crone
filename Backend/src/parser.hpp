@@ -8,6 +8,7 @@
 #include "timetableEvent.hpp"
 #include "timetable.hpp"
 #include <iostream>
+#include <map>
 
 class Parser {
     private:
@@ -16,9 +17,10 @@ class Parser {
         int weekStart;
         std::string dataPath;
         std::string gCalPath;
+        std::map<std::string, std::string> colorMap;
 
         // Base Functions
-        void setPaths();
+        void init();
         void extractJsonArray();
         void getWeekStart();
         int indexOf(std::string data, std::string pattern);
@@ -38,7 +40,6 @@ class Parser {
         Parser(std::string j);
 
         // Access
-        void setJson(std::string json);
         std::string getJson();
 
         // Parsing
