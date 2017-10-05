@@ -31,10 +31,10 @@ func setNotification (event: Lesson){
     interval.day = event.day
     
     // Start time plus 7 gives correct hours for before lecture
-    interval.hour = event.startTime + 7 - 7
-    interval.minute = 60 - minsBeforeNotification - 6
+    interval.hour = event.startTime + 7
+    interval.minute = 60 - minsBeforeNotification
     
-    let notificationTimeAndDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: interval, to: mondaysDate)!)
+    let notificationTimeAndDate = Calendar.current.date(byAdding: interval, to: mondaysDate)!
     
     let localNotification = UILocalNotification()
     localNotification.timeZone = TimeZone(identifier: "NZST")
@@ -46,6 +46,9 @@ func setNotification (event: Lesson){
     
     //set the notification
     UIApplication.shared.scheduleLocalNotification(localNotification)
+    
+    // DEBUG print out currently scheduled notifications
+    print(UIApplication.shared.scheduledLocalNotifications!)
 }
 
 // Account for the default UMT time, which is giving wrong date regardless of how the timezone is set!!!

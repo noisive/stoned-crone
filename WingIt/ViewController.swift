@@ -34,14 +34,15 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
         
-       let todayDay = Calendar.current.component(.weekday, from: date) - 2 // wtf
+       let todayDay = Calendar.current.component(.weekday, from: date) - 2 // US Date, starts with sun at 0. We are changing to mon at 1?
+        
+        // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
+        UIApplication.shared.cancelAllLocalNotifications()
         
         var dayIndex = 0;
         
         while (dayIndex < 7) {
             
-            // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
-            UIApplication.shared.cancelAllLocalNotifications()
             
             let searchDate = Calendar.current.date(byAdding: .day, value: (-todayDay) + dayIndex, to: date)!
             
