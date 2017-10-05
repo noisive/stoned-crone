@@ -7,7 +7,7 @@
 //
 
 extension UIColor {
-    convenience init(red: Int, green: Int, blue: Int) {
+    @objc convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")
         assert(blue >= 0 && blue <= 255, "Invalid blue component")
@@ -15,7 +15,7 @@ extension UIColor {
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
     }
     
-    convenience init(rgb: Int) {
+    @objc convenience init(rgb: Int) {
         self.init(
             red: (rgb >> 16) & 0xFF,
             green: (rgb >> 8) & 0xFF,
@@ -36,29 +36,29 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var doneButton: UIButton!
     
-    let errorColor: UIColor = UIColor(rgb: 0xFF0013)
-    let infoColor: UIColor = UIColor(rgb: 0x0052FF)
+    @objc let errorColor: UIColor = UIColor(rgb: 0xFF0013)
+    @objc let infoColor: UIColor = UIColor(rgb: 0x0052FF)
     
-    let webCheckError = "document.getElementsByClassName('sv-panel-danger').length > 0;"
+    @objc let webCheckError = "document.getElementsByClassName('sv-panel-danger').length > 0;"
     
-    let webErrorReason = "document.getElementsByClassName('sv-panel sv-panel-danger')[0].getElementsByTagName('strong')[0].innerHTML"
+    @objc let webErrorReason = "document.getElementsByClassName('sv-panel sv-panel-danger')[0].getElementsByTagName('strong')[0].innerHTML"
     
-    let webClickLogin = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-primary')[0].click();"
+    @objc let webClickLogin = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-primary')[0].click();"
     
-    let webClickTimetable = "document.getElementsByClassName('uo_see_more')[document.getElementsByClassName('uo_see_more').length - 1].getElementsByTagName('a')[0].click();"
+    @objc let webClickTimetable = "document.getElementsByClassName('uo_see_more')[document.getElementsByClassName('uo_see_more').length - 1].getElementsByTagName('a')[0].click();"
     
-    let webClickNextWeek = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-default')[1].click();"
+    @objc let webClickNextWeek = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-default')[1].click();"
     
-    let webCheckHeader = "document.getElementsByClassName('sv-h1-small')[0].innerHTML"
+    @objc let webCheckHeader = "document.getElementsByClassName('sv-h1-small')[0].innerHTML"
     
-    let webLogout = "document.getElementsByClassName('sv-navbar-text sv-visible-xs-block')[0].getElementsByTagName('a')[0].click()"
+    @objc let webLogout = "document.getElementsByClassName('sv-navbar-text sv-visible-xs-block')[0].getElementsByTagName('a')[0].click()"
     
-    let webInsertFunctions = "window.getJSArray = function() {\n" +
+    @objc let webInsertFunctions = "window.getJSArray = function() {\n" +
                 "return content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();}"
 
-    let webGrabCode = "window.getJSArray()"
+    @objc let webGrabCode = "window.getJSArray()"
     
-    let monitorScript = "var intervalHandle" +
+    @objc let monitorScript = "var intervalHandle" +
                         "var monitorState = 0" +
                         "window.monitorUpdate = function(cb) {" +
                             "intervalHandle = setInterval(() => {" +
@@ -79,9 +79,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                             "})" +
                         "}"
     
-    let loadNextWeek = "window.loadNextWeek()"
+    @objc let loadNextWeek = "window.loadNextWeek()"
     
-    var once:Bool = false
+    @objc var once:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,7 +120,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         }
     }
     
-    func loginReset(reason:String) {
+    @objc func loginReset(reason:String) {
         webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
         usernameField.isHidden = false
         passwordField.isHidden = false
@@ -234,7 +234,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         }
     }
     
-    func attemptLogin() {
+    @objc func attemptLogin() {
         let user:String = usernameField.text!
         webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
         let pass:String = passwordField.text!

@@ -66,6 +66,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
                 
                 //setNotification(event: lesson)
+
                 
       
                 

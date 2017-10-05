@@ -157,11 +157,11 @@ void Timetable::exportToFile(std::string fileName) {
            */
 
         for (TimetableEvent event: eventList) {
-            output += event.toString();
+            output += event.toString() + "\n";
         }
 
         for (TimetableEvent event: customList) {
-            output += event.toString();
+            output += event.toString() + "\n";
         }
 
         myfile << output;

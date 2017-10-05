@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     std::vector<TimetableEvent> events = timetable.getByDate("2017-09-28");
 
     for (TimetableEvent event : events) {
-        std::cout << event.toString();
+        std::cout << event.toString() << std::endl;
     }
 
     std::cout << "[\e[32mOK\e[0m] Check that the "
