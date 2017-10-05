@@ -17,7 +17,7 @@ extern "C" void initTimetable() {
 }
 
 extern "C" int queryDate(const char* dateString) {
-    return (int) timetable.queryDate(dateString);
+    return (int) timetable.queryByDate(dateString);
 }
 
 extern "C" const char* queryResult(int index) {
@@ -26,7 +26,7 @@ extern "C" const char* queryResult(int index) {
     
     size_t bufferSize =  0;
     
-    TimetableEvent event = timetable.getResult(index);
+    TimetableEvent event = timetable.queryResult(index);
 
     bufferSize += event.toString().length();
     data += event.toString();
