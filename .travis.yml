@@ -1,7 +1,7 @@
 os: osx
 language: objective-c
 xcode_workspace: Project.xcworkspace # path to your xcodeproj folder
-osx_image: xcode8.3
+osx_image: xcode9.0
 
 branches:
   only:
