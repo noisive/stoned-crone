@@ -60,7 +60,9 @@ int Parser::indexOf(std::string data, std::string pattern, int startIndex) {
 void Parser::extractJsonArray() {
     int startIndex = indexOf(this->json, "[");
     int endIndex = indexOf(this->json, "]");
-    this->json = this->json.substr(startIndex, endIndex - startIndex + 1);
+    if (startIndex != -1 && endIndex != -1) {
+        this->json = this->json.substr(startIndex, endIndex - startIndex + 1);
+    }
 }
 
 int Parser::getObjectCount(std::string json) {
@@ -143,10 +145,12 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
 
 void Parser::getWeekStart() {
     int startIndex = indexOf(this->json, "ng dates ");
-    std::string date = this->json.substr(startIndex + sizeof("ng dates ") - 1, 12);
-    this->weekStart = std::stoi(date.substr(0, 2) +
-                                date.substr(4, 2) +
-                                date.substr(8, 4));
+    if (this->json.length() >= 12 && startIndex != -1) {
+        std::string date = this->json.substr(startIndex + sizeof("ng dates ") - 1, 12);
+        this->weekStart = std::stoi(date.substr(0, 2) +
+                                    date.substr(4, 2) +
+                                    date.substr(8, 4));
+    }
 }
 
 Timetable Parser::parseCachedFile() {
