@@ -39,6 +39,7 @@ func setNotification (event: Lesson){
     let localNotification = UILocalNotification()
     localNotification.timeZone = TimeZone(identifier: "NZST")
     localNotification.fireDate = notificationTimeAndDate
+    localNotification.soundName = UILocalNotificationDefaultSoundName
     
     var eventTime = event.startTime + 8
     if eventTime > 12{
