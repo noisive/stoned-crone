@@ -40,7 +40,7 @@ class TimetableEvent {
         bool equals(TimetableEvent other);
         
         void genUID();
-        
+
         // Wraps the setDate function to parse and add days from evision.
         void fixDate(int startingDate);
         Date getDate();

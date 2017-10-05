@@ -7,6 +7,7 @@
 #include <sstream>
 #include <iostream>
 #include "date.hpp"
+#include <cstring>
 
 TimetableEvent::TimetableEvent(void) {
     this->uid = 0xCC;

@@ -34,10 +34,16 @@ int main(int argc, char** argv) {
   
     timetable.restore();
 
-    std::vector<TimetableEvent> events = timetable.getByDate("2017-09-28");
+    int numEvents = timetable.queryByDate("2017-09-28");
 
-    for (TimetableEvent event : events) {
-        std::cout << event.toString() << std::endl;
+    for (int i = 0; i < numEvents; i++) {
+        std::cout << timetable.queryResult(i).toString() << std::endl;
+    }
+
+    numEvents = timetable.queryByDate("2017-09-27");
+
+    for (int i = 0; i < numEvents; i++) {
+        std::cout << timetable.queryResult(i).toString() << std::endl;
     }
 
     std::cout << "[\e[32mOK\e[0m] Check that the "

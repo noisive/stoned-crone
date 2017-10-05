@@ -14,6 +14,7 @@
  * 20 is a rough peak for number of classes in a week. */
 std::vector<TimetableEvent> eventList(20);
 std::vector<TimetableEvent> customList(20);
+std::vector<TimetableEvent> queryStore(20);
 
 Timetable::Timetable() {
     reset();
@@ -31,6 +32,7 @@ void Timetable::restore() {
 void Timetable::reset() {
     eventList.clear();
     customList.clear();
+    queryStore.clear();
 }
 
 void Timetable::parseEvents(std::string jumbledData) {
@@ -123,15 +125,24 @@ int Timetable::merge() {
     return numRemoved;
 }
 
-std::vector<TimetableEvent> Timetable::getByDate(const char* date) {
-    Date d(date);
-    std::vector<TimetableEvent> matchedEvents; 
+int Timetable::queryByDate(const char* d) {
+    queryStore.clear();
+    Date date(d);
     for (TimetableEvent event : eventList) {
-        if (d.compare(event.getDate()) == 0) {
-            matchedEvents.push_back(event); 
+        if (date.compare(event.getDate()) == 0) {
+            queryStore.push_back(event); 
         }
     }
-    return matchedEvents;
+    return queryStore.size();
+}
+
+TimetableEvent Timetable::queryResult(int index) {
+    if (index == queryStore.size() - 1) {
+        TimetableEvent event = queryStore[index];
+        queryStore.clear();
+        return event;
+    }
+    return queryStore[index]; 
 }
 
 TimetableEvent Timetable::getByUID(const char* id) {

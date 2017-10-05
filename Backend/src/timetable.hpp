@@ -19,6 +19,9 @@ class Timetable {
         // Custom events list.
         std::vector<ttEvent> customEvents;
 
+        // Cached query
+        std::vector<ttEvent> queryStore;
+
         // Save file paths.
         std::string dataPath;
         std::string gCalPath;
@@ -48,7 +51,8 @@ class Timetable {
 
         // Integration
         void parseEvents(std::string jumbledData);
-        std::vector<ttEvent> getByDate(const char* date);
+        int queryByDate(const char* d);
+        TimetableEvent queryResult(int index);
         int merge();
         TimetableEvent getByUID(const char* id);
         void addEvent(const char* event);

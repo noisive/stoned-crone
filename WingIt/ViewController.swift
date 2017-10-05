@@ -94,11 +94,11 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     func getEventsForDay(date: String) -> [String] {
         var arr = [String]()
         
-        let num = numEvents(date.cString(using: String.Encoding.utf8))
+        let num = queryDate(date.cString(using: String.Encoding.utf8))
         var index: Int32 = 0
         
         while (index < num) {
-            let cstr = getEventsByDate(date.cString(using: String.Encoding.utf8), index)
+            let cstr = queryResult(index)
             let str = String(cString: cstr!)
             free(UnsafeMutablePointer(mutating: cstr)) // We must free the memory that C++ created for the pointer.
             arr.append(str)

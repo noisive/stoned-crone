@@ -6,32 +6,30 @@
 // it can be called from C
 // (and Swift).
 
-Parser parser;
-
 Timetable timetable;
 
 extern "C" void parseTimetable(const char* data) {
-    parser = Parser(data);
-    timetable = parser.parse();
+    timetable.parseEvents(data);
 }
 
-extern "C" void initParser() {
-    timetable = parser.parseCachedFile();
+extern "C" void initTimetable() {
+    timetable.restore();
 }
 
-extern "C" int numEvents(const char* dateString) {
-    return (int) timetable.getByDate(dateString).size();
+extern "C" int queryDate(const char* dateString) {
+    return timetable.queryDate(dateString);
 }
 
-extern "C" const char* getEventsByDate(const char* dateString, int index) {
-    std::vector<TimetableEvent> events = timetable.getByDate(dateString);
+extern "C" const char* queryResult(int index) {
     
     std::string data = "";
     
     size_t bufferSize =  0;
     
-    bufferSize += events[index].toString().length();
-    data += events[index].toString();
+    TimetableEvent event = timetable.getResult(index);
+
+    bufferSize += event.toString().length();
+    data += event.toString();
     
     bufferSize += 20;
     
