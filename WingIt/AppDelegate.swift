@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initParser();
         
         // Register intent to use notifications
-        // application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
 
         return true
     }
