@@ -119,6 +119,12 @@ tm Date::tmDate() {
     date.tm_year = this->year;
     date.tm_mon = this->month - 1; // zero index
     date.tm_mday = this->day;
+    date.tm_hour = 0;
+    date.tm_min = 0;
+    date.tm_wday = 0;
+    date.tm_yday = 0;
+    date.tm_sec = 0;
+    date.tm_isdst = 0;
 
     return date;
 }
