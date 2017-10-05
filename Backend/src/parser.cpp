@@ -17,7 +17,7 @@ int Parser::lastIndexOf(std::string data, std::string pattern, int startIndex) {
     if (index == -1) {
         return index;
     }
-    return index + pattern.length();
+    return (int) (index + pattern.length());
 }
 
 int Parser::lastIndexOf(std::string data, std::string pattern) {

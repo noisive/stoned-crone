@@ -127,7 +127,7 @@ int Timetable::queryByDate(const char* d) {
             queryStore.push_back(event); 
         }
     }
-    return queryStore.size();
+    return (int) queryStore.size();
 }
 
 TimetableEvent Timetable::queryResult(int index) {
