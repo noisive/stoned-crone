@@ -27,10 +27,11 @@ struct Lesson {
     var roomFull : String!
     var paperName : String!
     var day : Int!
+    var eventDate: Date
     var latitude : Double!
     var longitude : Double!
     
-    init(uid: CLong, classID: String, start : Int, length: Int, code: String, type: classType, roomShort: String, roomFull : String, paperName: String, day: Int, latitude: Double, longitude: Double) {
+    init(uid: CLong, classID: String, start : Int, length: Int, code: String, type: classType, roomShort: String, roomFull : String, paperName: String, day: Int, eventDate: Date, latitude: Double, longitude: Double) {
         self.uid = uid;
         self.classID = classID
         self.startTime = start
@@ -41,6 +42,7 @@ struct Lesson {
         self.roomFull = roomFull
         self.paperName = paperName
         self.day = day
+        self.eventDate = eventDate
         self.latitude = latitude
         self.longitude = longitude
         

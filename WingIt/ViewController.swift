@@ -58,11 +58,13 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let longitude = Double(eventArr[9])
                 let roomCode = eventArr[10]
                 let roomName = eventArr[11]
-                //let eventDate = eventArr[12]
+                let eventDateString = eventArr[13]
                 
-                let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
+                let eventDate = formatter.date(from: eventDateString)
                 
-                //setNotification(event: lesson)
+                let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: eventDate?, latitude: latitude!, longitude: longitude!)
+                
+                setNotification(event: lesson)
                 
                 
                 // Debugging
