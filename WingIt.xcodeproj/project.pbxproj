@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* WingItUITests.swift */; };
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; };
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
 		06B38A381F82361E009EDC60 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* Helper.swift */; };
@@ -28,7 +29,20 @@
 		53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A0201EC3DE930001604A /* DayCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		06934D7F1F86730B00D308BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53F8A0001EC3D0010001604A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 53F8A0071EC3D0010001604A;
+			remoteInfo = WingIt;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		06934D7A1F86730B00D308BD /* WingItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06934D7C1F86730B00D308BD /* WingItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITests.swift; sourceTree = "<group>"; };
+		06934D7E1F86730B00D308BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06A5475D1F7B1D9600967FD7 /* libBackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBackend.a; path = "../../Library/Developer/Xcode/DerivedData/Project-faabexjzkhonsfdsetxpryushahl/Build/Products/Debug-iphonesimulator/libBackend.a"; sourceTree = "<group>"; };
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
 		06B38A371F82361E009EDC60 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -55,6 +69,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		06934D771F86730B00D308BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F8A0051EC3D0010001604A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -66,6 +87,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06934D7B1F86730B00D308BD /* WingItUITests */ = {
+			isa = PBXGroup;
+			children = (
+				06934D7C1F86730B00D308BD /* WingItUITests.swift */,
+				06934D7E1F86730B00D308BD /* Info.plist */,
+			);
+			path = WingItUITests;
+			sourceTree = "<group>";
+		};
 		53BA20E41EDB8E6E0063E603 /* CSV Parser */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				53F8A00A1EC3D0010001604A /* WingIt */,
+				06934D7B1F86730B00D308BD /* WingItUITests */,
 				53F8A0091EC3D0010001604A /* Products */,
 				9D76A468FCF7B393CEA24F56 /* Frameworks */,
 			);
@@ -117,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				53F8A0081EC3D0010001604A /* WingIt.app */,
+				06934D7A1F86730B00D308BD /* WingItUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,6 +186,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		06934D791F86730B00D308BD /* WingItUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06934D831F86730B00D308BD /* Build configuration list for PBXNativeTarget "WingItUITests" */;
+			buildPhases = (
+				06934D761F86730B00D308BD /* Sources */,
+				06934D771F86730B00D308BD /* Frameworks */,
+				06934D781F86730B00D308BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				06934D801F86730B00D308BD /* PBXTargetDependency */,
+			);
+			name = WingItUITests;
+			productName = WingItUITests;
+			productReference = 06934D7A1F86730B00D308BD /* WingItUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		53F8A0071EC3D0010001604A /* WingIt */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F8A01D1EC3D0010001604A /* Build configuration list for PBXNativeTarget "WingIt" */;
@@ -177,10 +227,16 @@
 		53F8A0001EC3D0010001604A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Noisive;
 				TargetAttributes = {
+					06934D791F86730B00D308BD = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = 9L3BH5LC27;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 53F8A0071EC3D0010001604A;
+					};
 					53F8A0071EC3D0010001604A = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 9L3BH5LC27;
@@ -203,11 +259,19 @@
 			projectRoot = "";
 			targets = (
 				53F8A0071EC3D0010001604A /* WingIt */,
+				06934D791F86730B00D308BD /* WingItUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		06934D781F86730B00D308BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F8A0061EC3D0010001604A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -221,6 +285,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		06934D761F86730B00D308BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F8A0041EC3D0010001604A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,6 +317,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		06934D801F86730B00D308BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 53F8A0071EC3D0010001604A /* WingIt */;
+			targetProxy = 06934D7F1F86730B00D308BD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		53F8A00F1EC3D0010001604A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -265,6 +345,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		06934D811F86730B00D308BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9L3BH5LC27;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WingItUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = noisive.WingItUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WingIt;
+			};
+			name = Debug;
+		};
+		06934D821F86730B00D308BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9L3BH5LC27;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WingItUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = noisive.WingItUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WingIt;
+			};
+			name = Release;
+		};
 		53F8A01B1EC3D0010001604A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -426,6 +546,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		06934D831F86730B00D308BD /* Build configuration list for PBXNativeTarget "WingItUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06934D811F86730B00D308BD /* Debug */,
+				06934D821F86730B00D308BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		53F8A0031EC3D0010001604A /* Build configuration list for PBXProject "WingIt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
