@@ -40,6 +40,18 @@ int Parser::indexOf(std::string data, std::string pattern) {
     return this->indexOf(data, pattern, 0);
 }
 
+int Parser::lastIndexOf(std::string data, std::string pattern, int startIndex) {
+    int index = this->indexOf(data, pattern, startIndex);
+    if (index == -1) {
+        return index;
+    }
+    return index + pattern.length();
+}
+
+int Parser::lastIndexOf(std::string data, std::string pattern) {
+    return this->lastIndexOf(data, pattern, 0);
+}
+
 int Parser::indexOf(std::string data, std::string pattern, int startIndex) {
     int patternIndex = 0;
     for (int i = startIndex; i < data.size(); i++) {
@@ -70,7 +82,7 @@ int Parser::getObjectCount(std::string json) {
     int count = 0;
 
     for (int i = startIndex; i < json.size(); i++) {
-        startIndex = indexOf(json, "}},", startIndex + 3);
+        startIndex = lastIndexOf(json, "}},", startIndex);
         if (startIndex == -1) {
             return count;
         }
@@ -88,28 +100,28 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     ttEvent.setType(infoSegment.substr(startIndex, endIndex));
 
     // Set paper code
-    startIndex = indexOf(infoSegment, "<br>", endIndex) + sizeof("<br>") + 1;
+    startIndex = lastIndexOf(infoSegment, "<br>\\n", endIndex);
     endIndex = indexOf(infoSegment, "<br>", startIndex);
     ttEvent.setPaperCode(
         infoSegment.substr(startIndex, endIndex - startIndex));
 
     // Set maps url
-    startIndex = indexOf(infoSegment, "\"", endIndex) + 1;
+    startIndex = lastIndexOf(infoSegment, "\"", endIndex);
     endIndex = indexOf(infoSegment, "\"", startIndex);
     std::string mapUrl = infoSegment.substr(
         startIndex, endIndex - startIndex - 1);
 
     // Set map lat
-    startIndex = indexOf(mapUrl, "=") + 1;
+    startIndex = lastIndexOf(mapUrl, "=");
     endIndex = indexOf(mapUrl, ",", startIndex);
     ttEvent.setMapLat(mapUrl.substr(startIndex, endIndex - startIndex));
 
     // Set map long
-    startIndex = indexOf(mapUrl, "&") - 1;
-    ttEvent.setMapLong(mapUrl.substr(endIndex + 1, startIndex - endIndex));
+    startIndex = indexOf(mapUrl, "&", startIndex);
+    ttEvent.setMapLong(mapUrl.substr(endIndex + 1, startIndex - endIndex - 1));
 
     // Set room code
-    startIndex = indexOf(infoSegment, "\">", endIndex) + 2;
+    startIndex = lastIndexOf(infoSegment, "\">", endIndex);
     endIndex = indexOf(infoSegment, "<\\/a>", startIndex);
     ttEvent.setRoomCode(
         infoSegment.substr(startIndex, endIndex - startIndex));
@@ -123,8 +135,8 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // Set room name
     int c = 0;
     while (c < 4) {
-        startIndex = indexOf(infoSegment, "<span>", endIndex) + 6;
-        endIndex = indexOf(infoSegment, "<\\", startIndex) - 1;
+        startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
+        endIndex = indexOf(infoSegment, "<\\", startIndex) - 1; // Cuts space off end.
         c++;
     }
     ttEvent.setRoomName(
@@ -133,7 +145,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // Set building name
     c = 0;
     while (c < 2) {
-        startIndex = indexOf(infoSegment, "<span>", endIndex) + 6;
+        startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
         endIndex = indexOf(infoSegment, "<\\", startIndex);
         c++;
     }
@@ -178,8 +190,6 @@ Timetable Parser::parseFile(std::string fileName, std::string format) {
     }
     else
         std::cerr << "Format not supported" << std::endl;
-
-    //std::cout << timetable.toString() << std::endl;
 
     return timetable;
 }
@@ -243,10 +253,9 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
     // Implicitly constructs date.
     ttEvent.setDate(build);
 
-    // Once all the data is loaded, generate the UID();
+    // Once all the data is loaded, generate the UID()
+    // as generating this requires many pieces of information.
     ttEvent.genUID();
-
-    //std::cout << ttEvent.toString();
 
     return ttEvent;
 }
@@ -280,7 +289,7 @@ Timetable Parser::parse() {
         TimetableEvent ttEvent;
 
         // Set each id
-        startIndex = indexOf(json, ":", endIndex) + 2;
+        startIndex = indexOf(json, ":\"", endIndex);
         endIndex = indexOf(json, ",", startIndex) - 1;
         ttEvent.setId(json.substr(startIndex, endIndex - startIndex));
 

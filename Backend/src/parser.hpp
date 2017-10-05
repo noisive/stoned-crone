@@ -23,6 +23,8 @@ class Parser {
         void getWeekStart();
         int indexOf(std::string data, std::string pattern);
         int indexOf(std::string data, std::string pattern, int startIndex);
+        int lastIndexOf(std::string data, std::string pattern, int startIndex);
+        int lastIndexOf(std::string data, std::string pattern);
 
         // Parsing Functions
         int getObjectCount(std::string json);
