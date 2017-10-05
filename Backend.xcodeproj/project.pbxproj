@@ -28,6 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		06934D6A1F86703400D308BD /* parserTests.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = parserTests.xcodeproj; path = Backend/parserTests/parserTests.xcodeproj; sourceTree = SOURCE_ROOT; };
 		06A547191F7B12B400967FD7 /* libBackend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBackend.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		06D026541F7DE061001B79FD /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = src/makefile; sourceTree = "<group>"; };
 		06D026561F7DE061001B79FD /* parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = src/parser.cpp; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 		06A5471B1F7B12B400967FD7 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				06934D6A1F86703400D308BD /* parserTests.xcodeproj */,
 				BEE32B4A1F8191E9005AA683 /* date.cpp */,
 				BEE32B4B1F8191E9005AA683 /* date.hpp */,
 				06D026541F7DE061001B79FD /* makefile */,
