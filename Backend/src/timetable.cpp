@@ -2,12 +2,6 @@
    @author W. Warren - 2017
    */
 #include "timetable.hpp"
-#include <cstring>
-#include <ctime>
-#include <iostream> 
-#include <fstream>
-#include <cmath>
-#include <sstream>
 
 /* Set initial vector size.
 

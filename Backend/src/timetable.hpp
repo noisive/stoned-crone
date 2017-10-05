@@ -4,11 +4,10 @@
 #ifndef TIMETABLE_H_
 #define TIMETABLE_H_
 
-#include <string>
-#include <vector>
 #include "timetableEvent.hpp"
-#include <fstream>
 #include "parser.hpp"
+#include <sstream>
+#include <vector>
 
 typedef TimetableEvent ttEvent;
 

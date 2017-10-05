@@ -3,8 +3,7 @@
 //
 
 #import "SWRevealViewController.h"
-void parseTimetable(const char* data);
-void parse();
-const char* getEventsByDate(const char* dateString, int index);
-void initParser();
-int numEvents(const char* dateString);
+void parseEvents();
+void initTimetable();
+int queryDate(const char* dateString);
+const char* queryResult(int index);

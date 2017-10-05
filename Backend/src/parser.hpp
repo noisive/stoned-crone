@@ -4,7 +4,6 @@
 #ifndef PARSER_HPP_
 #define PARSER_HPP_
 
-#include <string>
 #include "timetableEvent.hpp"
 #include <iostream>
 #include <fstream>

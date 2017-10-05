@@ -2,12 +2,6 @@
    @author Will Shaw - 2017
    */
 #include "timetableEvent.hpp"
-#include <ctime>
-#include <iomanip>
-#include <sstream>
-#include <iostream>
-#include "date.hpp"
-#include <cstring>
 
 TimetableEvent::TimetableEvent(void) {
     this->uid = 0xCC;

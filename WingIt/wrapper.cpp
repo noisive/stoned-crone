@@ -8,7 +8,7 @@
 
 Timetable timetable;
 
-extern "C" void parseTimetable(const char* data) {
+extern "C" void parseEvents(const char* data) {
     timetable.parseEvents(data);
 }
 
@@ -17,7 +17,7 @@ extern "C" void initTimetable() {
 }
 
 extern "C" int queryDate(const char* dateString) {
-    return timetable.queryDate(dateString);
+    return (int) timetable.queryDate(dateString);
 }
 
 extern "C" const char* queryResult(int index) {

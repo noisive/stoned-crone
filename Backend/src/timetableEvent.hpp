@@ -5,7 +5,6 @@
 #ifndef TIMETABLEEVENT_H_
 #define TIMETABLEEVENT_H_
 
-#include <string>
 #include "date.hpp"
 
 class TimetableEvent {
