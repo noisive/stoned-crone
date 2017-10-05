@@ -65,7 +65,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
                 //let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
                 
-                //setNotification(event: lesson)
+                setNotification(event: lesson)
 
                 
       
@@ -318,16 +318,27 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     func calculateDayLabel() {
 
         // Gives date of most recent Monday
-        var mondaysDate: Date {
-            return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        }
+        let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        
         
         let format = DateFormatter()
+        format.timeZone = TimeZone.autoupdatingCurrent
+        format.timeZone = TimeZone(identifier: "NZST")
         format.dateFormat = "dd/MM"
-        let offset = getCurrentXPage() - 1
-     
+        let offset = getCurrentXPage()
+        
+        /*
+         is affecting monday... also 0. So don't use.
+        // Before anything has loaded, this was 0. Change to today's date
+        if offset < 0{
+            offset = Calendar.current.component(.weekday, from: Date()) - 2
+        }*/
+        
+         //       print(format.string(from: mondaysDate))
+        
         let offsetDate = Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)
         
+        format.timeZone = TimeZone(identifier: "NZST")
         createDateLabel(date: format.string(from: offsetDate!))
     }
     

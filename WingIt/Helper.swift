@@ -47,7 +47,7 @@ func setNotification (event: Lesson){
     
     dateFormatter.dateFormat = "ddMMyyHHmm"
     let localNotification = UILocalNotification()
-    localNotification.timeZone = TimeZone.autoupdatingCurrent
+    localNotification.timeZone = TimeZone(identifier: "NZST")
     localNotification.fireDate = dateFormatter.date(from: notificationTimeAndDateString)
     // Message example: COSC345 Lecture coming up at 11
     let notificationMessage = "\((event.code)!) \((event.type)!) coming up at \((event.startTime)! + 8)"
