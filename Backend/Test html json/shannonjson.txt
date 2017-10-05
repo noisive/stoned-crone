@@ -1,0 +1,274 @@
+if(typeof($) == "function") {  newtimetable();   }else{
+sits_attach_event(window, "load", newtimetable);  }  function newtimetable() {
+var options =
+{"onEventHover":function(e,ui){sitsjqtt_increase_event_size($(this)); if(typeof
+ui.extraData.extra.eirh==='string'&&ui.extraData.extra.eirh!=''){return
+true;}return
+false;},"onEventEditClick":function(e,ui){ttb_editDetails(ui.extraData.extra.eire,
+ui.extraData.extra.eirr,
+ui.extraData.extra.eirh);},"height":"90%","in_client":"inBrowser","title":"Timetable
+for  (Now showing dates 02\/10\/2017 to
+08\/10\/2017)","start_day":1,"no_days":7,"start_time":8,"no_hours":14,"view":"DAY_BY_TIME","snap_mins":30,"view_toggle":"Y","show_time":"N","dim_on_select":false,"more_info":"<B>More<\/B>"};
+var eventdata =
+[{"id":"YTTB1","day":1,"start":"10:00","end":"11:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nBIOC360<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8645093545978,170.513062675081&ll=-45.8645093545978,170.513062675081&z=19&t=k\"
+target=\"_blank\">BISEM<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_BIOC360S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_BIOC360S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Research Perspectives in
+Biochemistry<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry Seminar Rm. <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Research Perspectives in
+Biochemistry<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry Seminar Rm. <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":8,"rcid":""}},{"id":"YTTB2","day":1,"start":"11:00","end":"12:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nPATH302<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8698939091485,170.507093699963&ll=-45.8698939091485,170.507093699963&z=19&t=k\"
+target=\"_blank\">DEPPATH<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_PATH302S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_PATH302S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Cancer Biology<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Contact the Dept. of Pathology for room info
+<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Hercus
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Cancer Biology<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Contact the Dept. of Pathology for room info
+<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Hercus
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":9,"rcid":""}},{"id":"YTTB3","day":1,"start":"14:00","end":"18:00","draggable":false,"resizable":false,"selected":false,"bcol":"#09BBF7","fcol":"#000000","info":"Practical<br>\nBIOC353<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8645093545978,170.513062675081&ll=-45.8645093545978,170.513062675081&z=19&t=k\"
+target=\"_blank\">BIG05<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_BIOC353S2DNI2017PA1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_BIOC353S2DNI2017PA1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Molecular Basis of Health and
+Disease<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>A1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry G05 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Molecular Basis of Health and
+Disease<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>A1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry G05 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":5,"rcid":""}},{"id":"YTTB4","day":2,"start":"09:00","end":"10:00","draggable":false,"resizable":false,"selected":false,"bcol":"#09BBF7","fcol":"#000000","info":"Practical<br>\nBIOC353<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8645093545978,170.513062675081&ll=-45.8645093545978,170.513062675081&z=19&t=k\"
+target=\"_blank\">BIG05<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_BIOC353S2DNI2017PA1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_BIOC353S2DNI2017PA1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Molecular Basis of Health and
+Disease<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>A1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry G05 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Molecular Basis of Health and
+Disease<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>A1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry G05 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":4,"rcid":""}},{"id":"YTTB5","day":2,"start":"10:00","end":"11:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nBIOC353<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8645093545978,170.513062675081&ll=-45.8645093545978,170.513062675081&z=19&t=k\"
+target=\"_blank\">BISEM<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_BIOC353S2DNI2017LD1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_BIOC353S2DNI2017LD1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Molecular Basis of Health and
+Disease<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>D1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry Seminar Rm. <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Molecular Basis of Health and
+Disease<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>D1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry Seminar Rm. <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":2,"rcid":""}},{"id":"YTTB6","day":2,"start":"11:00","end":"12:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nPATH302<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8698939091485,170.507093699963&ll=-45.8698939091485,170.507093699963&z=19&t=k\"
+target=\"_blank\">DEPPATH<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_PATH302S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_PATH302S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Cancer Biology<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Contact the Dept. of Pathology for room info
+<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Hercus
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Cancer Biology<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Contact the Dept. of Pathology for room info
+<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Hercus
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":10,"rcid":""}},{"id":"YTTB7","day":2,"start":"11:00","end":"18:00","draggable":false,"resizable":false,"selected":false,"bcol":"#09BBF7","fcol":"#000000","info":"Practical<br>\nBIOC353<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8645093545978,170.513062675081&ll=-45.8645093545978,170.513062675081&z=19&t=k\"
+target=\"_blank\">BIG05<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_BIOC353S2DNI2017PA1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_BIOC353S2DNI2017PA1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Molecular Basis of Health and
+Disease<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>A1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry G05 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Molecular Basis of Health and
+Disease<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>A1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry G05 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":3,"rcid":""}},{"id":"YTTB8","day":3,"start":"10:00","end":"11:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nBIOC353<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8645093545978,170.513062675081&ll=-45.8645093545978,170.513062675081&z=19&t=k\"
+target=\"_blank\">BISEM<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_BIOC353S2DNI2017LD1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_BIOC353S2DNI2017LD1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Molecular Basis of Health and
+Disease<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>D1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry Seminar Rm. <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Molecular Basis of Health and
+Disease<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>D1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry Seminar Rm. <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":1,"rcid":""}},{"id":"YTTB9","day":4,"start":"10:00","end":"11:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nBIOC360<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8645093545978,170.513062675081&ll=-45.8645093545978,170.513062675081&z=19&t=k\"
+target=\"_blank\">BISEM<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_BIOC360S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_BIOC360S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Research Perspectives in
+Biochemistry<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry Seminar Rm. <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Research Perspectives in
+Biochemistry<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry Seminar Rm. <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":7,"rcid":""}},{"id":"YTTB10","day":5,"start":"10:00","end":"11:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nBIOC360<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8645093545978,170.513062675081&ll=-45.8645093545978,170.513062675081&z=19&t=k\"
+target=\"_blank\">BISEM<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_BIOC360S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_BIOC360S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Research Perspectives in
+Biochemistry<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry Seminar Rm. <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Research Perspectives in
+Biochemistry<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry Seminar Rm. <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Biochemistry
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":6,"rcid":""}}];
+sits_timetable_widget("#newtimetable", "CREATE", options, eventdata);  }

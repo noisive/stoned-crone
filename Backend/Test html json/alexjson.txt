@@ -1,0 +1,231 @@
+if(typeof($) == "function") {  newtimetable();   }else{
+sits_attach_event(window, "load", newtimetable);  }  function newtimetable() {
+var options =
+{"onEventHover":function(e,ui){sitsjqtt_increase_event_size($(this)); if(typeof
+ui.extraData.extra.eirh==='string'&&ui.extraData.extra.eirh!=''){return
+true;}return
+false;},"onEventEditClick":function(e,ui){ttb_editDetails(ui.extraData.extra.eire,
+ui.extraData.extra.eirr,
+ui.extraData.extra.eirh);},"height":"90%","in_client":"inBrowser","title":"Timetable
+for  (Now showing dates 02\/10\/2017 to
+08\/10\/2017)","start_day":1,"no_days":7,"start_time":8,"no_hours":14,"view":"DAY_BY_TIME","snap_mins":30,"view_toggle":"Y","show_time":"N","dim_on_select":false,"more_info":"<B>More<\/B>"};
+var eventdata =
+[{"id":"YTTB1","day":1,"start":"09:00","end":"10:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nECON375<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8647447389463,170.515310881497&ll=-45.8647447389463,170.515310881497&z=19&t=k\"
+target=\"_blank\">QUAD3<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_ECON375S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_ECON375S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Econometrics<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Quad 3 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Geology
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Econometrics<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Quad 3 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Geology
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":6,"rcid":""}},{"id":"YTTB2","day":1,"start":"14:00","end":"15:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nPOLS322<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8636426650169,170.513851671001&ll=-45.8636426650169,170.513851671001&z=19&t=k\"
+target=\"_blank\">SDAV6<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_POLS322S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_POLS322S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Politics and Human Nature<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>St David Seminar Rm 6 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>St David
+Complex<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Politics and Human Nature<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>St David Seminar Rm 6 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>St David
+Complex<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":4,"rcid":""}},{"id":"YTTB3","day":2,"start":"10:00","end":"11:00","draggable":false,"resizable":false,"selected":false,"bcol":"#80FFFF","fcol":"#000000","info":"Computer
+Lab<br>\nECON375<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8677571473166,170.520244476464&ll=-45.8677571473166,170.520244476464&z=19&t=k\"
+target=\"_blank\">TG05<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_ECON375S2DNI2017CZ2').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_ECON375S2DNI2017CZ2\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Econometrics<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Z2<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>General Access Tower G05 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>UOCE Teaching
+Wing<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Econometrics<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Z2<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>General Access Tower G05 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>UOCE Teaching
+Wing<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":1,"rcid":""}},{"id":"YTTB4","day":2,"start":"12:00","end":"14:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nECON375<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8677571473166,170.520244476464&ll=-45.8677571473166,170.520244476464&z=19&t=k\"
+target=\"_blank\">T203<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_ECON375S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_ECON375S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Econometrics<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>College Tchng. Wing 203 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>UOCE Teaching
+Wing<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Econometrics<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>College Tchng. Wing 203 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>UOCE Teaching
+Wing<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":7,"rcid":""}},{"id":"YTTB5","day":2,"start":"16:00","end":"17:00","draggable":false,"resizable":false,"selected":false,"bcol":"#FFD700","fcol":"#000000","info":"Tutorial<br>\nCOSC345<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8645312,170.5108324&ll=-45.8645312,170.5108324&z=19&t=k\"
+target=\"_blank\">UNIST<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_COSC345FYDNI2017TU1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_COSC345FYDNI2017TU1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Software Engineering<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>U1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Union St. Lecture Theatre <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Botany
+Annexe<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Software Engineering<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>U1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Union St. Lecture Theatre <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Botany
+Annexe<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":8,"rcid":""}},{"id":"YTTB6","day":2,"start":"17:00","end":"19:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nPHPE301<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8647447389463,170.515310881497&ll=-45.8647447389463,170.515310881497&z=19&t=k\"
+target=\"_blank\">QUAD5<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_PHPE301S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_PHPE301S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Research Essay<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Quad 5 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Geology
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Research Essay<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Quad 5 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Geology
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":2,"rcid":""}},{"id":"YTTB7","day":3,"start":"14:00","end":"16:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nPOLS322<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8665841716334,170.513129341856&ll=-45.8665841716334,170.513129341856&z=19&t=k\"
+target=\"_blank\">CASTC<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_POLS322S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_POLS322S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Politics and Human Nature<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Castle C <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Castle Lecture
+Theatres<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Politics and Human Nature<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Castle C <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Castle Lecture
+Theatres<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":5,"rcid":""}},{"id":"YTTB8","day":4,"start":"17:00","end":"19:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nPHPE301<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8647447389463,170.515310881497&ll=-45.8647447389463,170.515310881497&z=19&t=k\"
+target=\"_blank\">QUAD5<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_PHPE301S2DNI2017LL1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_PHPE301S2DNI2017LL1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Research Essay<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Quad 5 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Geology
+Building<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Research Essay<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Quad 5 <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Geology
+Building<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":3,"rcid":""}},{"id":"YTTB9","day":5,"start":"09:00","end":"10:00","draggable":false,"resizable":false,"selected":false,"bcol":"lightgrey","fcol":"#121212","info":"Lecture<br>\nCOSC345<br>\n\n<a
+href=\"https:\/\/maps.google.com\/?q=-45.8645312,170.5108324&ll=-45.8645312,170.5108324&z=19&t=k\"
+target=\"_blank\">UNIST<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg
+sv-hidden-sm\">\n\t<a
+onclick=\"$('.uo_mobile_more_COSC345FYDNI2017LM1').toggle()\"
+href=\"javascript:void(0)\">More...<\/a>\n\t<div
+class=\"uo_mobile_more_COSC345FYDNI2017LM1\" style=\"display:none\">\n<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Software Engineering<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>M1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Union St. Lecture Theatre <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Botany
+Annexe<\/span><\/div>\n\t<\/div>\n<\/div>","ttip":"<div
+class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'>\t<span>Software Engineering<\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>M1<\/span><\/div>\n\n<div
+class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Union St. Lecture Theatre <\/span><\/div><div
+class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div
+class='sv-col-sm-9'><span>Botany
+Annexe<\/span><\/div>","preinfo":"","isnote":false,"extra":{"tts_seqn":9,"rcid":""}}];
+sits_timetable_widget("#newtimetable", "CREATE", options, eventdata);  }
