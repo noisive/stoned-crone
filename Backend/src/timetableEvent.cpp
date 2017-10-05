@@ -158,6 +158,6 @@ std::string TimetableEvent::toString() {
         "," + this->roomCode +
         "," + this->roomName +
         "," + this->building +
-        "," + this->date.ISODate() + "\n";
+        "," + this->date.ISODate();
 }
 
