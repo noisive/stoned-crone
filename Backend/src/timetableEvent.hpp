@@ -5,7 +5,6 @@
 #ifndef TIMETABLEEVENT_H_
 #define TIMETABLEEVENT_H_
 
-#include <string>
 #include "date.hpp"
 
 class TimetableEvent {
@@ -40,7 +39,7 @@ class TimetableEvent {
         bool equals(TimetableEvent other);
         
         void genUID();
-        
+
         // Wraps the setDate function to parse and add days from evision.
         void fixDate(int startingDate);
         Date getDate();

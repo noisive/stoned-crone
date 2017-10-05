@@ -4,10 +4,10 @@
 #ifndef TIMETABLE_H_
 #define TIMETABLE_H_
 
-#include <string>
-#include <vector>
 #include "timetableEvent.hpp"
-#include <fstream>
+#include "parser.hpp"
+#include <sstream>
+#include <vector>
 
 typedef TimetableEvent ttEvent;
 
@@ -17,7 +17,16 @@ class Timetable {
         std::vector<ttEvent> eventList;
         // Custom events list.
         std::vector<ttEvent> customEvents;
-        
+
+        // Cached query
+        std::vector<ttEvent> queryStore;
+
+        // Save file paths.
+        std::string dataPath;
+        std::string gCalPath;
+
+        // Timetable Maintenance
+        void reset();
         void clean(std::vector<ttEvent> &list);
         void removeEvent(ttEvent t, std::vector<ttEvent> &list);
 
@@ -28,19 +37,28 @@ class Timetable {
         // Base Functions
         void addEvent(ttEvent t);
         void addEvent(ttEvent t, bool custom);
+        
+        void addMultiple(std::vector<ttEvent> events);
+        void addMultiple(std::vector<ttEvent> events, bool custom);
+
         void removeEvent(ttEvent t);
         void removeEvent(ttEvent t, bool custom);
+        
         void updateEvent(ttEvent t, bool custom);
         int size();
         std::string toString();
 
         // Integration
-        std::vector<ttEvent> getByDate(const char* date);
+        void parseEvents(std::string jumbledData);
+        int queryByDate(const char* d);
+        TimetableEvent queryResult(int index);
         int merge();
         TimetableEvent getByUID(const char* id);
         void addEvent(const char* event);
 
-        // Exporting
+        // Persistence
+        void save();
+        void restore();
         void printToCSV();
         void exportToFile(std::string fileName);
         void exportToGoogleCalFile(std::string fileName);

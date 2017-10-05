@@ -187,7 +187,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 
                 // Here we can pass on the output timetable for one week with the printed date.
                 print(json)
-                parseTimetable(json.cString(using: String.Encoding.utf8));
+                parseEvents(json.cString(using: String.Encoding.utf8));
                 
 //                /// _________________________________________ EXAMPLE CPP LIB USAGE
 //                

@@ -1,37 +1,35 @@
 
-#include "../Backend/src/parser.hpp"
+#include "../Backend/src/timetable.hpp"
 // extern "C" will cause the C++ compiler
 // (remember, this is still C++ code!) to
 // compile the function in such a way that
 // it can be called from C
 // (and Swift).
 
-Parser parser;
-
 Timetable timetable;
 
-extern "C" void parseTimetable(const char* data) {
-    parser = Parser(data);
-    timetable = parser.parse();
+extern "C" void parseEvents(const char* data) {
+    timetable.parseEvents(data);
 }
 
-extern "C" void initParser() {
-    timetable = parser.parseCachedFile();
+extern "C" void initTimetable() {
+    timetable.restore();
 }
 
-extern "C" int numEvents(const char* dateString) {
-    return (int) timetable.getByDate(dateString).size();
+extern "C" int queryDate(const char* dateString) {
+    return (int) timetable.queryByDate(dateString);
 }
 
-extern "C" const char* getEventsByDate(const char* dateString, int index) {
-    std::vector<TimetableEvent> events = timetable.getByDate(dateString);
+extern "C" const char* queryResult(int index) {
     
     std::string data = "";
     
     size_t bufferSize =  0;
     
-    bufferSize += events[index].toString().length();
-    data += events[index].toString();
+    TimetableEvent event = timetable.queryResult(index);
+
+    bufferSize += event.toString().length();
+    data += event.toString();
     
     bufferSize += 20;
     

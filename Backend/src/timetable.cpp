@@ -2,22 +2,53 @@
    @author W. Warren - 2017
    */
 #include "timetable.hpp"
-#include <cstring>
-#include <ctime>
-#include <iostream> 
-#include <fstream>
-#include <cmath>
-#include <sstream>
 
 /* Set initial vector size.
 
  * 20 is a rough peak for number of classes in a week. */
 std::vector<TimetableEvent> eventList(20);
 std::vector<TimetableEvent> customList(20);
+std::vector<TimetableEvent> queryStore(20);
 
 Timetable::Timetable() {
+    reset();
+    this->dataPath = ((std::string)getenv("HOME")) + "/Library/Caches/data.csv";
+    this->gCalPath = ((std::string)getenv("HOME")) + "/Library/Caches/GoogleCalFile.csv";
+}
+
+void Timetable::restore() {
+    reset();
+    Parser parser;
+    std::vector<TimetableEvent> events = parser.parseFile(dataPath, "csv");
+    addMultiple(events);
+}
+
+void Timetable::reset() {
     eventList.clear();
     customList.clear();
+    queryStore.clear();
+}
+
+void Timetable::parseEvents(std::string jumbledData) {
+    reset();
+    Parser parser;
+    std::vector<TimetableEvent> events = parser.parse(jumbledData);
+    addMultiple(events);
+}
+
+void Timetable::save() {
+    exportToFile(dataPath);
+    exportToGoogleCalFile(gCalPath);
+}
+
+void Timetable::addMultiple(std::vector<TimetableEvent> events) {
+    addMultiple(events, false);
+}
+
+void Timetable::addMultiple(std::vector<TimetableEvent> events, bool custom) {
+    for (TimetableEvent event : events) { 
+        this->eventList.push_back(event);
+    }
 }
 
 void Timetable::addEvent(TimetableEvent t) {
@@ -88,15 +119,24 @@ int Timetable::merge() {
     return numRemoved;
 }
 
-std::vector<TimetableEvent> Timetable::getByDate(const char* date) {
-    Date d(date);
-    std::vector<TimetableEvent> matchedEvents; 
+int Timetable::queryByDate(const char* d) {
+    queryStore.clear();
+    Date date(d);
     for (TimetableEvent event : eventList) {
-        if (d.compare(event.getDate()) == 0) {
-            matchedEvents.push_back(event); 
+        if (date.compare(event.getDate()) == 0) {
+            queryStore.push_back(event); 
         }
     }
-    return matchedEvents;
+    return (int) queryStore.size();
+}
+
+TimetableEvent Timetable::queryResult(int index) {
+    if (index == queryStore.size() - 1) {
+        TimetableEvent event = queryStore[index];
+        queryStore.clear();
+        return event;
+    }
+    return queryStore[index]; 
 }
 
 TimetableEvent Timetable::getByUID(const char* id) {

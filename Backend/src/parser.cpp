@@ -2,42 +2,26 @@
     @author Will Shaw - 2017
 */
 #include "parser.hpp"
-#include <cstring>
 
 Parser::Parser(void) {
-    setPaths();
-    parseCachedFile();
-}
-
-Parser::Parser(const char *data) {
-    std::string j(data);
-    setPaths();
-    this->json = j;
+    this->colorMap["lightgrey"] = "#D3D3D3";
     this->weekStart = 0xCC;
-}
-
-Parser::Parser(std::string j) {
-    setPaths();
-    this->json = j;
-    this->weekStart = 0xCC;
-}
-
-void Parser::setJson(std::string json) {
-    setPaths();
-    this->json = json;
-}
-
-void Parser::setPaths() {
-    this->dataPath = ((std::string)getenv("HOME")) + "/Library/Caches/data.csv";
-    this->gCalPath = ((std::string)getenv("HOME")) + "/Library/Caches/GoogleCalFile.csv";
-}
-
-std::string Parser::getJson() {
-    return this->json;
 }
 
 int Parser::indexOf(std::string data, std::string pattern) {
     return this->indexOf(data, pattern, 0);
+}
+
+int Parser::lastIndexOf(std::string data, std::string pattern, int startIndex) {
+    int index = this->indexOf(data, pattern, startIndex);
+    if (index == -1) {
+        return index;
+    }
+    return (int) (index + pattern.length());
+}
+
+int Parser::lastIndexOf(std::string data, std::string pattern) {
+    return this->lastIndexOf(data, pattern, 0);
 }
 
 int Parser::indexOf(std::string data, std::string pattern, int startIndex) {
@@ -60,7 +44,9 @@ int Parser::indexOf(std::string data, std::string pattern, int startIndex) {
 void Parser::extractJsonArray() {
     int startIndex = indexOf(this->json, "[");
     int endIndex = indexOf(this->json, "]");
-    this->json = this->json.substr(startIndex, endIndex - startIndex + 1);
+    if (startIndex != -1 && endIndex != -1) {
+        this->json = this->json.substr(startIndex, endIndex - startIndex + 1);
+    }
 }
 
 int Parser::getObjectCount(std::string json) {
@@ -68,7 +54,7 @@ int Parser::getObjectCount(std::string json) {
     int count = 0;
 
     for (int i = startIndex; i < json.size(); i++) {
-        startIndex = indexOf(json, "}},", startIndex + 3);
+        startIndex = lastIndexOf(json, "}},", startIndex);
         if (startIndex == -1) {
             return count;
         }
@@ -86,28 +72,28 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     ttEvent.setType(infoSegment.substr(startIndex, endIndex));
 
     // Set paper code
-    startIndex = indexOf(infoSegment, "<br>", endIndex) + sizeof("<br>") + 1;
+    startIndex = lastIndexOf(infoSegment, "<br>\\n", endIndex);
     endIndex = indexOf(infoSegment, "<br>", startIndex);
     ttEvent.setPaperCode(
         infoSegment.substr(startIndex, endIndex - startIndex));
 
     // Set maps url
-    startIndex = indexOf(infoSegment, "\"", endIndex) + 1;
+    startIndex = lastIndexOf(infoSegment, "\"", endIndex);
     endIndex = indexOf(infoSegment, "\"", startIndex);
     std::string mapUrl = infoSegment.substr(
         startIndex, endIndex - startIndex - 1);
 
     // Set map lat
-    startIndex = indexOf(mapUrl, "=") + 1;
+    startIndex = lastIndexOf(mapUrl, "=");
     endIndex = indexOf(mapUrl, ",", startIndex);
     ttEvent.setMapLat(mapUrl.substr(startIndex, endIndex - startIndex));
 
     // Set map long
-    startIndex = indexOf(mapUrl, "&") - 1;
-    ttEvent.setMapLong(mapUrl.substr(endIndex + 1, startIndex - endIndex));
+    startIndex = indexOf(mapUrl, "&", startIndex);
+    ttEvent.setMapLong(mapUrl.substr(endIndex + 1, startIndex - endIndex - 1));
 
     // Set room code
-    startIndex = indexOf(infoSegment, "\">", endIndex) + 2;
+    startIndex = lastIndexOf(infoSegment, "\">", endIndex);
     endIndex = indexOf(infoSegment, "<\\/a>", startIndex);
     ttEvent.setRoomCode(
         infoSegment.substr(startIndex, endIndex - startIndex));
@@ -121,8 +107,8 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // Set room name
     int c = 0;
     while (c < 4) {
-        startIndex = indexOf(infoSegment, "<span>", endIndex) + 6;
-        endIndex = indexOf(infoSegment, "<\\", startIndex) - 1;
+        startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
+        endIndex = indexOf(infoSegment, "<\\", startIndex) - 1; // Cuts space off end.
         c++;
     }
     ttEvent.setRoomName(
@@ -131,7 +117,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // Set building name
     c = 0;
     while (c < 2) {
-        startIndex = indexOf(infoSegment, "<span>", endIndex) + 6;
+        startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
         endIndex = indexOf(infoSegment, "<\\", startIndex);
         c++;
     }
@@ -143,19 +129,17 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
 
 void Parser::getWeekStart() {
     int startIndex = indexOf(this->json, "ng dates ");
-    std::string date = this->json.substr(startIndex + sizeof("ng dates ") - 1, 12);
-    this->weekStart = std::stoi(date.substr(0, 2) +
-                                date.substr(4, 2) +
-                                date.substr(8, 4));
+    if (this->json.length() >= 12 && startIndex != -1) {
+        std::string date = this->json.substr(startIndex + sizeof("ng dates ") - 1, 12);
+        this->weekStart = std::stoi(date.substr(0, 2) +
+                                    date.substr(4, 2) +
+                                    date.substr(8, 4));
+    }
 }
 
-Timetable Parser::parseCachedFile() {
-    return parseFile(this->dataPath, "csv");
-}
+std::vector<TimetableEvent> Parser::parseFile(std::string fileName, std::string format) {
 
-Timetable Parser::parseFile(std::string fileName, std::string format) {
-
-    Timetable timetable;
+    std::vector<TimetableEvent> events;
 
     if (format.compare("csv") == 0) {
 
@@ -164,7 +148,7 @@ Timetable Parser::parseFile(std::string fileName, std::string format) {
         if (file.is_open()) {
             while (getline(file, line)) {
                 if (line.length() > 1) {
-                    timetable.addEvent(parseCSVLine(line));
+                    events.push_back(parseCSVLine(line));
                 }
             }
             file.close();
@@ -175,9 +159,7 @@ Timetable Parser::parseFile(std::string fileName, std::string format) {
     else
         std::cerr << "Format not supported" << std::endl;
 
-    //std::cout << timetable.toString() << std::endl;
-
-    return timetable;
+    return events;
 }
 
 TimetableEvent Parser::parseCSVLine(std::string line) {
@@ -239,28 +221,33 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
     // Implicitly constructs date.
     ttEvent.setDate(build);
 
-    // Once all the data is loaded, generate the UID();
+    // Once all the data is loaded, generate the UID()
+    // as generating this requires many pieces of information.
     ttEvent.genUID();
-
-    //std::cout << ttEvent.toString();
 
     return ttEvent;
 }
 
-Timetable Parser::parse() {
+std::vector<TimetableEvent> Parser::parse(const char* data) {
+    std::string strData(data);
+    return parse(strData);
+}
 
-    Timetable timetable;
+std::vector<TimetableEvent> Parser::parse(std::string data) {
+    this->json = data;
+
+    std::vector<TimetableEvent> events;
 
     if (this->json == "0xCC") {
         std::cerr << "No data given" << std::endl;
-        return Timetable();
+        return events;
     }
 
     getWeekStart();
 
     if (this->weekStart == 0xCC) {
         std::cerr << "No data given" << std::endl;
-        return Timetable();
+        return events;
     }
 
     extractJsonArray();
@@ -276,7 +263,7 @@ Timetable Parser::parse() {
         TimetableEvent ttEvent;
 
         // Set each id
-        startIndex = indexOf(json, ":", endIndex) + 2;
+        startIndex = indexOf(json, ":\"", endIndex);
         endIndex = indexOf(json, ",", startIndex) - 1;
         ttEvent.setId(json.substr(startIndex, endIndex - startIndex));
 
@@ -319,22 +306,19 @@ Timetable Parser::parse() {
 
         startIndex = indexOf(json, "}},", endIndex) + 2;
         endIndex = startIndex + 1;
+   
+        // This will search the colorMap and replace the web color with it's mapped HEX color.
+        std::map<std::string, std::string>::iterator it = colorMap.find(ttEvent.getColor());
+        if (it != colorMap.end()) {
+            ttEvent.setColor(it->second);
+        }
 
         ttEvent.fixDate(this->weekStart);
 
         ttEvent.genUID();
 
-        //std::cout << ttEvent.toString();
-
-        timetable.addEvent(ttEvent);
+        events.push_back(ttEvent);
     }
-
-    // Save to CSV formatted file.
-    timetable.exportToFile(this->dataPath);
-
-    // Save to Google Calendar Formatted file.
-    timetable.exportToGoogleCalFile(this->gCalPath);
-    
-    return timetable;
+    return events;
 }
 
