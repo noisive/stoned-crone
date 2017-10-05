@@ -39,8 +39,13 @@ func setNotification (event: Lesson){
     let localNotification = UILocalNotification()
     localNotification.timeZone = TimeZone(identifier: "NZST")
     localNotification.fireDate = notificationTimeAndDate
+    
+    var eventTime = event.startTime + 8
+    if eventTime > 12{
+        eventTime -= 12
+    }
     // Message example: COSC345 Lecture coming up at 11
-    let notificationMessage = "\((event.code)!) \((event.type)!) coming up at \((event.startTime)! + 8)"
+    let notificationMessage = "\((event.code)!) \((event.type)!) coming up at \((eventTime)!)"
     localNotification.alertBody = notificationMessage
     
     
