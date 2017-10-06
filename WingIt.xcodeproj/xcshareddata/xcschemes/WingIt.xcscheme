@@ -38,6 +38,14 @@
                BlueprintName = "WingItUITests"
                ReferencedContainer = "container:WingIt.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "WingItUITests">
+               </Test>
+               <Test
+                  Identifier = "WingItUITests/testLoginRaw()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

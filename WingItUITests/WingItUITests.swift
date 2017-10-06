@@ -8,6 +8,12 @@
 
 import XCTest
 
+extension XCUIApplication {
+    var isDisplayingDay: Bool {
+        return otherElements["Monday"].exists
+    }
+}
+
 class WingItUITests: XCTestCase {
     
     var app: XCUIApplication! = XCUIApplication()
@@ -40,12 +46,34 @@ class WingItUITests: XCTestCase {
     
     
     
+
+
+    // Special webview window without any coverplate. For debugging webview login.
+    func testLoginRaw(){
+        // Argument to enter raw
+        app.launchArguments.append("--debugLogin")
+        app.launch()
+        print("hi")
+
+        let webViewsQuery = app.webViews
+        
+        let element2 = webViewsQuery.otherElements["Otago Student Administration - The University of Otago"].children(matching: .other).element(boundBy: 6)
+        let textField = element2.children(matching: .textField).element
+        // Need to wait
+        textField.tap()
+        textField.typeText(eVisionUsername)
+        element2.children(matching: .secureTextField).element.typeText(eVisionPassword)
+        app.typeText("\r")
+        
+        //XCTAssertEqual(data.json, )
+
+    }
+    
     func testLoginFresh(){
-        // Argument to delete data
-        app.launchArguments.append("--uitesting")
+        app.launchArguments.append("--resetdata")
         app.launch()
         
- 
+        
         let usernameTextField = app.textFields["Username"]
         usernameTextField.tap()
         usernameTextField.typeText(eVisionUsername)
@@ -54,17 +82,18 @@ class WingItUITests: XCTestCase {
         passwordSecureTextField.tap()
         passwordSecureTextField.typeText(eVisionPassword)
         app.typeText("\r")
+        XCUIApplication().navigationBars["Log in to eVision"].buttons["Cancel"].tap()
+        
+        XCTAssertTrue(app.isDisplayingDay)
         
     }
     
     func testLoginUpdate(){
-        // Argument to delete data
-        app.launchArguments.append("--uitesting")
+        testLoginFresh()
         app.launch()
-        
         app.navigationBars["Friday"].children(matching: .button).element.tap()
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Update / Log in"]/*[[".cells.staticTexts[\"Update \/ Log in\"]",".staticTexts[\"Update \/ Log in\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
- 
+        
         let usernameTextField = app.textFields["Username"]
         usernameTextField.tap()
         usernameTextField.typeText(eVisionUsername)
@@ -74,8 +103,7 @@ class WingItUITests: XCTestCase {
         passwordSecureTextField.typeText(eVisionPassword)
         app.typeText("\r")
         
-        app.staticTexts["Enter your eVision details"]
-        
+        XCTAssertTrue(app.isDisplayingDay)
         
     }
     

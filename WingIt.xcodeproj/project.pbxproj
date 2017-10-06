@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* WingItUITests.swift */; };
+		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; };
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
 		06B38A381F82361E009EDC60 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* Helper.swift */; };
@@ -43,6 +44,7 @@
 		06934D7A1F86730B00D308BD /* WingItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06934D7C1F86730B00D308BD /* WingItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITests.swift; sourceTree = "<group>"; };
 		06934D7E1F86730B00D308BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		069827641F87041000777DAD /* LoginDebugController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDebugController.swift; sourceTree = "<group>"; };
 		06A5475D1F7B1D9600967FD7 /* libBackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBackend.a; path = "../../Library/Developer/Xcode/DerivedData/Project-faabexjzkhonsfdsetxpryushahl/Build/Products/Debug-iphonesimulator/libBackend.a"; sourceTree = "<group>"; };
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
 		06B38A371F82361E009EDC60 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				53F8A00D1EC3D0010001604A /* ViewController.swift */,
+				069827641F87041000777DAD /* LoginDebugController.swift */,
 				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
 				297C56921ED9126200C44420 /* LoginViewController.swift */,
 				53BB7A201ED1536C00370F7B /* DetailView.swift */,
@@ -306,6 +309,7 @@
 				53C7D03F1EC9BD8400D0BD9C /* MenuTableViewController.swift in Sources */,
 				53C7D0391EC9B6A500D0BD9C /* Lesson.swift in Sources */,
 				535BDEC91EC48FB200B853C2 /* TimetableCell.swift in Sources */,
+				069827651F87041000777DAD /* LoginDebugController.swift in Sources */,
 				53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */,
 				297C56931ED9126200C44420 /* LoginViewController.swift in Sources */,
 				5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */,
