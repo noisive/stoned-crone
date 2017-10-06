@@ -61,10 +61,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.makeKeyAndVisible()
                 
             }
+            
+            
         }
         
         // Get data from CSV
         initTimetable();
+        
+        // Register settings bundle.
+        UserDefaults.standard.register(defaults: [String : Any]())
         
         // Register intent to use notifications
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))

@@ -40,9 +40,6 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "WingItUITests">
-               </Test>
-               <Test
                   Identifier = "WingItUITests/testLoginRaw()">
                </Test>
             </SkippedTests>
