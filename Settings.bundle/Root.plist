@@ -8,17 +8,17 @@
 	<array>
 		<dict>
 			<key>Type</key>
-			<string>Title</string>
+			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Notice period is the number of minutes before an event that the notification will fire</string>
+			<string>Minutes before event notifications fire</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Notice Period:</string>
+			<string></string>
 			<key>Key</key>
-			<string>noticePeriod</string>
+            <string>noticePeriod</string>
 			<key>DefaultValue</key>
 			<string>15</string>
 			<key>IsSecure</key>
@@ -30,6 +30,6 @@
 			<key>AutocorrectionType</key>
 			<string>No</string>
 		</dict>
-	</array>
+		</array>
 </dict>
 </plist>
