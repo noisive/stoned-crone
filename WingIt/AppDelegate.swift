@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let path = NSHomeDirectory()+"/Library/Caches/data.csv"
         
         // Resets app if given argument --uitesting, so that tests start from a consistent clean state
-        if CommandLine.arguments.contains("--uitesting") {
+        if CommandLine.arguments.contains("--resetdata") {
             do {
                 try FileManager.default.removeItem(at: NSURL(fileURLWithPath: path) as URL)
             } catch let error as NSError {
@@ -30,17 +30,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        // If we don't have data already, prompt for login.
-        if !fileManager.fileExists(atPath: path) {
+        // Bring up different initial view for this test - used for debugging login
+        if CommandLine.arguments.contains("--debugLogin") {
+            do {
+                try FileManager.default.removeItem(at: NSURL(fileURLWithPath: path) as URL)
+            } catch let error as NSError {
+                print("Error: \(error.domain)")
+            }
+            
+            // Open debug window
             self.window = UIWindow(frame: UIScreen.main.bounds)
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginDebugVC")
             
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
+        }else{
             
+            // If we don't have data already, prompt for login.
+            if !fileManager.fileExists(atPath: path) {
+                self.window = UIWindow(frame: UIScreen.main.bounds)
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+                
+                self.window?.rootViewController = initialViewController
+                self.window?.makeKeyAndVisible()
+                
+            }
         }
         
         // Get data from CSV
