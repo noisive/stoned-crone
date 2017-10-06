@@ -1,5 +1,12 @@
 /* Parser class implementation.
     @author Will Shaw - 2017
+ 
+ An object which parses the extracted (and mangled) timetable json.
+ The strings it looks for may change with eVision updates -
+ these should be changed in the parseInfo method if this happens.
+ Creates a timetable object with the data, saves to CSV.
+ 
+ 0xCC is used as a default blank 'uninitialised' value.
 */
 #include "parser.hpp"
 
