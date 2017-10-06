@@ -46,7 +46,7 @@ func setNotification (event: Lesson){
         eventTime -= 12
     }
     // Message example: COSC345 Lecture coming up at 11
-    let notificationMessage = "\((event.code)!) \((event.type)!) coming up at \((eventTime)!)"
+    let notificationMessage = "\((event.code)!) \((event.type)!) coming up at \(eventTime)"
     localNotification.alertBody = notificationMessage
     
     
@@ -54,7 +54,7 @@ func setNotification (event: Lesson){
     UIApplication.shared.scheduleLocalNotification(localNotification)
     
     // DEBUG print out currently scheduled notifications
-    print(UIApplication.shared.scheduledLocalNotifications!)
+    // print(UIApplication.shared.scheduledLocalNotifications!)
 }
 
 // Account for the default UMT time, which is giving wrong date regardless of how the timezone is set!!!
