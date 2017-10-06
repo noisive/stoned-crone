@@ -115,7 +115,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     }
     
     @objc private func textUpdated() {
-        if ((usernameField.text?.characters.count)! > 0 && (passwordField.text?.characters.count)! > 0) {
+        if ((usernameField.text?.count)! > 0 && (passwordField.text?.count)! > 0) {
             errorLabel.text = ""
         }
     }
@@ -227,7 +227,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     }
     
     @objc private func buttonClicked() {
-        if ((usernameField.text?.characters.count)! > 0 && (passwordField.text?.characters.count)! > 0) {
+        if ((usernameField.text?.count)! > 0 && (passwordField.text?.count)! > 0) {
             attemptLogin();
         } else {
             errorLabel.text = "Username & Password required"

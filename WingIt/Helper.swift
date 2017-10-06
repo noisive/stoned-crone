@@ -14,7 +14,7 @@ import Foundation
 // @param the event struct to be used.
 func setNotification (event: Lesson){
     
-    let minsBeforeNotification = 15
+    let minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
     
     // Get Monday's date, then transform fire date based on lesson's weekday
     var dateFormatter = DateFormatter()
