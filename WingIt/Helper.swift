@@ -38,6 +38,11 @@ func setNotification (event: Lesson){
     
     let localNotification = UILocalNotification()
     localNotification.timeZone = TimeZone(identifier: "NZST")
+    
+    // first check notification isn't in the past. if it is, skip the rest.
+    if notificationTimeAndDate < Date(){
+        return
+    }
     localNotification.fireDate = notificationTimeAndDate
     localNotification.soundName = UILocalNotificationDefaultSoundName
     
@@ -50,7 +55,6 @@ func setNotification (event: Lesson){
     localNotification.alertBody = notificationMessage
     
     
-    //set the notification
     UIApplication.shared.scheduleLocalNotification(localNotification)
     
     // DEBUG print out currently scheduled notifications
