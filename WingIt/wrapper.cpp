@@ -10,6 +10,7 @@ Timetable timetable;
 
 extern "C" void parseEvents(const char* data) {
     timetable.parseEvents(data);
+    timetable.save();
 }
 
 extern "C" void initTimetable() {
@@ -39,3 +40,5 @@ extern "C" const char* queryResult(int index) {
     
     return strdup(buffer);
 }
+
+
