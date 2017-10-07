@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let fileManager = FileManager.default
         let path = NSHomeDirectory()+"/Library/Caches/data.csv"
         
-        // Resets app if given argument --uitesting, so that tests start from a consistent clean state
+        // Resets app if given argument --resetdata, so that tests start from a consistent clean state
         if CommandLine.arguments.contains("--resetdata") {
             do {
                 try FileManager.default.removeItem(at: NSURL(fileURLWithPath: path) as URL)

@@ -87,6 +87,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                         hourData[dayIndex][hour]?.lesson2 = lesson.uid
                     }
                 }
+                
             }
             dayIndex += 1
         }
@@ -112,7 +113,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         return arr
     }
     
-    func scrollToCurrentDayTime(){
+    func scrollToCurrentDay(){
         
         // First scroll day
         let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
@@ -120,29 +121,9 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
         
-        /*
-         Have currently given up on scrolling to the current time on app open.
-         Too hard to figure out what 'cell' should be. Don't even know if the view is populated yet.
-         
-        //Get the current cell object for the current page
-        let cell : DayCollectionViewCell = self.collectionView.cellForItem(at: indexPath) as! DayCollectionViewCell
-        
-        
-        let currentHour = Calendar.current.component(.hour, from: Date())
-        
-        var currentHourCell: IndexPath
-        // Check if time to scroll to is reasonable
-        if currentHour >= 8 {
-            currentHourCell = IndexPath(row: currentHour - 8 + 24, section: 0)
-        } else {
-            currentHourCell = IndexPath(row: 8, section: 0)
-        }
-
-        cell.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
- */
-        
     }
     
+
     
     func createDateLabel() {
         let date = calculateDayLabel()
@@ -182,8 +163,8 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         loadWeekData()
         
-        // Autoscroll to current day and hour on startup
-        scrollToCurrentDayTime()
+        // Autoscroll to current day on startup
+        scrollToCurrentDay()
         
     }
     
@@ -231,8 +212,8 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         cell.tableView.reloadData()
         cell.passDelegate = self
         
+        cell.scrollToCurrentTime()
         //removed
-
         return cell
     }
     
@@ -341,6 +322,8 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
          //       print(format.string(from: mondaysDate))
         
+        // We are basically just adding 13 to UMT... DK how robust it is, but only thing that seems to work.
+        // Test early and late in day.
         let offsetDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!)
         
         return format.string(from: offsetDate)
@@ -352,6 +335,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         let width = collectionView.bounds.size.width
         return Int(ceil(xOffset / width))
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

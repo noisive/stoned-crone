@@ -33,7 +33,7 @@ class DetailView: UITableViewController, MKMapViewDelegate {
         typeLabel.text = getLocalisedType(type: lessonData.type)
         
         let startTime = lessonData.startTime + 8 >= 10 ? "\(lessonData.startTime + 8):00" : "0\(lessonData.startTime + 8):00"
-        let endTime = lessonData.startTime + lessonData.length + 8 >= 10 ? "\(lessonData.startTime + lessonData.length + 8):00" : "0\(lessonData.startTime + lessonData.length + 8):00"
+        let endTime = lessonData.startTime + lessonData.duration + 8 >= 10 ? "\(lessonData.startTime + lessonData.duration + 8):00" : "0\(lessonData.startTime + lessonData.duration + 8):00"
         
         timeLabel.text = "\(startTime) - \(endTime)"
         

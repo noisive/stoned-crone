@@ -28,9 +28,29 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         return 1
     }
     
+    
+    func scrollToCurrentTime(){
+        
+        let currentHour = Calendar.current.component(.hour, from: Date())
+        
+        var currentHourCell: IndexPath
+        // Check if time to scroll to is out of bounds, scroll to min/max if so.
+        if currentHour < 8 {
+            currentHourCell = IndexPath(row: 0, section: 0)
+        }else if currentHour > 21{
+            currentHourCell = IndexPath(row: 21 - 8, section: 0)
+        } else {
+            currentHourCell = IndexPath(row: currentHour - 8, section: 0)
+        }
+        
+        self.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return hourData.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dataPath = hourData[indexPath.row]
@@ -73,6 +93,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
             cell = clashCell
         }
         cell.selectionStyle = .none
+        
         return cell
     }
     
@@ -91,6 +112,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         
         if indexPath.row > 0 {
             switch true {
+                
             // If the cell above is equal, connect the two and remove excess data
             case lessonData?.lesson == hourData[indexPath.row - 1]?.lesson:
                 cell.colorView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 0).isActive = true
