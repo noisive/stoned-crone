@@ -83,7 +83,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hjS-Ao-BND" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2031" y="90"/>
+            <point key="canvasLocation" x="2028" y="27"/>
         </scene>
         <!--Login-->
         <scene sceneID="nyr-PF-7ss">
@@ -443,7 +443,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Monday" id="nbG-qC-Ukr">
-                        <barButtonItem key="leftBarButtonItem" tag="1" title="MenuButton" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
+                        <barButtonItem key="leftBarButtonItem" tag="1" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
                             <color key="tintColor" red="0.058823529411764705" green="0.15686274509803921" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
