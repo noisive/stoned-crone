@@ -149,9 +149,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        // Puts the current date label in
-        createDateLabel()
-        
+
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -165,6 +163,9 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         // Autoscroll to current day on startup
         scrollToCurrentDay()
+        
+        // Puts the current date label in
+        createDateLabel()
         
     }
     
