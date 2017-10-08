@@ -34,10 +34,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var doneButton: UIButton!
     
     @objc let errorColor: UIColor = UIColor(rgb: 0xFF0013)
-    @objc let infoColor: UIColor = UIColor(rgb: 0x0052FF)
+    @objc let infoColor: UIColor = UIColor(rgb: 0x000000)
     
     @objc let webCheckError = "document.getElementsByClassName('sv-panel-danger').length > 0;"
     
@@ -188,27 +187,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 // Here we can pass on the output timetable for one week with the printed date.
                 print(json)
                 parseEvents(json.cString(using: String.Encoding.utf8));
-                
-//                /// _________________________________________ EXAMPLE CPP LIB USAGE
-//                
-//                let date = Date()
-//                let formatter = DateFormatter()
-//                
-//                formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
-//                
-//                let today = formatter.string(from: date)
-//                
-//                let cstr = getEventsByDate(today.cString(using: String.Encoding.utf8), 0)
-//                
-//                let str = String(cString: cstr!)
-//                
-//                free(UnsafeMutablePointer(mutating: cstr)) // We must free the memory that C++ created for the pointer.
-//                
-//                print("\(str)")
-//                
-//                print("NUM EVENTS = \(numEvents("2017-10-02".cString(using: String.Encoding.utf8)))")
-//                
-//                /// _________________________________________
  
                 errorLabel.text = "Done!"
                 
