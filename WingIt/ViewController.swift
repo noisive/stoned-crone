@@ -26,7 +26,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     let numberOfDaysInSection = 7
     
     var hourData = [[(lesson: CLong?, lesson2: CLong?)?]](repeating: [(lesson: CLong?, lesson2: CLong?)?](repeating: nil, count: 14), count: 7)
- 
+    
     /** Adds the events retrieved from the C++ lib into the correct timeslots. */
     func loadWeekData() {
         let date = Date()
@@ -34,8 +34,8 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
         
-        // Get current weekday as int, with Mon represented by 0
-       let todayDay = Calendar.current.component(.weekday, from: date) - 2 // normally US Date, starts with sun at 0.
+        // Get current weekday as int, with Mon represented by 1
+        let todayDay = getDayOfWeek()
         
         // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
         UIApplication.shared.cancelAllLocalNotifications()
@@ -45,12 +45,12 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         while (dayIndex < numberOfDaysInSection) {
             
             
-            let searchDate = Calendar.current.date(byAdding: .day, value: (-todayDay) + dayIndex, to: date)!
+            let searchDate = Calendar.current.date(byAdding: .day, value: (todayDay)! + dayIndex, to: date)!
             
             for event in getEventsForDay(date: formatter.string(from: searchDate)) {
                 
                 let eventArr = event.components(separatedBy: ",")
-            
+                
                 //Define all data from CSV file and cast to correct data type.
                 let uid = CLong(eventArr[0])!
                 let dayNumber = Int(eventArr[1])! - 1 //Minus 1 as Monday should be 0
@@ -68,17 +68,17 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let eventDate = formatter.date(from: eventDateString)
                 
                 let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
-                //let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
+                
                 
                 setNotification(event: lesson)
-
                 
-      
+                
+                
                 
                 let hour = lesson.startTime!
                 
                 self.lessonData.append(lesson)
-
+                
                 // Create array spots for each hour a class runs for (i.e. 2 hour tutorial gets two cells)
                 for hoursIntoClass in 0..<lesson.duration! {
                     if (self.hourData[dayIndex][hour + hoursIntoClass]?.lesson == nil) {
@@ -93,7 +93,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         }
         
         self.collectionView.reloadData()
-
+        
     }
     
     /** Retrieves the events for a given date from the C++ library. */
@@ -119,11 +119,11 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
         self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
         
-        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
+        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()! - 1]
         
     }
     
-
+    
     
     func createDateLabel() {
         let date = calculateDayLabel()
@@ -149,14 +149,14 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-
+        
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         loadWeekData()
@@ -191,7 +191,12 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         let todayDate = Date()
         let myCalendar = Calendar(identifier: .gregorian)
         let weekDay = myCalendar.component(.weekday, from: todayDate)
-        return weekDay - 2
+        // Weekday 1 is sunday, we want to return sunday as 7
+        if weekDay == 1 {
+            return 7
+        }else{
+            return weekDay - 2
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -297,13 +302,14 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         if dayIndex < numberOfDaysInSection {
             self.navigationItem.title = dayArray[dayIndex]
         }
-    
+        
         createDateLabel()
     }
     
     // FEATURE Will also have to change if we are extending the number of days.
+    // Currently labels by getting most recent monday, adding offset to that.
     func calculateDayLabel() -> String {
-
+        
         // Gives date of most recent Monday
         let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
         
@@ -314,14 +320,6 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         format.dateFormat = "dd/MM"
         let offset = getCurrentXPage()
         
-        /*
-         is affecting monday... also 0. So don't use.
-        // Before anything has loaded, this was 0. Change to today's date
-        if offset < 0{
-            offset = Calendar.current.component(.weekday, from: Date()) - 2
-        }*/
-        
-         //       print(format.string(from: mondaysDate))
         
         // We are basically just adding 13 to UMT... DK how robust it is, but only thing that seems to work.
         // Test early and late in day.
