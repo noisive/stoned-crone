@@ -35,8 +35,13 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
         
+<<<<<<< HEAD
         // Gives date of most recent Monday
         let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+=======
+        // Get current weekday as int, with Mon represented by 0
+       let todayDay = Calendar.current.component(.weekday, from: date) - 2 // normally US Date, starts with sun at 0.
+>>>>>>> master
         
         // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
         UIApplication.shared.cancelAllLocalNotifications()
@@ -44,6 +49,10 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         var dayIndex = 0;
         
         while (dayIndex < numberOfDaysInSection) {
+<<<<<<< HEAD
+=======
+            
+>>>>>>> master
             
             // Data is stored with Monday = 0
             let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
@@ -69,7 +78,11 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let eventDate = formatter.date(from: eventDateString)
                 
                 let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
+<<<<<<< HEAD
                 
+=======
+                //let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
+>>>>>>> master
                 
                 setNotification(event: lesson)
                 
@@ -79,7 +92,11 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let hour = lesson.startTime!
                 
                 self.lessonData.append(lesson)
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> master
                 // Create array spots for each hour a class runs for (i.e. 2 hour tutorial gets two cells)
                 for hoursIntoClass in 0..<lesson.duration! {
                     if (self.hourData[dayIndex][hour + hoursIntoClass]?.lesson == nil) {
@@ -120,12 +137,20 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         let indexPath = IndexPath(item: self.getDayOfWeek()! - 1, section: 0)
         self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
         
+<<<<<<< HEAD
         self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()! - 1]
+=======
+        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
+>>>>>>> master
         
     }
     
+
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> master
     func createDateLabel() {
         let date = calculateDayLabel()
         let dateLabel : UIBarButtonItem = {
@@ -152,7 +177,11 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> master
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -221,11 +250,29 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         cell.tableView.reloadData()
         cell.passDelegate = self
         
+<<<<<<< HEAD
         // Scroll to current time if app has just loaded, otherwise scroll new cell to same time as current one.
         if thisIsFirstLoad {
             cell.scrollToCurrentTime()
             thisIsFirstLoad = false
         }else{
+=======
+        cell.scrollToCurrentTime()
+        //removed
+        return cell
+    }
+    
+    /*
+    // Change neighbouring cells to currently scrolled-to hour
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //get current offset of cell
+        
+        //Left and righ
+        //scrollView.contentOffset.x
+    
+        //collectionView.selectItem(at: <#T##IndexPath?#>, animated: <#T##Bool#>, scrollPosition: <#T##UICollectionViewScrollPosition#>)
+        
+>>>>>>> master
         
             //Get the current cell object for the current page
             //let currCell : DayCollectionViewCell = collectionView.cellForItem(at: IndexPath(row: getCurrentXPage(), section: 0)) as! DayCollectionViewCell
@@ -273,10 +320,19 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         if dayIndex < numberOfDaysInSection {
             self.navigationItem.title = dayArray[dayIndex]
         }
+<<<<<<< HEAD
         
         createDateLabel()
     }
     
+=======
+    
+        createDateLabel()
+    }
+    
+    // FEATURE Will also have to change if we are extending the number of days.
+    func calculateDayLabel() -> String {
+>>>>>>> master
 
     // FEATURE Will also have to change if we are extending the number of days.
     // Currently labels by getting most recent monday, adding offset to that.

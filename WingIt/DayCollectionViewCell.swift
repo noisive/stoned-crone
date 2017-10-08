@@ -28,6 +28,10 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         return 1
     }
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> master
     func scrollToCurrentTime(){
         
         let currentHour = Calendar.current.component(.hour, from: Date())
@@ -46,7 +50,10 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         
     }
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> master
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return hourData.count
     }
