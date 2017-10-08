@@ -47,10 +47,7 @@ class WingItUITests: XCTestCase {
     
     func testingPlayground(){
         app.launch()
-        
-        
-        
-        let app = XCUIApplication()
+
         let dayviewElement = app/*@START_MENU_TOKEN@*/.otherElements["dayView"]/*[[".otherElements[\"day\"]",".otherElements[\"dayView\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         dayviewElement/*@START_MENU_TOKEN@*/.press(forDuration: 0.7);/*[[".tap()",".press(forDuration: 0.7);"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         dayviewElement.tap()

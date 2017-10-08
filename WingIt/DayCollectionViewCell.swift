@@ -28,7 +28,10 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         return 1
     }
     
+<<<<<<< HEAD
+=======
     
+>>>>>>> master
     func scrollToCurrentTime(){
         
         let currentHour = Calendar.current.component(.hour, from: Date())
@@ -47,6 +50,10 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         
     }
     
+<<<<<<< HEAD
+    
+=======
+>>>>>>> master
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return hourData.count
     }
@@ -157,17 +164,6 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         }
     }
     
-    /*
-    // On scroll, change neighbouring cells to currently scrolled-to hour
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
-
-            let currentOffsetY = self.tableView.contentOffset.y
-            
-            for day in self..visibleCells as! [DayCollectionViewCell] {
-                day.tableView.contentOffset.y = currentOffsetY
-            }
-    }*/
 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

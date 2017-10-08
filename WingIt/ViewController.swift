@@ -20,22 +20,28 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     
     var lessonData = [Lesson]()
     
+    var thisIsFirstLoad = false
+    
     var dateLabel : String = String()
     
     // 7 days if using one week. If you change this, change hourData's initialisation
     let numberOfDaysInSection = 7
     
     var hourData = [[(lesson: CLong?, lesson2: CLong?)?]](repeating: [(lesson: CLong?, lesson2: CLong?)?](repeating: nil, count: 14), count: 7)
- 
+    
     /** Adds the events retrieved from the C++ lib into the correct timeslots. */
     func loadWeekData() {
-        let date = Date()
         let formatter = DateFormatter()
         
         formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
         
+<<<<<<< HEAD
+        // Gives date of most recent Monday
+        let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+=======
         // Get current weekday as int, with Mon represented by 0
        let todayDay = Calendar.current.component(.weekday, from: date) - 2 // normally US Date, starts with sun at 0.
+>>>>>>> master
         
         // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
         UIApplication.shared.cancelAllLocalNotifications()
@@ -43,14 +49,18 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         var dayIndex = 0;
         
         while (dayIndex < numberOfDaysInSection) {
+<<<<<<< HEAD
+=======
             
+>>>>>>> master
             
-            let searchDate = Calendar.current.date(byAdding: .day, value: (-todayDay) + dayIndex, to: date)!
+            // Data is stored with Monday = 0
+            let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
             
             for event in getEventsForDay(date: formatter.string(from: searchDate)) {
                 
                 let eventArr = event.components(separatedBy: ",")
-            
+                
                 //Define all data from CSV file and cast to correct data type.
                 let uid = CLong(eventArr[0])!
                 let dayNumber = Int(eventArr[1])! - 1 //Minus 1 as Monday should be 0
@@ -68,17 +78,25 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let eventDate = formatter.date(from: eventDateString)
                 
                 let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
+<<<<<<< HEAD
+                
+=======
                 //let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
+>>>>>>> master
                 
                 setNotification(event: lesson)
-
                 
-      
+                
+                
                 
                 let hour = lesson.startTime!
                 
                 self.lessonData.append(lesson)
+<<<<<<< HEAD
+                
+=======
 
+>>>>>>> master
                 // Create array spots for each hour a class runs for (i.e. 2 hour tutorial gets two cells)
                 for hoursIntoClass in 0..<lesson.duration! {
                     if (self.hourData[dayIndex][hour + hoursIntoClass]?.lesson == nil) {
@@ -93,7 +111,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         }
         
         self.collectionView.reloadData()
-
+        
     }
     
     /** Retrieves the events for a given date from the C++ library. */
@@ -116,15 +134,23 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     func scrollToCurrentDay(){
         
         // First scroll day
-        let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
+        let indexPath = IndexPath(item: self.getDayOfWeek()! - 1, section: 0)
         self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
         
+<<<<<<< HEAD
+        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()! - 1]
+=======
         self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
+>>>>>>> master
         
     }
     
 
     
+<<<<<<< HEAD
+    
+=======
+>>>>>>> master
     func createDateLabel() {
         let date = calculateDayLabel()
         let dateLabel : UIBarButtonItem = {
@@ -143,20 +169,26 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        thisIsFirstLoad = true
+        
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> master
         
         collectionView.delegate = self
         collectionView.dataSource = self
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         loadWeekData()
@@ -191,7 +223,12 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         let todayDate = Date()
         let myCalendar = Calendar(identifier: .gregorian)
         let weekDay = myCalendar.component(.weekday, from: todayDate)
-        return weekDay - 2
+        // Weekday 1 is sunday, we want to return sunday as 7
+        if weekDay == 1 {
+            return 7
+        }else{
+            return weekDay - 1
+        }
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -213,6 +250,13 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         cell.tableView.reloadData()
         cell.passDelegate = self
         
+<<<<<<< HEAD
+        // Scroll to current time if app has just loaded, otherwise scroll new cell to same time as current one.
+        if thisIsFirstLoad {
+            cell.scrollToCurrentTime()
+            thisIsFirstLoad = false
+        }else{
+=======
         cell.scrollToCurrentTime()
         //removed
         return cell
@@ -228,52 +272,31 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     
         //collectionView.selectItem(at: <#T##IndexPath?#>, animated: <#T##Bool#>, scrollPosition: <#T##UICollectionViewScrollPosition#>)
         
+>>>>>>> master
         
-        //Get the current page
-        if let cellSelected = collectionView.indexPathsForSelectedItems?.first {
-            
-            let currCellIndex = IndexPath(row: cellSelected.row, section: 0)
-            //getCurrentXPage()
-            
             //Get the current cell object for the current page
-            let cell : DayCollectionViewCell = collectionView.cellForItem(at: currCellIndex) as! DayCollectionViewCell
+            //let currCell : DayCollectionViewCell = collectionView.cellForItem(at: IndexPath(row: getCurrentXPage(), section: 0)) as! DayCollectionViewCell
             
-            //could use collectionview.scrolloffest.width divide it by screen width -> round down to number
-            
-            //Get the tableview offeset for the current cell objects tableview
-            let currentOffsetY = cell.tableView.contentOffset.y
-            
-            for day in self.collectionView.visibleCells as! [DayCollectionViewCell] {
-                day.tableView.contentOffset.y = currentOffsetY
-            }
-            
-            /*
-            //Check if left or right cells would be out of bounds
-            var leftCellIndex: IndexPath
-            var rightCellIndex: IndexPath
-            if currCellIndex.row == 0 {
-                leftCellIndex = IndexPath(row: currCellIndex.row, section: 0)
-            }else{
-                leftCellIndex = IndexPath(row: currCellIndex.row - 1, section: 0)
+            //Get the current page
+            if let cellSelected = self.collectionView.indexPathsForVisibleItems.first {
+                
+                let currCellIndex = IndexPath(row: cellSelected.row, section: 0)
+                
+                //Get the current cell object for the current page
+                let currCell : DayCollectionViewCell = collectionView.cellForItem(at: currCellIndex) as! DayCollectionViewCell
+                
+                //Get the tableview offeset for the current cell objects tableview
+                let currentOffsetY = currCell.tableView.contentOffset.y
+                
+                cell.tableView.contentOffset.y = currentOffsetY
                 
             }
-            if currCellIndex.row == numberOfDaysInSection - 1 {
-                rightCellIndex = IndexPath(row: currCellIndex.row, section: 0)
-            }else{
-                rightCellIndex = IndexPath(row: currCellIndex.row + 1, section: 0)
-            }
-            
-            let rightCell : DayCollectionViewCell = collectionView.cellForItem(at: rightCellIndex) as! DayCollectionViewCell
-            let leftCell : DayCollectionViewCell = collectionView.cellForItem(at: leftCellIndex) as! DayCollectionViewCell
-            
-            rightCell.tableView.contentOffset.y = currentOffsetY
-            leftCell.tableView.contentOffset.y = currentOffsetY
- */
-            
-            
         }
         
-    }*/
+        return cell
+    }
+    
+ 
     
     func performSegue(with data: Lesson)  {
         //Perform segue here
@@ -297,13 +320,24 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         if dayIndex < numberOfDaysInSection {
             self.navigationItem.title = dayArray[dayIndex]
         }
+<<<<<<< HEAD
+        
+        createDateLabel()
+    }
+    
+=======
     
         createDateLabel()
     }
     
     // FEATURE Will also have to change if we are extending the number of days.
     func calculateDayLabel() -> String {
+>>>>>>> master
 
+    // FEATURE Will also have to change if we are extending the number of days.
+    // Currently labels by getting most recent monday, adding offset to that.
+    func calculateDayLabel() -> String {
+        
         // Gives date of most recent Monday
         let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
         
@@ -314,14 +348,6 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         format.dateFormat = "dd/MM"
         let offset = getCurrentXPage()
         
-        /*
-         is affecting monday... also 0. So don't use.
-        // Before anything has loaded, this was 0. Change to today's date
-        if offset < 0{
-            offset = Calendar.current.component(.weekday, from: Date()) - 2
-        }*/
-        
-         //       print(format.string(from: mondaysDate))
         
         // We are basically just adding 13 to UMT... DK how robust it is, but only thing that seems to work.
         // Test early and late in day.
