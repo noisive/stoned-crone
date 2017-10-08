@@ -8,10 +8,8 @@
 For more background information, see our [first assignment](https://github.com/noisive/stoned-crone/blob/assignment1/README.md)
 
 ### So what does WingIt do?
-WingIt is a iOS tool for managing University of Otago classes. It uses a webview in the app to log you in to eVision, injects JavaScript to navigate pages, then more JavaScript trickery to pull your timetable out of the webview.
-
-Once it has retrieved your timetable from eVision, it's thrown at a Parser which unjumbles the mess of JavaScript, HTML, & JSON which eVision has kindly messed up in order to display your timetable as easy as possible (albeit with some bad practice thrown in). This Parser also handles saving your sorted time table to your phones internal storage; it's written in C++.
-
+WingIt grabs your university timetable for the week, stores it offline, and displays it in a pleasant user interface with notifications.
+This makes it much easier and more reliable than the current alternatives for keeping track of your classes.
 
 ### Installation
 
@@ -28,6 +26,10 @@ If your timetable for the week has changed compared to the currently loaded week
 Connectivity issues can occasionally mean the app hangs during this process. Clicking cancel and retrying will rectify this.
 
 ### Internal working documention
+
+WingIt is a iOS tool for managing University of Otago classes. It uses a webview in the app to log you in to eVision, injects JavaScript to navigate pages, then more JavaScript trickery to pull your timetable out of the webview.
+
+Once it has retrieved your timetable from eVision, it's thrown at a Parser which unjumbles the mess of JavaScript, HTML, & JSON which eVision has kindly messed up in order to display your timetable as easy as possible (albeit with some bad practice thrown in). This parser also handles saving your sorted time table to your phone's internal storage. It is written in C++.
 
 The data acquisition process is the most important and most likely to break part of the app. The login occurs first in the [UI](stoned-crone/WingIt/LoginViewController.swift) by loading a hidden browser page, obtaining user credentials, and using javascript injection to navigate to the timetable page. The HTML is then scraped for a mangled json object, the text of which is passed to the custom Parser in C++.
 
