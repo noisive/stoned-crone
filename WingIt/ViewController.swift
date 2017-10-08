@@ -227,38 +227,22 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             thisIsFirstLoad = false
         }else{
         
-        //Get the current page
-        if let cellSelected = collectionView.indexPathsForSelectedItems?.first {
-            
-            let currCellIndex = IndexPath(row: cellSelected.row, section: 0)
-            //getCurrentXPage()
-            
             //Get the current cell object for the current page
-            let cell : DayCollectionViewCell = collectionView.cellForItem(at: currCellIndex) as! DayCollectionViewCell
+            //let currCell : DayCollectionViewCell = collectionView.cellForItem(at: IndexPath(row: getCurrentXPage(), section: 0)) as! DayCollectionViewCell
             
-            //could use collectionview.scrolloffest.width divide it by screen width -> round down to number
-            
-            //Get the tableview offeset for the current cell objects tableview
-            let currentOffsetY = cell.tableView.contentOffset.y
-            
-            for day in self.collectionView.visibleCells as! [DayCollectionViewCell] {
-                day.tableView.contentOffset.y = currentOffsetY
-            }
-            
-            /*
-            //Check if left or right cells would be out of bounds
-            var leftCellIndex: IndexPath
-            var rightCellIndex: IndexPath
-            if currCellIndex.row == 0 {
-                leftCellIndex = IndexPath(row: currCellIndex.row, section: 0)
-            }else{
-                leftCellIndex = IndexPath(row: currCellIndex.row - 1, section: 0)
+            //Get the current page
+            if let cellSelected = self.collectionView.indexPathsForVisibleItems.first {
                 
-            }
-            if currCellIndex.row == numberOfDaysInSection - 1 {
-                rightCellIndex = IndexPath(row: currCellIndex.row, section: 0)
-            }else{
-                rightCellIndex = IndexPath(row: currCellIndex.row + 1, section: 0)
+                let currCellIndex = IndexPath(row: cellSelected.row, section: 0)
+                
+                //Get the current cell object for the current page
+                let currCell : DayCollectionViewCell = collectionView.cellForItem(at: currCellIndex) as! DayCollectionViewCell
+                
+                //Get the tableview offeset for the current cell objects tableview
+                let currentOffsetY = currCell.tableView.contentOffset.y
+                
+                cell.tableView.contentOffset.y = currentOffsetY
+                
             }
         }
         
