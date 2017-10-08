@@ -48,7 +48,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             // Data is stored with Monday = 0
             let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
             
-            for event in getEventsForDay(date: formatter.string(from: searchDate)) {
+            for event in getEventsForDate(searchDate: searchDate) {
                 
                 let eventArr = event.components(separatedBy: ",")
                 
@@ -94,7 +94,28 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     }
     
     /** Retrieves the events for a given date from the C++ library. */
-    func getEventsForDay(date: String) -> [String] {
+    func getEventsForDate(searchDate: Date) -> [String]{
+        
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        format.timeZone = TimeZone.init(abbreviation: "NZST")
+        var date = format.string(from: searchDate)
+        
+        // ------------------------------------------------------------------
+        // Temporary change to get based on weekday
+        // FEATURE remove this when more than one week of data is loaded.
+        let searchWeekday: Int = Calendar.current.component(.weekday, from: searchDate) - 2 // - 2 to make monday 0
+        // Gives date of most recent Monday
+        let mondaysDate = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))
+        
+        // Add the day to monday
+        var interval = DateComponents()
+        interval.day = searchWeekday
+        date = format.string(from: Calendar.current.date(byAdding: interval, to: mondaysDate!)!)
+        
+        // End temp change -------------------------------------------------
+        
+        
         var arr = [String]()
         
         let num = queryDate(date.cString(using: String.Encoding.utf8))

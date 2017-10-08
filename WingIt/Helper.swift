@@ -16,6 +16,37 @@ func setNotification (event: Lesson){
     
     let minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
     
+    
+    //---------------------------------------------------------------------------------------------
+    // This section of code has an alternative after it, for if there are multiple weeks of data. Change them when this is implemented. FEATURE
+    
+    // Get Monday's date, then transform fire date based on lesson's weekday
+    var dateFormatter = DateFormatter()
+    let today = Date()
+    let todayWeekday: Int = Calendar.current.component(.weekday, from: today)
+    
+    // Gives date of most recent Monday
+    var mondaysDate: Date {
+        return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+    }
+    
+    // Add the day to monday
+    var interval = DateComponents()
+    interval.day = event.day
+    
+    // Start time plus 7 gives correct hours for before lecture
+    interval.hour = event.startTime + 7
+    interval.minute = 60 - minsBeforeNotification
+    
+    let notificationTimeAndDate = Calendar.current.date(byAdding: interval, to: mondaysDate)!
+    
+    // End weekday date code
+    //-----------------------------------------------------------------------------------------------
+    
+    
+    
+    /* This section of code loads the notification for the actual event date, rather than the weekday. Use this for when multiple weeks are loaded.
+     
     // Add the notification time to the date of the event
     var interval = DateComponents()
     // Start time plus 7 gives correct hours for before lecture
@@ -23,6 +54,8 @@ func setNotification (event: Lesson){
     interval.minute = 60 - minsBeforeNotification
     
     let notificationTimeAndDate = Calendar.current.date(byAdding: interval, to: event.eventDate)!
+     
+ */
     
     let localNotification = UILocalNotification()
     localNotification.timeZone = TimeZone(identifier: "NZST")
