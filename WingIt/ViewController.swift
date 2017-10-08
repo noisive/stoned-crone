@@ -31,13 +31,12 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     
     /** Adds the events retrieved from the C++ lib into the correct timeslots. */
     func loadWeekData() {
-        let date = Date()
         let formatter = DateFormatter()
         
         formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
         
-        // Get current weekday as int, with Mon represented by 1
-        let todayDay = getDayOfWeek()
+        // Gives date of most recent Monday
+        let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
         
         // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
         UIApplication.shared.cancelAllLocalNotifications()
@@ -46,8 +45,8 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         while (dayIndex < numberOfDaysInSection) {
             
-            
-            let searchDate = Calendar.current.date(byAdding: .day, value: (todayDay)! + dayIndex, to: date)!
+            // Data is stored with Monday = 0
+            let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
             
             for event in getEventsForDay(date: formatter.string(from: searchDate)) {
                 
@@ -118,7 +117,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     func scrollToCurrentDay(){
         
         // First scroll day
-        let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
+        let indexPath = IndexPath(item: self.getDayOfWeek()! - 1, section: 0)
         self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
         
         self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()! - 1]
@@ -199,7 +198,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         if weekDay == 1 {
             return 7
         }else{
-            return weekDay - 2
+            return weekDay - 1
         }
     }
     
@@ -262,7 +261,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 rightCellIndex = IndexPath(row: currCellIndex.row + 1, section: 0)
             }
         }
-            
+        
         return cell
     }
     
@@ -294,6 +293,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         createDateLabel()
     }
     
+
     // FEATURE Will also have to change if we are extending the number of days.
     // Currently labels by getting most recent monday, adding offset to that.
     func calculateDayLabel() -> String {
