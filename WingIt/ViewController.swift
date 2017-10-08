@@ -20,6 +20,8 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     
     var lessonData = [Lesson]()
     
+    var thisIsFirstLoad = false
+    
     var dateLabel : String = String()
     
     // 7 days if using one week. If you change this, change hourData's initialisation
@@ -143,6 +145,8 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        thisIsFirstLoad = true
+        
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
@@ -218,21 +222,11 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         cell.tableView.reloadData()
         cell.passDelegate = self
         
-        cell.scrollToCurrentTime()
-        //removed
-        return cell
-    }
-    
-    /*
-    // Change neighbouring cells to currently scrolled-to hour
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //get current offset of cell
-        
-        //Left and righ
-        //scrollView.contentOffset.x
-    
-        //collectionView.selectItem(at: <#T##IndexPath?#>, animated: <#T##Bool#>, scrollPosition: <#T##UICollectionViewScrollPosition#>)
-        
+        // Scroll to current time if app has just loaded, otherwise scroll new cell to same time as current one.
+        if thisIsFirstLoad {
+            cell.scrollToCurrentTime()
+            thisIsFirstLoad = false
+        }else{
         
         //Get the current page
         if let cellSelected = collectionView.indexPathsForSelectedItems?.first {
@@ -267,18 +261,12 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             }else{
                 rightCellIndex = IndexPath(row: currCellIndex.row + 1, section: 0)
             }
-            
-            let rightCell : DayCollectionViewCell = collectionView.cellForItem(at: rightCellIndex) as! DayCollectionViewCell
-            let leftCell : DayCollectionViewCell = collectionView.cellForItem(at: leftCellIndex) as! DayCollectionViewCell
-            
-            rightCell.tableView.contentOffset.y = currentOffsetY
-            leftCell.tableView.contentOffset.y = currentOffsetY
- */
-            
-            
         }
-        
-    }*/
+            
+        return cell
+    }
+    
+ 
     
     func performSegue(with data: Lesson)  {
         //Perform segue here
