@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		061F3E801F8AF09C00BD0D09 /* UIDataHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061F3E7F1F8AF09C00BD0D09 /* UIDataHandling.swift */; };
 		06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* WingItUITests.swift */; };
 		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		061F3E7F1F8AF09C00BD0D09 /* UIDataHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDataHandling.swift; sourceTree = "<group>"; };
 		06934D7A1F86730B00D308BD /* WingItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06934D7C1F86730B00D308BD /* WingItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITests.swift; sourceTree = "<group>"; };
 		06934D7E1F86730B00D308BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 		53F8A00A1EC3D0010001604A /* WingIt */ = {
 			isa = PBXGroup;
 			children = (
+				061F3E7F1F8AF09C00BD0D09 /* UIDataHandling.swift */,
 				06A637F81F7DD15F00C5F15F /* wrapper.cpp */,
 				53F8A00B1EC3D0010001604A /* AppDelegate.swift */,
 				53CDC1E51EDC1EC000A2ED5A /* Views */,
@@ -319,6 +322,7 @@
 				5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */,
 				06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
+				061F3E801F8AF09C00BD0D09 /* UIDataHandling.swift in Sources */,
 				53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

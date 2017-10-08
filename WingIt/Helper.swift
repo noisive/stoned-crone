@@ -91,3 +91,15 @@ func convertUMTtoNZT(current: Date) -> Date{
     return (updated)!
 }
 
+func getDayOfWeek() -> Int? {
+    let todayDate = Date()
+    let myCalendar = Calendar(identifier: .gregorian)
+    let weekDay = myCalendar.component(.weekday, from: todayDate)
+    // Weekday 1 is sunday, we want to return sunday as 7
+    if weekDay == 1 {
+        return 7
+    }else{
+        return weekDay - 1
+    }
+}
+

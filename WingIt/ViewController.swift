@@ -29,114 +29,14 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     
     var hourData = [[(lesson: CLong?, lesson2: CLong?)?]](repeating: [(lesson: CLong?, lesson2: CLong?)?](repeating: nil, count: 14), count: 7)
     
-    /** Adds the events retrieved from the C++ lib into the correct timeslots. */
-    func loadWeekData() {
-        let formatter = DateFormatter()
-        
-        formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
-        
-        // Gives date of most recent Monday
-        let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        
-        // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
-        UIApplication.shared.cancelAllLocalNotifications()
-        
-        var dayIndex = 0;
-        
-        while (dayIndex < numberOfDaysInSection) {
-            
-            // Data is stored with Monday = 0
-            let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
-            
-            for event in getEventsForDate(searchDate: searchDate) {
-                
-                let eventArr = event.components(separatedBy: ",")
-                
-                //Define all data from CSV file and cast to correct data type.
-                let uid = CLong(eventArr[0])!
-                let dayNumber = Int(eventArr[1])! - 1 //Minus 1 as Monday should be 0
-                let startTime = Int(eventArr[2])! - 8
-                let duration = Int(eventArr[3])
-                let types = ViewController.getClassType(classString: eventArr[5])
-                let paperCode = eventArr[6]
-                let paperName = eventArr[7]
-                let latitude = Double(eventArr[8])
-                let longitude = Double(eventArr[9])
-                let roomCode = eventArr[10]
-                let roomName = eventArr[11]
-                let eventDateString = eventArr[13]
-                
-                let eventDate = formatter.date(from: eventDateString)
-                
-                let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
-                
-                setNotification(event: lesson)
-                
-                let hour = lesson.startTime!
-                
-                self.lessonData.append(lesson)
-
-                // Create array spots for each hour a class runs for (i.e. 2 hour tutorial gets two cells)
-                for hoursIntoClass in 0..<lesson.duration! {
-                    if (self.hourData[dayIndex][hour + hoursIntoClass]?.lesson == nil) {
-                        hourData[dayIndex][hour + hoursIntoClass] = (lesson: lesson.uid, nil)
-                    } else {
-                        hourData[dayIndex][hour]?.lesson2 = lesson.uid
-                    }
-                }
-                
-            }
-            dayIndex += 1
-        }
-        
-        self.collectionView.reloadData()
-        
-    }
     
-    /** Retrieves the events for a given date from the C++ library. */
-    func getEventsForDate(searchDate: Date) -> [String]{
-        
-        let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd"
-        format.timeZone = TimeZone.init(abbreviation: "NZST")
-        var date = format.string(from: searchDate)
-        
-        // ------------------------------------------------------------------
-        // Temporary change to get based on weekday
-        // FEATURE remove this when more than one week of data is loaded.
-        let searchWeekday: Int = Calendar.current.component(.weekday, from: searchDate) - 2 // - 2 to make monday 0
-        // Gives date of most recent Monday
-        let mondaysDate = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))
-        
-        // Add the day to monday
-        var interval = DateComponents()
-        interval.day = searchWeekday
-        date = format.string(from: Calendar.current.date(byAdding: interval, to: mondaysDate!)!)
-        
-        // End temp change -------------------------------------------------
-        
-        
-        var arr = [String]()
-        
-        let num = queryDate(date.cString(using: String.Encoding.utf8))
-        var index: Int32 = 0
-        
-        while (index < num) {
-            let cstr = queryResult(index)
-            let str = String(cString: cstr!)
-            free(UnsafeMutablePointer(mutating: cstr)) // We must free the memory that C++ created for the pointer.
-            arr.append(str)
-            index += 1
-        }
-        return arr
-    }
     
     func scrollToCurrentDay(){
         
         // First scroll day
-        let indexPath = IndexPath(item: self.getDayOfWeek()! - 1, section: 0)
+        let indexPath = IndexPath(item: getDayOfWeek()! - 1, section: 0)
         self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
-        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()! - 1]
+        self.navigationItem.title = Constants.Formats.dayArray[getDayOfWeek()! - 1]
 
     }
 
@@ -174,7 +74,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         // Do any additional setup after loading the view, typically from a nib.
         
-        loadWeekData()
+        loadWeekData(VC: self)
         
         // Autoscroll to current day on startup
         scrollToCurrentDay()
@@ -184,35 +84,6 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
     }
     
-    
-    
-    static func getClassType(classString: String) -> classType {
-        switch classString {
-        case "Lecture":
-            return .lecture
-        case "Practical":
-            return .practical
-        case "Computer Lab":
-            return .lab
-        case "Tutorial":
-            return .tutorial
-        default:
-            print("Error, unknown class type. Return default color: lecture")
-            return .lecture
-        }
-    }
-    
-    func getDayOfWeek() -> Int? {
-        let todayDate = Date()
-        let myCalendar = Calendar(identifier: .gregorian)
-        let weekDay = myCalendar.component(.weekday, from: todayDate)
-        // Weekday 1 is sunday, we want to return sunday as 7
-        if weekDay == 1 {
-            return 7
-        }else{
-            return weekDay - 1
-        }
-    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
