@@ -5,7 +5,7 @@
 
 ##### **WingIt** is an app for keeping track of your University of Otago timetable
 
-For more background information, see our [first assignment](ProjectInfo.md)
+For more background information, see our [first assignment](https://github.com/noisive/stoned-crone/blob/assignment1/README.md)
 
 ### So what does WingIt do?
 WingIt is a iOS tool for managing University of Otago classes. It uses a webview in the app to log you in to eVision, injects JavaScript to navigate pages, then more JavaScript trickery to pull your timetable out of the webview.
@@ -39,3 +39,11 @@ Once the data is extracted into structs for each [timetable event](stoned-crone/
 
 Each time the app starts up, [swift calls](stoned-crone/blob/master/WingIt/AppDelegate.swift#L47) initiate the C++ CSV loader, which restores the offline data to an accessible form.  
 Swift then recreates its representation of the timetables by calling accessor methods on the data. It then loads and presents this to the user.
+
+
+
+
+##### Why "stoned-crone"?
+Greek Mythology has 3 crones working on the tapestry of life, that can see the past and future. They have the "vision".
+"e" is a colloquial term for MDMA, or ecstacy, a narcotic.
+Hence, "e-Vision" = "stoned-crone"
