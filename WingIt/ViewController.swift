@@ -34,14 +34,15 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
         
-       let todayDay = Calendar.current.component(.weekday, from: date) - 2 // US Date, starts with sun at 0. We are changing to mon at 1?
+        // Get current weekday as int, with Mon represented by 0
+       let todayDay = Calendar.current.component(.weekday, from: date) - 2 // normally US Date, starts with sun at 0.
         
         // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
         UIApplication.shared.cancelAllLocalNotifications()
         
         var dayIndex = 0;
         
-        while (dayIndex < 7) {
+        while (dayIndex < numberOfDaysInSection) {
             
             
             let searchDate = Calendar.current.date(byAdding: .day, value: (-todayDay) + dayIndex, to: date)!
@@ -66,7 +67,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 
                 let eventDate = formatter.date(from: eventDateString)
                 
-                let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
+                let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
                 //let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, length: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, latitude: latitude!, longitude: longitude!)
                 
                 setNotification(event: lesson)
@@ -77,15 +78,16 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
                 let hour = lesson.startTime!
                 
                 self.lessonData.append(lesson)
-                let iterations = lesson.length!
-                
-                for i in 0..<iterations {
-                    if (self.hourData[dayIndex][hour + i]?.lesson == nil) {
-                        hourData[dayIndex][hour + i] = (lesson: lesson.uid, nil)
+
+                // Create array spots for each hour a class runs for (i.e. 2 hour tutorial gets two cells)
+                for hoursIntoClass in 0..<lesson.duration! {
+                    if (self.hourData[dayIndex][hour + hoursIntoClass]?.lesson == nil) {
+                        hourData[dayIndex][hour + hoursIntoClass] = (lesson: lesson.uid, nil)
                     } else {
                         hourData[dayIndex][hour]?.lesson2 = lesson.uid
                     }
                 }
+                
             }
             dayIndex += 1
         }
@@ -111,7 +113,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         return arr
     }
     
-    func scrollToCurrentDayTime(){
+    func scrollToCurrentDay(){
         
         // First scroll day
         let indexPath = IndexPath(item: self.getDayOfWeek()!, section: 0)
@@ -119,63 +121,12 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
         self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()!]
         
-        /*
-         Have currently given up on scrolling to the current time on app open.
-         Too hard to figure out what 'cell' should be. Don't even know if the view is populated yet.
-         
-        //Get the current cell object for the current page
-        let cell : DayCollectionViewCell = self.collectionView.cellForItem(at: indexPath) as! DayCollectionViewCell
-        
-        
-        let currentHour = Calendar.current.component(.hour, from: Date())
-        
-        var currentHourCell: IndexPath
-        // Check if time to scroll to is reasonable
-        if currentHour >= 8 {
-            currentHourCell = IndexPath(row: currentHour - 8 + 24, section: 0)
-        } else {
-            currentHourCell = IndexPath(row: 8, section: 0)
-        }
-        
-        
-        cell.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
- */
-        
     }
     
-    
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if self.revealViewController() != nil {
-            menuButton.target = self.revealViewController()
-            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        }
-        
-        // Puts the current date label in
-        calculateDayLabel()
-        
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
 
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        loadWeekData()
-        
-        // Autoscroll to current day and hour on startup
-        scrollToCurrentDayTime()
-        
-    }
     
-    func createDateLabel(date: String) {
+    func createDateLabel() {
+        let date = calculateDayLabel()
         let dateLabel : UIBarButtonItem = {
             let label = UILabel()
             label.text = date
@@ -187,6 +138,38 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         }()
         self.navigationItem.rightBarButtonItem = dateLabel
     }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if self.revealViewController() != nil {
+            menuButton.target = self.revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+        
+
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        loadWeekData()
+        
+        // Autoscroll to current day on startup
+        scrollToCurrentDay()
+        
+        // Puts the current date label in
+        createDateLabel()
+        
+    }
+    
+    
     
     static func getClassType(classString: String) -> classType {
         switch classString {
@@ -230,8 +213,8 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         cell.tableView.reloadData()
         cell.passDelegate = self
         
+        cell.scrollToCurrentTime()
         //removed
-
         return cell
     }
     
@@ -315,11 +298,11 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             self.navigationItem.title = dayArray[dayIndex]
         }
     
-        calculateDayLabel()
+        createDateLabel()
     }
     
     // FEATURE Will also have to change if we are extending the number of days.
-    func calculateDayLabel() {
+    func calculateDayLabel() -> String {
 
         // Gives date of most recent Monday
         let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
@@ -340,9 +323,11 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
          //       print(format.string(from: mondaysDate))
         
+        // We are basically just adding 13 to UMT... DK how robust it is, but only thing that seems to work.
+        // Test early and late in day.
         let offsetDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!)
         
-        createDateLabel(date: format.string(from: offsetDate))
+        return format.string(from: offsetDate)
     }
     
     
@@ -351,6 +336,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         let width = collectionView.bounds.size.width
         return Int(ceil(xOffset / width))
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
