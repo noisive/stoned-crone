@@ -34,6 +34,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var storePWSwitch: UISwitch!
+    @IBOutlet weak var storePWLabel: UILabel!
     
     @objc let errorColor: UIColor = UIColor(rgb: 0xFF0013)
     @objc let infoColor: UIColor = UIColor(rgb: 0x000000)
