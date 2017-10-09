@@ -1,0 +1,136 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 HelveticaNeue;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green116\blue0;\red170\green13\blue145;
+\red92\green38\blue153;\red46\green13\blue110;\red28\green0\blue207;\red63\green110\blue116;\red58\green62\blue68;
+\red237\green236\blue236;\red22\green25\blue31;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c0;\csgenericrgb\c0\c45600\c0;\csgenericrgb\c66500\c5200\c56900;
+\csgenericrgb\c35900\c14900\c60100;\csgenericrgb\c18100\c5200\c43100;\csgenericrgb\c11000\c0\c81000;\csgenericrgb\c24700\c43100\c45600;\cssrgb\c29412\c30980\c33725;
+\cssrgb\c94510\c94118\c94118;\cssrgb\c11373\c12941\c16078;\csgray\c100000;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Frida's iphone: success. 10.3.3, iphone 5\
+\
+\pard\tx543\pardeftab543\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf2 \CocoaLigature0         \cf3 // Autoscroll to current hour on startup\
+\cf2         \cf4 let\cf2  currentHour = \cf5 Calendar\cf2 .\cf5 current\cf2 .\cf6 component\cf2 (.\cf6 hour\cf2 , from: \cf5 Date\cf2 ())\
+        \
+        \cf4 let\cf2  currentHourCell = \cf5 IndexPath\cf2 (row: currentHour - \cf7 8\cf2 , section: \cf7 0\cf2 )\
+        \
+        cell.\cf8 tableView\cf2 .\cf6 scrollToRow\cf2 (at: currentHourCell, at: .\cf6 top\cf2 , animated: \cf4 true\cf2 )\
+\
+\
+UIViewController has descendent UITableView with method scrolltorow\
+view - collection view - daycells - tableview\
+\
+\
+Problem: after loading the timetable and getting the json, when it gets passed to the c++ it becomes blank. Possibly due to reusing the variable? Because it works ok for the date section?\
+\
+Notice period is the number of minutes before an event that the notification will fire\
+\
+\pard\pardeftab720\sl300\partightenfactor0
+
+\f2\fs24 \cf9 \cb10 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \outl0\strokewidth0 \strokec9 you would need to get that lesson cell's \'93dayCell\'94 by calling collectionView.cellForRowAt( IndexPath (item: \{DayNumOfCellYouWant\}, section: 0) and then with that cell you can access the tableview for that day. (.tableView)\
+\
+Once you have that tableview you can then get the lesson cell by calling tableView.cellForRowAt(IndexPath(\{LessonCellIndex\}, section: 0). Now that you have a reference to that lesson cell you can modify of call functions related to that cell\cb1 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf11 \strokec11 \
+\pard\pardeftab720\sl300\partightenfactor0
+\cf9 \cb10 \strokec9 let dayOfCellYouWant = 4 // Friday\
+        let lessonCellIndex = 2 // 09:00\
+        \
+        let indexPathForDay = IndexPath(item: dayOfCellYouWant, section: 0)\
+        \
+        let dayCell : DayCollectionViewCell = collectionView.cellForItem(at: indexPathForDay) as! DayCollectionViewCell\
+        \
+        let indexPathForLessonCell = IndexPath(row: lessonCellIndex, section: 0)\
+        \
+        let lessonCellReference = dayCell.tableView.cellForRow(at: indexPathForLessonCell) as! TimetableCell\
+        \
+        //Now you have lesson cell reference you can do things to that specific cell\
+        lessonCellReference.timeLabel.text = "Yay it changed"\
+\
+cells are dequed when not on screen and they are re-used when they come back on\
+\
+\
+\
+\pard\tx543\pardeftab543\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf3 \cb12 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 AppDelegate goes through init stages. Sets document directiory, application object.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 This is during AppDelegate creation.
+\f0\fs24 \cf0 \
+\
+
+\f1\fs22 \cf3 App eventually launches.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 AppDelegate.application is called.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 If there is no data, the initial view is set to the login screen.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 Otherwise, C's initTimetable() (aka timetable.restore()) is called.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 The timetable is reset, which clears all timetable memory.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 A parser is created, but the contructer does nothing.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 Parser creats a timetable.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 Parses csv database and creates ttEvent from each line.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 A unique identifier for the event is made.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 Events are added to eventList
+\f0\fs24 \cf0 \
+\
+
+\f1\fs22 \cf3 This is all happening within AppDelegate.application() constructor. Does all initialisation.
+\f0\fs24 \cf0 \
+\
+\
+
+\f1\fs22 \cf3 ViewController:
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3     Contains collectionView, declared at start.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3     Array of lessons.
+\f0\fs24 \cf0 \
+\
+
+\f1\fs22 \cf3 viewDidLoad sets up the sidebar menu.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3 the ViewController is the delegate and data source for the collectionView
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3     
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3     getEventsForDay will return an array of strings of the components of each event.
+\f0\fs24 \cf0 \
+
+\f1\fs22 \cf3     This is converted into an eventArray in loadweekdata.
+\f0\fs24 \cf0 \
+\
+
+\f1\fs22 \cf3 Viecontroller's collectionview deques a cell and sets its data when it comes into view.\
+\
+\
+\
+\
+Login details are stored securely in the iOS device's keychain, with the help of an open-source 3rd party library.}
