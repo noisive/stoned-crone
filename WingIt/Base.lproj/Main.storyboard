@@ -166,13 +166,13 @@
                                         <rect key="frame" x="177" y="121.5" width="20" height="20"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remeber login details?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-PE-o4j">
-                                        <rect key="frame" x="95.5" y="228" width="184" height="22"/>
+                                        <rect key="frame" x="95.5" y="248" width="184" height="22"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZZF-fX-oiF">
-                                        <rect key="frame" x="299.5" y="223" width="27.5" height="31"/>
+                                        <rect key="frame" x="299.5" y="243" width="27.5" height="31"/>
                                         <connections>
                                             <action selector="storePWSwitchToggled:" destination="PM4-zz-bZM" eventType="valueChanged" id="oN1-1g-3Ig"/>
                                         </connections>
@@ -195,7 +195,7 @@
                                     <constraint firstItem="kyS-PE-o4j" firstAttribute="centerY" secondItem="ZZF-fX-oiF" secondAttribute="centerY" id="YGj-bI-PRY"/>
                                     <constraint firstItem="HIl-wc-waP" firstAttribute="centerY" secondItem="hDN-j8-zPN" secondAttribute="centerY" id="dzs-sD-PFV"/>
                                     <constraint firstItem="kyS-PE-o4j" firstAttribute="centerX" secondItem="hDN-j8-zPN" secondAttribute="centerX" id="i02-b4-6NK"/>
-                                    <constraint firstItem="kyS-PE-o4j" firstAttribute="top" secondItem="CVd-jW-wzG" secondAttribute="bottom" constant="10" id="lsF-ZD-DAz"/>
+                                    <constraint firstItem="kyS-PE-o4j" firstAttribute="top" secondItem="CVd-jW-wzG" secondAttribute="bottom" constant="30" id="lsF-ZD-DAz"/>
                                     <constraint firstItem="w1j-HK-9bc" firstAttribute="leading" secondItem="hDN-j8-zPN" secondAttribute="leading" constant="20" id="seg-av-lhM"/>
                                     <constraint firstItem="ZZF-fX-oiF" firstAttribute="leading" secondItem="kyS-PE-o4j" secondAttribute="trailing" constant="20" id="yQy-PJ-AQ6"/>
                                     <constraint firstAttribute="height" constant="264" id="zmu-lZ-TTy"/>

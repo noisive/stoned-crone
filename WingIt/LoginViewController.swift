@@ -89,10 +89,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        usernameField.isHidden = true
-        passwordField.isHidden = true
-        loginButton.isHidden = true
-        spinner.startAnimating()
+        hideLoginFields()
         webView.delegate = self
         webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
         
@@ -128,13 +125,29 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         }
     }
     
-    @objc func loginReset(reason:String) {
-        webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
+    @objc func displayLoginFields(){
         usernameField.isHidden = false
         passwordField.isHidden = false
         loginButton.isHidden = false
         spinner.isHidden = true
         spinner.stopAnimating()
+        storePWSwitch.isHidden = false
+        storePWLabel.isHidden = false
+
+    }
+    @objc func hideLoginFields(){
+        usernameField.isHidden = true
+        passwordField.isHidden = true
+        loginButton.isHidden = true
+        storePWSwitch.isHidden = true
+        storePWLabel.isHidden = true
+        spinner.isHidden = false
+        spinner.startAnimating()
+    }
+    
+    @objc func loginReset(reason:String) {
+        webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
+        displayLoginFields()
         passwordField.text = ""
         errorLabel.textColor = errorColor
         errorLabel.text = "\(reason)"
@@ -166,11 +179,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             
             if (header == "" && !once) {
                 errorLabel.text = "Enter your eVision details"
-                usernameField.isHidden = false
-                passwordField.isHidden = false
-                loginButton.isHidden = false
-                spinner.stopAnimating()
-                spinner.isHidden = true
+                displayLoginFields()
                 once = true
             }
             
@@ -233,11 +242,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             //PWIsStored = false
             // unstore credentials.
         }
-        usernameField.isHidden = true
-        passwordField.isHidden = true
-        loginButton.isHidden = true
-        spinner.isHidden = false
-        spinner.startAnimating()
+        hideLoginFields()
         errorLabel.textColor = infoColor
         errorLabel.text = "Logging you in"
         webView.stringByEvaluatingJavaScript(from: webClickLogin)
