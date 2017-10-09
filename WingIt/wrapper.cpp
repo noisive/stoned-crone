@@ -42,3 +42,17 @@ extern "C" const char* queryResult(int index) {
 }
 
 
+extern "C" const char* getFirstEventDate() {
+    
+    std::string data = "";
+    
+    size_t bufferSize = 20;
+    
+    data = timetable.getFirstEventDateString();
+    
+    char buffer[bufferSize];
+    
+    snprintf(buffer, sizeof(buffer), "%s", data.c_str());
+    
+    return strdup(buffer);
+}

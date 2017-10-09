@@ -34,6 +34,10 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var storePWSwitch: UISwitch!
+    @IBOutlet weak var storePWLabel: UILabel!
+    
+    var PWIsStored = false
     
     @objc let errorColor: UIColor = UIColor(rgb: 0xFF0013)
     @objc let infoColor: UIColor = UIColor(rgb: 0x000000)
@@ -85,10 +89,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        usernameField.isHidden = true
-        passwordField.isHidden = true
-        loginButton.isHidden = true
-        spinner.startAnimating()
+        hideLoginFields()
         webView.delegate = self
         webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
         
@@ -97,6 +98,15 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         usernameField.addTarget(self, action: #selector(self.textUpdated), for: .editingChanged)
         passwordField.addTarget(self, action: #selector(self.textUpdated), for: .editingChanged)
         passwordField.delegate = self
+        storePWSwitch.addTarget(self, action: #selector(storePWSwitchToggled(_:)), for: UIControlEvents.valueChanged)
+        
+        // Check if details have been stored
+        if retrieveStoredUsername().characters.count > 0 {
+            PWIsStored = true
+            storePWSwitch.setOn(true, animated: false)
+        }
+    }
+    @IBAction func storePWSwitchToggled(_ sender: UISwitch) {
     }
     
     override func didReceiveMemoryWarning() {
@@ -119,13 +129,29 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         }
     }
     
-    @objc func loginReset(reason:String) {
-        webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
+    @objc func displayLoginFields(){
         usernameField.isHidden = false
         passwordField.isHidden = false
         loginButton.isHidden = false
         spinner.isHidden = true
         spinner.stopAnimating()
+        storePWSwitch.isHidden = false
+        storePWLabel.isHidden = false
+
+    }
+    @objc func hideLoginFields(){
+        usernameField.isHidden = true
+        passwordField.isHidden = true
+        loginButton.isHidden = true
+        storePWSwitch.isHidden = true
+        storePWLabel.isHidden = true
+        spinner.isHidden = false
+        spinner.startAnimating()
+    }
+    
+    @objc func loginReset(reason:String) {
+        webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
+        displayLoginFields()
         passwordField.text = ""
         errorLabel.textColor = errorColor
         errorLabel.text = "\(reason)"
@@ -157,11 +183,14 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             
             if (header == "" && !once) {
                 errorLabel.text = "Enter your eVision details"
-                usernameField.isHidden = false
-                passwordField.isHidden = false
-                loginButton.isHidden = false
-                spinner.stopAnimating()
-                spinner.isHidden = true
+                displayLoginFields()
+                if PWIsStored{
+                    usernameField.text = retrieveStoredUsername()
+                    usernameField.backgroundColor = UIColor.yellow
+                    passwordField.text = retrieveStoredPassword()
+                    passwordField.backgroundColor = UIColor.yellow
+                    
+                }
                 once = true
             }
             
@@ -217,11 +246,17 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
         let pass:String = passwordField.text!
         webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(pass)';")
-        usernameField.isHidden = true
-        passwordField.isHidden = true
-        loginButton.isHidden = true
-        spinner.isHidden = false
-        spinner.startAnimating()
+        if storePWSwitch.isOn{
+            storeUserPass(username: user, password: pass)
+            PWIsStored = true
+        }else{
+            PWIsStored = false
+            removeStoredUserPass()
+            usernameField.backgroundColor = UIColor.white
+            passwordField.backgroundColor = UIColor.white
+
+        }
+        hideLoginFields()
         errorLabel.textColor = infoColor
         errorLabel.text = "Logging you in"
         webView.stringByEvaluatingJavaScript(from: webClickLogin)
