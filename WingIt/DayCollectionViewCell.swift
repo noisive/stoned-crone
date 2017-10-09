@@ -168,9 +168,11 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         }
     }
     
+    
+    // Programatically set the height of all timetable cells
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 100
+        return 75
     }
     
 }
