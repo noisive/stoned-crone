@@ -103,3 +103,14 @@ func getDayOfWeek() -> Int? {
     }
 }
 
+func storeUserPass(username: String, password: String){
+    print("storing password in keychain")
+}
+
+func retrieveStoredUsername() -> String{
+    return "here you go"
+}
+
+func retrieveStoredPassword() -> String{
+    return "here you go"
+}

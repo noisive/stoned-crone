@@ -192,10 +192,15 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let senderObject = sender as! Lesson
+        if segue.identifier == "refreshSegue" {
+            
+        }else{
+            let senderObject = sender as! Lesson
+            let destinationVC = segue.destination as! DetailView
+            destinationVC.lessonData = senderObject
+        }
         
-        let destinationVC = segue.destination as! DetailView
-        destinationVC.lessonData = senderObject
+
         
     }
   
