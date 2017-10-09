@@ -100,7 +100,11 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         passwordField.delegate = self
         storePWSwitch.addTarget(self, action: #selector(storePWSwitchToggled(_:)), for: UIControlEvents.valueChanged)
         
-        //PWIsStored =
+        // Check if details have been stored
+        if retrieveStoredUsername().characters.count > 0 {
+            PWIsStored = true
+            storePWSwitch.setOn(true, animated: false)
+        }
     }
     @IBAction func storePWSwitchToggled(_ sender: UISwitch) {
     }
@@ -180,6 +184,13 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             if (header == "" && !once) {
                 errorLabel.text = "Enter your eVision details"
                 displayLoginFields()
+                if PWIsStored{
+                    usernameField.text = retrieveStoredUsername()
+                    usernameField.backgroundColor = UIColor.yellow
+                    passwordField.text = retrieveStoredPassword()
+                    passwordField.backgroundColor = UIColor.yellow
+                    
+                }
                 once = true
             }
             
@@ -237,10 +248,13 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(pass)';")
         if storePWSwitch.isOn{
             storeUserPass(username: user, password: pass)
-            //PWIsStored = true
+            PWIsStored = true
         }else{
-            //PWIsStored = false
-            // unstore credentials.
+            PWIsStored = false
+            removeStoredUserPass()
+            usernameField.backgroundColor = UIColor.white
+            passwordField.backgroundColor = UIColor.white
+
         }
         hideLoginFields()
         errorLabel.textColor = infoColor
