@@ -109,8 +109,6 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
             cell.scrollToCurrentTime()
             thisIsFirstLoad = false
         }else{
-            //Get the current cell object for the current page
-            //let currCell : DayCollectionViewCell = collectionView.cellForItem(at: IndexPath(row: getCurrentXPage(), section: 0)) as! DayCollectionViewCell
             
             //Get the current page
             if let cellSelected = self.collectionView.indexPathsForVisibleItems.first {

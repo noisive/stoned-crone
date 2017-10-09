@@ -25,7 +25,24 @@ func loadWeekData(VC: ViewController) {
     while (dayIndex < VC.numberOfDaysInSection) {
         
         // Data is stored with Monday = 0
-        let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
+        var searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
+        
+        // ------------------------------------------------------------------
+        // Temporary change to make data static based on first week in timetable data.
+        // This means the same week of data is displayed every week.
+        // FEATURE remove this when more than one week of data is loaded.
+
+        let firstEventDateCString = getFirstEventDate()
+        let firstEventDateString = String(cString: firstEventDateCString!)
+        free(UnsafeMutablePointer(mutating: firstEventDateCString)) // We must free the memory that C++ created for the pointer.
+        
+        let firstMondaysDate = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: formatter.date(from: firstEventDateString)!))
+        searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: firstMondaysDate!)!
+        
+        
+        // End temp change -------------------------------------------------
+        
+        
         
         for event in getEventsForDate(searchDate: searchDate) {
             
@@ -78,23 +95,9 @@ func getEventsForDate(searchDate: Date) -> [String]{
     let format = DateFormatter()
     format.dateFormat = "yyyy-MM-dd"
     format.timeZone = TimeZone.init(abbreviation: "NZST")
-    var date = format.string(from: searchDate)
+    let date = format.string(from: searchDate)
     
-    // ------------------------------------------------------------------
-    // Temporary change to get based on weekday
-    // FEATURE remove this when more than one week of data is loaded.
-    let searchWeekday: Int = Calendar.current.component(.weekday, from: searchDate) - 2 // - 2 to make monday 0
-    // Gives date of most recent Monday
-    let mondaysDate = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))
-    
-    // Add the day to monday
-    var interval = DateComponents()
-    interval.day = searchWeekday
-    date = format.string(from: Calendar.current.date(byAdding: interval, to: mondaysDate!)!)
-    
-    // End temp change -------------------------------------------------
-    
-    
+   
     var arr = [String]()
     
     let num = queryDate(date.cString(using: String.Encoding.utf8))

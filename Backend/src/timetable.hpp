@@ -55,6 +55,8 @@ class Timetable {
         int merge();
         TimetableEvent getByUID(const char* id);
         void addEvent(const char* event);
+    
+        std::string getFirstEventDateString();
 
         // Persistence
         void save();
