@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -156,50 +155,31 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVd-jW-wzG">
-                                        <rect key="frame" x="165" y="188" width="45" height="30"/>
+                                        <rect key="frame" x="20" y="208" width="335" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Z4a-EJ-Qi1"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Login"/>
                                     </button>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="HIl-wc-waP">
                                         <rect key="frame" x="177" y="121.5" width="20" height="20"/>
                                     </activityIndicatorView>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="storePW" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hbu-Cd-95n" userLabel="storePW">
-                                        <rect key="frame" x="216" y="224" width="51" height="31"/>
-                                        <connections>
-                                            <action selector="storePW:" destination="PM4-zz-bZM" eventType="valueChanged" id="Fd9-Lp-sqP"/>
-                                            <action selector="storePWSwitchAction:" destination="PM4-zz-bZM" eventType="valueChanged" id="IOT-Pf-oEP"/>
-                                        </connections>
-                                    </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Remeber login details?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="apA-OF-9os">
-                                        <rect key="frame" x="30" y="226" width="156" height="27"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="ilB-Zz-Y6M" firstAttribute="top" secondItem="dkB-Uh-avX" secondAttribute="bottom" constant="30" id="9LO-s8-Qb0"/>
-                                    <constraint firstItem="hbu-Cd-95n" firstAttribute="leading" secondItem="apA-OF-9os" secondAttribute="trailing" constant="30" id="CsX-8e-nRT"/>
+                                    <constraint firstAttribute="trailing" secondItem="CVd-jW-wzG" secondAttribute="trailing" constant="20" id="DOT-4o-Abv"/>
                                     <constraint firstAttribute="trailing" secondItem="dkB-Uh-avX" secondAttribute="trailing" constant="20" id="Dfh-53-T3T"/>
-                                    <constraint firstItem="apA-OF-9os" firstAttribute="top" secondItem="CVd-jW-wzG" secondAttribute="bottom" constant="8" id="E0I-Xa-akG"/>
                                     <constraint firstAttribute="trailing" secondItem="w1j-HK-9bc" secondAttribute="trailing" constant="20" id="F36-Nt-t7h"/>
                                     <constraint firstItem="dkB-Uh-avX" firstAttribute="leading" secondItem="hDN-j8-zPN" secondAttribute="leading" constant="20" id="G31-HX-TI4"/>
-                                    <constraint firstItem="apA-OF-9os" firstAttribute="leading" secondItem="hDN-j8-zPN" secondAttribute="leading" constant="30" id="G61-wE-jSD"/>
                                     <constraint firstAttribute="trailing" secondItem="ilB-Zz-Y6M" secondAttribute="trailing" constant="20" id="K9S-Rv-sg4"/>
-                                    <constraint firstItem="CVd-jW-wzG" firstAttribute="top" secondItem="ilB-Zz-Y6M" secondAttribute="bottom" constant="20" id="Nyb-9y-ET5"/>
+                                    <constraint firstItem="CVd-jW-wzG" firstAttribute="top" secondItem="ilB-Zz-Y6M" secondAttribute="bottom" constant="40" id="Nyb-9y-ET5"/>
                                     <constraint firstItem="dkB-Uh-avX" firstAttribute="top" secondItem="w1j-HK-9bc" secondAttribute="bottom" constant="40" id="TxO-0z-D2J"/>
-                                    <constraint firstItem="CVd-jW-wzG" firstAttribute="centerX" secondItem="hDN-j8-zPN" secondAttribute="centerX" id="V82-op-I8k"/>
                                     <constraint firstItem="ilB-Zz-Y6M" firstAttribute="leading" secondItem="hDN-j8-zPN" secondAttribute="leading" constant="20" id="VEP-uQ-8Zi"/>
                                     <constraint firstItem="HIl-wc-waP" firstAttribute="centerX" secondItem="hDN-j8-zPN" secondAttribute="centerX" id="WYz-Ws-Yay"/>
                                     <constraint firstItem="w1j-HK-9bc" firstAttribute="top" secondItem="hDN-j8-zPN" secondAttribute="top" constant="20" id="XfA-FT-yyA"/>
+                                    <constraint firstItem="CVd-jW-wzG" firstAttribute="leading" secondItem="hDN-j8-zPN" secondAttribute="leading" constant="20" id="ZO5-bh-Age"/>
                                     <constraint firstItem="HIl-wc-waP" firstAttribute="centerY" secondItem="hDN-j8-zPN" secondAttribute="centerY" id="dzs-sD-PFV"/>
-                                    <constraint firstItem="apA-OF-9os" firstAttribute="centerY" secondItem="hbu-Cd-95n" secondAttribute="centerY" id="imM-vg-gCs"/>
-                                    <constraint firstItem="hbu-Cd-95n" firstAttribute="top" secondItem="CVd-jW-wzG" secondAttribute="bottom" constant="6" id="ozf-id-F4E"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hbu-Cd-95n" secondAttribute="trailing" constant="30" id="q8f-h9-SgB"/>
                                     <constraint firstItem="w1j-HK-9bc" firstAttribute="leading" secondItem="hDN-j8-zPN" secondAttribute="leading" constant="20" id="seg-av-lhM"/>
                                     <constraint firstAttribute="height" constant="264" id="zmu-lZ-TTy"/>
                                 </constraints>
@@ -219,11 +199,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="PWStore" destination="hbu-Cd-95n" id="fDK-OF-np9"/>
                         <outlet property="errorLabel" destination="w1j-HK-9bc" id="lZ1-5k-1Lr"/>
                         <outlet property="loginButton" destination="CVd-jW-wzG" id="csS-AW-C70"/>
                         <outlet property="passwordField" destination="ilB-Zz-Y6M" id="XG8-yT-XSO"/>
-                        <outlet property="rememberLabel" destination="apA-OF-9os" id="rBd-OE-kje"/>
                         <outlet property="spinner" destination="HIl-wc-waP" id="mhe-9b-VV6"/>
                         <outlet property="usernameField" destination="dkB-Uh-avX" id="3c7-3P-KK7"/>
                         <outlet property="webView" destination="1c5-uh-vDW" id="EEv-kz-Xy1"/>
@@ -232,7 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7W-WX-gOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2717.5" y="40.5"/>
+            <point key="canvasLocation" x="2717.5999999999999" y="40.929535232383813"/>
         </scene>
         <!--Monday-->
         <scene sceneID="tne-QT-ifu">
@@ -334,7 +312,6 @@
                                                                     <constraint firstItem="GRZ-Vm-NcG" firstAttribute="top" secondItem="e2G-6h-WCv" secondAttribute="bottom" constant="8" id="Oi5-qh-S8c"/>
                                                                     <constraint firstAttribute="trailing" secondItem="GRZ-Vm-NcG" secondAttribute="trailing" constant="8" id="Th4-gc-3NE"/>
                                                                     <constraint firstItem="YcQ-zg-9Fm" firstAttribute="leading" secondItem="BfX-FO-0JK" secondAttribute="leading" constant="8" id="k5w-4N-zSW"/>
-                                                                    <constraint firstItem="GRZ-Vm-NcG" firstAttribute="leading" secondItem="YcQ-zg-9Fm" secondAttribute="trailing" id="q9x-qe-5jT"/>
                                                                 </constraints>
                                                             </tableViewCellContentView>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -490,17 +467,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Monday" id="nbG-qC-Ukr">
-                        <leftBarButtonItems>
-                            <barButtonItem tag="1" image="Refresh_icon" largeContentSizeImage="Menu" id="f44-3T-TU7" userLabel="Refreshbutton">
-                                <color key="tintColor" red="0.058823529409999999" green="0.15686274510000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <segue destination="PM4-zz-bZM" kind="presentation" identifier="refreshSegue" id="Jdz-ub-GUh"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem tag="1" enabled="NO" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9" userLabel="Hidden unused Menu Button">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </barButtonItem>
-                        </leftBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" tag="1" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
+                            <color key="tintColor" red="0.058823529411764705" green="0.15686274509803921" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="1cv-MI-B9i" id="O8J-xM-9kF"/>
@@ -733,10 +702,8 @@
     </scenes>
     <resources>
         <image name="Menu" width="24" height="24"/>
-        <image name="Refresh_icon" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jdz-ub-GUh"/>
-        <segue reference="PXH-wo-5I9"/>
+        <segue reference="0yp-yP-7EJ"/>
     </inferredMetricsTieBreakers>
 </document>
