@@ -42,7 +42,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     /* HEX colors used within the Login View for errors, info, and autofill. */
     @objc let errorColor: UIColor = UIColor(rgb: 0xFF0013)
     @objc let infoColor: UIColor = UIColor(rgb: 0x000000)
-    @objc let autoFill: UIColor = UIColor(rgb: 0xFAFFBD)
+    @objc let autoFillColor: UIColor = UIColor(rgb: 0xFAFFBD)
     
     @objc let webCheckError = "document.getElementsByClassName('sv-panel-danger').length > 0;"
     
@@ -110,7 +110,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     }
     @IBAction func storePWSwitchToggled(_ sender: UISwitch) {
         if (!sender.isOn) {
-            passwordField.text = ""
             passwordField.backgroundColor = UIColor.white
             passwordField.becomeFirstResponder()
             usernameField.backgroundColor = UIColor.white
@@ -194,9 +193,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 displayLoginFields()
                 if PWIsStored {
                     usernameField.text = retrieveStoredUsername()
-                    usernameField.backgroundColor = autoFill
+                    usernameField.backgroundColor = autoFillColor
                     passwordField.text = retrieveStoredPassword()
-                    passwordField.backgroundColor = autoFill
+                    passwordField.backgroundColor = autoFillColor
                 }
                 once = true
             }
