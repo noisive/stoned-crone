@@ -39,8 +39,10 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     
     var PWIsStored = false
     
+    /* HEX colors used within the Login View for errors, info, and autofill. */
     @objc let errorColor: UIColor = UIColor(rgb: 0xFF0013)
     @objc let infoColor: UIColor = UIColor(rgb: 0x000000)
+    @objc let autoFill: UIColor = UIColor(rgb: 0xFAFFBD)
     
     @objc let webCheckError = "document.getElementsByClassName('sv-panel-danger').length > 0;"
     
@@ -107,6 +109,12 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         }
     }
     @IBAction func storePWSwitchToggled(_ sender: UISwitch) {
+        if (!sender.isOn) {
+            passwordField.text = ""
+            passwordField.backgroundColor = UIColor.white
+            passwordField.becomeFirstResponder()
+            usernameField.backgroundColor = UIColor.white
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -184,12 +192,11 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             if (header == "" && !once) {
                 errorLabel.text = "Enter your eVision details"
                 displayLoginFields()
-                if PWIsStored{
+                if PWIsStored {
                     usernameField.text = retrieveStoredUsername()
-                    usernameField.backgroundColor = UIColor.yellow
+                    usernameField.backgroundColor = autoFill
                     passwordField.text = retrieveStoredPassword()
-                    passwordField.backgroundColor = UIColor.yellow
-                    
+                    passwordField.backgroundColor = autoFill
                 }
                 once = true
             }
@@ -214,7 +221,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 //webView.stringByEvaluatingJavaScript(from: loadNextWeek)
                 
                 // Here we can pass on the output timetable for one week with the printed date.
-                print(json)
+                //print(json)
                 parseEvents(json.cString(using: String.Encoding.utf8));
  
                 errorLabel.text = "Done!"
@@ -246,10 +253,10 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
         let pass:String = passwordField.text!
         webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(pass)';")
-        if storePWSwitch.isOn{
+        if storePWSwitch.isOn {
             storeUserPass(username: user, password: pass)
             PWIsStored = true
-        }else{
+        } else {
             PWIsStored = false
             removeStoredUserPass()
             usernameField.backgroundColor = UIColor.white
