@@ -171,7 +171,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZZF-fX-oiF">
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZZF-fX-oiF">
                                         <rect key="frame" x="299.5" y="243" width="27.5" height="31"/>
                                         <connections>
                                             <action selector="storePWSwitchToggled:" destination="PM4-zz-bZM" eventType="valueChanged" id="oN1-1g-3Ig"/>

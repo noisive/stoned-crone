@@ -104,13 +104,34 @@ func getDayOfWeek() -> Int? {
 }
 
 func storeUserPass(username: String, password: String){
-    print("storing password in keychain")
+    var saveSuccessful: Bool = KeychainWrapper.standard.set(username, forKey: "WingItStoredUser")
+    if saveSuccessful{
+        saveSuccessful = KeychainWrapper.standard.set(password, forKey: "WingItStoredPass")
+    }
+    if saveSuccessful{
+        print("saved username and password successfully!")
+    }
 }
 
+func removeStoredUserPass(){
+    KeychainWrapper.standard.removeObject(forKey: "WingItStoredUser")
+    KeychainWrapper.standard.removeObject(forKey: "WingItStoredPass")
+    
+}
 func retrieveStoredUsername() -> String{
-    return "here you go"
+    // Check unwrap is not nil (ie no value stored)
+    if let name = KeychainWrapper.standard.string(forKey: "WingItStoredUser"){
+        return name
+    }else{
+        return ""
+    }
 }
 
 func retrieveStoredPassword() -> String{
-    return "here you go"
+     // Check unwrap is not nil (ie no value stored)
+    if let pass = KeychainWrapper.standard.string(forKey: "WingItStoredPass"){
+        return pass
+    }else{
+        return ""
+}
 }

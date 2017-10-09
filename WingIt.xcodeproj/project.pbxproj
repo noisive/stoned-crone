@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		061F3E801F8AF09C00BD0D09 /* UIDataHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061F3E7F1F8AF09C00BD0D09 /* UIDataHandling.swift */; };
+		062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9441F8B414B005F350E /* KeychainWrapper.swift */; };
+		062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */; };
 		06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* WingItUITests.swift */; };
 		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; };
@@ -44,6 +46,10 @@
 
 /* Begin PBXFileReference section */
 		061F3E7F1F8AF09C00BD0D09 /* UIDataHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDataHandling.swift; sourceTree = "<group>"; };
+		062EB9431F8B414B005F350E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		062EB9441F8B414B005F350E /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
 		06934D7A1F86730B00D308BD /* WingItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06934D7C1F86730B00D308BD /* WingItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITests.swift; sourceTree = "<group>"; };
 		06934D7E1F86730B00D308BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,6 +99,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		062EB9421F8B414B005F350E /* SwiftKeychainWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				062EB9431F8B414B005F350E /* Info.plist */,
+				062EB9441F8B414B005F350E /* KeychainWrapper.swift */,
+				062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */,
+				062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */,
+			);
+			path = SwiftKeychainWrapper;
+			sourceTree = "<group>";
+		};
 		06934D7B1F86730B00D308BD /* WingItUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,13 +117,6 @@
 				06934D7E1F86730B00D308BD /* Info.plist */,
 			);
 			path = WingItUITests;
-			sourceTree = "<group>";
-		};
-		53BA20E41EDB8E6E0063E603 /* CSV Parser */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "CSV Parser";
 			sourceTree = "<group>";
 		};
 		53CDC1E41EDC1EB300A2ED5A /* Cells */ = {
@@ -165,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				061F3E7F1F8AF09C00BD0D09 /* UIDataHandling.swift */,
+				06B38A371F82361E009EDC60 /* Helper.swift */,
 				06A637F81F7DD15F00C5F15F /* wrapper.cpp */,
 				53F8A00B1EC3D0010001604A /* AppDelegate.swift */,
 				53CDC1E51EDC1EC000A2ED5A /* Views */,
@@ -178,8 +189,7 @@
 				53C7D03B1EC9B79E00D0BD9C /* SWRevealViewController.h */,
 				53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */,
 				53C7D03A1EC9B79D00D0BD9C /* Project-Bridging-Header.h */,
-				53BA20E41EDB8E6E0063E603 /* CSV Parser */,
-				06B38A371F82361E009EDC60 /* Helper.swift */,
+				062EB9421F8B414B005F350E /* SwiftKeychainWrapper */,
 			);
 			path = WingIt;
 			sourceTree = "<group>";
@@ -307,6 +317,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */,
+				062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */,
 				53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */,
 				53F8A00E1EC3D0010001604A /* ViewController.swift in Sources */,
 				06B38A381F82361E009EDC60 /* Helper.swift in Sources */,
