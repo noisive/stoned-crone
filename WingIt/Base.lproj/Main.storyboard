@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -102,21 +103,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayn-rG-QWd">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="35x-8d-rQk"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="Log in to eVision" id="XKm-2K-n0K">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="l7h-td-XK0">
-                                            <connections>
-                                                <segue destination="QRJ-3s-2Y0" kind="presentation" identifier="CancelLoginSegue" id="PXH-wo-5I9"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDN-j8-zPN">
                                 <rect key="frame" x="0.0" y="201.5" width="375" height="264"/>
                                 <subviews>
@@ -201,6 +187,21 @@
                                     <constraint firstAttribute="height" constant="264" id="zmu-lZ-TTy"/>
                                 </constraints>
                             </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayn-rG-QWd">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="35x-8d-rQk"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Log in to eVision" id="XKm-2K-n0K">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="l7h-td-XK0">
+                                            <connections>
+                                                <segue destination="QRJ-3s-2Y0" kind="presentation" identifier="CancelLoginSegue" id="PXH-wo-5I9"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -487,9 +488,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Monday" id="nbG-qC-Ukr">
-                        <barButtonItem key="leftBarButtonItem" tag="1" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
-                            <color key="tintColor" red="0.058823529411764705" green="0.15686274509803921" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem image="Refresh_icon" id="r4G-vv-p0b" userLabel="Refresh Button">
+                                <color key="tintColor" red="0.058823529409999999" green="0.15686274510000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="PM4-zz-bZM" kind="popoverPresentation" popoverAnchorBarButtonItem="r4G-vv-p0b" id="D7v-BD-djU">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="1" enabled="NO" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="1cv-MI-B9i" id="O8J-xM-9kF"/>
@@ -722,8 +733,10 @@
     </scenes>
     <resources>
         <image name="Menu" width="24" height="24"/>
+        <image name="Refresh_icon" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0yp-yP-7EJ"/>
+        <segue reference="D7v-BD-djU"/>
+        <segue reference="PXH-wo-5I9"/>
     </inferredMetricsTieBreakers>
 </document>
