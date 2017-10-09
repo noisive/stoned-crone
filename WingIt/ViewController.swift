@@ -19,7 +19,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     @IBOutlet var menuButton: UIBarButtonItem!
     
     var lessonData = [Lesson]()
-    
+
     var thisIsFirstLoad = false
     
     var dateLabel : String = String()
@@ -63,7 +63,10 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            
+            // These allow tapping on the timetable view or swiping to close the menu
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
         }
         
         collectionView.delegate = self
@@ -84,6 +87,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         
     }
     
+
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -194,5 +198,6 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
         destinationVC.lessonData = senderObject
         
     }
+  
 }
 
