@@ -37,6 +37,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var storePWSwitch: UISwitch!
     @IBOutlet weak var storePWLabel: UILabel!
     
+    var PWIsStored = false
+    
     @objc let errorColor: UIColor = UIColor(rgb: 0xFF0013)
     @objc let infoColor: UIColor = UIColor(rgb: 0x000000)
     
@@ -99,6 +101,11 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         usernameField.addTarget(self, action: #selector(self.textUpdated), for: .editingChanged)
         passwordField.addTarget(self, action: #selector(self.textUpdated), for: .editingChanged)
         passwordField.delegate = self
+        storePWSwitch.addTarget(self, action: #selector(storePWSwitchToggled(_:)), for: UIControlEvents.valueChanged)
+        
+        //PWIsStored =
+    }
+    @IBAction func storePWSwitchToggled(_ sender: UISwitch) {
     }
     
     override func didReceiveMemoryWarning() {
@@ -219,6 +226,13 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
         let pass:String = passwordField.text!
         webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(pass)';")
+        if storePWSwitch.isOn{
+            storeUserPass(username: user, password: pass)
+            //PWIsStored = true
+        }else{
+            //PWIsStored = false
+            // unstore credentials.
+        }
         usernameField.isHidden = true
         passwordField.isHidden = true
         loginButton.isHidden = true
