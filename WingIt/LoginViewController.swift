@@ -24,6 +24,8 @@ extension UIColor {
     }
 }
 
+
+
 import UIKit
 
 class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate {
@@ -36,6 +38,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var storePWSwitch: UISwitch!
     @IBOutlet weak var storePWLabel: UILabel!
+    
+    
     
     var PWIsStored = false
     
@@ -89,7 +93,12 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @objc var once:Bool = false
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        
+        // Hide keyboard when something else tapped.
+        self.hideKeyboardWhenTappedAround()
         
         hideLoginFields()
         webView.delegate = self
@@ -103,7 +112,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         storePWSwitch.addTarget(self, action: #selector(storePWSwitchToggled(_:)), for: UIControlEvents.valueChanged)
         
         // Check if details have been stored
-        if retrieveStoredUsername().characters.count > 0 {
+        if retrieveStoredUsername().count > 0 {
             PWIsStored = true
             storePWSwitch.setOn(true, animated: false)
         }
