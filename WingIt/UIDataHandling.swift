@@ -54,7 +54,7 @@ func loadWeekData(VC: ViewController) {
             let startTime = Int(eventArr[2])! - 8 // We start the day at 8 am
             let duration = Int(eventArr[3])
             let colour = eventArr[4]
-            let types = getClassType(classString: eventArr[5])
+            let type = eventArr[5]
             let paperCode = eventArr[6]
             let paperName = eventArr[7]
             let latitude = Double(eventArr[8])
@@ -67,7 +67,7 @@ func loadWeekData(VC: ViewController) {
             
             let eventDate = formatter.date(from: eventDateString)
             
-            let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, colour: colour, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
+            let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, colour: colour, code: paperCode, type: type, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
             
             setNotification(event: lesson)
             
@@ -116,18 +116,3 @@ func getEventsForDate(searchDate: Date) -> [String]{
     return arr
 }
 
-func getClassType(classString: String) -> classType {
-    switch classString {
-    case "Lecture":
-        return .lecture
-    case "Practical":
-        return .practical
-    case "Computer Lab":
-        return .lab
-    case "Tutorial":
-        return .tutorial
-    default:
-        print("Error, unknown class type. Return default color: lecture")
-        return .lecture
-    }
-}

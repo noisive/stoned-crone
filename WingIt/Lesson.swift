@@ -8,13 +8,6 @@
 
 import Foundation
 
-enum classType {
-    case lecture
-    case lab
-    case tutorial
-    case practical
-}
-
 struct Lesson {
     
     var uid : CLong!
@@ -22,7 +15,7 @@ struct Lesson {
     var startTime : Int!
     var duration : Int!
     var code : String!
-    var type : classType!
+    var type : String!
     var roomShort : String!
     var roomFull : String!
     var paperName : String!
@@ -32,7 +25,7 @@ struct Lesson {
     var latitude : Double!
     var longitude : Double!
     
-    init(uid: CLong, classID: String, start : Int, duration: Int, colour: String, code: String, type: classType, roomShort: String, roomFull : String, paperName: String, day: Int, eventDate: Date, latitude: Double, longitude: Double) {
+    init(uid: CLong, classID: String, start : Int, duration: Int, colour: String, code: String, type: String, roomShort: String, roomFull : String, paperName: String, day: Int, eventDate: Date, latitude: Double, longitude: Double) {
     //init(uid: CLong, classID: String, start : Int, length: Int, code: String, type: classType, roomShort: String, roomFull : String, paperName: String, day: Int, latitude: Double, longitude: Double) {
         self.uid = uid;
         self.classID = classID

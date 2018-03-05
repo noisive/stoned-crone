@@ -104,8 +104,9 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         return nil
     }
     
-    func setupCell(Appearance cell: TimetableCell, indexPath: IndexPath, type: classType) {
-        cell.colorView.backgroundColor = calculateLessonColor(classType: type)
+    func setupCell(Appearance cell: TimetableCell, indexPath: IndexPath, type: String, colour: String) {
+        
+        cell.colorView.backgroundColor = UIColor(hexString: colour)
         
         let lessonData = hourData[indexPath.row]
         
@@ -141,22 +142,6 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         cellMask.path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: 2, height: 2)).cgPath
         view.layer.mask = cellMask
     }
-    
-    //Returns the color based on what kind of lesson it is
-    func calculateLessonColor(classType: classType) -> UIColor {
-        switch classType {
-        case .lab:
-            return Constants.Colors.labColor
-        case .lecture:
-            return Constants.Colors.lectureColor
-        case .tutorial:
-            return Constants.Colors.tutorialColor
-        case .practical:
-            return Constants.Colors.practicalColor
-        }
-    }
-    
-
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if hourData[indexPath.row] != nil{
