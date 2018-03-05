@@ -14,8 +14,11 @@ import Foundation
 // @param the event struct to be used.
 func setNotification (event: Lesson){
     
-    let minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
-    
+    var minsBeforeNotification = 15 // Default to 15 mins before lecture
+    if isKeyPresentInUserDefaults(key: "noticePeriod"){
+        minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
+    }
+
     
     //---------------------------------------------------------------------------------------------
     // This section of code has an alternative after it, for if there are multiple weeks of data. Change them when this is implemented. FEATURE
@@ -134,6 +137,10 @@ func retrieveStoredPassword() -> String{
     }else{
         return ""
     }
+}
+
+func isKeyPresentInUserDefaults(key: String) -> Bool {
+    return UserDefaults.standard.object(forKey: key) != nil
 }
 
 
