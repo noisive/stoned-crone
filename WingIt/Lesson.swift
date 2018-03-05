@@ -31,7 +31,7 @@ struct Lesson {
         self.classID = classID
         self.startTime = start
         self.duration = duration
-        self.colour = code
+        self.colour = colour
         self.code = code
         self.type = type
         self.roomShort = roomShort

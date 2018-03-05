@@ -72,7 +72,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
                 singleCell.lessonRoom.text = lessonData.roomShort
                 
                 //Setup time table, color and style.
-                setupCell(Appearance: singleCell, indexPath: indexPath, type: lessonData.type)
+                setupCell(Appearance: singleCell, indexPath: indexPath, type: lessonData.type, colour: lessonData.colour)
             }
             singleCell.timeLabel.text = indexPath.row + 8 >= 10 ? "\(8 + indexPath.row):00" : "0\(8 + indexPath.row):00"
             
