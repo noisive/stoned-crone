@@ -38,6 +38,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var storePWSwitch: UISwitch!
     @IBOutlet weak var storePWLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+
     
     
     
@@ -95,6 +97,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     override func viewDidLoad() {
         
         super.viewDidLoad()
+
+        hideCancelOnNoData()
         
         
         // Hide keyboard when something else tapped.
@@ -172,6 +176,19 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         errorLabel.textColor = errorColor
         errorLabel.text = "\(reason)"
     }
+
+    @objc func hideCancelOnNoData() {
+        let fileManager = FileManager.default
+        let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
+        // If we don't have data already.
+        if !fileManager.fileExists(atPath: dataPath) {
+            cancelButton?.isEnabled = false
+            cancelButton?.tintColor = UIColor.clear
+        }else{
+            cancelButton?.isEnabled = true
+            cancelButton?.tintColor = nil
+        }
+    }
     
 //    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
 //        print("CALLED \(String(describing: request.url?.absoluteString))")
@@ -183,6 +200,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
 //        return true
 //    }
     
+   
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if (!webView.isLoading) {
             

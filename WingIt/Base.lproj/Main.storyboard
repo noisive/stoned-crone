@@ -194,7 +194,7 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Log in to eVision" id="XKm-2K-n0K">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="l7h-td-XK0">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="l7h-td-XK0" userLabel="cancelButton">
                                             <connections>
                                                 <segue destination="QRJ-3s-2Y0" kind="presentation" identifier="CancelLoginSegue" id="PXH-wo-5I9"/>
                                             </connections>
@@ -217,6 +217,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="l7h-td-XK0" id="Iyf-CB-rAf"/>
                         <outlet property="errorLabel" destination="w1j-HK-9bc" id="lZ1-5k-1Lr"/>
                         <outlet property="loginButton" destination="CVd-jW-wzG" id="csS-AW-C70"/>
                         <outlet property="passwordField" destination="ilB-Zz-Y6M" id="XG8-yT-XSO"/>
