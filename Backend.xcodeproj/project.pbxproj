@@ -29,7 +29,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
+			dstSubfolderSpec = 11;
 			files = (
 				06A5475C1F7B1D7100967FD7 /* libBackend.a in CopyFiles */,
 			);
@@ -298,9 +298,9 @@
 				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				GCC_C_LANGUAGE_STANDARD = c11;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../**";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -313,9 +313,9 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				GCC_C_LANGUAGE_STANDARD = c11;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../**";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

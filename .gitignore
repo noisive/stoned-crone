@@ -1,3 +1,5 @@
+# Products and derived data from xcode project
+/DerivedData/*
 # Compiled Object files
 ._stoned*
 *.slo

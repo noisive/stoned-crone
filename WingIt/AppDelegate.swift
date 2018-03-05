@@ -19,12 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let fileManager = FileManager.default
-        let path = NSHomeDirectory()+"/Library/Caches/data.csv"
+        let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
         
         // Resets app if given argument --resetdata, so that tests start from a consistent clean state
         if CommandLine.arguments.contains("--resetdata") {
             do {
-                try FileManager.default.removeItem(at: NSURL(fileURLWithPath: path) as URL)
+                try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
             } catch let error as NSError {
                 print("Error: \(error.domain)")
             }
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Bring up different initial view for this test - used for debugging login
         if CommandLine.arguments.contains("--debugLogin") {
             do {
-                try FileManager.default.removeItem(at: NSURL(fileURLWithPath: path) as URL)
+                try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
             } catch let error as NSError {
                 print("Error: \(error.domain)")
             }
@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }else{
             
             // If we don't have data already, prompt for login.
-            if !fileManager.fileExists(atPath: path) {
+            if !fileManager.fileExists(atPath: dataPath) {
                 self.window = UIWindow(frame: UIScreen.main.bounds)
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
