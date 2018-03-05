@@ -80,12 +80,15 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         } else if dataPath?.lesson != nil && dataPath?.lesson2 != nil {
             let clashCell : ClashCell = tableView.dequeueReusableCell(withIdentifier:
                 "ClashCell", for: indexPath) as! ClashCell
-            clashCell.leftLesson.backgroundColor = Constants.Colors.labColor
+           
             
             if let lessonData1 = findData(uid: (dataPath?.lesson)!), let lessonData2 = findData(uid: (dataPath?.lesson2)!) {
                 clashCell.leftLessonLabel.text = lessonData1.code
                 clashCell.rightLessonLabel.text = lessonData2.code
+                clashCell.leftLesson.backgroundColor = UIColor(hexString: lessonData1.colour)
+                clashCell.rightLesson.backgroundColor = UIColor(hexString: lessonData2.colour)
             }
+            
             
             clashCell.timeLabel.text = indexPath.row + 8 >= 10 ? "\(8 + indexPath.row):00" : "0\(8 + indexPath.row):00"
             
