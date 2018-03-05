@@ -30,7 +30,7 @@ class DetailView: UITableViewController, MKMapViewDelegate {
         //Place data into labels
         roomLabel.text = lessonData.roomFull
         nameLabel.text = lessonData.paperName
-        typeLabel.text = getLocalisedType(type: lessonData.type)
+        typeLabel.text = lessonData.type
         
         let startTime = lessonData.startTime + 8 >= 10 ? "\(lessonData.startTime + 8):00" : "0\(lessonData.startTime + 8):00"
         let endTime = lessonData.startTime + lessonData.duration + 8 >= 10 ? "\(lessonData.startTime + lessonData.duration + 8):00" : "0\(lessonData.startTime + lessonData.duration + 8):00"
@@ -56,18 +56,6 @@ class DetailView: UITableViewController, MKMapViewDelegate {
         
         //Add pin to map
         mapView.addAnnotation(pin)
-    }
-    func getLocalisedType(type: classType) -> String {
-        switch type {
-        case .lab:
-            return "Lab"
-        case .tutorial:
-            return "Tutorial"
-        case .lecture:
-            return "Lecture"
-        case .practical:
-            return "Practical"
-        }
     }
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

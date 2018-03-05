@@ -72,7 +72,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
                 singleCell.lessonRoom.text = lessonData.roomShort
                 
                 //Setup time table, color and style.
-                setupCell(Appearance: singleCell, indexPath: indexPath, type: lessonData.type)
+                setupCell(Appearance: singleCell, indexPath: indexPath, type: lessonData.type, colour: lessonData.colour)
             }
             singleCell.timeLabel.text = indexPath.row + 8 >= 10 ? "\(8 + indexPath.row):00" : "0\(8 + indexPath.row):00"
             
@@ -80,12 +80,15 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         } else if dataPath?.lesson != nil && dataPath?.lesson2 != nil {
             let clashCell : ClashCell = tableView.dequeueReusableCell(withIdentifier:
                 "ClashCell", for: indexPath) as! ClashCell
-            clashCell.leftLesson.backgroundColor = Constants.Colors.labColor
+           
             
             if let lessonData1 = findData(uid: (dataPath?.lesson)!), let lessonData2 = findData(uid: (dataPath?.lesson2)!) {
                 clashCell.leftLessonLabel.text = lessonData1.code
                 clashCell.rightLessonLabel.text = lessonData2.code
+                clashCell.leftLesson.backgroundColor = UIColor(hexString: lessonData1.colour)
+                clashCell.rightLesson.backgroundColor = UIColor(hexString: lessonData2.colour)
             }
+            
             
             clashCell.timeLabel.text = indexPath.row + 8 >= 10 ? "\(8 + indexPath.row):00" : "0\(8 + indexPath.row):00"
             
@@ -104,8 +107,9 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         return nil
     }
     
-    func setupCell(Appearance cell: TimetableCell, indexPath: IndexPath, type: classType) {
-        cell.colorView.backgroundColor = calculateLessonColor(classType: type)
+    func setupCell(Appearance cell: TimetableCell, indexPath: IndexPath, type: String, colour: String) {
+        
+        cell.colorView.backgroundColor = UIColor(hexString: colour)
         
         let lessonData = hourData[indexPath.row]
         
@@ -141,22 +145,6 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         cellMask.path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: 2, height: 2)).cgPath
         view.layer.mask = cellMask
     }
-    
-    //Returns the color based on what kind of lesson it is
-    func calculateLessonColor(classType: classType) -> UIColor {
-        switch classType {
-        case .lab:
-            return Constants.Colors.labColor
-        case .lecture:
-            return Constants.Colors.lectureColor
-        case .tutorial:
-            return Constants.Colors.tutorialColor
-        case .practical:
-            return Constants.Colors.practicalColor
-        }
-    }
-    
-
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if hourData[indexPath.row] != nil{

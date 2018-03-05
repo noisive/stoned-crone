@@ -14,8 +14,11 @@ import Foundation
 // @param the event struct to be used.
 func setNotification (event: Lesson){
     
-    let minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
-    
+    var minsBeforeNotification = 15 // Default to 15 mins before lecture
+    if isKeyPresentInUserDefaults(key: "noticePeriod"){
+        minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
+    }
+
     
     //---------------------------------------------------------------------------------------------
     // This section of code has an alternative after it, for if there are multiple weeks of data. Change them when this is implemented. FEATURE
@@ -47,15 +50,15 @@ func setNotification (event: Lesson){
     
     /* This section of code loads the notification for the actual event date, rather than the weekday. Use this for when multiple weeks are loaded.
      
-    // Add the notification time to the date of the event
-    var interval = DateComponents()
-    // Start time plus 7 gives correct hours for before lecture
-    interval.hour = event.startTime + 7
-    interval.minute = 60 - minsBeforeNotification
-    
-    let notificationTimeAndDate = Calendar.current.date(byAdding: interval, to: event.eventDate)!
+     // Add the notification time to the date of the event
+     var interval = DateComponents()
+     // Start time plus 7 gives correct hours for before lecture
+     interval.hour = event.startTime + 7
+     interval.minute = 60 - minsBeforeNotification
      
- */
+     let notificationTimeAndDate = Calendar.current.date(byAdding: interval, to: event.eventDate)!
+     
+     */
     
     let localNotification = UILocalNotification()
     localNotification.timeZone = TimeZone(identifier: "NZST")
@@ -72,7 +75,7 @@ func setNotification (event: Lesson){
         eventTime -= 12
     }
     // Message example: COSC345 Lecture coming up at 11
-    let notificationMessage = "\((event.code)!) \((event.type)!) coming up at \(eventTime)"
+    let notificationMessage = "\((event.code)!) \((event.type)!) starts at \(eventTime) in \((event.roomShort)!)"
     localNotification.alertBody = notificationMessage
     
     
@@ -128,12 +131,58 @@ func retrieveStoredUsername() -> String{
 }
 
 func retrieveStoredPassword() -> String{
-     // Check unwrap is not nil (ie no value stored)
+    // Check unwrap is not nil (ie no value stored)
     if let pass = KeychainWrapper.standard.string(forKey: "WingItStoredPass"){
         return pass
     }else{
         return ""
+    }
 }
+
+func isKeyPresentInUserDefaults(key: String) -> Bool {
+    return UserDefaults.standard.object(forKey: key) != nil
+}
+
+
+// Usage: let color2 = UIColor(rgb: 0xFFFFFF)
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
+    // Convert string (format "#FFFFFF") to hex int (format 0xFFFFFF)
+    convenience init(hexString:String) {
+        let hexString:NSString = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased() as NSString
+        let scanner            = Scanner(string: hexString as String)
+        
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        
+        var color:UInt32 = 0
+        scanner.scanHexInt32(&color)
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        
+        self.init(red:red, green:green, blue:blue, alpha:1)
+    }
 }
 
 // Hides keyboard if another part of the screen is tapped.
@@ -148,3 +197,4 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
