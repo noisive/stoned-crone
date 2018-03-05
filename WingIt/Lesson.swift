@@ -28,15 +28,17 @@ struct Lesson {
     var paperName : String!
     var day : Int!
     var eventDate: Date
+    var colour : String!
     var latitude : Double!
     var longitude : Double!
     
-    init(uid: CLong, classID: String, start : Int, duration: Int, code: String, type: classType, roomShort: String, roomFull : String, paperName: String, day: Int, eventDate: Date, latitude: Double, longitude: Double) {
+    init(uid: CLong, classID: String, start : Int, duration: Int, colour: String, code: String, type: classType, roomShort: String, roomFull : String, paperName: String, day: Int, eventDate: Date, latitude: Double, longitude: Double) {
     //init(uid: CLong, classID: String, start : Int, length: Int, code: String, type: classType, roomShort: String, roomFull : String, paperName: String, day: Int, latitude: Double, longitude: Double) {
         self.uid = uid;
         self.classID = classID
         self.startTime = start
         self.duration = duration
+        self.colour = code
         self.code = code
         self.type = type
         self.roomShort = roomShort

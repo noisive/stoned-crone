@@ -51,8 +51,9 @@ func loadWeekData(VC: ViewController) {
             //Define all data from CSV file and cast to correct data type.
             let uid = CLong(eventArr[0])!
             let dayNumber = Int(eventArr[1])! - 1 //Minus 1 as Monday should be 0
-            let startTime = Int(eventArr[2])! - 8
+            let startTime = Int(eventArr[2])! - 8 // We start the day at 8 am
             let duration = Int(eventArr[3])
+            let colour = eventArr[4]
             let types = getClassType(classString: eventArr[5])
             let paperCode = eventArr[6]
             let paperName = eventArr[7]
@@ -60,11 +61,13 @@ func loadWeekData(VC: ViewController) {
             let longitude = Double(eventArr[9])
             let roomCode = eventArr[10]
             let roomName = eventArr[11]
+            let building = eventArr[12]
             let eventDateString = eventArr[13]
+
             
             let eventDate = formatter.date(from: eventDateString)
             
-            let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
+            let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, colour: colour, code: paperCode, type: types, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
             
             setNotification(event: lesson)
             
