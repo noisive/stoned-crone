@@ -29,7 +29,7 @@
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
+			dstSubfolderSpec = 11;
 			files = (
 				06A5475C1F7B1D7100967FD7 /* libBackend.a in CopyFiles */,
 			);

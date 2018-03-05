@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Backend.xcodeproj">
+      location = "group:/home/cshome/w/wwarren/345/stoned-crone/Backend.xcodeproj">
    </FileRef>
    <FileRef
       location = "container:WingIt.xcodeproj">

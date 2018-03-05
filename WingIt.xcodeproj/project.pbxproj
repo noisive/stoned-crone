@@ -10,9 +10,9 @@
 		061F3E801F8AF09C00BD0D09 /* UIDataHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061F3E7F1F8AF09C00BD0D09 /* UIDataHandling.swift */; };
 		062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9441F8B414B005F350E /* KeychainWrapper.swift */; };
 		062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */; };
+		068301AD204D5C3600080EB2 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 068301AE204D5C3600080EB2 /* libBackend.a */; };
 		06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* WingItUITests.swift */; };
 		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
-		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
 		06B38A381F82361E009EDC60 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* Helper.swift */; };
 		06D37CD71F873C7F009318AC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06D37CD61F873C7F009318AC /* Settings.bundle */; };
@@ -35,6 +35,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		068301B3204D5C4D00080EB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 068301AF204D5C4D00080EB2 /* Backend.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 06A547191F7B12B400967FD7;
+			remoteInfo = Backend;
+		};
+		068301B6204D5CAC00080EB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 068301AF204D5C4D00080EB2 /* Backend.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 06A547181F7B12B400967FD7;
+			remoteInfo = Backend;
+		};
 		06934D7F1F86730B00D308BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 53F8A0001EC3D0010001604A /* Project object */;
@@ -50,11 +64,12 @@
 		062EB9441F8B414B005F350E /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
+		068301AE204D5C3600080EB2 /* libBackend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBackend.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		068301AF204D5C4D00080EB2 /* Backend.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Backend.xcodeproj; path = "/home/cshome/w/wwarren/345/stoned-crone/Backend.xcodeproj"; sourceTree = "<absolute>"; };
 		06934D7A1F86730B00D308BD /* WingItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06934D7C1F86730B00D308BD /* WingItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITests.swift; sourceTree = "<group>"; };
 		06934D7E1F86730B00D308BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		069827641F87041000777DAD /* LoginDebugController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDebugController.swift; sourceTree = "<group>"; };
-		06A5475D1F7B1D9600967FD7 /* libBackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBackend.a; path = "../../Library/Developer/Xcode/DerivedData/Project-faabexjzkhonsfdsetxpryushahl/Build/Products/Debug-iphonesimulator/libBackend.a"; sourceTree = "<group>"; };
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
 		06B38A371F82361E009EDC60 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		06D37CD61F873C7F009318AC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -92,7 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */,
+				068301AD204D5C3600080EB2 /* libBackend.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +123,14 @@
 				062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */,
 			);
 			path = SwiftKeychainWrapper;
+			sourceTree = "<group>";
+		};
+		068301B0204D5C4D00080EB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				068301B4204D5C4D00080EB2 /* libBackend.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		06934D7B1F86730B00D308BD /* WingItUITests */ = {
@@ -154,6 +177,7 @@
 		53F89FFF1EC3D0010001604A = {
 			isa = PBXGroup;
 			children = (
+				068301AF204D5C4D00080EB2 /* Backend.xcodeproj */,
 				06D37CD61F873C7F009318AC /* Settings.bundle */,
 				53F8A00A1EC3D0010001604A /* WingIt */,
 				06934D7B1F86730B00D308BD /* WingItUITests */,
@@ -197,7 +221,7 @@
 		9D76A468FCF7B393CEA24F56 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				06A5475D1F7B1D9600967FD7 /* libBackend.a */,
+				068301AE204D5C3600080EB2 /* libBackend.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -234,6 +258,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				068301B7204D5CAC00080EB2 /* PBXTargetDependency */,
 			);
 			name = WingIt;
 			productName = Project;
@@ -275,6 +300,12 @@
 			mainGroup = 53F89FFF1EC3D0010001604A;
 			productRefGroup = 53F8A0091EC3D0010001604A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 068301B0204D5C4D00080EB2 /* Products */;
+					ProjectRef = 068301AF204D5C4D00080EB2 /* Backend.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				53F8A0071EC3D0010001604A /* WingIt */,
@@ -282,6 +313,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		068301B4204D5C4D00080EB2 /* libBackend.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBackend.a;
+			remoteRef = 068301B3204D5C4D00080EB2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		06934D781F86730B00D308BD /* Resources */ = {
@@ -342,6 +383,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		068301B7204D5CAC00080EB2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Backend;
+			targetProxy = 068301B6204D5CAC00080EB2 /* PBXContainerItemProxy */;
+		};
 		06934D801F86730B00D308BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 53F8A0071EC3D0010001604A /* WingIt */;
