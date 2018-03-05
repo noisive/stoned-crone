@@ -72,7 +72,7 @@ func setNotification (event: Lesson){
         eventTime -= 12
     }
     // Message example: COSC345 Lecture coming up at 11
-    let notificationMessage = "\((event.code)!) \((event.type)!) coming up at \(eventTime)"
+    let notificationMessage = "\((event.code)!) \((event.type)!) starts at \(eventTime) in \((event.roomShort)!)"
     localNotification.alertBody = notificationMessage
     
     
