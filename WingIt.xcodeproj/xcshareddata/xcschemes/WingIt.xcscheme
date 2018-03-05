@@ -14,6 +14,34 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "06A547181F7B12B400967FD7"
+               BuildableName = "libBackend.a"
+               BlueprintName = "Backend"
+               ReferencedContainer = "container:Backend.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "06A547181F7B12B400967FD7"
+               BuildableName = "libBackend.a"
+               BlueprintName = "Backend"
+               ReferencedContainer = "container:../345/stoned-crone/Backend.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "53F8A0071EC3D0010001604A"
                BuildableName = "WingIt.app"
                BlueprintName = "WingIt"

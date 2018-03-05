@@ -1,6 +1,6 @@
 os: osx
 language: objective-c
-xcode_workspace: Project.xcworkspace # path to your xcodeproj folder
+xcode_workspace: WingIt.xcworkspace # path to your xcodeproj folder
 osx_image: xcode9.1
 
 branches:
