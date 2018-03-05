@@ -92,9 +92,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
         hideCancelOnNoData()
+        
         hideLoginFields()
         webView.delegate = self
         webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
@@ -167,17 +167,18 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         errorLabel.textColor = errorColor
         errorLabel.text = "\(reason)"
     }
-        @objc func hideCancelOnNoData() {
-            let fileManager = FileManager.default
-            let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
-            // If we don't have data already.
-            if !fileManager.fileExists(atPath: dataPath) {
-                cancelButton.isEnabled = false
-                cancelButton.tintColor = UIColor.clear
-            }else{
-                cancelButton.isEnabled = true
-                cancelButton.tintColor = nil
-            }
+
+    @objc func hideCancelOnNoData() {
+        let fileManager = FileManager.default
+        let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
+        // If we don't have data already.
+        if !fileManager.fileExists(atPath: dataPath) {
+            cancelButton?.isEnabled = false
+            cancelButton?.tintColor = UIColor.clear
+        }else{
+            cancelButton?.isEnabled = true
+            cancelButton?.tintColor = nil
+        }
     }
     
 //    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
