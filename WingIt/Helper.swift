@@ -47,15 +47,15 @@ func setNotification (event: Lesson){
     
     /* This section of code loads the notification for the actual event date, rather than the weekday. Use this for when multiple weeks are loaded.
      
-    // Add the notification time to the date of the event
-    var interval = DateComponents()
-    // Start time plus 7 gives correct hours for before lecture
-    interval.hour = event.startTime + 7
-    interval.minute = 60 - minsBeforeNotification
-    
-    let notificationTimeAndDate = Calendar.current.date(byAdding: interval, to: event.eventDate)!
+     // Add the notification time to the date of the event
+     var interval = DateComponents()
+     // Start time plus 7 gives correct hours for before lecture
+     interval.hour = event.startTime + 7
+     interval.minute = 60 - minsBeforeNotification
      
- */
+     let notificationTimeAndDate = Calendar.current.date(byAdding: interval, to: event.eventDate)!
+     
+     */
     
     let localNotification = UILocalNotification()
     localNotification.timeZone = TimeZone(identifier: "NZST")
@@ -128,12 +128,32 @@ func retrieveStoredUsername() -> String{
 }
 
 func retrieveStoredPassword() -> String{
-     // Check unwrap is not nil (ie no value stored)
+    // Check unwrap is not nil (ie no value stored)
     if let pass = KeychainWrapper.standard.string(forKey: "WingItStoredPass"){
         return pass
     }else{
         return ""
+    }
 }
+
+
+// Usage: let color2 = UIColor(rgb: 0xFFFFFF)
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
 }
 
 // Hides keyboard if another part of the screen is tapped.
@@ -148,3 +168,4 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
