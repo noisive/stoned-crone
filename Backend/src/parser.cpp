@@ -134,14 +134,53 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     return ttEvent;
 }
 
+
+std::string month3CharNameTo2NumString(std::string monthString){
+    std::transform(monthString.begin(), monthString.end(), monthString.begin(), ::tolower);
+    std::string month3Char [] = {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
+    std::string monthNum [] = {"01", "02","03", "04", "05", "06", "07", "08","09", "10", "11", "12"};
+    
+    for (int i=0; i<=sizeof(month3Char) / sizeof(month3Char[0]); i++){
+        if (monthString == month3Char[i]){
+            return monthNum[i];
+        }
+    }
+    return "0xCC";
+}
+
+
 void Parser::getWeekStart() {
     int startIndex = indexOf(this->json, "ng dates ");
     if (this->json.length() >= 12 && startIndex != -1) {
-        std::string date = this->json.substr(startIndex + sizeof("ng dates ") - 1, 12);
-        this->weekStart = std::stoi(date.substr(0, 2) +
-                                    date.substr(4, 2) +
-                                    date.substr(8, 4));
+        // This was the old json format, which stored its date as "Now showing dates 02\/10\/2017 to". New format is "Now showing dates 26\/Mar\/2017 to"
+        /* std::string date = this->json.substr(startIndex + sizeof("ng dates ") - 1, 12); */
+        
+        int dateStringStartIndex = startIndex + sizeof("ng dates ");
+        int dateStringLength = indexOf(this->json, " to")-dateStringStartIndex;
+        std::string dateSlice = this->json.substr(dateStringStartIndex,dateStringLength);
+        
+        // Day number is until first slash pair (have to be escaped, will show up like this in debugger).
+        int slashIndex = indexOf(dateSlice, "\\/");
+        std::string dayIntString = dateSlice.substr(0, slashIndex);
+        // Cut the slash off.
+        dateSlice = dateSlice.substr(slashIndex+2, std::string::npos);
+        
+        std::string monthIntString;
+        // May be in 3 letter format (eg mar, Nov), or may be in two number form.
+        if(indexOf(dateSlice, "\\/") == 3){
+            monthIntString = month3CharNameTo2NumString(dateSlice.substr(0, 3));
+        }else{
+            monthIntString = dateSlice.substr(0,2);
+        }
+        
+        slashIndex = indexOf(dateSlice, "\\/");
+        // npos goes to end position
+        dateSlice = dateSlice.substr(slashIndex+2, std::string::npos);
+        std::string yearIntString = dateSlice.substr(0, 4);
+        // This requires input to be of format dd+mm+yy
+        this->weekStart = std::stoi(dayIntString + monthIntString + yearIntString);
     }
+    std::cout<<weekStart;
 }
 
 std::vector<TimetableEvent> Parser::parseFile(std::string fileName, std::string format) {
@@ -239,7 +278,7 @@ std::vector<TimetableEvent> Parser::parse(const char* data) {
     std::string strData(data);
     return parse(strData);
 }
-
+                                         
 std::vector<TimetableEvent> Parser::parse(std::string data) {
     this->json = data;
 
