@@ -3,13 +3,32 @@
 #include <streambuf>
 #include "timetable.hpp"
 #include "parser.hpp"
+#include <iostream>      /* puts */
+#include <time.h>       /* time_t, struct tm, time, localtime, strftime */
+#include <cstring>
+
+// http://www.cplusplus.com/reference/ctime/strftime/
+// strftime example
+std::string getCurrentDate()
+{
+  time_t rawtime;
+  struct tm * timeinfo;
+  char st [80];
+	
+  time (&rawtime);
+  timeinfo = localtime (&rawtime);
+
+  strftime (st,80,"%y-%m-%d",timeinfo);
+  return std::string(st);
+}
 
 int main(int argc, char** argv) {
     
     // Get the home directory for checking files.
     std::string home = getenv("HOME"); 
     
-    std::ifstream fileStream("./test/ttb.txt");
+    /* std::ifstream fileStream("./test/ttb.txt"); */
+    std::ifstream fileStream("../parserTests/Test html json/easterjson.txt");
     std::string dataString;
 
     fileStream.seekg(0, std::ios::end);   
@@ -34,13 +53,17 @@ int main(int argc, char** argv) {
   
     timetable.restore();
 
-    int numEvents = timetable.queryByDate("2017-09-28");
+    const char * todayDateTime = getCurrentDate().c_str();
+    /* auto todayDateTime = getCurrentDate(); */
+    std::cout << todayDateTime;
+
+    int numEvents = timetable.queryByDate(todayDateTime);
 
     for (int i = 0; i < numEvents; i++) {
         std::cout << timetable.queryResult(i).toString() << std::endl;
     }
 
-    numEvents = timetable.queryByDate("2017-09-27");
+    numEvents = timetable.queryByDate(todayDateTime);
 
     for (int i = 0; i < numEvents; i++) {
         std::cout << timetable.queryResult(i).toString() << std::endl;
@@ -51,3 +74,4 @@ int main(int argc, char** argv) {
 
     return 0;
 }
+
