@@ -198,3 +198,43 @@ extension UIViewController {
     }
 }
 
+func checkBadDateData(){
+    // Resets data if bad date. //
+    let fileManager = FileManager.default
+    let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
+    
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
+    let firstEventDateCString = getFirstEventDate()
+    let firstEventDateString = String(cString: firstEventDateCString!)
+    free(UnsafeMutablePointer(mutating: firstEventDateCString)) // We must free the memory that C++ created for the pointer.
+    enum DateError: Error {
+        case BadDate
+    }
+    do{
+        guard let testdate = formatter.date(from: firstEventDateString) else{
+        throw DateError.BadDate
+    }
+}catch{
+    
+    do {
+            print("Date format unacceptable. Deleting data...")
+            try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
+        } catch let error as NSError {
+            print("Error: \(error.domain)")
+        }
+    }
+    
+    /*
+    // Hard code year limits.
+    // TODO make this adapt.
+    if let firstEventDateNum = Int(firstEventDateString) {
+        if (timeInterval > Int((upperInterval?.timeIntervalSince1970)!) || firstEventDateNum < Int((lowerInterval?.timeIntervalSince1970)!)) {
+            do {
+                try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
+            } catch let error as NSError {
+                print("Error: \(error.domain)")
+            }
+        }
+    }*/
+}

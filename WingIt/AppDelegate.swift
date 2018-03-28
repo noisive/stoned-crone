@@ -69,29 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initTimetable();
         
         
-        // Resets data if bad date. //
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
-        let firstEventDateCString = getFirstEventDate()
-        let firstEventDateString = String(cString: firstEventDateCString!)
-        free(UnsafeMutablePointer(mutating: firstEventDateCString)) // We must free the memory that C++ created for the pointer.
-        let firstMondaysDate = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: formatter.date(from: firstEventDateString)!))
-        let lowerInterval = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: formatter.date(from: "2018-01-01")!))
-        let upperInterval = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: formatter.date(from: "2018-12-12")!))
-        let timeInterval = Int((firstMondaysDate?.timeIntervalSince1970)!)
-        
-        
-        // Hard code year limits.
-        // TODO make this adapt.
-        if let firstEventDateNum = Int(firstEventDateString) {
-            if (timeInterval > Int((upperInterval?.timeIntervalSince1970)!) || firstEventDateNum < Int((lowerInterval?.timeIntervalSince1970)!)) {
-                do {
-                    try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
-                } catch let error as NSError {
-                    print("Error: \(error.domain)")
-                }
-            }
-        }
+        checkBadDateData();
         
         
         
