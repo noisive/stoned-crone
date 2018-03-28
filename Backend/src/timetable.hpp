@@ -57,6 +57,8 @@ class Timetable {
         void addEvent(const char* event);
     
         std::string getFirstEventDateString();
+        std::string getLastEventDateString();
+
 
         // Persistence
         void save();

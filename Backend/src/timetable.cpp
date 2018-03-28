@@ -134,6 +134,11 @@ std::string Timetable::getFirstEventDateString(){
     TimetableEvent event = eventList[0];
     return event.getDate().ISODate();
 }
+// TODO test this.
+std::string Timetable::getLastEventDateString(){
+    TimetableEvent event = eventList.back();
+    return event.getDate().ISODate();
+}
 
 TimetableEvent Timetable::queryResult(int index) {
     if (index == queryStore.size() - 1) {
