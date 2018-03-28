@@ -170,7 +170,7 @@ void Parser::getWeekStart() {
     if (this->json.length() >= 12 && startIndex != -1) {
         // This was the old json format, which stored its date as "Now showing dates 02\/10\/2017 to". New format is "Now showing dates 26\/Mar\/2017 to"
         /* std::string date = this->json.substr(startIndex + sizeof("ng dates ") - 1, 12); */
-        int dateStringStartIndex = startIndex + sizeof("ng dates ");
+        int dateStringStartIndex = startIndex + sizeof("ng dates");
         int dateStringLength = indexOf(this->json, " to")-dateStringStartIndex;
         std::string dateSlice = this->json.substr(dateStringStartIndex,dateStringLength);
         
