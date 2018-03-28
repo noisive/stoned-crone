@@ -51,16 +51,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             // If we don't have data already, prompt for login.
             if !fileManager.fileExists(atPath: dataPath) {
-                promptForLogin()
+                self.window = UIWindow(frame: UIScreen.main.bounds)
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+                
+                self.window?.rootViewController = initialViewController
+                self.window?.makeKeyAndVisible()
+                // promptForLogin()
                 
             }
-            
-            
         }
         
         // Get data from CSV
         initTimetable()
-        
         if checkBadDateData(){
             promptForLogin()
         }
