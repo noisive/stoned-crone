@@ -51,14 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             // If we don't have data already, prompt for login.
             if !fileManager.fileExists(atPath: dataPath) {
-                self.window = UIWindow(frame: UIScreen.main.bounds)
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
-                
-                self.window?.rootViewController = initialViewController
-                self.window?.makeKeyAndVisible()
+                promptForLogin()
                 
             }
             
@@ -66,10 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Get data from CSV
-        initTimetable();
+        initTimetable()
         
-        
-        checkBadDateData();
+        if checkBadDateData(){
+            promptForLogin()
+        }
         
         
         
@@ -80,6 +74,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         
         return true
+    }
+    
+    func promptForLogin(){
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+        
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -149,6 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let modelURL = Bundle.main.url(forResource: "coreDataTestForPreOS", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
+    
     
     @objc lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.

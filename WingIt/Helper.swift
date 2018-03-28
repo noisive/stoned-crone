@@ -198,7 +198,7 @@ extension UIViewController {
     }
 }
 
-func checkBadDateData(){
+func checkBadDateData() -> Bool{
     // Resets data if bad date. //
     let fileManager = FileManager.default
     let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
@@ -220,6 +220,9 @@ func checkBadDateData(){
     do {
             print("Date format unacceptable. Deleting data...")
             try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
+        // Get user to log in again...
+        return true
+        
         } catch let error as NSError {
             print("Error: \(error.domain)")
         }
@@ -237,4 +240,5 @@ func checkBadDateData(){
             }
         }
     }*/
+    return false
 }
