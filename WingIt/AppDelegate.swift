@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let fileManager = FileManager.default
         let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
+    
         
         // Resets app if given argument --resetdata, so that tests start from a consistent clean state
         if CommandLine.arguments.contains("--resetdata") {
@@ -51,25 +52,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             // If we don't have data already, prompt for login.
             if !fileManager.fileExists(atPath: dataPath) {
-                self.window = UIWindow(frame: UIScreen.main.bounds)
                 
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                promptForLogin()
                 
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
-                
-                self.window?.rootViewController = initialViewController
-                self.window?.makeKeyAndVisible()
-                // promptForLogin()
-                
+            }else{
+                initTimetable()
+                // Get data from CSV
+                if checkAndRemoveBadDateData(){
+                    promptForLogin()
+                }
             }
         }
         
-        // Get data from CSV
         initTimetable()
-        if checkBadDateData(){
-            promptForLogin()
-        }
-        
         
         
         // Register settings bundle.

@@ -198,7 +198,7 @@ extension UIViewController {
     }
 }
 
-func checkBadDateData() -> Bool{
+func checkAndRemoveBadDateData() -> Bool{
     // Resets data if bad date. //
     let fileManager = FileManager.default
     let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
