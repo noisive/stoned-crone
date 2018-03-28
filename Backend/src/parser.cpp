@@ -145,7 +145,23 @@ std::string month3CharNameTo2NumString(std::string monthString){
             return monthNum[i];
         }
     }
+    std::cerr << "Invalid date format" << std::endl;
     return "0xCC";
+}
+
+std::string monthFullNameTo2NumString(std::string monthString){
+    std::transform(monthString.begin(), monthString.end(), monthString.begin(), ::tolower);
+    std::string monthFull [] = {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
+    std::string monthNum [] = {"01", "02","03", "04", "05", "06", "07", "08","09", "10", "11", "12"};
+    
+    for (int i=0; i<=sizeof(monthFull) / sizeof(monthFull[0]); i++){
+        if (monthString == monthFull[i]){
+            return monthNum[i];
+        }
+    }
+    std::cerr << "Invalid date format" << std::endl;
+    return "0xCC";
+    
 }
 
 
@@ -154,28 +170,33 @@ void Parser::getWeekStart() {
     if (this->json.length() >= 12 && startIndex != -1) {
         // This was the old json format, which stored its date as "Now showing dates 02\/10\/2017 to". New format is "Now showing dates 26\/Mar\/2017 to"
         /* std::string date = this->json.substr(startIndex + sizeof("ng dates ") - 1, 12); */
-        
         int dateStringStartIndex = startIndex + sizeof("ng dates ");
         int dateStringLength = indexOf(this->json, " to")-dateStringStartIndex;
         std::string dateSlice = this->json.substr(dateStringStartIndex,dateStringLength);
         
-        // Day number is until first slash pair (have to be escaped, will show up like this in debugger).
-        int slashIndex = indexOf(dateSlice, "\\/");
+        // Have to be escaped, will show up like this in debugger. Look like \/ in real data.
+        std::string slashPair = "\\/";
+        // Day number is until first slash pair
+        int slashIndex = indexOf(dateSlice, slashPair);
         std::string dayIntString = dateSlice.substr(0, slashIndex);
         // Cut the slash off.
         dateSlice = dateSlice.substr(slashIndex+2, std::string::npos);
         
         std::string monthIntString;
         // May be in 3 letter format (eg mar, Nov), or may be in two number form.
-        if(indexOf(dateSlice, "\\/") == 3){
+        if(indexOf(dateSlice, slashPair) == 3){
             monthIntString = month3CharNameTo2NumString(dateSlice.substr(0, 3));
-        }else{
+        }else if(indexOf(dateSlice, slashPair) == 2){
             monthIntString = dateSlice.substr(0,2);
+        }else{
+            // Include full, just in case they change it again.
+            monthIntString = monthFullNameTo2NumString(dateSlice.substr(0,indexOf(dateSlice, "\\/")));
         }
         
-        slashIndex = indexOf(dateSlice, "\\/");
+        slashIndex = indexOf(dateSlice, slashPair);
         // npos goes to end position
         dateSlice = dateSlice.substr(slashIndex+2, std::string::npos);
+        // TODO make this check until " to" instead of assuming 4 digits.
         std::string yearIntString = dateSlice.substr(0, 4);
         // This requires input to be of format dd+mm+yy
         this->weekStart = std::stoi(dayIntString + monthIntString + yearIntString);
