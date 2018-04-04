@@ -6,11 +6,12 @@
 /* Set initial vector size.
 
  * 20 is a rough peak for number of classes in a week. */
-std::vector<TimetableEvent> eventList(20);
-std::vector<TimetableEvent> customList(20);
-std::vector<TimetableEvent> queryStore(20);
 
 Timetable::Timetable() {
+std::vector<TimetableEvent> eventList(40);
+std::vector<TimetableEvent> customList(40);
+std::vector<TimetableEvent> queryStore(40);
+
     reset();
     this->dataPath = ((std::string)getenv("HOME")) + "/Library/Caches/data.csv";
     this->gCalPath = ((std::string)getenv("HOME")) + "/Library/Caches/GoogleCalFile.csv";
