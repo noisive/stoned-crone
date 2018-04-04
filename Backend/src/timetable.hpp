@@ -32,7 +32,7 @@ class Timetable {
 
     public:
         // Constructors
-        Timetable();
+        Timetable(std::string dataBasePath = (std::string)getenv("HOME") + "/Library/Caches");
 
         // Base Functions
         void addEvent(ttEvent t);
