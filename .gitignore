@@ -4,8 +4,9 @@
 *.lo
 *.o
 *.obj
-*.dSYM
 *.dSYM/*
+*.dSYM
+/Backend/parserTests/*.csv
 # Precompiled Headers
 *.gch
 *.pch
