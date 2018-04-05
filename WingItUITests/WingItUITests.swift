@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Foundation //env variables
 
 extension XCUIApplication {
     var isDisplayingDay: Bool {
@@ -18,8 +19,10 @@ class WingItUITests: XCTestCase {
     
     var app: XCUIApplication! = XCUIApplication()
     
-    let eVisionUsername = "warwi639"
-    let eVisionPassword = "WingItDemo"
+    if let eVisionUsername = ProcessInfo.processInfo.environment["EVISIONUSER"] {
+    }
+    if let eVisionPassword = ProcessInfo.processInfo.environment["EVISIONPW"] {
+    }
     
     override func setUp() {
         super.setUp()
