@@ -131,11 +131,17 @@ int Timetable::queryByDate(const char* d) {
 }
 
 std::string Timetable::getFirstEventDateString(){
+    if (eventList.size() == 0){
+        return "0xCC";
+    }
     TimetableEvent event = eventList[0];
     return event.getDate().ISODate();
 }
 // TODO test this.
 std::string Timetable::getLastEventDateString(){
+    if (eventList.size() == 0){
+        return "0xCC";
+    }
     TimetableEvent event = eventList.back();
     return event.getDate().ISODate();
 }

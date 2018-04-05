@@ -56,15 +56,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 promptForLogin()
                 
             }else{
-                initTimetable()
                 // Get data from CSV
+                initTimetable()
                 if checkAndRemoveBadDateData(){
                     promptForLogin()
                 }
             }
         }
         
-        initTimetable()
         
         
         // Register settings bundle.

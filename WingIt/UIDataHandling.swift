@@ -36,10 +36,13 @@ func loadWeekData(VC: ViewController) {
         let firstEventDateString = String(cString: firstEventDateCString!)
         free(UnsafeMutablePointer(mutating: firstEventDateCString)) // We must free the memory that C++ created for the pointer.
         
-        
-        // TODO: Check date if no class on monday.
-        let firstMondaysDate = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: formatter.date(from: firstEventDateString)!))
-        searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: firstMondaysDate!)!
+        if (firstEventDateString == "0xCC"){
+           print("Error: first event date string not found/set")
+        }else{
+            // TODO: Check date if no class on monday.
+            let firstMondaysDate = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: formatter.date(from: firstEventDateString)!))
+            searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: firstMondaysDate!)!
+        }
         
         
         // End temp change -------------------------------------------------

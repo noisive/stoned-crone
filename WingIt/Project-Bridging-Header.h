@@ -3,11 +3,8 @@
 //
 
 #import "SWRevealViewController.h"
-#import "SVProgressHUD.h"
-
 void parseEvents(const char* data);
 void initTimetable();
 int queryDate(const char* dateString);
 const char* queryResult(int index);
 const char* getFirstEventDate();
-

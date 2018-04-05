@@ -4,7 +4,8 @@
 *.lo
 *.o
 *.obj
-/Backend/src/parsertest.out.dSYM/
+*.dSYM
+*.dSYM/*
 # Precompiled Headers
 *.gch
 *.pch
