@@ -228,6 +228,12 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 
                 // Here we can pass on the output timetable for one week with the printed date.
                 //print(json)
+                //Todo: This may break things when we add multiple weeks,
+                // because init resets the currently loaded TT...
+                // But then again, that's only the TT loaded into memory, so maybe that's ok?
+                // Probably a tad slower than it might have to be though. TODO.
+                initTimetable()
+                // Oh lol, parseEvents calls reset anyway.
                 parseEvents(json.cString(using: String.Encoding.utf8));
  
                 errorLabel.text = "Done!"
