@@ -490,7 +490,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Monday" id="nbG-qC-Ukr">
                         <leftBarButtonItems>
-                            <barButtonItem image="Refresh_icon" id="r4G-vv-p0b" userLabel="Refresh Button">
+                            <barButtonItem systemItem="refresh" id="r4G-vv-p0b" userLabel="Refresh Button">
                                 <color key="tintColor" red="0.058823529409999999" green="0.15686274510000001" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <segue destination="PM4-zz-bZM" kind="popoverPresentation" popoverAnchorBarButtonItem="r4G-vv-p0b" id="D7v-BD-djU">
@@ -734,7 +734,6 @@
     </scenes>
     <resources>
         <image name="Menu" width="24" height="24"/>
-        <image name="Refresh_icon" width="42" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="D7v-BD-djU"/>
