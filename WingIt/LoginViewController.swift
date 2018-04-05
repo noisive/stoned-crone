@@ -10,269 +10,217 @@ import UIKit
 
 class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate {
     
-    //MARK: Outlets and Variables
-    //==========================================================================
-    
-    //Outlets
-    @IBOutlet var loginContainer: UIView!
-    @IBOutlet var loginButton: UIButton!
-    @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var usernameField: UITextField!
-    @IBOutlet var passwordField: UITextField!
-    @IBOutlet var cancelButton: UIButton!
-    @IBOutlet var savePasswordSwitch: UISwitch!
     @IBOutlet weak var webView: UIWebView!
-    
-    //Variables
-    public var isUpdatingMode: Bool = false
-    private var PWIsStored: Bool = false
-    
-    //Constants
-    private let CORNER_RADIUS: CGFloat = 3.5;
-    
-    //HTML
-    private let webCheckError: String = "document.getElementsByClassName('sv-panel-danger').length > 0;"
-    private let webErrorReason: String = "document.getElementsByClassName('sv-panel sv-panel-danger')[0].getElementsByTagName('strong')[0].innerHTML"
-    private let webClickLogin: String = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-primary')[0].click();"
-    private let webClickTimetable: String = "document.getElementsByClassName('uo_see_more')[document.getElementsByClassName('uo_see_more').length - 1].getElementsByTagName('a')[0].click();"
-    private let webClickNextWeek: String = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-default')[1].click();"
-    private let webCheckHeader: String = "document.getElementsByClassName('sv-h1-small')[0].innerHTML"
-    private let webLogout: String = "document.getElementsByClassName('sv-navbar-text sv-visible-xs-block')[0].getElementsByTagName('a')[0].click()"
-    private let webInsertFunctions: String = "window.getJSArray = function() {\n" +
-    "return content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();}"
-    private let webGrabCode: String = "window.getJSArray()"
-    private let monitorScript: String = "var intervalHandle" +
-        "var monitorState = 0" +
-        "window.monitorUpdate = function(cb) {" +
-        "intervalHandle = setInterval(() => {" +
-        "var newDate = document.getElementsByClassName('sitsjqtttitle')[0].innerHTML" +
-        "if (newDate.indexOf('Updating') !== -1) {" +
-        "monitorState = 1" +
-        "} else if (monitorState === 1) {" +
-        "monitorState = 0" +
-        "clearInterval(intervalHandle)" +
-        "cb()" +
-        "}" +
-        "}, 50)" +
-        "}" +
-        "window.loadNextWeek = function() {" +
-        "ttb_timetable_move('N')" +
-        "monitorUpdate(() => {" +
-        "window.location.href = 'https://com.noisive'" +
-        "})" +
-    "}"
-    private let loadNextWeek: String = "window.loadNextWeek()"
-    private var once: Bool = false
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var storePWSwitch: UISwitch!
+    @IBOutlet weak var storePWLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+
     
     
-    //MARK: View loading
-    //==========================================================================
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
+    var PWIsStored = false
+    
+    /* HEX colors used within the Login View for errors, info, and autofill. */
+    @objc let errorColor: UIColor = UIColor(rgb: 0xFF0013)
+    @objc let infoColor: UIColor = UIColor(rgb: 0x000000)
+    @objc let autoFillColor: UIColor = UIColor(rgb: 0xFAFFBD)
+    
+    @objc let webCheckError = "document.getElementsByClassName('sv-panel-danger').length > 0;"
+    
+    @objc let webErrorReason = "document.getElementsByClassName('sv-panel sv-panel-danger')[0].getElementsByTagName('strong')[0].innerHTML"
+    
+    @objc let webClickLogin = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-primary')[0].click();"
+    
+    @objc let webClickTimetable = "document.getElementsByClassName('uo_see_more')[document.getElementsByClassName('uo_see_more').length - 1].getElementsByTagName('a')[0].click();"
+    
+    @objc let webClickNextWeek = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-default')[1].click();"
+    
+    @objc let webCheckHeader = "document.getElementsByClassName('sv-h1-small')[0].innerHTML"
+    
+    @objc let webLogout = "document.getElementsByClassName('sv-navbar-text sv-visible-xs-block')[0].getElementsByTagName('a')[0].click()"
+    
+    @objc let webInsertFunctions = "window.getJSArray = function() {\n" +
+                "return content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();}"
+
+    @objc let webGrabCode = "window.getJSArray()"
+    
+    @objc let monitorScript = "var intervalHandle" +
+                        "var monitorState = 0" +
+                        "window.monitorUpdate = function(cb) {" +
+                            "intervalHandle = setInterval(() => {" +
+                                "var newDate = document.getElementsByClassName('sitsjqtttitle')[0].innerHTML" +
+                                "if (newDate.indexOf('Updating') !== -1) {" +
+                                    "monitorState = 1" +
+                                "} else if (monitorState === 1) {" +
+                                    "monitorState = 0" +
+                                    "clearInterval(intervalHandle)" +
+                                    "cb()" +
+                                "}" +
+                            "}, 50)" +
+                        "}" +
+                        "window.loadNextWeek = function() {" +
+                            "ttb_timetable_move('N')" +
+                            "monitorUpdate(() => {" +
+                                "window.location.href = 'https://com.noisive'" +
+                            "})" +
+                        "}"
+    
+    @objc let loadNextWeek = "window.loadNextWeek()"
+    
+    @objc var once:Bool = false
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        setupLogic()
-        setupLooks()
-        
-        if (!self.isUpdatingMode) {
-            SVProgressHUD.setDefaultStyle(.dark)
-            SVProgressHUD.show(withStatus: "Loading eVision")
-            self.loginContainer.alpha = 0
-        }
-    }
-    
-    //MARK: Functions
-    //==========================================================================
-    
-    private func setupLooks() {
-        loginContainer.layer.shadowColor = UIColor.black.cgColor
-        loginContainer.layer.shadowOpacity = 0.3
-        loginContainer.layer.shadowOffset = CGSize.zero
-        loginContainer.layer.shadowRadius = 3
-        loginContainer.clipsToBounds = false
-        loginContainer.layer.cornerRadius = CORNER_RADIUS;
-        
-        loginButton.layer.cornerRadius = CORNER_RADIUS;
-    }
-    
-    private func setupLogic() {
-        //Setup delegates
-        usernameField.delegate = self
-        passwordField.delegate = self
-        webView.delegate = self
-        
-        PWIsStored = true
-        
-        //Setup gestures
-        let dismissGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
-        self.scrollView.addGestureRecognizer(dismissGesture)
-        
-        //Setup webview
-        let urlBase: URL? = URL(string: "https://evision.otago.ac.nz")
-        if let url = urlBase {
-            let loadRequest: URLRequest = URLRequest(url: url)
-            webView.loadRequest(loadRequest)
-        }
-        
+
         hideCancelOnNoData()
-    }
-    
-    @objc private func endEditing() {
-        self.view.endEditing(true)
-        self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-    }
-    
-    private func beginLogin() {
-        self.endEditing()
-        SVProgressHUD.show(withStatus: "Logging you in")
         
-        if let user = usernameField.text, let password = passwordField.text {
-            self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
-            self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(password)';")
-            
-            if self.savePasswordSwitch.isOn {
-                storeUserPass(username: user, password: password)
-                self.PWIsStored = true
-            } else {
-                self.PWIsStored = false
-                removeStoredUserPass()
-            }
-            
-            //Fire request
-            webView.stringByEvaluatingJavaScript(from: self.webClickLogin)
-        } else {
-            SVProgressHUD.dismiss()
-            self.handleAlert(title: "Login Error", description: "Please ensure your login details are entered correctly.")
+        
+        // Hide keyboard when something else tapped.
+        self.hideKeyboardWhenTappedAround()
+        
+        hideLoginFields()
+        webView.delegate = self
+        webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
+        
+        
+        loginButton.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
+        usernameField.addTarget(self, action: #selector(self.textUpdated), for: .editingChanged)
+        passwordField.addTarget(self, action: #selector(self.textUpdated), for: .editingChanged)
+        passwordField.delegate = self
+        storePWSwitch.addTarget(self, action: #selector(storePWSwitchToggled(_:)), for: UIControlEvents.valueChanged)
+        
+        // Check if details have been stored
+        if retrieveStoredUsername().count > 0 {
+            PWIsStored = true
+            storePWSwitch.setOn(true, animated: false)
+        }
+    }
+    @IBAction func storePWSwitchToggled(_ sender: UISwitch) {
+        if (!sender.isOn) {
+            passwordField.backgroundColor = UIColor.white
+            passwordField.becomeFirstResponder()
+            usernameField.backgroundColor = UIColor.white
         }
     }
     
-    private func handleAlert(title: String, description: String) {
-        let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    @IBAction func passPrimaryActionTriggered(_ sender: UITextField) {
+        if (sender == usernameField) {
+            usernameField.resignFirstResponder()
+            passwordField.becomeFirstResponder()
+        } else if (sender == passwordField) {
+            passwordField.resignFirstResponder()
+            attemptLogin()
+        }
     }
     
-    private func hideCancelOnNoData() {
+    @objc private func textUpdated() {
+        if ((usernameField.text?.count)! > 0 && (passwordField.text?.count)! > 0) {
+            errorLabel.text = ""
+        }
+    }
+    
+    @objc func displayLoginFields(){
+        usernameField.isHidden = false
+        passwordField.isHidden = false
+        loginButton.isHidden = false
+        spinner.isHidden = true
+        spinner.stopAnimating()
+        storePWSwitch.isHidden = false
+        storePWLabel.isHidden = false
+
+    }
+    @objc func hideLoginFields(){
+        usernameField.isHidden = true
+        passwordField.isHidden = true
+        loginButton.isHidden = true
+        storePWSwitch.isHidden = true
+        storePWLabel.isHidden = true
+        spinner.isHidden = false
+        spinner.startAnimating()
+    }
+    
+    @objc func loginReset(reason:String) {
+        webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
+        displayLoginFields()
+        passwordField.text = ""
+        errorLabel.textColor = errorColor
+        errorLabel.text = "\(reason)"
+    }
+
+    @objc func hideCancelOnNoData() {
         let fileManager = FileManager.default
         let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
-        
         // If we don't have data already.
-        if (!fileManager.fileExists(atPath: dataPath)) {
-            cancelButton.isEnabled = false
-            cancelButton.isHidden = true
-        } else {
-            cancelButton.isEnabled = true
-            cancelButton.isHidden = false
+        if !fileManager.fileExists(atPath: dataPath) {
+            cancelButton?.isEnabled = false
+            cancelButton?.tintColor = UIColor.clear
+        }else{
+            cancelButton?.isEnabled = true
+            cancelButton?.tintColor = nil
         }
     }
     
-    //MARK: Actions
-    //==========================================================================
+//    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+//        print("CALLED \(String(describing: request.url?.absoluteString))")
+//        
+//        if request.url?.absoluteString == "https://com.noisive" {
+//            print("JS CALLBACK")
+//            return false
+//        }
+//        return true
+//    }
     
-    @IBAction func dismiss(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func loginPressed(_ sender: Any) {
-        self.beginLogin()
-    }
-    
-    //MARK: Delegates
-    //==========================================================================
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        guard let usernameText = self.usernameField.text else { return false }
-        guard let passwordText = self.passwordField.text else { return false }
-        
-        switch textField {
-        case self.usernameField:
-            if (usernameText.isEmpty) {
-                self.handleAlert(title: "Username Empty", description: "Please enter your eVision username.")
-            } else if (!usernameText.isEmpty && passwordText.isEmpty) {
-                self.passwordField.becomeFirstResponder()
-            } else {
-                self.beginLogin()
-            }
-        case self.passwordField:
-            if (passwordText.isEmpty) {
-                self.handleAlert(title: "Password Empty", description: "Please enter your eVision password.")
-            } else if (usernameText.isEmpty && !passwordText.isEmpty) {
-                self.usernameField.becomeFirstResponder()
-            } else {
-                self.beginLogin()
-            }
-        default:
-            print("Unknown text field")
-        }
-        return true
-    }
-    
-    internal func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        print("CALLED \(String(describing: request.url?.absoluteString))")
-        
-        if request.url?.absoluteString == "https://com.noisive" {
-            print("JS CALLBACK")
-            return false
-        }
-        return true
-    }
-    
+   
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if (!webView.isLoading) {
             
             let error:Bool = NSString(string: webView.stringByEvaluatingJavaScript(from: webCheckError)!).boolValue
             if (error) {
                 // Get the error given by eVision.
-                let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webErrorReason)!) as String
-                
-                //loginReset(reason: reason)
+                let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: webErrorReason)!) as String
+                loginReset(reason: reason)
                 return;
             }
             
-            var header:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webCheckHeader)!) as String
+            var header:String = NSString(string: webView.stringByEvaluatingJavaScript(from: webCheckHeader)!) as String
             header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
             
-            //Web view initial load, grab stored details
             if (header == "" && !once) {
-                usernameField.text = retrieveStoredUsername()
-                passwordField.text = retrieveStoredPassword()
-                
-                if (retrieveStoredUsername() != "" && retrieveStoredPassword() != "") {
-                    self.savePasswordSwitch.isOn = true
+                errorLabel.text = "Enter your eVision details"
+                displayLoginFields()
+                if PWIsStored {
+                    usernameField.text = retrieveStoredUsername()
+                    usernameField.backgroundColor = autoFillColor
+                    passwordField.text = retrieveStoredPassword()
+                    passwordField.backgroundColor = autoFillColor
                 }
                 once = true
-                
-                SVProgressHUD.dismiss()
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.loginContainer.alpha = 1
-                }, completion: { (success) in
-                    self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
-                    self.usernameField.becomeFirstResponder()
-                })
             }
             
             switch header {
                 
             case "System Message":
-                SVProgressHUD.show()
+                spinner.stopAnimating()
+                spinner.isHidden = true
                 break;
                 
             case "Home":
-                webView.stringByEvaluatingJavaScript(from: self.webClickTimetable)
-                SVProgressHUD.setStatus("Retrieving your timetable...")
+                webView.stringByEvaluatingJavaScript(from: webClickTimetable)
+                errorLabel.text = "Retrieving your timetable"
                 break;
                 
             case "Timetable":
-                webView.stringByEvaluatingJavaScript(from: self.webInsertFunctions)
+                webView.stringByEvaluatingJavaScript(from: webInsertFunctions)
                 let json:String = NSString(string: webView.stringByEvaluatingJavaScript(from: webGrabCode)!) as String
                 
                 //webView.stringByEvaluatingJavaScript(from: monitorScript)
@@ -281,6 +229,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 // Here we can pass on the output timetable for one week with the printed date.
                 //print(json)
                 parseEvents(json.cString(using: String.Encoding.utf8));
+ 
+                errorLabel.text = "Done!"
                 
                 self.performSegue(withIdentifier: "LoginDoneSegue", sender: self)
                 
@@ -293,5 +243,36 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 
             }
         }
+        
     }
+    
+    @objc private func buttonClicked() {
+        if ((usernameField.text?.count)! > 0 && (passwordField.text?.count)! > 0) {
+            attemptLogin();
+        } else {
+            errorLabel.text = "Username & Password required"
+        }
+    }
+    
+    @objc func attemptLogin() {
+        let user:String = usernameField.text!
+        webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
+        let pass:String = passwordField.text!
+        webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(pass)';")
+        if storePWSwitch.isOn {
+            storeUserPass(username: user, password: pass)
+            PWIsStored = true
+        } else {
+            PWIsStored = false
+            removeStoredUserPass()
+            usernameField.backgroundColor = UIColor.white
+            passwordField.backgroundColor = UIColor.white
+
+        }
+        hideLoginFields()
+        errorLabel.textColor = infoColor
+        errorLabel.text = "Logging you in"
+        webView.stringByEvaluatingJavaScript(from: webClickLogin)
+    }
+    
 }
