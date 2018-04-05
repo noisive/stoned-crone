@@ -266,7 +266,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             switch header {
                 
             case "System Message":
-                SVProgressHUD.show()
                 break;
                 
             case "Home":
@@ -285,7 +284,11 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 //print(json)
                 parseEvents(json.cString(using: String.Encoding.utf8));
                 
-                self.performSegue(withIdentifier: "LoginDoneSegue", sender: self)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "entry") as! SWRevealViewController
+                
+                self.present(vc, animated: true, completion: nil)
+                
+                SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded!")
                 
                 webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
                 webView.stringByEvaluatingJavaScript(from: webLogout)
