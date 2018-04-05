@@ -51,8 +51,15 @@ int Parser::indexOf(std::string data, std::string pattern, int startIndex) {
 void Parser::extractJsonArray() {
     int startIndex = indexOf(this->json, "[");
     int endIndex = indexOf(this->json, "]");
+    // Check to ensure the timetable isn't empty and the indexes were found.
     if (startIndex != -1 && endIndex != -1) {
         this->json = this->json.substr(startIndex, endIndex - startIndex + 1);
+    }else{
+        std::cerr << "Error: json not found" << std::endl;
+    }
+    // No data in json.
+    if (endIndex - startIndex < 2){
+        std::cerr << "Error: json timetable is empty" << std::endl;
     }
 }
 
@@ -201,7 +208,7 @@ void Parser::getWeekStart() {
         // This requires input to be of format dd+mm+yy
         this->weekStart = std::stoi(dayIntString + monthIntString + yearIntString);
     }
-    std::cout<<weekStart;
+    std::cout<<weekStart << std::endl;
 }
 
 std::vector<TimetableEvent> Parser::parseFile(std::string fileName, std::string format) {
@@ -221,7 +228,7 @@ std::vector<TimetableEvent> Parser::parseFile(std::string fileName, std::string 
             file.close();
         }
         else
-            std::cerr << "Unable to open file" << std::endl;
+            std::cerr << "Unable to open file " << fileName << std::endl;
     }
     else
         std::cerr << "Format not supported" << std::endl;
@@ -305,7 +312,7 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
 
     std::vector<TimetableEvent> events;
 
-    if (this->json == "0xCC") {
+    if (this->json == "0xCC" || this->json == "") {
         std::cerr << "No data given" << std::endl;
         return events;
     }
