@@ -18,6 +18,11 @@
 		06D37CD71F873C7F009318AC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06D37CD61F873C7F009318AC /* Settings.bundle */; };
 		297C56931ED9126200C44420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginViewController.swift */; };
 		5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */; };
+		533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 533C92D320762A9200394325 /* SVProgressHUD.bundle */; };
+		533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D420762A9300394325 /* SVProgressAnimatedView.m */; };
+		533C92DE20762A9400394325 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D620762A9300394325 /* SVProgressHUD.m */; };
+		533C92DF20762A9400394325 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D720762A9300394325 /* SVIndefiniteAnimatedView.m */; };
+		533C92E020762A9400394325 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92DB20762A9400394325 /* SVRadialGradientLayer.m */; };
 		535BDEC91EC48FB200B853C2 /* TimetableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BDEC81EC48FB200B853C2 /* TimetableCell.swift */; };
 		53BB7A171ED133A900370F7B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB7A161ED133A900370F7B /* Constants.swift */; };
 		53BB7A191ED14C3800370F7B /* ClashCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB7A181ED14C3700370F7B /* ClashCell.swift */; };
@@ -64,6 +69,16 @@
 		06D37CD61F873C7F009318AC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		297C56921ED9126200C44420 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankCellTableViewCell.swift; sourceTree = "<group>"; };
+		533C92D220762A9200394325 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		533C92D320762A9200394325 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		533C92D420762A9300394325 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressAnimatedView.m; sourceTree = "<group>"; };
+		533C92D520762A9300394325 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
+		533C92D620762A9300394325 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		533C92D720762A9300394325 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		533C92D820762A9300394325 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		533C92D920762A9300394325 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		533C92DA20762A9300394325 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		533C92DB20762A9400394325 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		535BDEC81EC48FB200B853C2 /* TimetableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableCell.swift; sourceTree = "<group>"; };
 		53BB7A161ED133A900370F7B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		53BB7A181ED14C3700370F7B /* ClashCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClashCell.swift; sourceTree = "<group>"; };
@@ -201,6 +216,16 @@
 				53C7D03B1EC9B79E00D0BD9C /* SWRevealViewController.h */,
 				53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */,
 				53C7D03A1EC9B79D00D0BD9C /* Project-Bridging-Header.h */,
+				533C92D820762A9300394325 /* SVIndefiniteAnimatedView.h */,
+				533C92D720762A9300394325 /* SVIndefiniteAnimatedView.m */,
+				533C92D520762A9300394325 /* SVProgressAnimatedView.h */,
+				533C92D420762A9300394325 /* SVProgressAnimatedView.m */,
+				533C92DA20762A9300394325 /* SVProgressHUD-Prefix.pch */,
+				533C92D320762A9200394325 /* SVProgressHUD.bundle */,
+				533C92D920762A9300394325 /* SVProgressHUD.h */,
+				533C92D620762A9300394325 /* SVProgressHUD.m */,
+				533C92D220762A9200394325 /* SVRadialGradientLayer.h */,
+				533C92DB20762A9400394325 /* SVRadialGradientLayer.m */,
 				062EB9421F8B414B005F350E /* SwiftKeychainWrapper */,
 			);
 			path = WingIt;
@@ -308,6 +333,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */,
 				06D37CD71F873C7F009318AC /* Settings.bundle in Resources */,
 				53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */,
 				53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */,
@@ -348,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */,
+				533C92DF20762A9400394325 /* SVIndefiniteAnimatedView.m in Sources */,
 				062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */,
 				53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */,
 				53F8A00E1EC3D0010001604A /* ViewController.swift in Sources */,
@@ -356,23 +383,23 @@
 				53BB7A191ED14C3800370F7B /* ClashCell.swift in Sources */,
 				53F8A00C1EC3D0010001604A /* AppDelegate.swift in Sources */,
 				53C7D03F1EC9BD8400D0BD9C /* MenuTableViewController.swift in Sources */,
-				535E7B122074D98900A06538 /* SVIndefiniteAnimatedView.m in Sources */,
 				53D4B384207610140063E45F /* AppStates.swift in Sources */,
 				53C7D0391EC9B6A500D0BD9C /* Lesson.swift in Sources */,
 				535BDEC91EC48FB200B853C2 /* TimetableCell.swift in Sources */,
+				533C92DE20762A9400394325 /* SVProgressHUD.m in Sources */,
 				53D4B38620761F700063E45F /* NavigationProtocols.swift in Sources */,
-				535E7B102074D98900A06538 /* SVProgressAnimatedView.m in Sources */,
 				069827651F87041000777DAD /* LoginDebugController.swift in Sources */,
 				53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */,
 				297C56931ED9126200C44420 /* LoginViewController.swift in Sources */,
 				5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */,
+				533C92E020762A9400394325 /* SVRadialGradientLayer.m in Sources */,
 				06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */,
-				535E7B112074D98900A06538 /* SVProgressHUD.m in Sources */,
 				53D4B38220760FBF0063E45F /* NavigationService.swift in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
 				53D4B38020760D9A0063E45F /* TimeUtil.swift in Sources */,
 				061F3E801F8AF09C00BD0D09 /* UIDataHandling.swift in Sources */,
 				53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */,
+				533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
