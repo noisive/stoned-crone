@@ -339,6 +339,11 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
         // Set each id
         startIndex = indexOf(json, ":\"", endIndex);
         endIndex = indexOf(json, ",", startIndex) - 1;
+        if (startIndex == -1 || endIndex == -1) {
+            std::cerr << "Error scraping json" << std::endl;
+            // Current approach to a json error? Return empty events.
+            return events;
+        }
         ttEvent.setId(json.substr(startIndex, endIndex - startIndex));
 
         // Set each day
