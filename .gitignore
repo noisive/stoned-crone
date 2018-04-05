@@ -32,6 +32,9 @@
 *.out
 *.app
 
+# Test outputs
+*.diff
+
 # Misc crap
 *.DS_Store
 *.swp
