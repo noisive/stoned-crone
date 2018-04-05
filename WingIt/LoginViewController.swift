@@ -8,8 +8,21 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate {
+class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLoginState {
     
+    
+    
+    //MARK: Outlets and Variables
+    //==========================================================================
+    
+    //Outlets
+    @IBOutlet var loginContainer: UIView!
+    @IBOutlet var loginButton: UIButton!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var usernameField: UITextField!
+    @IBOutlet var passwordField: UITextField!
+    @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var savePasswordSwitch: UISwitch!
     @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var usernameField: UITextField!
@@ -21,6 +34,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var cancelButton: UIBarButtonItem!
 
     
+    //Variables
+    public var isUpdatingMode: Bool!
+    private var PWIsStored: Bool = false
     
     
     var PWIsStored = false
@@ -81,6 +97,23 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         hideCancelOnNoData()
         
         
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show(withStatus: "Loading eVision...")
+        self.loginContainer.alpha = 0
+    
+    }
+    
+    //MARK: Functions
+    //==========================================================================
+    
+    private func setupLooks() {
+        loginContainer.layer.shadowColor = UIColor.black.cgColor
+        loginContainer.layer.shadowOpacity = 0.3
+        loginContainer.layer.shadowOffset = CGSize.zero
+        loginContainer.layer.shadowRadius = 3
+        loginContainer.clipsToBounds = false
+        loginContainer.layer.cornerRadius = CORNER_RADIUS;
+        
         // Hide keyboard when something else tapped.
         self.hideKeyboardWhenTappedAround()
         
@@ -88,6 +121,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         webView.delegate = self
         webView.loadRequest(URLRequest(url: URL(string: "https://evision.otago.ac.nz")!))
         
+        
+        PWIsStored = true
         
         loginButton.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
         usernameField.addTarget(self, action: #selector(self.textUpdated), for: .editingChanged)
@@ -187,8 +222,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             let error:Bool = NSString(string: webView.stringByEvaluatingJavaScript(from: webCheckError)!).boolValue
             if (error) {
                 // Get the error given by eVision.
-                let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: webErrorReason)!) as String
-                loginReset(reason: reason)
+                let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webErrorReason)!) as String
+                SVProgressHUD.showError(withStatus: reason)
+                
                 return;
             }
             

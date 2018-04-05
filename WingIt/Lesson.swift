@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Lesson {
+public struct Lesson {
     
     var uid : CLong!
     var classID : String!
