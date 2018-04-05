@@ -52,22 +52,24 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let dataPath = hourData[indexPath.row]
-        
+     
         var cell : UITableViewCell = UITableViewCell()
         
-        if dataPath == nil {
+        //Empty cell
+        guard let dataPath = self.hourData[indexPath.row] else {
             let blankCell : BlankCellTableViewCell = tableView.dequeueReusableCell(withIdentifier:
                 "BlankCell", for: indexPath) as! BlankCellTableViewCell
             
-            blankCell.timeLabel.text = indexPath.row + 8 >= 10 ? "\(8 + indexPath.row):00" : "0\(8 + indexPath.row):00"
-            cell = blankCell
-            
-        } else if dataPath?.lesson != nil && dataPath?.lesson2 == nil {
+            blankCell.timeLabel.text = TimeUtil.get24HourTimeFromIndexPath(row: indexPath.row)
+            return blankCell
+        }
+        
+        //Single lesson
+        if dataPath.lesson != nil && dataPath.lesson2 == nil {
             let singleCell : TimetableCell = tableView.dequeueReusableCell(withIdentifier:
                 "TimetableCell", for: indexPath) as! TimetableCell
             
-            if let lessonData = findData(uid: (dataPath?.lesson)!) {
+            if let lessonData = findData(uid: (dataPath.lesson)!) {
                 singleCell.lessonCode.text = lessonData.code
                 singleCell.lessonRoom.text = lessonData.roomShort
                 
@@ -77,12 +79,12 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
             singleCell.timeLabel.text = indexPath.row + 8 >= 10 ? "\(8 + indexPath.row):00" : "0\(8 + indexPath.row):00"
             
             cell = singleCell
-        } else if dataPath?.lesson != nil && dataPath?.lesson2 != nil {
+        } else if dataPath.lesson != nil && dataPath.lesson2 != nil {
             let clashCell : ClashCell = tableView.dequeueReusableCell(withIdentifier:
                 "ClashCell", for: indexPath) as! ClashCell
            
             
-            if let lessonData1 = findData(uid: (dataPath?.lesson)!), let lessonData2 = findData(uid: (dataPath?.lesson2)!) {
+            if let lessonData1 = findData(uid: (dataPath.lesson)!), let lessonData2 = findData(uid: (dataPath.lesson2)!) {
                 clashCell.leftLessonLabel.text = lessonData1.code
                 clashCell.rightLessonLabel.text = lessonData2.code
                 clashCell.leftLesson.backgroundColor = UIColor(hexString: lessonData1.colour)
@@ -90,7 +92,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
             }
             
             
-            clashCell.timeLabel.text = indexPath.row + 8 >= 10 ? "\(8 + indexPath.row):00" : "0\(8 + indexPath.row):00"
+            clashCell.timeLabel.text = TimeUtil.get24HourTimeFromIndexPath(row: indexPath.row)
             
             cell = clashCell
         }

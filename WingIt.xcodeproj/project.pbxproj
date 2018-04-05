@@ -30,6 +30,10 @@
 		53C7D0391EC9B6A500D0BD9C /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7D0381EC9B6A500D0BD9C /* Lesson.swift */; };
 		53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */; };
 		53C7D03F1EC9BD8400D0BD9C /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */; };
+		53D4B38020760D9A0063E45F /* TimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B37F20760D9A0063E45F /* TimeUtil.swift */; };
+		53D4B38220760FBF0063E45F /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B38120760FBF0063E45F /* NavigationService.swift */; };
+		53D4B384207610140063E45F /* AppStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B383207610140063E45F /* AppStates.swift */; };
+		53D4B38620761F700063E45F /* NavigationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B38520761F700063E45F /* NavigationProtocols.swift */; };
 		53F8A00C1EC3D0010001604A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A00B1EC3D0010001604A /* AppDelegate.swift */; };
 		53F8A00E1EC3D0010001604A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A00D1EC3D0010001604A /* ViewController.swift */; };
 		53F8A0111EC3D0010001604A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F8A00F1EC3D0010001604A /* Main.storyboard */; };
@@ -84,6 +88,10 @@
 		53C7D03B1EC9B79E00D0BD9C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		53D4B37F20760D9A0063E45F /* TimeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtil.swift; sourceTree = "<group>"; };
+		53D4B38120760FBF0063E45F /* NavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
+		53D4B383207610140063E45F /* AppStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStates.swift; sourceTree = "<group>"; };
+		53D4B38520761F700063E45F /* NavigationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationProtocols.swift; sourceTree = "<group>"; };
 		53F8A0081EC3D0010001604A /* WingIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WingIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F8A00B1EC3D0010001604A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F8A00D1EC3D0010001604A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +220,10 @@
 				53F8A00B1EC3D0010001604A /* AppDelegate.swift */,
 				53CDC1E51EDC1EC000A2ED5A /* Views */,
 				53F8A00F1EC3D0010001604A /* Main.storyboard */,
+				53D4B37F20760D9A0063E45F /* TimeUtil.swift */,
+				53D4B38120760FBF0063E45F /* NavigationService.swift */,
+				53D4B38520761F700063E45F /* NavigationProtocols.swift */,
+				53D4B383207610140063E45F /* AppStates.swift */,
 				53CDC1E41EDC1EB300A2ED5A /* Cells */,
 				53CDC1E61EDC1EC900A2ED5A /* Data Structures */,
 				53F8A0151EC3D0010001604A /* Assets.xcassets */,
@@ -380,8 +392,10 @@
 				535E7B132074D98900A06538 /* SVRadialGradientLayer.m in Sources */,
 				53C7D03F1EC9BD8400D0BD9C /* MenuTableViewController.swift in Sources */,
 				535E7B122074D98900A06538 /* SVIndefiniteAnimatedView.m in Sources */,
+				53D4B384207610140063E45F /* AppStates.swift in Sources */,
 				53C7D0391EC9B6A500D0BD9C /* Lesson.swift in Sources */,
 				535BDEC91EC48FB200B853C2 /* TimetableCell.swift in Sources */,
+				53D4B38620761F700063E45F /* NavigationProtocols.swift in Sources */,
 				535E7B102074D98900A06538 /* SVProgressAnimatedView.m in Sources */,
 				069827651F87041000777DAD /* LoginDebugController.swift in Sources */,
 				53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */,
@@ -389,7 +403,9 @@
 				5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */,
 				06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */,
 				535E7B112074D98900A06538 /* SVProgressHUD.m in Sources */,
+				53D4B38220760FBF0063E45F /* NavigationService.swift in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
+				53D4B38020760D9A0063E45F /* TimeUtil.swift in Sources */,
 				061F3E801F8AF09C00BD0D09 /* UIDataHandling.swift in Sources */,
 				53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */,
 			);

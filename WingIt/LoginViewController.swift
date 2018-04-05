@@ -8,7 +8,9 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate {
+class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLoginState {
+    
+    
     
     //MARK: Outlets and Variables
     //==========================================================================
@@ -24,7 +26,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     @IBOutlet weak var webView: UIWebView!
     
     //Variables
-    public var isUpdatingMode: Bool = false
+    public var isUpdatingMode: Bool!
     private var PWIsStored: Bool = false
     
     //Constants
@@ -78,11 +80,11 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         setupLogic()
         setupLooks()
         
-        if (!self.isUpdatingMode) {
-            SVProgressHUD.setDefaultStyle(.dark)
-            SVProgressHUD.show(withStatus: "Loading eVision")
-            self.loginContainer.alpha = 0
-        }
+        
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show(withStatus: "Loading eVision...")
+        self.loginContainer.alpha = 0
+    
     }
     
     //MARK: Functions
@@ -104,6 +106,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         usernameField.delegate = self
         passwordField.delegate = self
         webView.delegate = self
+        
         
         PWIsStored = true
         
@@ -233,8 +236,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             if (error) {
                 // Get the error given by eVision.
                 let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webErrorReason)!) as String
+                SVProgressHUD.showError(withStatus: reason)
                 
-                //loginReset(reason: reason)
                 return;
             }
             

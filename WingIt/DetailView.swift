@@ -9,55 +9,91 @@
 import UIKit
 import MapKit
 
-class DetailView: UITableViewController, MKMapViewDelegate {
-
+class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     
-    //Create outlets
+    //MARK: Variables and outlets
+    //=============================================================================
+    
+    //Outlets
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var roomLabel: UILabel!
-    @IBOutlet var nameLabel: UILabel!
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
         
-    //Create lesson object, data will be placed into this object based on what cell they click.
-    var lessonData : Lesson!
+    //Variables
+    public var lessonData : Lesson!
+    
+    //Constants
+    private let CORNER_RADIUS: CGFloat = 13
+    private let ZOOM_LEVEL: CLLocationDegrees = 0.002
+
+    //MARK: View loading
+    //=============================================================================
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.mapView.layer.masksToBounds = true
+        self.mapView.layer.cornerRadius = self.CORNER_RADIUS
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationItem.title = lessonData.code
-        
-        //Place data into labels
-        roomLabel.text = lessonData.roomFull
-        nameLabel.text = lessonData.paperName
-        typeLabel.text = lessonData.type
-        
-        let startTime = lessonData.startTime + 8 >= 10 ? "\(lessonData.startTime + 8):00" : "0\(lessonData.startTime + 8):00"
-        let endTime = lessonData.startTime + lessonData.duration + 8 >= 10 ? "\(lessonData.startTime + lessonData.duration + 8):00" : "0\(lessonData.startTime + lessonData.duration + 8):00"
-        
-        timeLabel.text = "\(startTime) - \(endTime)"
-        
-        //Setup map
-        mapView.delegate = self
-        mapView.mapType = .hybrid
-        
-        //Create region for map to show
-        let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
-        let coordinates = CLLocationCoordinate2D(latitude: CLLocationDegrees(lessonData.latitude), longitude: CLLocationDegrees(lessonData.longitude))
-        let region = MKCoordinateRegion(center: coordinates, span: span)
-    
-        //Show region
-        mapView.setRegion(region, animated: true)
-        
-        //Create pin with information about class
-        let pin = MKPointAnnotation()
-        pin.title = lessonData.code
-        pin.coordinate = coordinates
-        
-        //Add pin to map
-        mapView.addAnnotation(pin)
+        self.setupData()
     }
 
+    //MARK: Actions
+    //=============================================================================
+    
+    @IBAction func recenterMap(_ sender: Any) {
+        self.centerMap()
+    }
+    
+    //MARK: Functions
+    //=============================================================================
+    
+    private func centerMap() {
+        //Create region for map to show
+        let span = MKCoordinateSpan(latitudeDelta: self.ZOOM_LEVEL, longitudeDelta: self.ZOOM_LEVEL)
+        let coordinates = CLLocationCoordinate2D(latitude: CLLocationDegrees(lessonData.latitude),
+                                                 longitude: CLLocationDegrees(lessonData.longitude))
+        let region = MKCoordinateRegion(center: coordinates, span: span)
+        
+        //Show region
+        mapView.setRegion(region, animated: true)
+    }
+    
+    private func setupMap() {
+        self.mapView.delegate = self
+        self.mapView.mapType = .hybrid
+        
+        self.centerMap()
+        
+        let pin = MKPointAnnotation()
+        pin.title = lessonData.code
+        pin.coordinate = self.mapView.centerCoordinate
+        self.mapView.addAnnotation(pin)
+    }
+    
+    private func setupData() {
+        self.navigationItem.title = lessonData.paperName
+        
+        self.roomLabel.text = lessonData.roomFull
+        self.typeLabel.text = lessonData.type
+        
+        let startTime = TimeUtil.get24HourTimeFromIndexPath(row: lessonData.startTime)
+        let endTime = TimeUtil.get24HourTimeFromIndexPath(row: lessonData.startTime + lessonData.duration)
+        timeLabel.text = "\(startTime) - \(endTime)"
+        
+        self.setupMap()
+    }
+    
+    //MARK: Delegates
+    //=============================================================================
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
+    
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = .clear
