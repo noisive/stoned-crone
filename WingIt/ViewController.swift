@@ -55,37 +55,36 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     }
     
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        thisIsFirstLoad = true
-//
-//        if self.revealViewController() != nil {
-//            menuButton.target = self.revealViewController()
-//            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-//
-//            // These allow tapping on the timetable view or swiping to close the menu
-//            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//            self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
-//        }
-//
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
-//
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//
-//        // Do any additional setup after loading the view, typically from a nib.
-//
-//        loadWeekData(VC: self)
-//
-//        // Autoscroll to current day on startup
-//        scrollToCurrentDay()
-//        
-//        // Puts the current date label in
-//        createDateLabel()
-//
-//    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        thisIsFirstLoad = true
+
+        if self.revealViewController() != nil {
+            menuButton.target = self.revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+
+            // These allow tapping on the timetable view or swiping to close the menu
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
+        }
+
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
+        
+
+        // Do any additional setup after loading the view, typically from a nib.
+
+        loadWeekData(VC: self)
+
+        // Autoscroll to current day on startup
+        scrollToCurrentDay()
+        
+        // Puts the current date label in
+        createDateLabel()
+
+    }
     
 
     
