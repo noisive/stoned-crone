@@ -284,6 +284,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 //print(json)
                 parseEvents(json.cString(using: String.Encoding.utf8));
                 
+                initTimetable()
+                
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "entry") as! SWRevealViewController
                 
                 self.present(vc, animated: true, completion: nil)

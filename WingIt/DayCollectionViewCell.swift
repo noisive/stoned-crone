@@ -22,6 +22,12 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 0)
+        
+        tableViewData.insert(Lesson(uid: 1, classID: "as", start: 3, duration: 4, colour: "", code: "COSC345", type: "Lecture", roomShort: "FHC", roomFull: "St. Davids", paperName: "Software Engineering", day: 4, eventDate: Date(), latitude: 0.2378, longitude: 0.2894 ), at: 0)
+        
+        
+        
+        self.tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,6 +60,8 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      
         var cell : UITableViewCell = UITableViewCell()
+        
+        print(self.hourData[indexPath.row])
         
         //Empty cell
         guard let dataPath = self.hourData[indexPath.row] else {
