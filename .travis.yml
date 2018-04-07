@@ -26,10 +26,6 @@ stages:
 before_install:
     # - rvm install ruby-2.2.2
     - gem install xcpretty -N
-    - echo $EVISIONUSER
-    - echo "test"
-    - echo $EVISIONPASS
-    - echo $EVISIONPW
 
 jobs:
   include:
