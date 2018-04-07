@@ -90,9 +90,10 @@ class WingItUITests: XCTestCase {
         app.launch()
 
         login()
-        XCUIApplication().navigationBars["Log in to eVision"].buttons["Cancel"].tap()
 
-        XCTAssertTrue(app.isDisplayingDay)
+        // Wait for a thing to display, then assert it is displaying... Circular? But should work.
+        _ = app/*@START_MENU_TOKEN@*/.otherElements["dayView"]/*[[".otherElements[\"day\"]",".otherElements[\"dayView\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 20)
+        XCTAssertTrue(app.isDisplayingTT)
 
     }
 
@@ -104,21 +105,27 @@ class WingItUITests: XCTestCase {
 
         login()
 
-        XCTAssertTrue(app.isDisplayingDay)
+        XCTAssertTrue(app.isDisplayingTT)
 
     }
 
     func login(){
 
-        waitForElement(element: app.textFields["Username"])
+        _ = app.textFields["Username"].waitForExistence(timeout: 10)
         let usernameTextField = app.textFields["Username"]
-        usernameTextField.tap()
-        usernameTextField.typeText(eVisionUsername)
-
         let passwordSecureTextField = app.secureTextFields["Password"]
+        
+        // Clear in case login info still saved
+        usernameTextField.buttons["Clear text"].tap()
+        passwordSecureTextField.buttons["Clear text"].tap()
+        
+        usernameTextField.tap()
+        usernameTextField.typeText(self.eVisionUsername)
         passwordSecureTextField.tap()
-        passwordSecureTextField.typeText(eVisionPassword)
-        app.typeText("\r")
+        passwordSecureTextField.typeText(self.eVisionPassword)
+        
+        app.buttons["Login"].tap()
+        _ = app/*@START_MENU_TOKEN@*/.otherElements["dayView"]/*[[".otherElements[\"day\"]",".otherElements[\"dayView\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 20)
     }
 
     func waitForElement(element: XCUIElement){
@@ -132,6 +139,6 @@ class WingItUITests: XCTestCase {
 
 extension XCUIApplication {
     var isDisplayingTT: Bool {
-        return otherElements["Friday"].exists
+        return otherElements["dayView"].exists
     }
 }
