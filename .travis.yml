@@ -63,8 +63,8 @@ jobs:
           CODE_SIGNING_REQUIRED=NO 
           -derivedDataPath './output' 
           -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest' 
-          -destination 'platform=iOS Simulator,name=iPhone X,OS=latest' 
-          | xcpretty -c
+          # -destination 'platform=iOS Simulator,name=iPhone X,OS=latest' 
+          # | xcpretty -c
           # -stage: parserTests
           # script:
           #     - set -o pipefail
