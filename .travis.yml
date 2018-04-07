@@ -14,10 +14,12 @@ env:
   global:
   - secure: Qfr+x9a0+yxtNPFkCrrN+yZyYHk/4GNN29xx1Tl16Nmhh4QV/Zg2xMOhMKxYKqKQgxeV+OQq4t6v6Dcv+ShtrtSiJqTBBmaTI3bjjMm5LAhuyDhY35kA0LVTD/1J2YVaNAoC1GNE4wejHLhV3VVLfFhxmZMi9C7hxEn38/rIJFnEZ9jDm7qDjQzp9huUfaOA3EDuNq2wGt6E1LoK4VJpcHL4qz/olwXwMaE7IO2zP1uCQwGwmCquQPHYPxy1kOLlSXweH1QtBGvvJhFRCjJAbaMrYEZ+H1hBuEOydwlmTX4y3MRjREk7u3cUVEPzp9v4bBpwc1wT4MCTv6uURQZm6ugD0SNNFV+neQJOL3A0p2iQx95KghKHa4hL++MBpguaJWjZzmwab6Rcj2tXPWfuwqG+Xag6GvhH4fYw7FZ81iHiXkACPiKo8YimZ9eRQedtYAN04Cjp2ffnHf7vY5bonepb1XXkWPDdtfNtZpDBrO1euUkzQLcvEYo8Rr5/5JHiUt1pHqtFHSIxh8F0z2YHzlDQfncwCd/we/NPCIc8NHHtWEePLwbmprIK1JEDHX9DlKI1JchWM0LUIfdrqt5pwEyDwdqB1/IUqi5Y00ikNQ+kRJIv0JYIF3LCWfYpqOAhb7sD8EFupEAT/p9eLU6SovGp2vDYdP/iA5CPYCmI6OE=
   - secure: hUf0e/p+rDhAISIlGj1dPyQ4OvbA/HEciXVTrgQNxgFjIixiIQkjr+JhhqZfaxj832rC2DPYgxwAhtq9JRhxZuVaK2PsS+JxDjo64uT8ynjYla3RhTrkAuTeqlmNIjvUFWIjHUELWwos1sy+8aA+f9PR7aSGBGLYNK3Fbd+xvgkIJzOU735+FO5w3gneNxg18ckfOv9h1TJkS4NKfC9dkZYDrueLY1qpH1ZuS3Q68hiP8hSM21VrzfGvU//hRnibl6xWKPSG4GOKww57DNNkFANjrVEdhjHZaLz+e0GMlGxqHDYuPEkQ8y2n6DLdn+y8HS8KkdJAi4A3YUwEt7iyL10CsWFwUva9z93y4GHaJVVExkWVUhvp7bhNS4hGdcyZen11frjxOdVlBuTA7eVyyQDGEyOp1/slHy/Dejq5f8i1I1+Af+YVj4G7FEhaQ29O/l1tBYwUnAizAM6WMgegFcR5ptLasb3SywoPj+kFLjOG6rzocn1Jb90pvYJqh4zl4VNMeAPDpaWbe3ra7OW+AMQ35TB7hCJJxGpdUJSfjjJH+iFUPDzdEMEP9p2sP8THesSD7WED9TLEcjy2yQb18XVmKEzpYp5nljcWxufmbBzQl+Qn8oLHKS+crhffqLOEJKIv+25sIUES/XOydsFkTNgLfvvCMjZH1Xnj6XrrfIw=
-# before_install:
+before_install:
 # - rvm install ruby-2.2.2
-# - gem install xcpretty -N
-# script:
-# - set -o pipefail
-# - xcodebuild -workspace WingIt.xcworkspace -scheme WingIt -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-#   | xcpretty -c
+- gem install xcpretty -N
+script:
+- set -o pipefail
+# xctool, the default for travis, does'nt seem to work with the latest
+# version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
+- xcodebuild -workspace WingIt.xcworkspace -scheme WingIt -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO -derivedDaaPath './output' test
+  | xcpretty -c
