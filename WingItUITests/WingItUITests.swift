@@ -133,9 +133,12 @@ class WingItUITests: XCTestCase {
         let usernameTextField = app.textFields["Username"]
         let passwordSecureTextField = app.secureTextFields["Password"]
         
+        // Check if clear button exists (if box is empty, it won't)
+        if usernameTextField.buttons["Clear text"].exists {
             // Clear in case login info still saved
             usernameTextField.buttons["Clear text"].tap()
             passwordSecureTextField.buttons["Clear text"].tap()
+        }
         
         usernameTextField.tap()
         usernameTextField.typeText(self.eVisionUsername)
