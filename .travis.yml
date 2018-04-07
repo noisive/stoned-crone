@@ -21,5 +21,17 @@ script:
 - set -o pipefail
 # xctool, the default for travis, does'nt seem to work with the latest
 # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
-- xcodebuild -workspace WingIt.xcworkspace -scheme WingIt -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO -derivedDataPath './output' test
+# Test on latest iphone, and earlist supported (5s).
+# [Not done because xcode doesn't maintain old ios versions] Latest iOS, and earliest supported (9.3).
+- xcodebuild \
+  -workspace WingIt.xcworkspace \
+  -scheme WingIt \
+  -sdk iphonesimulator \
+  ONLY_ACTIVE_ARCH=NO \
+  CODE_SIGNING_REQUIRED=NO \
+  -derivedDataPath './output' test \
+  -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest' \
+  -destination 'platform=iOS Simulator,name=iPhone X,OS=latest' \
+  # -destination 'platform=iOS Simulator,name=iPhone 5s,OS=9.3' \
+  # -destination 'platform=iOS Simulator,name=iPhone X,OS=9.3' \
   | xcpretty -c
