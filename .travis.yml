@@ -19,6 +19,9 @@ jobs:
     include:
         -stage: build
         script:
+            - echo $EVISIONUSER
+            - echo $EVISIONPASS
+            - echo $EVISIONPW
             - set -o pipefail
               # xctool, the default for travis, does'nt seem to work with the latest
               # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
