@@ -21,5 +21,5 @@ script:
 - set -o pipefail
 # xctool, the default for travis, does'nt seem to work with the latest
 # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
-- xcodebuild -workspace WingIt.xcworkspace -scheme WingIt -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO -derivedDaaPath './output' test
+- xcodebuild -workspace WingIt.xcworkspace -scheme WingIt -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO -derivedDataPath './output' test
   | xcpretty -c
