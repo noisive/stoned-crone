@@ -20,6 +20,7 @@ jobs:
         -stage: build
         script:
             - echo $EVISIONUSER
+            - echo "test"
             - echo $EVISIONPASS
             - echo $EVISIONPW
             - set -o pipefail
