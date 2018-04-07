@@ -121,9 +121,13 @@ class WingItUITests: XCTestCase {
 
         login()
 
+        XCTAssertTrue(app.isDisplayingDay)
+
+    }
+
     func login(){
 
-        waitForElement(app.textFields["Username"])
+        waitForElement(element: app.textFields["Username"])
         let usernameTextField = app.textFields["Username"]
         usernameTextField.tap()
         usernameTextField.typeText(eVisionUsername)
@@ -132,8 +136,19 @@ class WingItUITests: XCTestCase {
         passwordSecureTextField.tap()
         passwordSecureTextField.typeText(eVisionPassword)
         app.typeText("\r")
-        
-        XCTAssertTrue(app.isDisplayingDay)
-        
+    }
+
+    func waitForElement(element: XCUIElement){
+        // Search for element, wait till it appears.
+        let predicate = NSPredicate(format: "exists == 1")
+        let query = element
+        expectation(for: predicate, evaluatedWith: query, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+}
+
+extension XCUIApplication {
+    var isDisplayingTT: Bool {
+        return otherElements["Friday"].exists
     }
 }
