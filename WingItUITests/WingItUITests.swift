@@ -24,6 +24,7 @@ class WingItUITests: XCTestCase {
             let eVisionUsername = ""
             return eVisionUsername
         }
+        print(eVisionUsername)
         return eVisionUsername
     }
     func setPassFromEnv() -> String{
