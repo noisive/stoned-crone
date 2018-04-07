@@ -29,7 +29,7 @@ before_install:
 
 jobs:
   include:
-      stage: build
+      - stage: build
       script:
           - set -o pipefail
             # xctool, the default for travis, does'nt seem to work with the latest
@@ -49,7 +49,7 @@ jobs:
             # -destination 'platform=iOS Simulator,name=iPhone 5s,OS=9.3' \
             # -destination 'platform=iOS Simulator,name=iPhone X,OS=9.3' \
 
-      stage: UITests
+      - stage: UITests
       script:
           - set -o pipefail
             # xctool, the default for travis, does'nt seem to work with the latest
