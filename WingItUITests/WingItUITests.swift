@@ -16,7 +16,7 @@ class WingItUITests: XCTestCase {
 
     var eVisionUsername: String = ""
     var eVisionPassword: String = ""
-
+    
     func setUserFromEnv() -> String{
         guard let eVisionUsername = ProcessInfo.processInfo.environment["EVISIONUSER"] else {
             let eVisionUsername = ""
@@ -59,7 +59,7 @@ class WingItUITests: XCTestCase {
 
 
     func testingPlayground(){
-
+        
     }
 
 
@@ -98,10 +98,14 @@ class WingItUITests: XCTestCase {
     }
 
     func testLoginUpdate(){
+        
+        // Ensure we have a timetable to view
         testLoginFresh()
-        app.launch()
-        app.navigationBars["Friday"].children(matching: .button).element.tap()
-        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Update / Log in"]/*[[".cells.staticTexts[\"Update \/ Log in\"]",".staticTexts[\"Update \/ Log in\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        // Avoid each test having to relaunch the app (unless required).
+//        if (!WingItUITests.launched) {
+//            app.launch()
+//            WingItUITests.launched = true
+//        }
 
         login()
 
@@ -125,7 +129,6 @@ class WingItUITests: XCTestCase {
         passwordSecureTextField.typeText(self.eVisionPassword)
         
         app.buttons["Login"].tap()
-        _ = app/*@START_MENU_TOKEN@*/.otherElements["dayView"]/*[[".otherElements[\"day\"]",".otherElements[\"dayView\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 20)
     }
 
     func waitForElement(element: XCUIElement){
