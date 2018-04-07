@@ -9,12 +9,6 @@
 import XCTest
 import Foundation //env variables
 
-extension XCUIApplication {
-    var isDisplayingDay: Bool {
-        return otherElements["Monday"].exists
-    }
-}
-
 class WingItUITests: XCTestCase {
 
     var app: XCUIApplication! = XCUIApplication()
@@ -65,24 +59,6 @@ class WingItUITests: XCTestCase {
 
 
     func testingPlayground(){
-        app.launch()
-
-        let dayviewElement = app/*@START_MENU_TOKEN@*/.otherElements["dayView"]/*[[".otherElements[\"day\"]",".otherElements[\"dayView\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        dayviewElement/*@START_MENU_TOKEN@*/.press(forDuration: 0.7);/*[[".tap()",".press(forDuration: 0.7);"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        dayviewElement.tap()
-        dayviewElement.tap()
-        dayviewElement.swipeRight()
-        dayviewElement.tap()
-
-        let thursdayNavigationBar = app.navigationBars["Thursday"]
-        thursdayNavigationBar.tap()
-
-        let staticText = thursdayNavigationBar.staticTexts["05/10"]
-        staticText.tap()
-        staticText.tap()
-        staticText.tap()
-        dayviewElement.swipeLeft()
-        thursdayNavigationBar.tap()
 
     }
 
@@ -108,6 +84,7 @@ class WingItUITests: XCTestCase {
 
     }
 
+    // Test that a fresh login reaches a timetable.
     func testLoginFresh(){
         app.launchArguments.append("--resetdata")
         app.launch()
