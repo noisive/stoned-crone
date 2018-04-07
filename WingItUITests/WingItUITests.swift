@@ -23,20 +23,26 @@ class WingItUITests: XCTestCase {
     var eVisionUsername: String = ""
     var eVisionPassword: String = ""
 
+    func setUserFromEnv() -> String{
+        guard let eVisionUsername = ProcessInfo.processInfo.environment["EVISIONUSER"] else {
+            let eVisionUsername = ""
+            return eVisionUsername
+        }
+        return eVisionUsername
+    }
+    func setPassFromEnv() -> String{
+        guard let eVisionPassword = ProcessInfo.processInfo.environment["EVISIONPW"] else {
+            let eVisionPassword = ""
+            return eVisionPassword
+        }
+        return eVisionPassword
+    }
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        guard let eVisionUsername = ProcessInfo.processInfo.environment["EVISIONUSER"] else {
-            let eVisionUsername = ""
-            return
-        }
-
-        guard let eVisionPassword = ProcessInfo.processInfo.environment["EVISIONPW"] else {
-            let eVisionPassword = ""
-            return
-        }
-        self.eVisionUsername = eVisionUsername
-        self.eVisionPassword = eVisionPassword
+        self.eVisionUsername = setUserFromEnv()
+        self.eVisionPassword = setPassFromEnv()
 
 
         // In UI tests it is usually best to stop immediately when a failure occurs. (They are time-expensive to ru)
