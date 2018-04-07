@@ -101,8 +101,7 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell : DayCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCell", for: indexPath) as! DayCollectionViewCell
         
-        cell.tableView.separatorColor = .clear
-        cell.hourData = self.hourData[indexPath.row]
+        cell.dataByHour = self.hourData[indexPath.row]
         cell.tableViewData = self.lessonData
         cell.tableView.reloadData()
         cell.passDelegate = self

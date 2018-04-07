@@ -8,6 +8,22 @@
 
 import Foundation
 
+public func getBackgroundColorFromLesson(type: String) -> UIColor {
+    switch type {
+    case "Lecture":
+        return AppColors.LECTURE_COLOR.withAlphaComponent(0.2)
+    case "Lab":
+        return AppColors.LAB_COLOR.withAlphaComponent(0.2)
+    case "Tutorial":
+        return AppColors.TUTORIAL_COLOR.withAlphaComponent(0.2)
+    default:
+        return UIColor.gray
+    }
+}
+
+public func getBarBackgroundColorFromLesson(type: String) -> UIColor {
+    return getBackgroundColorFromLesson(type: type).withAlphaComponent(1)
+}
 
 // Call this function when each item is initialised to schedule a
 // notification [minsBeforeNotification] minutes before that event.
@@ -142,6 +158,7 @@ func retrieveStoredPassword() -> String{
 func isKeyPresentInUserDefaults(key: String) -> Bool {
     return UserDefaults.standard.object(forKey: key) != nil
 }
+
 
 
 // Usage: let color2 = UIColor(rgb: 0xFFFFFF)

@@ -14,7 +14,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     var passDelegate : PassData?
     
     //Create an array of arrays that have nothing in them
-    var hourData = [(lesson: CLong?, lesson2: CLong?)?](repeatElement(nil, count: 14))
+    var dataByHour = [(lesson: CLong?, lesson2: CLong?)?](repeatElement(nil, count: 14))
     
     var tableViewData = [Lesson]()
     
@@ -23,10 +23,6 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 0)
         
-        tableViewData.insert(Lesson(uid: 1, classID: "as", start: 3, duration: 4, colour: "", code: "COSC345", type: "Lecture", roomShort: "FHC", roomFull: "St. Davids", paperName: "Software Engineering", day: 4, eventDate: Date(), latitude: 0.2378, longitude: 0.2894 ), at: 0)
-        
-        
-        
         self.tableView.reloadData()
     }
     
@@ -34,10 +30,32 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         return 1
     }
     
+    //MARK: Functions
+    //===================================================================================
+    
+    private func isFirstOccurance(of currentLesson: CLong, indexPath: IndexPath) -> Bool {
+        if indexPath.row == 0 {
+            return true
+        }
+        guard let previousLesson: (lesson: CLong?, lesson2: CLong?) = self.dataByHour[indexPath.row - 1] else {
+            return true
+        }
+        if (currentLesson != previousLesson.lesson && currentLesson != previousLesson.lesson2) {
+            return true
+        }
+        return false
+    }
+    
+    //Find the lesson object that matches event uid
+    func findLessonData(uid: CLong) -> Lesson? {
+        if let data = tableViewData.filter({$0.uid == uid}).first {
+            return data
+        }
+        return nil
+    }
+    
     func scrollToCurrentTime(){
-        
         let currentHour = Calendar.current.component(.hour, from: Date())
-        
         var currentHourCell: IndexPath
         // Check if time to scroll to is out of bounds, scroll to min/max if so.
         if currentHour < 8 {
@@ -49,116 +67,120 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         }
         
         self.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
+    }
+    
+    @objc private func handleTap(sender: UIGestureRecognizer) {
+        guard let view: UIView = sender.view else { return }
+        if let lesson: Lesson = self.findLessonData(uid: view.tag) {
+            self.passDelegate?.performSegue(with: lesson)
+        } else {
+            print("View with tag \(view.tag) does not exist.")
+        }
         
     }
-
+    
+    //MARK: Delegate functions
+    //===================================================================================
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return hourData.count
+        return self.dataByHour.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     
-        var cell : UITableViewCell = UITableViewCell()
         
-        print(self.hourData[indexPath.row])
+        let cell: LessonCell = self.tableView.dequeueReusableCell(withIdentifier: AppCells.LESSON_CELL, for: indexPath) as! LessonCell
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
+        
+        cell.timeLabel.text = TimeUtil.get24HourTimeFromIndexPath(row: indexPath.row)
+        cell.showLessons()
         
         //Empty cell
-        guard let dataPath = self.hourData[indexPath.row] else {
-            let blankCell : BlankCellTableViewCell = tableView.dequeueReusableCell(withIdentifier:
-                "BlankCell", for: indexPath) as! BlankCellTableViewCell
-            
-            blankCell.timeLabel.text = TimeUtil.get24HourTimeFromIndexPath(row: indexPath.row)
-            return blankCell
+        guard let lessonData: (lesson: CLong?, lesson2: CLong?) = self.dataByHour[indexPath.row] else {
+            cell.hideLessons()
+            return cell
         }
         
-        //Single lesson
-        if dataPath.lesson != nil && dataPath.lesson2 == nil {
-            let singleCell : TimetableCell = tableView.dequeueReusableCell(withIdentifier:
-                "TimetableCell", for: indexPath) as! TimetableCell
-            
-            if let lessonData = findData(uid: (dataPath.lesson)!) {
-                singleCell.lessonCode.text = lessonData.code
-                singleCell.lessonRoom.text = lessonData.roomShort
-                
-                //Setup time table, color and style.
-                setupCell(Appearance: singleCell, indexPath: indexPath, type: lessonData.type, colour: lessonData.colour)
+        //Clash cell
+        if (lessonData.lesson != nil && lessonData.lesson2 != nil) {
+            if let lessonOneUID = lessonData.lesson, let lessonTwoUID = lessonData.lesson2 {
+                cell.leftLesson.tag = lessonOneUID
+                cell.rightLesson.tag = lessonTwoUID
+                cell.leftLesson.addGestureRecognizer(tapGesture)
+                cell.rightLesson.addGestureRecognizer(tapGesture)
+                if let lessonOneData = self.findLessonData(uid: lessonOneUID), let lessonTwoData = self.findLessonData(uid: lessonTwoUID) {
+                    if (self.isFirstOccurance(of: lessonOneUID, indexPath: indexPath)) {
+                        cell.leftLessonCode.text = lessonOneData.code
+                        cell.leftLessonRoom.text = lessonOneData.roomShort
+                        cell.leftLessonRoom.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLessonCode.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        
+                    } else {
+                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.hideLeftLessonLabels()
+                    }
+                    if (self.isFirstOccurance(of: lessonTwoUID, indexPath: indexPath)) {
+                        cell.rightLessonCode.text = lessonTwoData.code
+                        cell.rightLessonRoom.text = lessonTwoData.roomShort
+                        cell.rightLessonRoom.textColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type)
+                        cell.rightLessonCode.textColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type)
+                        cell.rightLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonTwoData.type)
+                        cell.rightLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type)
+                        
+                    } else {
+                        cell.rightLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonTwoData.type)
+                        cell.rightLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type)
+                        cell.hideRightLessonLabels()
+                    }
+                } else {
+                    print("Could not find lesson for UID")
+                }
+            } else {
+                print("UIDs are missing for one of the lessons")
             }
-            singleCell.timeLabel.text = indexPath.row + 8 >= 10 ? "\(8 + indexPath.row):00" : "0\(8 + indexPath.row):00"
             
-            cell = singleCell
-        } else if dataPath.lesson != nil && dataPath.lesson2 != nil {
-            let clashCell : ClashCell = tableView.dequeueReusableCell(withIdentifier:
-                "ClashCell", for: indexPath) as! ClashCell
-           
-            
-            if let lessonData1 = findData(uid: (dataPath.lesson)!), let lessonData2 = findData(uid: (dataPath.lesson2)!) {
-                clashCell.leftLessonLabel.text = lessonData1.code
-                clashCell.rightLessonLabel.text = lessonData2.code
-                clashCell.leftLesson.backgroundColor = UIColor(hexString: lessonData1.colour)
-                clashCell.rightLesson.backgroundColor = UIColor(hexString: lessonData2.colour)
-            }
-            
-            
-            clashCell.timeLabel.text = TimeUtil.get24HourTimeFromIndexPath(row: indexPath.row)
-            
-            cell = clashCell
         }
-        cell.selectionStyle = .none
+            
+            //Normal cell
+        else {
+            if let lessonOneUID = lessonData.lesson {
+                cell.hideRightLesson()
+                cell.leftLesson.tag = lessonOneUID
+                cell.leftLesson.addGestureRecognizer(tapGesture)
+                if let lessonOneData = self.findLessonData(uid: lessonOneUID) {
+                    if (self.isFirstOccurance(of: lessonOneUID, indexPath: indexPath)) {
+                        cell.leftLessonCode.text = lessonOneData.code
+                        cell.leftLessonRoom.text = lessonOneData.roomShort
+                        cell.leftLessonRoom.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLessonCode.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        
+                    } else {
+                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.hideLeftLessonLabels()
+                    }
+                } else {
+                    print("Could not find lesson for UID")
+                }
+            } else {
+                print("No data in lesson one")
+            }
+        }
         
         return cell
     }
     
-    //Find the lesson object that matches event uid
-    func findData(uid: CLong) -> Lesson? {
-        if let data = tableViewData.filter({$0.uid == uid}).first {
-            return data
-        }
-        return nil
-    }
     
-    func setupCell(Appearance cell: TimetableCell, indexPath: IndexPath, type: String, colour: String) {
-        
-        cell.colorView.backgroundColor = UIColor(hexString: colour)
-        
-        let lessonData = hourData[indexPath.row]
-        
-        if indexPath.row > 0 {
-            switch true {
-                
-            // If the cell above is equal, connect the two and remove excess data
-            case lessonData?.lesson == hourData[indexPath.row - 1]?.lesson:
-                cell.colorView.topAnchor.constraint(equalTo: cell.topAnchor, constant: 0).isActive = true
-                cell.seperatorLine.isHidden = true
-                cell.lessonCode.isHidden = true
-                cell.lessonRoom.isHidden = true
-                
-                //if the cell does not continue to another, round edges off
-                if lessonData?.lesson != hourData[indexPath.row + 1]?.lesson {
-                    roundEdges(view: cell.colorView, corners: [.bottomLeft, .bottomRight])
-                }
-
-            case hourData[indexPath.row + 1]?.lesson == lessonData?.lesson:
-                roundEdges(view: cell.colorView, corners: [.topLeft, .topRight])
-                
-            default:
-                cell.lessonRoom.isHidden = false
-                cell.lessonCode.isHidden = false
-                cell.seperatorLine.isHidden = false
-                cell.colorView.layer.cornerRadius = 2
-            }
-        }
-    }
     
-    @objc func roundEdges(view: UIView, corners: UIRectCorner) {
-        let cellMask = CAShapeLayer()
-        cellMask.path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: 2, height: 2)).cgPath
-        view.layer.mask = cellMask
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if hourData[indexPath.row] != nil{
-            if let pass = findData(uid: (hourData[indexPath.row]?.lesson)!) {
+        if dataByHour[indexPath.row] != nil{
+            if let pass = findLessonData(uid: (dataByHour[indexPath.row]?.lesson)!) {
                 self.passDelegate?.performSegue(with: pass)
             }else{
                 print("cell without data tapped")
@@ -170,7 +192,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     // Programatically set the height of all timetable cells
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 75
+        return 80
     }
     
 }
