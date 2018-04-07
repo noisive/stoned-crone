@@ -24,11 +24,10 @@ class WingItUITests: XCTestCase {
             let eVisionUsername = ""
             return eVisionUsername
         }
-        print(eVisionUsername)
         return eVisionUsername
     }
     func setPassFromEnv() -> String{
-        guard let eVisionPassword = ProcessInfo.processInfo.environment["EVISIONPW"] else {
+        guard let eVisionPassword = ProcessInfo.processInfo.environment["EVISIONPASS"] else {
             let eVisionPassword = ""
             return eVisionPassword
         }
