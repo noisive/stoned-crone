@@ -35,7 +35,7 @@ jobs:
             # xctool, the default for travis, does'nt seem to work with the latest
             # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
             # Test on latest iphone, and earlist supported (5s).
-          - xcodebuild 
+          - xcodebuild build
             -workspace WingIt.xcworkspace 
             -scheme WingIt 
             -sdk iphonesimulator 
@@ -48,17 +48,17 @@ jobs:
             # [Not done because xcode doesn't maintain old ios versions] Latest iOS, and earliest supported (9.3).
             # -destination 'platform=iOS Simulator,name=iPhone 5s,OS=9.3' \
             # -destination 'platform=iOS Simulator,name=iPhone X,OS=9.3' \
+
       -stage: UITests
       script:
           - set -o pipefail
             # xctool, the default for travis, does'nt seem to work with the latest
             # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
             # Test on latest iphone, and earlist supported (5s).
-          - xcodebuild 
+          - xcodebuild test
             -workspace WingIt.xcworkspace 
             -scheme WingItUITests
             -sdk iphonesimulator 
-            test
             ONLY_ACTIVE_ARCH=NO 
             CODE_SIGNING_REQUIRED=NO 
             -derivedDataPath './output' 
