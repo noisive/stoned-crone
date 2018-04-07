@@ -12,6 +12,8 @@ import Foundation //env variables
 class WingItUITests: XCTestCase {
 
     var app: XCUIApplication! = XCUIApplication()
+    // Track whether app is launched or not. (Some UI tests don't need restarts.)
+    static var launched = false
 
 
     var eVisionUsername: String = ""
@@ -60,6 +62,7 @@ class WingItUITests: XCTestCase {
 
     func testingPlayground(){
         
+
     }
 
 
@@ -92,7 +95,7 @@ class WingItUITests: XCTestCase {
         login()
 
         // Wait for a thing to display, then assert it is displaying... Circular? But should work.
-        _ = app/*@START_MENU_TOKEN@*/.otherElements["dayView"]/*[[".otherElements[\"day\"]",".otherElements[\"dayView\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.waitForExistence(timeout: 20)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
         XCTAssertTrue(app.isDisplayingTT)
 
     }
@@ -107,7 +110,10 @@ class WingItUITests: XCTestCase {
 //            WingItUITests.launched = true
 //        }
 
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
+        app.buttons["Refresh"].tap()
         login()
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
 
         XCTAssertTrue(app.isDisplayingTT)
 
@@ -115,7 +121,7 @@ class WingItUITests: XCTestCase {
 
     func login(){
 
-        _ = app.textFields["Username"].waitForExistence(timeout: 10)
+        _ = app.textFields["Username"].waitForExistence(timeout: 30)
         let usernameTextField = app.textFields["Username"]
         let passwordSecureTextField = app.secureTextFields["Password"]
         
@@ -136,7 +142,7 @@ class WingItUITests: XCTestCase {
         let predicate = NSPredicate(format: "exists == 1")
         let query = element
         expectation(for: predicate, evaluatedWith: query, handler: nil)
-        waitForExpectations(timeout: 10, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
 }
 
