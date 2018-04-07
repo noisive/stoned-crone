@@ -25,6 +25,8 @@
 		533C92E020762A9400394325 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92DB20762A9400394325 /* SVRadialGradientLayer.m */; };
 		535BDEC91EC48FB200B853C2 /* TimetableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535BDEC81EC48FB200B853C2 /* TimetableCell.swift */; };
 		53B30672207754A0006E05B7 /* LessonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B30671207754A0006E05B7 /* LessonCell.swift */; };
+		53B306742077584C006E05B7 /* AppCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B306732077584C006E05B7 /* AppCells.swift */; };
+		53B306762077643A006E05B7 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B306752077643A006E05B7 /* AppColors.swift */; };
 		53BB7A171ED133A900370F7B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB7A161ED133A900370F7B /* Constants.swift */; };
 		53BB7A191ED14C3800370F7B /* ClashCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB7A181ED14C3700370F7B /* ClashCell.swift */; };
 		53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB7A201ED1536C00370F7B /* DetailView.swift */; };
@@ -82,6 +84,8 @@
 		533C92DB20762A9400394325 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		535BDEC81EC48FB200B853C2 /* TimetableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimetableCell.swift; sourceTree = "<group>"; };
 		53B30671207754A0006E05B7 /* LessonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCell.swift; sourceTree = "<group>"; };
+		53B306732077584C006E05B7 /* AppCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCells.swift; sourceTree = "<group>"; };
+		53B306752077643A006E05B7 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		53BB7A161ED133A900370F7B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		53BB7A181ED14C3700370F7B /* ClashCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClashCell.swift; sourceTree = "<group>"; };
 		53BB7A201ED1536C00370F7B /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				53F8A00D1EC3D0010001604A /* ViewController.swift */,
+				53B306732077584C006E05B7 /* AppCells.swift */,
 				069827641F87041000777DAD /* LoginDebugController.swift */,
 				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
 				297C56921ED9126200C44420 /* LoginViewController.swift */,
@@ -202,6 +207,7 @@
 			children = (
 				061F3E7F1F8AF09C00BD0D09 /* UIDataHandling.swift */,
 				06B38A371F82361E009EDC60 /* Helper.swift */,
+				53B306752077643A006E05B7 /* AppColors.swift */,
 				06A637F81F7DD15F00C5F15F /* wrapper.cpp */,
 				53F8A00B1EC3D0010001604A /* AppDelegate.swift */,
 				53CDC1E51EDC1EC000A2ED5A /* Views */,
@@ -379,6 +385,7 @@
 				062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */,
 				533C92DF20762A9400394325 /* SVIndefiniteAnimatedView.m in Sources */,
 				062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */,
+				53B306762077643A006E05B7 /* AppColors.swift in Sources */,
 				53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */,
 				53F8A00E1EC3D0010001604A /* ViewController.swift in Sources */,
 				06B38A381F82361E009EDC60 /* Helper.swift in Sources */,
@@ -404,6 +411,7 @@
 				061F3E801F8AF09C00BD0D09 /* UIDataHandling.swift in Sources */,
 				53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */,
 				533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */,
+				53B306742077584C006E05B7 /* AppCells.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

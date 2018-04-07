@@ -29,15 +29,39 @@ class LessonCell: UITableViewCell {
     @IBOutlet var rightLessonRoom: UILabel!
     @IBOutlet var rightLessonBar: UIView!
     
+    //MARK: Tap handing
+    //=============================================================
+    
     override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+       
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    //MARK: Functions
+    //=============================================================
+    
+    public func hideLessons() {
+        self.lessonContainer.isHidden = true
     }
-
+    
+    public func showLessons() {
+        self.lessonContainer.isHidden = false
+    }
+    
+    public func hideLeftLesson() {
+        self.leftLesson.isHidden = true
+    }
+    
+    public func hideRightLesson() {
+        self.rightLesson.isHidden = true
+    }
+    
+    public func hideLeftLessonLabels() {
+        self.leftLessonCode.isHidden = true
+        self.leftLessonRoom.isHidden = true
+    }
+    
+    public func hideRightLessonLabels() {
+        self.rightLessonCode.isHidden = true
+        self.rightLessonRoom.isHidden = true
+    }
 }
