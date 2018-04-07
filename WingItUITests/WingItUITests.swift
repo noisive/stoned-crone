@@ -92,6 +92,14 @@ class WingItUITests: XCTestCase {
         app.launchArguments.append("--resetdata")
         app.launch()
 
+        // Waits and checks for allow notifications alert.
+        addUIInterruptionMonitor(withDescription: "Notifications") { (alert) -> Bool in
+            alert.buttons["Allow"].tap()
+            return true
+        }
+//        launchFinished() // wait for app to load and notification to show.
+        app.tap() // need to interact with the app for the handler to fire.
+        
         login()
 
         // Wait for a thing to display, then assert it is displaying... Circular? But should work.
@@ -125,9 +133,9 @@ class WingItUITests: XCTestCase {
         let usernameTextField = app.textFields["Username"]
         let passwordSecureTextField = app.secureTextFields["Password"]
         
-        // Clear in case login info still saved
-        usernameTextField.buttons["Clear text"].tap()
-        passwordSecureTextField.buttons["Clear text"].tap()
+            // Clear in case login info still saved
+            usernameTextField.buttons["Clear text"].tap()
+            passwordSecureTextField.buttons["Clear text"].tap()
         
         usernameTextField.tap()
         usernameTextField.typeText(self.eVisionUsername)
