@@ -16,20 +16,27 @@ extension XCUIApplication {
 }
 
 class WingItUITests: XCTestCase {
-    
+
     var app: XCUIApplication! = XCUIApplication()
-    
-    if let eVisionUsername = ProcessInfo.processInfo.environment["EVISIONUSER"] {
-    }
-    if let eVisionPassword = ProcessInfo.processInfo.environment["EVISIONPW"] {
-    }
-    
+
+
+    var eVisionUsername: String = ""
+    var eVisionPassword: String = ""
+
     override func setUp() {
         super.setUp()
-        
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // In UI tests it is usually best to stop immediately when a failure occurs.
+        guard let eVisionUsername = ProcessInfo.processInfo.environment["EVISIONUSER"] else {
+            let eVisionUsername = ""
+            return
+        }
+
+        guard let eVisionPassword = ProcessInfo.processInfo.environment["EVISIONPW"] else {
+            let eVisionPassword = ""
+            return
+        }
+        self.eVisionUsername = eVisionUsername
+        self.eVisionPassword = eVisionPassword
         continueAfterFailure = false
         
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.\
