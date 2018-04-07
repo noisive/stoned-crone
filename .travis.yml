@@ -28,58 +28,58 @@ before_install:
     - gem install xcpretty -N
 
 jobs:
-  include:
-      - stage: build
-      script:
-          - set -o pipefail
-            # xctool, the default for travis, does'nt seem to work with the latest
-            # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
-            # Test on latest iphone, and earlist supported (5s).
-          - xcodebuild build
-            -workspace WingIt.xcworkspace 
-            -scheme WingIt 
-            -sdk iphonesimulator 
-            ONLY_ACTIVE_ARCH=NO 
-            CODE_SIGNING_REQUIRED=NO 
-            -derivedDataPath './output'
-            -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest' 
-            -destination 'platform=iOS Simulator,name=iPhone X,OS=latest' 
-            | xcpretty -c
-            # [Not done because xcode doesn't maintain old ios versions] Latest iOS, and earliest supported (9.3).
-            # -destination 'platform=iOS Simulator,name=iPhone 5s,OS=9.3' \
-            # -destination 'platform=iOS Simulator,name=iPhone X,OS=9.3' \
+    include:
+        - stage: build
+          script:
+              - set -o pipefail
+                # xctool, the default for travis, does'nt seem to work with the latest
+                # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
+                # Test on latest iphone, and earlist supported (5s).
+              - xcodebuild build
+                -workspace WingIt.xcworkspace 
+                -scheme WingIt 
+                -sdk iphonesimulator 
+                ONLY_ACTIVE_ARCH=NO 
+                CODE_SIGNING_REQUIRED=NO 
+                -derivedDataPath './output'
+                -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest' 
+                -destination 'platform=iOS Simulator,name=iPhone X,OS=latest' 
+                | xcpretty -c
+                # [Not done because xcode doesn't maintain old ios versions] Latest iOS, and earliest supported (9.3).
+                # -destination 'platform=iOS Simulator,name=iPhone 5s,OS=9.3' \
+                # -destination 'platform=iOS Simulator,name=iPhone X,OS=9.3' \
 
       - stage: UITests
-      script:
-          - set -o pipefail
-            # xctool, the default for travis, does'nt seem to work with the latest
-            # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
-            # Test on latest iphone, and earlist supported (5s).
-          - xcodebuild test
-            -workspace WingIt.xcworkspace 
-            -scheme WingItUITests
-            -sdk iphonesimulator 
-            ONLY_ACTIVE_ARCH=NO 
-            CODE_SIGNING_REQUIRED=NO 
-            -derivedDataPath './output' 
-            -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest' 
-            -destination 'platform=iOS Simulator,name=iPhone X,OS=latest' 
-            | xcpretty -c
-            # -stage: parserTests
-            # script:
-            #     - set -o pipefail
-            #       # xctool, the default for travis, does'nt seem to work with the latest
-            #       # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
-            #       # Test on latest iphone, and earlist supported (5s).
-            #     - xcodebuild 
-            #       -workspace WingIt.xcworkspace 
-            #       -scheme ParserTests 
-            #       -sdk iphonesimulator 
-            #       ONLY_ACTIVE_ARCH=NO 
-            #       CODE_SIGNING_REQUIRED=NO 
-            #       -derivedDataPath './output' test 
-            #       -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest' 
-            #       -destination 'platform=iOS Simulator,name=iPhone X,OS=latest' 
-            #       | xcpretty -c
+        script:
+            - set -o pipefail
+              # xctool, the default for travis, does'nt seem to work with the latest
+              # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
+              # Test on latest iphone, and earlist supported (5s).
+            - xcodebuild test
+              -workspace WingIt.xcworkspace 
+              -scheme WingItUITests
+              -sdk iphonesimulator 
+              ONLY_ACTIVE_ARCH=NO 
+              CODE_SIGNING_REQUIRED=NO 
+              -derivedDataPath './output' 
+              -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest' 
+              -destination 'platform=iOS Simulator,name=iPhone X,OS=latest' 
+              | xcpretty -c
+              # -stage: parserTests
+              # script:
+              #     - set -o pipefail
+              #       # xctool, the default for travis, does'nt seem to work with the latest
+              #       # version of xcode. Use manual xcodebuild script instead, piped through xcpretty.
+              #       # Test on latest iphone, and earlist supported (5s).
+              #     - xcodebuild 
+              #       -workspace WingIt.xcworkspace 
+              #       -scheme ParserTests 
+              #       -sdk iphonesimulator 
+              #       ONLY_ACTIVE_ARCH=NO 
+              #       CODE_SIGNING_REQUIRED=NO 
+              #       -derivedDataPath './output' test 
+              #       -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest' 
+              #       -destination 'platform=iOS Simulator,name=iPhone X,OS=latest' 
+              #       | xcpretty -c
 
 
