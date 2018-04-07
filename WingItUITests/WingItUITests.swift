@@ -105,16 +105,8 @@ class WingItUITests: XCTestCase {
     func testLoginFresh(){
         app.launchArguments.append("--resetdata")
         app.launch()
-        
-        
-        let usernameTextField = app.textFields["Username"]
-        usernameTextField.tap()
-        usernameTextField.typeText(eVisionUsername)
-        
-        let passwordSecureTextField = app.secureTextFields["Password"]
-        passwordSecureTextField.tap()
-        passwordSecureTextField.typeText(eVisionPassword)
-        app.typeText("\r")
+
+        login()
         XCUIApplication().navigationBars["Log in to eVision"].buttons["Cancel"].tap()
 
         XCTAssertTrue(app.isDisplayingDay)
@@ -126,6 +118,12 @@ class WingItUITests: XCTestCase {
         app.launch()
         app.navigationBars["Friday"].children(matching: .button).element.tap()
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Update / Log in"]/*[[".cells.staticTexts[\"Update \/ Log in\"]",".staticTexts[\"Update \/ Log in\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+
+        login()
+
+    func login(){
+
+        waitForElement(app.textFields["Username"])
         let usernameTextField = app.textFields["Username"]
         usernameTextField.tap()
         usernameTextField.typeText(eVisionUsername)
