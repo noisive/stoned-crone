@@ -13,5 +13,4 @@ public class AppCells {
     
     public static let LESSON_CELL: String = "LessonCell"
     
-    
 }

@@ -38,7 +38,7 @@
 		53D4B384207610140063E45F /* AppStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B383207610140063E45F /* AppStates.swift */; };
 		53D4B38620761F700063E45F /* NavigationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B38520761F700063E45F /* NavigationProtocols.swift */; };
 		53F8A00C1EC3D0010001604A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A00B1EC3D0010001604A /* AppDelegate.swift */; };
-		53F8A00E1EC3D0010001604A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A00D1EC3D0010001604A /* ViewController.swift */; };
+		53F8A00E1EC3D0010001604A /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A00D1EC3D0010001604A /* TimetableView.swift */; };
 		53F8A0111EC3D0010001604A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F8A00F1EC3D0010001604A /* Main.storyboard */; };
 		53F8A0141EC3D0010001604A /* Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A0121EC3D0010001604A /* Project.xcdatamodeld */; };
 		53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53F8A0151EC3D0010001604A /* Assets.xcassets */; };
@@ -104,7 +104,7 @@
 		53D4B38520761F700063E45F /* NavigationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationProtocols.swift; sourceTree = "<group>"; };
 		53F8A0081EC3D0010001604A /* WingIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WingIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F8A00B1EC3D0010001604A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		53F8A00D1EC3D0010001604A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		53F8A00D1EC3D0010001604A /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
 		53F8A0101EC3D0010001604A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		53F8A0131EC3D0010001604A /* Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Project.xcdatamodel; sourceTree = "<group>"; };
 		53F8A0151EC3D0010001604A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -184,6 +184,7 @@
 		534635A92079A94800497A8D /* App Definitions */ = {
 			isa = PBXGroup;
 			children = (
+				53B306732077584C006E05B7 /* AppCells.swift */,
 				53D4B383207610140063E45F /* AppStates.swift */,
 				53B306752077643A006E05B7 /* AppColors.swift */,
 			);
@@ -224,8 +225,7 @@
 		53CDC1E51EDC1EC000A2ED5A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				53F8A00D1EC3D0010001604A /* ViewController.swift */,
-				53B306732077584C006E05B7 /* AppCells.swift */,
+				53F8A00D1EC3D0010001604A /* TimetableView.swift */,
 				069827641F87041000777DAD /* LoginDebugController.swift */,
 				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
 				297C56921ED9126200C44420 /* LoginViewController.swift */,
@@ -435,7 +435,7 @@
 				062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */,
 				53B306762077643A006E05B7 /* AppColors.swift in Sources */,
 				53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */,
-				53F8A00E1EC3D0010001604A /* ViewController.swift in Sources */,
+				53F8A00E1EC3D0010001604A /* TimetableView.swift in Sources */,
 				06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */,
 				53F8A0141EC3D0010001604A /* Project.xcdatamodeld in Sources */,
 				53B30672207754A0006E05B7 /* LessonCell.swift in Sources */,

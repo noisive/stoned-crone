@@ -11,9 +11,11 @@ import Foundation
 public class AppStates {
     
     //MARK: App States
-    //====================================================================================
+    //====================================================================
     
     public static let LOGIN_STATE: String = "LoginView"
-    public static let DETAIL_CLASS_VIEW: String = "DetailedClassView"
+    public static let DETAIL_VIEW_STATE: String = "DetailedClassView"
+    public static let MAIN_NAVIGATION_CONTROLLER: String = "MainNavigationController"
+    public static let TIMETABLE_STATE: String = "TimetableView"
     
 }

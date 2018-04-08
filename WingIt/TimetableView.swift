@@ -12,7 +12,7 @@ protocol PassData {
     func performSegue(with data: Lesson)
 }
 
-class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PassData {
+class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PassData {
     
     @IBOutlet var ToggleSectionOutlet: UISegmentedControl!
     @IBOutlet var collectionView: UICollectionView!
@@ -133,17 +133,11 @@ class ViewController: UIViewController, UIToolbarDelegate, UICollectionViewDeleg
  
     
     func performSegue(with data: Lesson)  {
-        //Perform segue here
-        self.performSegue(withIdentifier: "ShowDetail", sender: data)
+        self.navigationController?.pushViewController(NavigationService.displayDetailedClassView(lessonData: data), animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return CGSize(width: self.view.frame.size.width, height: self.collectionView.frame.size.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
     }
     
     // FEATURE This may need to change if we are extending the number of days?? - WW
