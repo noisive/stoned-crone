@@ -33,7 +33,6 @@ jobs:
         -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest'
         -destination 'platform=iOS Simulator,name=iPhone 5s,OS=9.3'
         -destination 'platform=iOS Simulator,name=iPhone X,OS=latest'
-        -destination 'platform=iOS Simulator,name=iPhone X,OS=9.3'
         | xcpretty -c
 
   - stage: UITests
@@ -54,5 +53,4 @@ jobs:
         -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest'
         -destination 'platform=iOS Simulator,name=iPhone 5s,OS=9.3'
         -destination 'platform=iOS Simulator,name=iPhone X,OS=latest'
-        -destination 'platform=iOS Simulator,name=iPhone X,OS=9.3'
         | xcpretty -c
