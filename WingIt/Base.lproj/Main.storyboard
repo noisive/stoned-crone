@@ -327,24 +327,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1cv-MI-B9i">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="1mY-ZG-zo1">
-                                    <size key="itemSize" width="371" height="687"/>
+                                    <size key="itemSize" width="371" height="640.66666666666663"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DayCell" id="wag-jb-VzF" customClass="DayCollectionViewCell" customModule="WingIt" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-24.666666666666668" width="371" height="687"/>
+                                        <rect key="frame" x="0.0" y="-23.333333333333332" width="371" height="640.66666666666663"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="371" height="687"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="371" height="640.66666666666663"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rbj-Pg-4kz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="371" height="687"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="371" height="640.66666666666663"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <prototypes>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LessonCell" rowHeight="75" id="K8l-yM-2VG" customClass="LessonCell" customModule="WingIt" customModuleProvider="target">
@@ -490,7 +490,6 @@
                                             <constraint firstItem="rbj-Pg-4kz" firstAttribute="top" secondItem="wag-jb-VzF" secondAttribute="top" id="bSS-Ww-Hlk"/>
                                             <constraint firstItem="rbj-Pg-4kz" firstAttribute="leading" secondItem="wag-jb-VzF" secondAttribute="leading" id="cbV-nu-tiZ"/>
                                         </constraints>
-                                        <size key="customSize" width="371" height="687"/>
                                         <connections>
                                             <outlet property="tableView" destination="rbj-Pg-4kz" id="205-7m-luK"/>
                                         </connections>
@@ -515,12 +514,12 @@
                         </accessibility>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oZS-Fc-H8Y" secondAttribute="bottom" id="Lfo-0N-r3E"/>
-                            <constraint firstItem="1cv-MI-B9i" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="QMS-5H-Hdc"/>
+                            <constraint firstItem="1cv-MI-B9i" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="OiF-bS-oRz"/>
                             <constraint firstAttribute="trailing" secondItem="oZS-Fc-H8Y" secondAttribute="trailing" id="Qmg-NI-o1y"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1cv-MI-B9i" secondAttribute="bottom" constant="-34" id="VrE-xr-A1E"/>
+                            <constraint firstAttribute="trailing" secondItem="1cv-MI-B9i" secondAttribute="trailing" id="VWX-rJ-LTb"/>
                             <constraint firstItem="oZS-Fc-H8Y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Y8w-hD-pvU"/>
-                            <constraint firstAttribute="trailing" secondItem="1cv-MI-B9i" secondAttribute="trailing" id="ZEY-Fy-eZf"/>
-                            <constraint firstItem="1cv-MI-B9i" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="jzA-KQ-AHD"/>
+                            <constraint firstItem="1cv-MI-B9i" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZBB-Gx-QdS"/>
+                            <constraint firstItem="oZS-Fc-H8Y" firstAttribute="top" secondItem="1cv-MI-B9i" secondAttribute="bottom" id="oPy-hD-kef"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Monday" id="nbG-qC-Ukr" userLabel="DayNavBar">
@@ -537,6 +536,7 @@
                         </leftBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="classCounter" destination="jRF-Bb-oUB" id="rgF-03-vH0"/>
                         <outlet property="collectionView" destination="1cv-MI-B9i" id="O8J-xM-9kF"/>
                         <outlet property="menuButton" destination="Ijd-hh-eA9" id="cGh-vC-LeX"/>
                         <segue destination="bhx-dZ-ymS" kind="show" identifier="ShowDetail" id="WqB-Bq-Hus"/>
@@ -544,7 +544,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1633" y="916"/>
+            <point key="canvasLocation" x="1632.8" y="915.51724137931035"/>
         </scene>
         <!--Software Engineering-->
         <scene sceneID="P4V-Z7-zem">

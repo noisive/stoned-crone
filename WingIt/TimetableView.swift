@@ -17,6 +17,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     @IBOutlet var ToggleSectionOutlet: UISegmentedControl!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var menuButton: UIBarButtonItem!
+    @IBOutlet var classCounter: UIBarButtonItem!
     
     var lessonData = [Lesson]()
 
@@ -158,6 +159,22 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
             self.navigationItem.title = dayArray[dayIndex]
         }
         createDateLabel()
+        
+        var ids = [CLong]()
+        hourData[getCurrentXPage()].forEach { (data:(lesson1: CLong?, lesson2: CLong?)?) in
+            if let datas = data {
+                if datas.lesson1 != nil { ids.append(datas.lesson1!)}
+                if datas.lesson2 != nil { ids.append(datas.lesson2!)}
+            }
+        }
+        ids = Array(Set(ids))
+        if (ids.count == 0) {
+            self.classCounter.title = "No classes today."
+        } else if (ids.count == 1) {
+            self.classCounter.title = "1 class today."
+        } else {
+            self.classCounter.title = "\(ids.count) classes today."
+        }
     }
 
 
@@ -204,4 +221,5 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
   
 }
+
 
