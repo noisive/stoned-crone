@@ -78,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func promptForLogin(){
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        self.window?.rootViewController = NavigationService.displayLoginState()
+        self.window?.rootViewController = NavigationService.displayLogin()
         self.window?.makeKeyAndVisible()
     }
     
