@@ -38,4 +38,4 @@ jobs:
       - xcodebuild test -workspace WingIt.xcworkspace -scheme WingItUITests -sdk iphonesimulator
         ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO EVISIONUSER=$EVISIONUSER EVISIONPW=$EVISIONPW
         -derivedDataPath './output' -destination 'platform=iOS Simulator,name=iPhone
-        5s,OS=latest' -show-build-settings
+        5s,OS=latest' -showBuildSettings
