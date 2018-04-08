@@ -8,9 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLoginState {
-    
-    
+class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLoginState {
     
     //MARK: Outlets and Variables
     //==========================================================================
@@ -84,7 +82,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show(withStatus: "Loading eVision...")
         self.loginContainer.alpha = 0
-    
     }
     
     //MARK: Functions
@@ -108,7 +105,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
         webView.delegate = self
         
         
-        PWIsStored = true
+        self.PWIsStored = true
         
         //Setup gestures
         let dismissGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
@@ -131,7 +128,13 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
     
     private func beginLogin() {
         self.endEditing()
-        SVProgressHUD.show(withStatus: "Logging you in")
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.loginContainer.alpha = 0
+            self.loginButton.isEnabled = false
+        }) { (success) in
+            SVProgressHUD.show(withStatus: "Logging you in...")
+        }
         
         if let user = usernameField.text, let password = passwordField.text {
             self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
@@ -236,9 +239,14 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
             if (error) {
                 // Get the error given by eVision.
                 let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webErrorReason)!) as String
-                SVProgressHUD.showError(withStatus: reason)
                 
-                return;
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.loginContainer.alpha = 1
+                }) { (success) in
+                    SVProgressHUD.showError(withStatus: reason)
+                    self.loginButton.isEnabled = false
+                }
+                return
             }
             
             var header:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webCheckHeader)!) as String
@@ -286,9 +294,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate, UITextFieldDeleg
                 
                 initTimetable()
                 
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "entry") as! SWRevealViewController
-                
-                self.present(vc, animated: true, completion: nil)
+                self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
                 
                 SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded!")
                 

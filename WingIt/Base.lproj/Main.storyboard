@@ -19,7 +19,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="SCI-M8-DVT">
             <objects>
-                <viewController storyboardIdentifier="entry" id="QRJ-3s-2Y0" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EntryView" id="QRJ-3s-2Y0" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yw1-se-IMe"/>
                         <viewControllerLayoutGuide type="bottom" id="xSC-xA-PKC"/>
@@ -37,7 +37,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gnj-c1-0gG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1190" y="27"/>
+            <point key="canvasLocation" x="948" y="27"/>
         </scene>
         <!--Menu Table View Controller-->
         <scene sceneID="04q-mO-7NS">
@@ -94,7 +94,7 @@
         <!--Login-->
         <scene sceneID="nyr-PF-7ss">
             <objects>
-                <viewController storyboardIdentifier="LoginView" title="Login" id="PM4-zz-bZM" customClass="LoginViewController" customModule="WingIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginView" title="Login" id="PM4-zz-bZM" customClass="LoginView" customModule="WingIt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HQp-gX-4Dh"/>
                         <viewControllerLayoutGuide type="bottom" id="jXX-ph-5Lw"/>
@@ -311,7 +311,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7W-WX-gOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="27"/>
+            <point key="canvasLocation" x="2249" y="27"/>
         </scene>
         <!--DayView-->
         <scene sceneID="tne-QT-ifu">
@@ -496,30 +496,44 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZS-Fc-H8Y">
+                                <rect key="frame" x="0.0" y="594" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="WZQ-MG-QQo"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="No class today" id="jRF-Bb-oUB">
+                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.94509803921568625" green="0.95686274509803915" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                         <accessibility key="accessibilityConfiguration" identifier="dayView" label="day">
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oZS-Fc-H8Y" secondAttribute="bottom" id="Lfo-0N-r3E"/>
                             <constraint firstItem="1cv-MI-B9i" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="QMS-5H-Hdc"/>
+                            <constraint firstAttribute="trailing" secondItem="oZS-Fc-H8Y" secondAttribute="trailing" id="Qmg-NI-o1y"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1cv-MI-B9i" secondAttribute="bottom" constant="-34" id="VrE-xr-A1E"/>
+                            <constraint firstItem="oZS-Fc-H8Y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Y8w-hD-pvU"/>
                             <constraint firstAttribute="trailing" secondItem="1cv-MI-B9i" secondAttribute="trailing" id="ZEY-Fy-eZf"/>
                             <constraint firstItem="1cv-MI-B9i" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="jzA-KQ-AHD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Monday" id="nbG-qC-Ukr" userLabel="DayNavBar">
                         <leftBarButtonItems>
-                            <barButtonItem tag="1" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </barButtonItem>
-                            <barButtonItem image="syncronize" id="r4G-vv-p0b" userLabel="Refresh Button">
+                            <barButtonItem systemItem="refresh" id="r4G-vv-p0b" userLabel="Refresh Button">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <segue destination="PM4-zz-bZM" kind="popoverPresentation" popoverAnchorBarButtonItem="r4G-vv-p0b" id="D7v-BD-djU">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="1" enabled="NO" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </barButtonItem>
                         </leftBarButtonItems>
                     </navigationItem>
@@ -663,7 +677,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pck-IM-UTk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="916"/>
+            <point key="canvasLocation" x="2287" y="916"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="e0Z-B1-RUq">
@@ -682,7 +696,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYy-Vp-APL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1190" y="916"/>
+            <point key="canvasLocation" x="964" y="916"/>
         </scene>
         <!--DebugLogin-->
         <scene sceneID="Smd-XA-imW">
@@ -732,7 +746,6 @@
         <image name="University_of_Otago_Registry_Building2" width="1200" height="1600"/>
         <image name="cancel" width="30" height="30"/>
         <image name="marker" width="30" height="30"/>
-        <image name="syncronize" width="30" height="30"/>
         <image name="user_male" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>

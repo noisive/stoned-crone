@@ -17,5 +17,5 @@ public class AppStates {
     public static let DETAIL_VIEW_STATE: String = "DetailedClassView"
     public static let MAIN_NAVIGATION_CONTROLLER: String = "MainNavigationController"
     public static let TIMETABLE_STATE: String = "TimetableView"
-    
+    public static let ENTRY_STATE: String = "EntryView"
 }
