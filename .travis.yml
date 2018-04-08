@@ -2,7 +2,7 @@ os: osx
 language: objective-c
 xcode_workspace: WingIt.xcworkspace
 xcode_scheme: WingIt
-osx_image: xcode9.2
+osx_image: xcode9.0
 notifications:
   email:
     on_failure: always
