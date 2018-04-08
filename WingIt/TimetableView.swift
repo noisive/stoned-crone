@@ -55,6 +55,11 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
     
     
+    @IBAction func updateTimetable(_ sender: Any) {
+        
+        self.present(NavigationService.displayLoginView(isUpdatingMode: true), animated: true, completion: nil)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -22,6 +22,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var savePasswordSwitch: UISwitch!
     @IBOutlet weak var webView: UIWebView!
+    @IBOutlet var loginTitle: UILabel!
     
     //Variables
     public var isUpdatingMode: Bool!
@@ -104,6 +105,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         passwordField.delegate = self
         webView.delegate = self
         
+        self.loginTitle.text = self.isUpdatingMode ? "Login to Evision for Update" : "Login to eVision"
+        self.loginButton.setTitle(self.isUpdatingMode ? "LOGIN & UPDATE" : "LOGIN", for: .normal)
         
         self.PWIsStored = true
         
@@ -244,7 +247,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                     self.loginContainer.alpha = 1
                 }) { (success) in
                     SVProgressHUD.showError(withStatus: reason)
-                    self.loginButton.isEnabled = false
+                    self.loginButton.isEnabled = true
                 }
                 return
             }
@@ -278,28 +281,34 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                 
             case "Home":
                 webView.stringByEvaluatingJavaScript(from: self.webClickTimetable)
-                SVProgressHUD.setStatus("Retrieving your timetable...")
+                SVProgressHUD.setStatus(self.isUpdatingMode ? "Updating your timetable..." : "Retrieving your timetable...")
                 break;
                 
             case "Timetable":
                 webView.stringByEvaluatingJavaScript(from: self.webInsertFunctions)
-                let json:String = NSString(string: webView.stringByEvaluatingJavaScript(from: webGrabCode)!) as String
                 
-                //webView.stringByEvaluatingJavaScript(from: monitorScript)
-                //webView.stringByEvaluatingJavaScript(from: loadNextWeek)
+                //Check if the json was grabbed
+                if let jsonString:String = webView.stringByEvaluatingJavaScript(from: webGrabCode) {
+                    let json: NSString = NSString(string: jsonString)
+                    parseEvents(json.cString(using: String.Encoding.utf8.rawValue))
+                    initTimetable()
+                    self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
+                    SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
+                    webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
+                    webView.stringByEvaluatingJavaScript(from: webLogout)
+                }
+                    //Issue with getting JSON. Display error and log out
+                else {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.loginContainer.alpha = 1
+                    }) { (success) in
+                        SVProgressHUD.showError(withStatus: "Something went wrong getting your timetable...")
+                        self.loginButton.isEnabled = true
+                    }
+                    webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
+                    webView.stringByEvaluatingJavaScript(from: webLogout)
+                }
                 
-                // Here we can pass on the output timetable for one week with the printed date.
-                //print(json)
-                parseEvents(json.cString(using: String.Encoding.utf8));
-                
-                initTimetable()
-                
-                self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
-                
-                SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded!")
-                
-                webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
-                webView.stringByEvaluatingJavaScript(from: webLogout)
                 break;
                 
             default:

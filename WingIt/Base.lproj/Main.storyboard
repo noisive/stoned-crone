@@ -302,6 +302,7 @@
                         <outlet property="cancelButton" destination="dMZ-e8-ekK" id="s1w-FM-CmN"/>
                         <outlet property="loginButton" destination="CVd-jW-wzG" id="432-eh-qFt"/>
                         <outlet property="loginContainer" destination="hDN-j8-zPN" id="xIP-VM-1Fj"/>
+                        <outlet property="loginTitle" destination="w5S-zD-cYt" id="7Ae-VD-epJ"/>
                         <outlet property="passwordField" destination="ilB-Zz-Y6M" id="JGM-Jw-7bz"/>
                         <outlet property="savePasswordSwitch" destination="ZZF-fX-oiF" id="zTe-v1-hjU"/>
                         <outlet property="scrollView" destination="3vt-l9-ZVc" id="woL-22-5yG"/>
@@ -527,9 +528,7 @@
                             <barButtonItem systemItem="refresh" id="r4G-vv-p0b" userLabel="Refresh Button">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <segue destination="PM4-zz-bZM" kind="popoverPresentation" popoverAnchorBarButtonItem="r4G-vv-p0b" id="D7v-BD-djU">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="updateTimetable:" destination="BYZ-38-t0r" id="wfi-ZT-yOO"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem tag="1" enabled="NO" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
@@ -545,7 +544,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1613" y="916"/>
+            <point key="canvasLocation" x="1633" y="916"/>
         </scene>
         <!--Software Engineering-->
         <scene sceneID="P4V-Z7-zem">
@@ -748,7 +747,4 @@
         <image name="marker" width="30" height="30"/>
         <image name="user_male" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="D7v-BD-djU"/>
-    </inferredMetricsTieBreakers>
 </document>
