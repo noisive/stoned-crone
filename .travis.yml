@@ -53,4 +53,4 @@ jobs:
         -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest'
         -destination 'platform=iOS Simulator,name=iPhone 5s,OS=9.3'
         -destination 'platform=iOS Simulator,name=iPhone X,OS=latest'
-        | xcpretty -c
+        # | xcpretty -c
