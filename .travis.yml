@@ -68,7 +68,7 @@ jobs:
           -sdk iphonesimulator 
           ONLY_ACTIVE_ARCH=NO 
           CODE_SIGNING_REQUIRED=NO 
-          EVISIONUSER=$EVISIONUSER
+          EVISIONUSER=Hello
           EVISIONPW=$EVISIONPW
           -derivedDataPath './output' 
           -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest' 
