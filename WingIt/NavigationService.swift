@@ -19,7 +19,7 @@ public class NavigationService {
     }
     
     public static func displayDetailedClassView(lessonData: Lesson!) -> UIViewController {
-        let vc: DetailView = self.STORYBOARD.instantiateViewController(withIdentifier: AppStates.DETAIL_CLASS_VIEW) as! DetailView
+        let vc: DetailView = self.STORYBOARD.instantiateViewController(withIdentifier: AppStates.DETAIL_VIEW_STATE) as! DetailView
         vc.lessonData = lessonData
         return vc
     }

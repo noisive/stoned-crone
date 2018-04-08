@@ -9,7 +9,7 @@
 import Foundation
 
 /** Adds the events retrieved from the C++ lib into the correct timeslots. */
-func loadWeekData(VC: ViewController) {
+func loadWeekData(VC: TimetableView) {
     let formatter = DateFormatter()
     
     formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
