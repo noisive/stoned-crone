@@ -12,7 +12,7 @@ public class NavigationService {
     
     private static let STORYBOARD: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
     
-    public static func displayLoginState(isUpdatingMode: Bool = false) -> UIViewController {
+    public static func displayLogin(isUpdatingMode: Bool = false) -> UIViewController {
         let vc: LoginViewController = self.STORYBOARD.instantiateViewController(withIdentifier: AppStates.LOGIN_STATE) as! LoginViewController
         vc.isUpdatingMode = isUpdatingMode
         return vc
