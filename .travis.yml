@@ -23,10 +23,16 @@ jobs:
   - stage: build
     script:
     - set -o pipefail
-    - xcodebuild build -workspace WingIt.xcworkspace -scheme WingIt -sdk iphonesimulator
-      ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO -derivedDataPath './output' -destination
-      'platform=iOS Simulator,name=iPhone 5s,OS=latest' -destination 'platform=iOS
-      Simulator,name=iPhone X,OS=latest' | xcpretty -c
+    - xcodebuild build
+      -workspace WingIt.xcworkspace
+      -scheme WingIt
+      -sdk iphonesimulator
+      ONLY_ACTIVE_ARCH=NO
+      CODE_SIGNING_REQUIRED=NO
+      -derivedDataPath './output'
+      -destination 'platform=iOS Simulator,name=iPhone 5s,OS=latest'
+      # -destination 'platform=iOS Simulator,name=iPhone X,OS=latest'
+      | xcpretty -c
 
   - stage: UITests
     env:
