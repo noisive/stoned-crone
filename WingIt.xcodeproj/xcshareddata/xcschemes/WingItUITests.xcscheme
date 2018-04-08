@@ -49,12 +49,12 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "EVISIONUSER"
-            value = "$(EVISIONUSER)"
+            value = "$EVISIONUSER"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "EVISIONPW"
-            value = "$(EVISIONPW)"
+            value = "$EVISIONPW"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
