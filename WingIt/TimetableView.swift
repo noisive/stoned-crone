@@ -45,7 +45,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         let dateLabel : UIBarButtonItem = {
             let label = UILabel()
             label.text = date
-            label.textColor = Constants.Colors.Theme
+            label.textColor = .white
             label.font = UIFont.boldSystemFont(ofSize: 16)
             label.textAlignment = .right
             label.frame = CGRect(x: 0, y: 0, width: 70, height: 28)
@@ -60,6 +60,10 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
 
         thisIsFirstLoad = true
 
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        }
+        
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))

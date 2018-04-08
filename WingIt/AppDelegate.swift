@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+
+        
         let fileManager = FileManager.default
         let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
     
@@ -78,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func promptForLogin(){
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        self.window?.rootViewController = NavigationService.displayLogin()
+        self.window?.rootViewController = NavigationService.displayLoginView()
         self.window?.makeKeyAndVisible()
     }
     

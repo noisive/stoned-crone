@@ -16,7 +16,7 @@
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
 		06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* CommonUtil.swift */; };
 		06D37CD71F873C7F009318AC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06D37CD61F873C7F009318AC /* Settings.bundle */; };
-		297C56931ED9126200C44420 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginViewController.swift */; };
+		297C56931ED9126200C44420 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginView.swift */; };
 		5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */; };
 		533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 533C92D320762A9200394325 /* SVProgressHUD.bundle */; };
 		533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D420762A9300394325 /* SVProgressAnimatedView.m */; };
@@ -70,7 +70,7 @@
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
 		06B38A371F82361E009EDC60 /* CommonUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
 		06D37CD61F873C7F009318AC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		297C56921ED9126200C44420 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		297C56921ED9126200C44420 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		5335EC861ED6449400CD2339 /* BlankCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankCellTableViewCell.swift; sourceTree = "<group>"; };
 		533C92D220762A9200394325 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		533C92D320762A9200394325 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 				53F8A00D1EC3D0010001604A /* TimetableView.swift */,
 				069827641F87041000777DAD /* LoginDebugController.swift */,
 				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
-				297C56921ED9126200C44420 /* LoginViewController.swift */,
+				297C56921ED9126200C44420 /* LoginView.swift */,
 				53BB7A201ED1536C00370F7B /* DetailView.swift */,
 			);
 			name = Views;
@@ -449,7 +449,7 @@
 				53D4B38620761F700063E45F /* NavigationProtocols.swift in Sources */,
 				069827651F87041000777DAD /* LoginDebugController.swift in Sources */,
 				53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */,
-				297C56931ED9126200C44420 /* LoginViewController.swift in Sources */,
+				297C56931ED9126200C44420 /* LoginView.swift in Sources */,
 				5335EC871ED6449400CD2339 /* BlankCellTableViewCell.swift in Sources */,
 				533C92E020762A9400394325 /* SVRadialGradientLayer.m in Sources */,
 				06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */,
