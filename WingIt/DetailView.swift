@@ -16,15 +16,19 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     
     //Outlets
     @IBOutlet var mapView: MKMapView!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet var roomLabel: UILabel!
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
-        
+    @IBOutlet weak var codeLabel: UILabel!
+    @IBOutlet var buttonEffectViews: [UIVisualEffectView]!
+    
     //Variables
     public var lessonData : Lesson!
     
     //Constants
-    private let CORNER_RADIUS: CGFloat = 13
+    private let MAP_CORNER_RADIUS: CGFloat = 13
+    private let BUTTONS_CORNER_RADIUS: CGFloat = 5
     private let ZOOM_LEVEL: CLLocationDegrees = 0.002
 
     //MARK: View loading
@@ -33,7 +37,12 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.mapView.layer.masksToBounds = true
-        self.mapView.layer.cornerRadius = self.CORNER_RADIUS
+        self.mapView.layer.cornerRadius = self.MAP_CORNER_RADIUS
+        self.mapView.clipsToBounds = true
+        self.buttonEffectViews.forEach { (view) in
+            view.layer.cornerRadius = self.BUTTONS_CORNER_RADIUS
+            view.layer.masksToBounds = true
+        }
     }
     
     override func viewDidLoad() {
@@ -46,6 +55,13 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     
     @IBAction func recenterMap(_ sender: Any) {
         self.centerMap()
+    }
+    
+    @IBAction func getDirections(_ sender: Any) {
+        let coordinate = CLLocationCoordinate2DMake(self.lessonData.latitude, self.lessonData.longitude)
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
+        mapItem.name = "\(self.lessonData.code ?? "class")."
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
     
     //MARK: Functions
@@ -75,8 +91,10 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     }
     
     private func setupData() {
-        self.navigationItem.title = lessonData.paperName
+        self.navigationItem.title = lessonData.code
         
+        self.nameLabel.text = lessonData.paperName
+        self.codeLabel.text = lessonData.code
         self.roomLabel.text = lessonData.roomFull
         self.typeLabel.text = lessonData.type
         
@@ -91,7 +109,7 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     //=============================================================================
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
+        return 16
     }
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
