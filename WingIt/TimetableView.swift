@@ -163,11 +163,11 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         }
         ids = Array(Set(ids))
         if (ids.count == 0) {
-            self.classCounter.title = "No classes today."
+            self.classCounter.title = "No classes on \(self.navigationItem.title ?? "day")."
         } else if (ids.count == 1) {
-            self.classCounter.title = "1 class today."
+            self.classCounter.title = "1 class on \(self.navigationItem.title ?? "day")."
         } else {
-            self.classCounter.title = "\(ids.count) classes today."
+            self.classCounter.title = "\(ids.count) classes on \(self.navigationItem.title ?? "day")."
         }
     }
 
