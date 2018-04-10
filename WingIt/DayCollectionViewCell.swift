@@ -12,6 +12,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     @IBOutlet var tableView: UITableView!
     
     var passDelegate : PassData?
+    public var currentXOffset: Int = 0
     
     //Create an array of arrays that have nothing in them
     var dataByHour = [(lesson: CLong?, lesson2: CLong?)?](repeatElement(nil, count: 14))
@@ -93,7 +94,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
         
         cell.timeLabel.text = TimeUtil.get24HourTimeFromIndexPath(row: indexPath.row)
-        cell.showLessons()
+        cell.resetCell()
         
         //Empty cell
         guard let lessonData: (lesson: CLong?, lesson2: CLong?) = self.dataByHour[indexPath.row] else {
@@ -176,8 +177,6 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     }
     
     
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if dataByHour[indexPath.row] != nil{
             if let pass = findLessonData(uid: (dataByHour[indexPath.row]?.lesson)!) {
@@ -186,6 +185,30 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
                 print("cell without data tapped")
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.calculateDayLabel()
+    }
+    
+    func calculateDayLabel() -> String {
+        
+        // Gives date of most recent Monday
+        let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        
+        
+        let format = DateFormatter()
+        format.timeZone = TimeZone.autoupdatingCurrent
+        format.timeZone = TimeZone(identifier: "NZST")
+        format.dateFormat = "d MMMM"
+        let offset = self.currentXOffset
+        
+        
+        // We are basically just adding 13 to UMT... DK how robust it is, but only thing that seems to work.
+        // Test early and late in day.
+        let offsetDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!)
+        
+        return format.string(from: offsetDate)
     }
     
     

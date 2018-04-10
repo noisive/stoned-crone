@@ -17,7 +17,10 @@ public class AppColors {
     
     public static let TUTORIAL_COLOR: UIColor = UIColor(red:0.04, green:0.29, blue:0.59, alpha:1.0)
     
+    public static let NAV_TITLE_COLOR: UIColor = UIColor(red:0.11, green:0.16, blue:0.29, alpha:1.0)
+
     
+    public static let CELL_SEPERATOR_COLOR: UIColor = UIColor(red:0.92, green:0.93, blue:0.94, alpha:1.0)
 
     
 }

@@ -43,8 +43,15 @@ class LessonCell: UITableViewCell {
         self.lessonContainer.isHidden = true
     }
     
-    public func showLessons() {
+    public func resetCell() {
         self.lessonContainer.isHidden = false
+        self.leftLesson.isHidden = false
+        self.rightLesson.isHidden = false
+        self.leftLessonCode.isHidden = false
+        self.leftLessonRoom.isHidden = false
+        self.rightLessonCode.isHidden = false
+        self.rightLessonRoom.isHidden = false
+        
     }
     
     public func hideLeftLesson() {

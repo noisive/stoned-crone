@@ -41,19 +41,6 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
 
     }
 
-    func createDateLabel() {
-        let date = calculateDayLabel()
-        let dateLabel : UIBarButtonItem = {
-            let label = UILabel()
-            label.text = date
-            label.textColor = .white
-            label.font = UIFont.boldSystemFont(ofSize: 16)
-            label.textAlignment = .right
-            label.frame = CGRect(x: 0, y: 0, width: 70, height: 28)
-            return UIBarButtonItem(customView: label)
-        }()
-        self.navigationItem.rightBarButtonItem = dateLabel
-    }
     
     
     @IBAction func updateTimetable(_ sender: Any) {
@@ -67,8 +54,14 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         thisIsFirstLoad = true
 
         if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: AppColors.NAV_TITLE_COLOR]
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+            
+            navigationItem.largeTitleDisplayMode = .always
         }
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+    
+        
         
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
@@ -91,8 +84,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         // Autoscroll to current day on startup
         scrollToCurrentDay()
         
-        // Puts the current date label in
-        createDateLabel()
+    
 
     }
     
@@ -114,7 +106,9 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         cell.dataByHour = self.hourData[indexPath.row]
         cell.tableViewData = self.lessonData
         cell.tableView.reloadData()
+        cell.tableView.separatorColor = AppColors.CELL_SEPERATOR_COLOR
         cell.passDelegate = self
+        cell.currentXOffset = indexPath.row
         
         // Scroll to current time if app has just loaded, otherwise scroll new cell to same time as current one.
         if thisIsFirstLoad {
@@ -158,7 +152,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         if dayIndex < numberOfDaysInSection {
             self.navigationItem.title = dayArray[dayIndex]
         }
-        createDateLabel()
+        
         
         var ids = [CLong]()
         hourData[getCurrentXPage()].forEach { (data:(lesson1: CLong?, lesson2: CLong?)?) in
@@ -180,25 +174,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
 
     // FEATURE Will also have to change if we are extending the number of days.
     // Currently labels by getting most recent monday, adding offset to that.
-    func calculateDayLabel() -> String {
-        
-        // Gives date of most recent Monday
-        let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        
-        
-        let format = DateFormatter()
-        format.timeZone = TimeZone.autoupdatingCurrent
-        format.timeZone = TimeZone(identifier: "NZST")
-        format.dateFormat = "dd/MM"
-        let offset = getCurrentXPage()
-        
-        
-        // We are basically just adding 13 to UMT... DK how robust it is, but only thing that seems to work.
-        // Test early and late in day.
-        let offsetDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!)
-        
-        return format.string(from: offsetDate)
-    }
+    
     
     
     func getCurrentXPage() -> Int {
