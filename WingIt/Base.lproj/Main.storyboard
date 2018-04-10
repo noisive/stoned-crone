@@ -328,7 +328,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1cv-MI-B9i">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="594"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AWQ-Ca-Wxb">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="AWQ-Ca-Wxb">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -727,17 +727,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="L5l-c7-hVT">
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="L5l-c7-hVT">
                                                     <rect key="frame" x="15" y="0.0" width="344" height="44.666666666666664"/>
                                                     <subviews>
                                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ac7-fw-IVy">
-                                                            <rect key="frame" x="0.0" y="0.0" width="164" height="44.666666666666664"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="109.33333333333333" height="44.666666666666664"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xyy-TY-QiL">
-                                                                <rect key="frame" x="0.0" y="0.0" width="164" height="44.666666666666664"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="109.33333333333333" height="44.666666666666664"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3De-aA-0Cg">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="164" height="44.666666666666664"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="109.66666666666667" height="44.666666666666664"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                         <state key="normal" title="Re-center"/>
                                                                         <connections>
@@ -755,13 +755,13 @@
                                                             <blurEffect style="extraLight"/>
                                                         </visualEffectView>
                                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jn7-1n-Zk5">
-                                                            <rect key="frame" x="180" y="0.0" width="164" height="44.666666666666664"/>
+                                                            <rect key="frame" x="117.33333333333334" y="0.0" width="109.33333333333334" height="44.666666666666664"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Amp-o8-SNU">
-                                                                <rect key="frame" x="0.0" y="0.0" width="164" height="44.666666666666664"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="109.33333333333334" height="44.666666666666664"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQP-3u-FL4">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="164" height="44.666666666666664"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="109.33333333333333" height="44.666666666666664"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                         <state key="normal" title="Directions"/>
                                                                         <connections>
@@ -774,6 +774,30 @@
                                                                     <constraint firstItem="wQP-3u-FL4" firstAttribute="top" secondItem="Amp-o8-SNU" secondAttribute="top" id="O8R-1y-cBz"/>
                                                                     <constraint firstItem="wQP-3u-FL4" firstAttribute="leading" secondItem="Amp-o8-SNU" secondAttribute="leading" id="o4x-zT-BPK"/>
                                                                     <constraint firstAttribute="trailing" secondItem="wQP-3u-FL4" secondAttribute="trailing" id="su9-wY-lk8"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <blurEffect style="extraLight"/>
+                                                        </visualEffectView>
+                                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0F-lc-wsv">
+                                                            <rect key="frame" x="234.66666666666666" y="0.0" width="109.33333333333334" height="44.666666666666664"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FJk-pK-g41">
+                                                                <rect key="frame" x="0.0" y="0.0" width="109.33333333333334" height="44.666666666666664"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAN-xu-dvd">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="109.66666666666667" height="44.666666666666664"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                                        <state key="normal" title="Hybrid"/>
+                                                                        <connections>
+                                                                            <action selector="changeMapType:" destination="bhx-dZ-ymS" eventType="touchUpInside" id="mxJ-V6-lbI"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="bAN-xu-dvd" firstAttribute="leading" secondItem="FJk-pK-g41" secondAttribute="leading" id="3KW-Ht-ROz"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="bAN-xu-dvd" secondAttribute="trailing" id="B36-Mg-5T4"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="bAN-xu-dvd" secondAttribute="bottom" id="UgH-nT-7lt"/>
+                                                                    <constraint firstItem="bAN-xu-dvd" firstAttribute="top" secondItem="FJk-pK-g41" secondAttribute="top" id="jxt-md-dDk"/>
                                                                 </constraints>
                                                             </view>
                                                             <blurEffect style="extraLight"/>
@@ -800,6 +824,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Software Engineering" id="QhG-ug-DhC"/>
                     <connections>
+                        <outlet property="changeMapType" destination="bAN-xu-dvd" id="pgK-FA-ouM"/>
                         <outlet property="codeLabel" destination="t3E-y9-Ax4" id="qXo-OX-IOa"/>
                         <outlet property="mapView" destination="8mB-oX-VU8" id="Exh-DB-6ce"/>
                         <outlet property="nameLabel" destination="tS0-u0-H8z" id="ySn-pq-MKm"/>
@@ -808,6 +833,7 @@
                         <outlet property="typeLabel" destination="Qv7-VJ-UPZ" id="hiR-Q8-8R1"/>
                         <outletCollection property="buttonEffectViews" destination="Jn7-1n-Zk5" collectionClass="NSMutableArray" id="ayo-0S-QX6"/>
                         <outletCollection property="buttonEffectViews" destination="Ac7-fw-IVy" collectionClass="NSMutableArray" id="HSk-ST-ONi"/>
+                        <outletCollection property="buttonEffectViews" destination="a0F-lc-wsv" collectionClass="NSMutableArray" id="PGd-wn-OtP"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pck-IM-UTk" userLabel="First Responder" sceneMemberID="firstResponder"/>

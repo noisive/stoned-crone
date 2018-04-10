@@ -22,6 +22,7 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet var buttonEffectViews: [UIVisualEffectView]!
+    @IBOutlet weak var changeMapType: UIButton!
     
     //Variables
     public var lessonData : Lesson!
@@ -29,7 +30,7 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     //Constants
     private let MAP_CORNER_RADIUS: CGFloat = 13
     private let BUTTONS_CORNER_RADIUS: CGFloat = 5
-    private let ZOOM_LEVEL: CLLocationDegrees = 0.002
+    private let ZOOM_LEVEL: CLLocationDegrees = 0.005
 
     //MARK: View loading
     //=============================================================================
@@ -64,6 +65,17 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
     
+    @IBAction func changeMapType(_ sender: Any) {
+        //self.mapView.mapType =
+        if self.mapView.mapType == .standard {
+            self.mapView.mapType = .hybrid
+            self.changeMapType.setTitle("Standard", for: .normal)
+        } else {
+            self.mapView.mapType = .standard
+            self.changeMapType.setTitle("Hybrid", for: .normal)
+        }
+    
+    }
     //MARK: Functions
     //=============================================================================
     
@@ -80,7 +92,7 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     
     private func setupMap() {
         self.mapView.delegate = self
-        self.mapView.mapType = .hybrid
+        self.mapView.mapType = .standard
         
         self.centerMap()
         
