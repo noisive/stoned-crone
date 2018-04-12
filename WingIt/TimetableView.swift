@@ -52,20 +52,27 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         super.viewDidLoad()
 
         thisIsFirstLoad = true
+        
+        
 
         if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: AppColors.NAV_TITLE_COLOR]
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+            
+            
             self.navigationController?.navigationBar.prefersLargeTitles = true
             
             navigationItem.largeTitleDisplayMode = .always
         }
         self.navigationController?.navigationBar.shadowImage = UIImage()
-    
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            
+            self.revealViewController().rearViewRevealWidth = self.view.frame.width - 50
 
             // These allow tapping on the timetable view or swiping to close the menu
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -88,6 +95,10 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
 
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

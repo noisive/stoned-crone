@@ -93,19 +93,19 @@ func loadWeekData(VC: TimetableView) {
         dayIndex += 1
     }
     
-//    VC.lessonData.append(Lesson(uid: 1, classID: "COSC345", start: 3, duration: 4, colour: "", code: "COSC345", type: "Lecture", roomShort: "SDAV2", roomFull: "St. Davids theatre", paperName: "Software Engineering", day: 0, eventDate: Date(), latitude: -45.866714, longitude: 170.512027))
-//    VC.lessonData.append(Lesson(uid: 2, classID: "COSC301", start: 3, duration: 4, colour: "", code: "COSC301", type: "Lab", roomShort: "HALL", roomFull: "St. Davids theatre", paperName: "Software", day: 0, eventDate: Date(), latitude: -45.866714, longitude: 170.512027))
+//VC.lessonData.append(Lesson(uid: 20, classID: "COSC341", start: 3, duration: 4, colour: "", code: "COSC345", type: "Lecture", roomShort: "TG08", roomFull: "St. Davids theatre", paperName: "Software Engineering", day: 0, eventDate: Date(), latitude: -45.866714, longitude: 170.512027))
+// VC.lessonData.append(Lesson(uid: 21, classID: "COSC301", start: 3, duration: 4, colour: "", code: "COSC301", type: "Lab", roomShort: "OWG38", roomFull: "St. Davids theatre", paperName: "Software", day: 0, eventDate: Date(), latitude: -45.866714, longitude: 170.512027))
+////    
+//  VC.lessonData.append(Lesson(uid: 22, classID: "COSC341", start: 3, duration: 4, colour: "", code: "PHYC18", type: "Tutorial", roomShort: "OWG34", roomFull: "St. Davids theatre", paperName: "Phyc", day: 0, eventDate: Date(), latitude: -45.866714, longitude: 170.512027))
+////    
+////
+//    VC.hourData[4][2] = nil
+//    VC.hourData[4][3] = ((lesson: 20, lesson2: nil))
+//    VC.hourData[4][4] = ((lesson: 20, lesson2: nil))
+//    VC.hourData[4][6] = ((lesson: 21, lesson2: 22))
 //    
-//    VC.lessonData.append(Lesson(uid: 3, classID: "PHYC18", start: 3, duration: 4, colour: "", code: "PHYC18", type: "Tutorial", roomShort: "MAIN", roomFull: "St. Davids theatre", paperName: "Phyc", day: 0, eventDate: Date(), latitude: -45.866714, longitude: 170.512027))
 //    
 //    
-//    VC.hourData[0][3] = ((lesson: 1, lesson2: nil))
-//    VC.hourData[1][4] = ((lesson: 1, lesson2: nil))
-//    VC.hourData[1][5] = ((lesson: 1, lesson2: 2))
-//    VC.hourData[1][6] = ((lesson: 3, lesson2: 2))
-//    VC.hourData[1][7] = ((lesson: 3, lesson2: nil))
-//    VC.hourData[1][9] = ((lesson: 3, lesson2: nil))
-    
     VC.collectionView.reloadData()
     
 }

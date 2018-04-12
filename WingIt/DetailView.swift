@@ -62,7 +62,7 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
         let coordinate = CLLocationCoordinate2DMake(self.lessonData.latitude, self.lessonData.longitude)
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
         mapItem.name = "\(self.lessonData.code ?? "class")."
-        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking])
     }
     
     @IBAction func changeMapType(_ sender: Any) {
@@ -103,6 +103,8 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     }
     
     private func setupData() {
+        self.tableView.separatorColor = AppColors.CELL_SEPERATOR_COLOR
+        
         self.navigationItem.title = lessonData.code
         
         self.nameLabel.text = lessonData.paperName
