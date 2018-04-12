@@ -22,7 +22,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     override func awakeFromNib() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         self.tableView.reloadData()
     }
