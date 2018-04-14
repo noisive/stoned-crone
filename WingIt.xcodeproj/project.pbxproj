@@ -222,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				53F8A00D1EC3D0010001604A /* TimetableView.swift */,
+				53DED0D9207F660000C363AF /* AboutView.swift */,
 				069827641F87041000777DAD /* LoginDebugController.swift */,
 				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
 				297C56921ED9126200C44420 /* LoginView.swift */,
@@ -264,7 +265,6 @@
 			children = (
 				53F8A00B1EC3D0010001604A /* AppDelegate.swift */,
 				53F8A00F1EC3D0010001604A /* Main.storyboard */,
-				53DED0D9207F660000C363AF /* AboutView.swift */,
 				534635AB2079A9C300497A8D /* Utilities */,
 				53CDC1E51EDC1EC000A2ED5A /* Views */,
 				534635AA2079A96000497A8D /* Navigation */,
