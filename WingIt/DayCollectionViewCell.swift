@@ -145,7 +145,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
             
         }
             
-            //Normal cell
+        //Normal cell
         else {
             if let lessonOneUID = lessonData.lesson {
                 cell.hideRightLesson()
@@ -181,7 +181,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         if dataByHour[indexPath.row] != nil{
             if let pass = findLessonData(uid: (dataByHour[indexPath.row]?.lesson)!) {
                 self.passDelegate?.performSegue(with: pass)
-            }else{
+            } else{
                 print("cell without data tapped")
             }
         }
