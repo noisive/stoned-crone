@@ -8,40 +8,127 @@
 
 import UIKit
 
-class MenuTableViewController: UITableViewController {
+class MenuTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.separatorColor = UIColor.white.withAlphaComponent(0.1)
-        self.navigationController?.navigationBar.tintColor = .white
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+    //MARK: Outlets & Variables
+    //=================================================================
+    
+    //Outlets
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var iconContainer: UIView!
+    
+    //Constants
+    private let NAVIGATION_DATA: [(title: String, image: UIImage)] = [
+        (title: "Timetable", image: #imageLiteral(resourceName: "Page Overview 2_000000_100")),
+        (title: "Update timetable", image: #imageLiteral(resourceName: "Repeat_000000_100")),
+        (title: "About", image: #imageLiteral(resourceName: "Meeting_000000_100"))
+    ]
+    private let CELL_HEIGHT: CGFloat = 60.0
+    private let ICON_CORNER_RADIUS: CGFloat = 8.0
+    private let NUMBER_OF_SECTIONS: Int = 1;
+    
+    //MARK: View loading
+    //=================================================================
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: indexPath, animated: true)
         }
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.layoutMargins = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 75)
-        cell.tintColor = .white
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupLooks()
+        self.setupDelegates()
     }
-   
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    
+    //MARK: Functions
+    //=================================================================
+    
+    private func setupDelegates() {
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+    }
+    
+    private func setupLooks() {
+        self.tableView.separatorColor = UIColor.white.withAlphaComponent(0.1)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.tintColor = .white
+        self.iconContainer.layer.cornerRadius = self.ICON_CORNER_RADIUS
+        self.tableView.separatorColor = AppColors.CELL_SEPERATOR_COLOR
+    }
+    
+    //MARK: Actions
+    //=================================================================
+    
+    @IBAction func dismiss(_ sender: Any) {
+        self.performSegue(withIdentifier: "ShowTimetable", sender: self)
+    }
+    
+    @IBAction func sendFeedback(_ sender: Any) {
+        let facebookURL = NSURL(string: "fb://page/1440825302620780")!
+        if UIApplication.shared.canOpenURL(facebookURL as URL) {
+            UIApplication.shared.openURL(facebookURL as URL)
+        } else {
+            UIApplication.shared.openURL(NSURL(string: "https://www.facebook.com/1440825302620780")! as URL)
+        }
+    }
+    
+    @IBAction func share(_ sender: Any) {
+        let text = "Want to track your Univerity timetable? Download WingIt from the app store now! https://www.facebook.com/pg/WingIteVision/"
+        let textToShare = [ text ]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop ]
+        
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    //MARK: Delegates
+    //=================================================================
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.NUMBER_OF_SECTIONS
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.NAVIGATION_DATA.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: AppCells.NAVIGATION_CELL, for: indexPath)
+        
+        let navigationItem = self.NAVIGATION_DATA[indexPath.row]
+        
+        cell.textLabel?.text = navigationItem.title
+    
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.CELL_HEIGHT
+    }
+    
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            self.performSegue(withIdentifier: "ShowTimetable", sender: self)
+        } else if indexPath.row == 1 {
+            self.performSegue(withIdentifier: "UpdateTimetable", sender: self)
+        } else if indexPath.row == 2 {
+            self.performSegue(withIdentifier: "ShowAbout", sender: self)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }
     
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.white.withAlphaComponent(0.5)
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 1 {
-            self.performSegue(withIdentifier: "UpdateTimetable", sender: self)
-        }
-    }
+    //MARK: Pass data
+    //=================================================================
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "UpdateTimetable" {

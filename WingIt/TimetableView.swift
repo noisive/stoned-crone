@@ -80,7 +80,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             
-            self.revealViewController().rearViewRevealWidth = self.view.frame.width - 50
+            self.revealViewController().rearViewRevealWidth = self.view.frame.width
             
             // These allow tapping on the timetable view or swiping to close the menu
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())

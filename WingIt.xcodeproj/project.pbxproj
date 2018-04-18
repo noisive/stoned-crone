@@ -22,6 +22,7 @@
 		533C92DE20762A9400394325 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D620762A9300394325 /* SVProgressHUD.m */; };
 		533C92DF20762A9400394325 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D720762A9300394325 /* SVIndefiniteAnimatedView.m */; };
 		533C92E020762A9400394325 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92DB20762A9400394325 /* SVRadialGradientLayer.m */; };
+		534A442120873F03009E719E /* NavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534A442020873F03009E719E /* NavigationCell.swift */; };
 		534BB68D2081E28A00757932 /* RMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6882081E28900757932 /* RMessage.m */; };
 		534BB68E2081E28A00757932 /* RMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534BB68A2081E28900757932 /* RMessageView.xib */; };
 		534BB68F2081E28A00757932 /* RMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB68B2081E28900757932 /* RMessageView.m */; };
@@ -92,6 +93,7 @@
 		534635A42079A90E00497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		534635A52079A91200497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		534635A62079A91700497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		534A442020873F03009E719E /* NavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCell.swift; sourceTree = "<group>"; };
 		534BB6872081E28900757932 /* RMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMessage.h; sourceTree = "<group>"; };
 		534BB6882081E28900757932 /* RMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMessage.m; sourceTree = "<group>"; };
 		534BB6892081E28900757932 /* RMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMessageView.h; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				53F8A00D1EC3D0010001604A /* TimetableView.swift */,
+				534A442020873F03009E719E /* NavigationCell.swift */,
 				53DED0D9207F660000C363AF /* AboutView.swift */,
 				069827641F87041000777DAD /* LoginDebugController.swift */,
 				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
@@ -498,6 +501,7 @@
 				534BB69D2081E31B00757932 /* UITabBarController+PPTopMostController.m in Sources */,
 				534BB69C2081E31B00757932 /* UINavigationController+PPTopMostController.m in Sources */,
 				297C56931ED9126200C44420 /* LoginView.swift in Sources */,
+				534A442120873F03009E719E /* NavigationCell.swift in Sources */,
 				533C92E020762A9400394325 /* SVRadialGradientLayer.m in Sources */,
 				06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */,
 				534BB68F2081E28A00757932 /* RMessageView.m in Sources */,
