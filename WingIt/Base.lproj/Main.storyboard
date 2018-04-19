@@ -979,26 +979,13 @@
                                             <action selector="share:" destination="f19-ya-NI0" eventType="touchUpInside" id="OBR-Mx-c5c"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTD-ao-tHY">
-                                        <rect key="frame" x="25" y="683" width="24" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="DBS-31-JiS"/>
-                                            <constraint firstAttribute="height" constant="24" id="PEL-oy-4DP"/>
-                                        </constraints>
-                                        <state key="normal" image="Insect_ffffff_100"/>
-                                        <connections>
-                                            <action selector="share:" destination="f19-ya-NI0" eventType="touchUpInside" id="PeZ-rb-Sdn"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.54117647059999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="pTD-ao-tHY" firstAttribute="centerX" secondItem="i50-fV-59H" secondAttribute="centerX" id="0xd-nS-Pj2"/>
                                     <constraint firstItem="Gy1-2d-Whg" firstAttribute="centerX" secondItem="i50-fV-59H" secondAttribute="centerX" id="7L6-vZ-BBR"/>
                                     <constraint firstItem="rjm-V2-fEQ" firstAttribute="top" secondItem="sSA-BX-UHX" secondAttribute="bottom" constant="30" id="EhR-x3-Nf3"/>
                                     <constraint firstItem="wSd-mq-uKc" firstAttribute="leading" secondItem="i50-fV-59H" secondAttribute="leadingMargin" id="F0s-28-Ops"/>
                                     <constraint firstItem="wSd-mq-uKc" firstAttribute="bottom" secondItem="i50-fV-59H" secondAttribute="bottomMargin" id="Ll4-CM-Dwi"/>
-                                    <constraint firstItem="wSd-mq-uKc" firstAttribute="top" secondItem="pTD-ao-tHY" secondAttribute="bottom" constant="30" id="PhD-ER-rTM"/>
                                     <constraint firstItem="wSd-mq-uKc" firstAttribute="trailing" secondItem="i50-fV-59H" secondAttribute="trailingMargin" id="YVk-lU-WEP"/>
                                     <constraint firstAttribute="width" constant="75" id="dwe-PO-dS0"/>
                                     <constraint firstItem="sSA-BX-UHX" firstAttribute="centerX" secondItem="i50-fV-59H" secondAttribute="centerX" id="k9v-SB-x08"/>
@@ -1135,7 +1122,6 @@
     <resources>
         <image name="Delete_ffffff_100" width="104" height="104"/>
         <image name="Feedback_ffffff_100" width="104" height="104"/>
-        <image name="Insect_ffffff_100" width="104" height="104"/>
         <image name="Menu" width="28" height="28"/>
         <image name="Share_ffffff_100" width="104" height="104"/>
         <image name="button:dMZ-e8-ekK:image" width="30" height="30">
