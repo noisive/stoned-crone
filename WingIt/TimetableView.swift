@@ -15,10 +15,11 @@ protocol PassData {
 
 class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PassData {
     
-    @IBOutlet var ToggleSectionOutlet: UISegmentedControl!
+
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var menuButton: UIBarButtonItem!
-    @IBOutlet var classCounter: UIBarButtonItem!
+    @IBOutlet weak var classCounterContainer: UIView!
+    @IBOutlet var classCounter: UILabel!
     
     var lessonData = [Lesson]()
     
@@ -54,14 +55,12 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        self.getClassCountForDay()
+        classCounterContainer.layer.masksToBounds = true
+        classCounterContainer.layer.cornerRadius = 18
+        classCounterContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+        classCounterContainer.layer.borderWidth = 0.5
         
         thisIsFirstLoad = true
-        
-       
-        
         
         if #available(iOS 11.0, *) {
             self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
@@ -110,7 +109,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
             }
         }
         
-        
+        self.getClassCountForDay()
         
         
     }
@@ -175,9 +174,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print("HERE:", self.view.frame.height)
-        print("HERE:", self.collectionView.frame.height)
-        return CGSize(width: self.view.frame.width, height: self.collectionView.frame.height)
+        return CGSize(width: self.view.frame.width, height: self.view.frame.height)
     }
     
     // FEATURE This may need to change if we are extending the number of days?? - WW
@@ -203,11 +200,11 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         }
         ids = Array(Set(ids))
         if (ids.count == 0) {
-            self.classCounter.title = "No classes"
+            self.classCounter.text = "No classes"
         } else if (ids.count == 1) {
-            self.classCounter.title = "1 class"
+            self.classCounter.text = "1 class"
         } else {
-            self.classCounter.title = "\(ids.count) classes"
+            self.classCounter.text = "\(ids.count) classes"
         }
     }
     
