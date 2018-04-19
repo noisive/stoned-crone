@@ -22,26 +22,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         let fileManager = FileManager.default
-        let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
-    
-        
+        let cacheURL = try! fileManager
+            .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let dataPath = cacheURL.appendingPathComponent("data.csv").path
+
         // Resets app if given argument --resetdata, so that tests start from a consistent clean state
         if CommandLine.arguments.contains("--resetdata") {
-            do {
-                try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
-            } catch let error as NSError {
-                print("Error: \(error.domain)")
-            }
+            clearCache()
         }
         
         // Bring up different initial view for this test - used for debugging login
         if CommandLine.arguments.contains("--debugLogin") {
-            do {
-                try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
-            } catch let error as NSError {
-                print("Error: \(error.domain)")
-            }
-            
+            clearCache()
             // Open debug window
             self.window = UIWindow(frame: UIScreen.main.bounds)
             
@@ -83,6 +75,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.rootViewController = NavigationService.displayLoginView()
         self.window?.makeKeyAndVisible()
+    }
+    
+    // Delete all files in app cache dir, including our data csvs.
+    func clearCache(){
+        let fileManager = FileManager.default
+        let cacheURL = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        do {
+            let cachePath = cacheURL.path
+            let fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
+            
+            for fileName in fileNames {
+                
+                //                    if (fileName == "cache.db-wal")
+                //                    {
+                let filePathName = "\(cachePath)/\(fileName)"
+                try fileManager.removeItem(atPath: filePathName)
+                //                    }
+            }
+                
+//            let files = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
+           
+            
+        } catch {
+            print("Could not clear: \(error)")
+        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

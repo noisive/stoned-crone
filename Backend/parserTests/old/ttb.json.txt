@@ -1,0 +1,231 @@
+[
+  {
+    "id": "YTTB1",
+    "day": 1,
+    "start": "16:00",
+    "end": "18:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "#FFD700",
+    "fcol": "#000000",
+    "info": "Tutorial<br>\nCOSC326<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8670533441689,170.518171263001&ll=-45.8670533441689,170.518171263001&z=19&t=k\" target=\"_blank\">OWG38<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC326S2DNI2017TX1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC326S2DNI2017TX1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Effective Programming<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>X1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Lab G38 COSC <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Building<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Effective Programming<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>X1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Lab G38 COSC <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Building<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 1,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB2",
+    "day": 2,
+    "start": "09:00",
+    "end": "10:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "lightgrey",
+    "fcol": "#121212",
+    "info": "Lecture<br>\nCOSC344<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8647447389463,170.515310881497&ll=-45.8647447389463,170.515310881497&z=19&t=k\" target=\"_blank\">QUAD4<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC344S2DNI2017LL1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC344S2DNI2017LL1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Database Theory and Applications<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Quad 4 <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Geology Building<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Database Theory and Applications<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Quad 4 <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Geology Building<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 10,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB3",
+    "day": 2,
+    "start": "10:00",
+    "end": "11:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "#FFD700",
+    "fcol": "#000000",
+    "info": "Tutorial<br>\nCOSC346<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8677571473166,170.520244476464&ll=-45.8677571473166,170.520244476464&z=19&t=k\" target=\"_blank\">T101<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC346S2DNI2017TT1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC346S2DNI2017TT1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Object-oriented Programming and User Interfaces<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>T1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>College Tchng. Wing 101 <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>UOCE Teaching Wing<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Object-oriented Programming and User Interfaces<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>T1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>College Tchng. Wing 101 <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>UOCE Teaching Wing<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 4,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB4",
+    "day": 2,
+    "start": "13:00",
+    "end": "14:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "lightgrey",
+    "fcol": "#121212",
+    "info": "Lecture<br>\nCOSC346<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8680587894445,170.520932749183&ll=-45.8680587894445,170.520932749183&z=19&t=k\" target=\"_blank\">TG08<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC346S2DNI2017LL1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC346S2DNI2017LL1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Object-oriented Programming and User Interfaces<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>College Tower Lect Rm G08 <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>UOCE Tower Block<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Object-oriented Programming and User Interfaces<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>College Tower Lect Rm G08 <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>UOCE Tower Block<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 5,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB5",
+    "day": 2,
+    "start": "16:00",
+    "end": "17:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "#FFD700",
+    "fcol": "#000000",
+    "info": "Tutorial<br>\nCOSC345<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8645312,170.5108324&ll=-45.8645312,170.5108324&z=19&t=k\" target=\"_blank\">UNIST<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC345FYDNI2017TU1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC345FYDNI2017TU1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Software Engineering<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>U1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Union St. Lecture Theatre <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Botany Annexe<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Software Engineering<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>U1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Union St. Lecture Theatre <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Botany Annexe<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 8,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB6",
+    "day": 3,
+    "start": "10:00",
+    "end": "12:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "#80FFFF",
+    "fcol": "#000000",
+    "info": "Computer Lab<br>\nCOSC346<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8670533441689,170.518171263001&ll=-45.8670533441689,170.518171263001&z=19&t=k\" target=\"_blank\">OWG38<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC346S2DNI2017CY1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC346S2DNI2017CY1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Object-oriented Programming and User Interfaces<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Y1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Lab G38 COSC <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Building<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Object-oriented Programming and User Interfaces<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Y1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Lab G38 COSC <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Building<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 7,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB7",
+    "day": 3,
+    "start": "16:00",
+    "end": "18:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "#FFD700",
+    "fcol": "#000000",
+    "info": "Tutorial<br>\nCOSC326<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8670533441689,170.518171263001&ll=-45.8670533441689,170.518171263001&z=19&t=k\" target=\"_blank\">OWG38<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC326S2DNI2017TX1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC326S2DNI2017TX1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Effective Programming<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>X1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Lab G38 COSC <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Building<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Effective Programming<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>X1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Lab G38 COSC <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Building<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 2,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB8",
+    "day": 4,
+    "start": "09:00",
+    "end": "10:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "lightgrey",
+    "fcol": "#121212",
+    "info": "Lecture<br>\nCOSC344<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8647447389463,170.515310881497&ll=-45.8647447389463,170.515310881497&z=19&t=k\" target=\"_blank\">QUAD4<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC344S2DNI2017LL1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC344S2DNI2017LL1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Database Theory and Applications<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Quad 4 <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Geology Building<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Database Theory and Applications<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Quad 4 <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Geology Building<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 11,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB9",
+    "day": 4,
+    "start": "10:00",
+    "end": "11:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "#FFD700",
+    "fcol": "#000000",
+    "info": "Tutorial<br>\nCOSC326<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8670533441689,170.518171263001&ll=-45.8670533441689,170.518171263001&z=19&t=k\" target=\"_blank\">OWG34<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC326S2DNI2017TX1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC326S2DNI2017TX1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Effective Programming<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>X1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Room G34 COSC <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Building<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Effective Programming<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>X1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Room G34 COSC <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Building<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 3,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB10",
+    "day": 4,
+    "start": "11:00",
+    "end": "13:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "#80FFFF",
+    "fcol": "#000000",
+    "info": "Computer Lab<br>\nCOSC344<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8670533441689,170.518171263001&ll=-45.8670533441689,170.518171263001&z=19&t=k\" target=\"_blank\">OWG38<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC344S2DNI2017CX2').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC344S2DNI2017CX2\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Database Theory and Applications<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>X2<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Lab G38 COSC <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Building<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Database Theory and Applications<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>X2<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Lab G38 COSC <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Owheo Building<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 12,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB11",
+    "day": 4,
+    "start": "13:00",
+    "end": "14:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "lightgrey",
+    "fcol": "#121212",
+    "info": "Lecture<br>\nCOSC346<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8680587894445,170.520932749183&ll=-45.8680587894445,170.520932749183&z=19&t=k\" target=\"_blank\">TG08<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC346S2DNI2017LL1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC346S2DNI2017LL1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Object-oriented Programming and User Interfaces<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>College Tower Lect Rm G08 <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>UOCE Tower Block<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Object-oriented Programming and User Interfaces<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>L1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>College Tower Lect Rm G08 <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>UOCE Tower Block<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 6,
+      "rcid": ""
+    }
+  },
+  {
+    "id": "YTTB12",
+    "day": 5,
+    "start": "09:00",
+    "end": "10:00",
+    "draggable": false,
+    "resizable": false,
+    "selected": false,
+    "bcol": "lightgrey",
+    "fcol": "#121212",
+    "info": "Lecture<br>\nCOSC345<br>\n\n<a href=\"https:\/\/maps.google.com\/?q=-45.8645312,170.5108324&ll=-45.8645312,170.5108324&z=19&t=k\" target=\"_blank\">UNIST<\/a>\n\n<div class=\"sv-hidden-md sv-hidden-lg sv-hidden-sm\">\n\t<a onclick=\"$('.uo_mobile_more_COSC345FYDNI2017LM1').toggle()\" href=\"javascript:void(0)\">More...<\/a>\n\t<div class=\"uo_mobile_more_COSC345FYDNI2017LM1\" style=\"display:none\">\n<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Software Engineering<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>M1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Union St. Lecture Theatre <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Botany Annexe<\/span><\/div>\n\t<\/div>\n<\/div>",
+    "ttip": "<div class='sv-col-sm-3'><span><strong>Paper:<\/strong><\/span><\/div><div class='sv-col-sm-9'>\t<span>Software Engineering<\/span><\/div><div class='sv-col-sm-3'><span><strong>Stream:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>M1<\/span><\/div>\n\n<div class='sv-col-sm-3'><span><strong>Room:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Union St. Lecture Theatre <\/span><\/div><div class='sv-col-sm-3'><span><strong>Building:<\/strong><\/span><\/div><div class='sv-col-sm-9'><span>Botany Annexe<\/span><\/div>",
+    "preinfo": "",
+    "isnote": false,
+    "extra": {
+      "tts_seqn": 9,
+      "rcid": ""
+    }
+  }
+]
+
