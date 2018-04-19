@@ -144,10 +144,6 @@
                                     <constraint firstAttribute="height" constant="10" id="ZS7-el-pbd"/>
                                 </constraints>
                             </webView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D8T-F3-dMA">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vt-l9-ZVc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
@@ -299,8 +295,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMZ-e8-ekK">
                                 <rect key="frame" x="18" y="44" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="DNm-jb-llj"/>
-                                    <constraint firstAttribute="height" constant="30" id="Wb6-zT-5Bf"/>
+                                    <constraint firstAttribute="width" constant="30" id="Dry-Dv-TKx"/>
+                                    <constraint firstAttribute="height" constant="30" id="uHR-aG-rvP"/>
                                 </constraints>
                                 <state key="normal" image="button:dMZ-e8-ekK:image"/>
                                 <connections>
@@ -310,17 +306,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dMZ-e8-ekK" firstAttribute="top" secondItem="HQp-gX-4Dh" secondAttribute="bottom" id="45E-pu-JEL"/>
-                            <constraint firstItem="D8T-F3-dMA" firstAttribute="leading" secondItem="V9B-Ts-DLQ" secondAttribute="leading" id="9Ag-BV-MYC"/>
-                            <constraint firstItem="D8T-F3-dMA" firstAttribute="top" secondItem="V9B-Ts-DLQ" secondAttribute="top" id="KPs-qc-TOi"/>
-                            <constraint firstAttribute="bottom" secondItem="D8T-F3-dMA" secondAttribute="bottom" id="N0i-jH-KFt"/>
+                            <constraint firstItem="dMZ-e8-ekK" firstAttribute="top" secondItem="HQp-gX-4Dh" secondAttribute="bottom" id="IRz-vA-5AU"/>
                             <constraint firstItem="1c5-uh-vDW" firstAttribute="top" secondItem="HQp-gX-4Dh" secondAttribute="bottom" id="PjV-G4-1aD"/>
                             <constraint firstAttribute="bottom" secondItem="3vt-l9-ZVc" secondAttribute="bottom" id="S5E-wU-dvy"/>
-                            <constraint firstAttribute="trailing" secondItem="D8T-F3-dMA" secondAttribute="trailing" id="eTd-yr-lVM"/>
-                            <constraint firstItem="dMZ-e8-ekK" firstAttribute="leading" secondItem="1c5-uh-vDW" secondAttribute="trailing" constant="8" id="gn3-KA-7GC"/>
                             <constraint firstItem="1c5-uh-vDW" firstAttribute="leading" secondItem="V9B-Ts-DLQ" secondAttribute="leading" id="hlg-hg-RZT"/>
                             <constraint firstItem="3vt-l9-ZVc" firstAttribute="top" secondItem="V9B-Ts-DLQ" secondAttribute="top" id="nK5-jk-4pr"/>
                             <constraint firstAttribute="trailing" secondItem="3vt-l9-ZVc" secondAttribute="trailing" id="pSy-G9-Taf"/>
+                            <constraint firstItem="dMZ-e8-ekK" firstAttribute="leading" secondItem="1c5-uh-vDW" secondAttribute="trailing" constant="8" id="s91-cL-DoV"/>
                             <constraint firstItem="3vt-l9-ZVc" firstAttribute="leading" secondItem="V9B-Ts-DLQ" secondAttribute="leading" id="t6s-JT-JXo"/>
                         </constraints>
                     </view>

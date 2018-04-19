@@ -71,7 +71,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+            self.hideCancelOnNoData()
     }
     
     override func viewDidLoad() {
@@ -122,8 +122,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             let loadRequest: URLRequest = URLRequest(url: url)
             webView.loadRequest(loadRequest)
         }
-        
-        hideCancelOnNoData()
+    
     }
     
     @objc private func endEditing() {
@@ -171,13 +170,18 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         let fileManager = FileManager.default
         let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
         
-        // If we don't have data already.
-        if (!fileManager.fileExists(atPath: dataPath)) {
-            cancelButton.isEnabled = false
-            cancelButton.isHidden = true
-        } else {
+        if self.isUpdatingMode {
             cancelButton.isEnabled = true
             cancelButton.isHidden = false
+        } else {
+            // If we don't have data already.
+            if (!fileManager.fileExists(atPath: dataPath)) {
+                cancelButton.isEnabled = false
+                cancelButton.isHidden = true
+            } else {
+                cancelButton.isEnabled = true
+                cancelButton.isHidden = false
+            }
         }
     }
     
