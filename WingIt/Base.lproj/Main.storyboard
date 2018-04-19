@@ -157,6 +157,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVd-jW-wzG">
                                                 <rect key="frame" x="16" y="201.00000000000003" width="327" height="50"/>
                                                 <color key="backgroundColor" red="0.002853669343" green="0.54101066440000001" blue="0.99908632040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <accessibility key="accessibilityConfiguration" label="Login"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="qm5-c2-pB4"/>
                                                 </constraints>
