@@ -16,12 +16,18 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     //Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var iconContainer: UIView!
+    @IBOutlet weak var welcomeMessage: UILabel!
     
     //Constants
     private let NAVIGATION_DATA: [(title: String, image: UIImage)] = [
-        (title: "Timetable", image: #imageLiteral(resourceName: "Page Overview 2_000000_100")),
-        (title: "Update timetable", image: #imageLiteral(resourceName: "Repeat_000000_100")),
+        (title: "Timetable", image: #imageLiteral(resourceName: "Meeting_000000_100")),
+        (title: "Update timetable", image: #imageLiteral(resourceName: "Meeting_000000_100")),
         (title: "About", image: #imageLiteral(resourceName: "Meeting_000000_100"))
+    ]
+    private let WELCOME_MESSAGES: [String] = [
+        "Have a great day!",
+        "Thanks for stopping by!",
+        "Enjoy class today!"
     ]
     private let CELL_HEIGHT: CGFloat = 60.0
     private let ICON_CORNER_RADIUS: CGFloat = 8.0
@@ -58,6 +64,9 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.navigationController?.navigationBar.tintColor = .white
         self.iconContainer.layer.cornerRadius = self.ICON_CORNER_RADIUS
         self.tableView.separatorColor = AppColors.CELL_SEPERATOR_COLOR
+        
+        let randomIndex: Int = Int(arc4random_uniform(UInt32(self.WELCOME_MESSAGES.count) + 0))
+        self.welcomeMessage.text = self.WELCOME_MESSAGES[randomIndex]
     }
     
     //MARK: Actions
