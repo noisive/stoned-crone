@@ -22,7 +22,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     override func awakeFromNib() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.contentInset = UIEdgeInsets(top: 4, left: 0, bottom: 8, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         self.tableView.reloadData()
     }
@@ -145,7 +145,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
             
         }
             
-            //Normal cell
+        //Normal cell
         else {
             if let lessonOneUID = lessonData.lesson {
                 cell.hideRightLesson()
@@ -181,7 +181,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         if dataByHour[indexPath.row] != nil{
             if let pass = findLessonData(uid: (dataByHour[indexPath.row]?.lesson)!) {
                 self.passDelegate?.performSegue(with: pass)
-            }else{
+            } else{
                 print("cell without data tapped")
             }
         }

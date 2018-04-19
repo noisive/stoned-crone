@@ -22,6 +22,15 @@
 		533C92DE20762A9400394325 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D620762A9300394325 /* SVProgressHUD.m */; };
 		533C92DF20762A9400394325 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D720762A9300394325 /* SVIndefiniteAnimatedView.m */; };
 		533C92E020762A9400394325 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92DB20762A9400394325 /* SVRadialGradientLayer.m */; };
+		534A442120873F03009E719E /* NavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534A442020873F03009E719E /* NavigationCell.swift */; };
+		534BB68D2081E28A00757932 /* RMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6882081E28900757932 /* RMessage.m */; };
+		534BB68E2081E28A00757932 /* RMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534BB68A2081E28900757932 /* RMessageView.xib */; };
+		534BB68F2081E28A00757932 /* RMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB68B2081E28900757932 /* RMessageView.m */; };
+		534BB6902081E28A00757932 /* RMessageDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 534BB68C2081E28900757932 /* RMessageDefaultDesign.json */; };
+		534BB6932081E2D400757932 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6912081E2D400757932 /* HexColors.m */; };
+		534BB69B2081E31B00757932 /* UIViewController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6962081E31A00757932 /* UIViewController+PPTopMostController.m */; };
+		534BB69C2081E31B00757932 /* UINavigationController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6972081E31A00757932 /* UINavigationController+PPTopMostController.m */; };
+		534BB69D2081E31B00757932 /* UITabBarController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6992081E31A00757932 /* UITabBarController+PPTopMostController.m */; };
 		53B30672207754A0006E05B7 /* LessonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B30671207754A0006E05B7 /* LessonCell.swift */; };
 		53B306742077584C006E05B7 /* AppCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B306732077584C006E05B7 /* AppCells.swift */; };
 		53B306762077643A006E05B7 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B306752077643A006E05B7 /* AppColors.swift */; };
@@ -35,6 +44,7 @@
 		53D4B38220760FBF0063E45F /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B38120760FBF0063E45F /* NavigationService.swift */; };
 		53D4B384207610140063E45F /* AppStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B383207610140063E45F /* AppStates.swift */; };
 		53D4B38620761F700063E45F /* NavigationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B38520761F700063E45F /* NavigationProtocols.swift */; };
+		53DED0DA207F660000C363AF /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DED0D9207F660000C363AF /* AboutView.swift */; };
 		53F8A00C1EC3D0010001604A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A00B1EC3D0010001604A /* AppDelegate.swift */; };
 		53F8A00E1EC3D0010001604A /* TimetableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53F8A00D1EC3D0010001604A /* TimetableView.swift */; };
 		53F8A0111EC3D0010001604A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53F8A00F1EC3D0010001604A /* Main.storyboard */; };
@@ -83,6 +93,22 @@
 		534635A42079A90E00497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		534635A52079A91200497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		534635A62079A91700497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		534A442020873F03009E719E /* NavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCell.swift; sourceTree = "<group>"; };
+		534BB6872081E28900757932 /* RMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMessage.h; sourceTree = "<group>"; };
+		534BB6882081E28900757932 /* RMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMessage.m; sourceTree = "<group>"; };
+		534BB6892081E28900757932 /* RMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMessageView.h; sourceTree = "<group>"; };
+		534BB68A2081E28900757932 /* RMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
+		534BB68B2081E28900757932 /* RMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMessageView.m; sourceTree = "<group>"; };
+		534BB68C2081E28900757932 /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
+		534BB6912081E2D400757932 /* HexColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexColors.m; sourceTree = "<group>"; };
+		534BB6922081E2D400757932 /* HexColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexColors.h; sourceTree = "<group>"; };
+		534BB6942081E30600757932 /* PPTopMostControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PPTopMostControllerProtocol.h; sourceTree = "<group>"; };
+		534BB6952081E31A00757932 /* UIViewController+PPTopMostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PPTopMostController.h"; sourceTree = "<group>"; };
+		534BB6962081E31A00757932 /* UIViewController+PPTopMostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PPTopMostController.m"; sourceTree = "<group>"; };
+		534BB6972081E31A00757932 /* UINavigationController+PPTopMostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+PPTopMostController.m"; sourceTree = "<group>"; };
+		534BB6982081E31A00757932 /* UITabBarController+PPTopMostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+PPTopMostController.h"; sourceTree = "<group>"; };
+		534BB6992081E31A00757932 /* UITabBarController+PPTopMostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+PPTopMostController.m"; sourceTree = "<group>"; };
+		534BB69A2081E31A00757932 /* UINavigationController+PPTopMostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+PPTopMostController.h"; sourceTree = "<group>"; };
 		53B30671207754A0006E05B7 /* LessonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCell.swift; sourceTree = "<group>"; };
 		53B306732077584C006E05B7 /* AppCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCells.swift; sourceTree = "<group>"; };
 		53B306752077643A006E05B7 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
@@ -98,6 +124,7 @@
 		53D4B38120760FBF0063E45F /* NavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		53D4B383207610140063E45F /* AppStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStates.swift; sourceTree = "<group>"; };
 		53D4B38520761F700063E45F /* NavigationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationProtocols.swift; sourceTree = "<group>"; };
+		53DED0D9207F660000C363AF /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		53F8A0081EC3D0010001604A /* WingIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WingIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53F8A00B1EC3D0010001604A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53F8A00D1EC3D0010001604A /* TimetableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableView.swift; sourceTree = "<group>"; };
@@ -206,6 +233,28 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		534BB6862081E21F00757932 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				534BB6872081E28900757932 /* RMessage.h */,
+				534BB6882081E28900757932 /* RMessage.m */,
+				534BB6942081E30600757932 /* PPTopMostControllerProtocol.h */,
+				534BB68C2081E28900757932 /* RMessageDefaultDesign.json */,
+				534BB6892081E28900757932 /* RMessageView.h */,
+				534BB68B2081E28900757932 /* RMessageView.m */,
+				534BB69A2081E31A00757932 /* UINavigationController+PPTopMostController.h */,
+				534BB6972081E31A00757932 /* UINavigationController+PPTopMostController.m */,
+				534BB6982081E31A00757932 /* UITabBarController+PPTopMostController.h */,
+				534BB6992081E31A00757932 /* UITabBarController+PPTopMostController.m */,
+				534BB6952081E31A00757932 /* UIViewController+PPTopMostController.h */,
+				534BB6962081E31A00757932 /* UIViewController+PPTopMostController.m */,
+				534BB6922081E2D400757932 /* HexColors.h */,
+				534BB6912081E2D400757932 /* HexColors.m */,
+				534BB68A2081E28900757932 /* RMessageView.xib */,
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
 		53CDC1E41EDC1EB300A2ED5A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +269,8 @@
 			isa = PBXGroup;
 			children = (
 				53F8A00D1EC3D0010001604A /* TimetableView.swift */,
+				534A442020873F03009E719E /* NavigationCell.swift */,
+				53DED0D9207F660000C363AF /* AboutView.swift */,
 				069827641F87041000777DAD /* LoginDebugController.swift */,
 				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
 				297C56921ED9126200C44420 /* LoginView.swift */,
@@ -277,6 +328,7 @@
 				534635A12079A8EC00497A8D /* SW Reveal Controll */,
 				534635A22079A8FB00497A8D /* Progress indicator */,
 				533C92DA20762A9300394325 /* SVProgressHUD-Prefix.pch */,
+				534BB6862081E21F00757932 /* Notifications */,
 				062EB9421F8B414B005F350E /* SwiftKeychainWrapper */,
 			);
 			path = WingIt;
@@ -385,8 +437,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */,
+				534BB6902081E28A00757932 /* RMessageDefaultDesign.json in Resources */,
 				06D37CD71F873C7F009318AC /* Settings.bundle in Resources */,
 				53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */,
+				534BB68E2081E28A00757932 /* RMessageView.xib in Resources */,
 				53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */,
 				53F8A0111EC3D0010001604A /* Main.storyboard in Resources */,
 			);
@@ -427,8 +481,10 @@
 				062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */,
 				533C92DF20762A9400394325 /* SVIndefiniteAnimatedView.m in Sources */,
 				062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */,
+				53DED0DA207F660000C363AF /* AboutView.swift in Sources */,
 				53B306762077643A006E05B7 /* AppColors.swift in Sources */,
 				53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */,
+				534BB68D2081E28A00757932 /* RMessage.m in Sources */,
 				53F8A00E1EC3D0010001604A /* TimetableView.swift in Sources */,
 				06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */,
 				53F8A0141EC3D0010001604A /* Project.xcdatamodeld in Sources */,
@@ -442,14 +498,20 @@
 				53D4B38620761F700063E45F /* NavigationProtocols.swift in Sources */,
 				069827651F87041000777DAD /* LoginDebugController.swift in Sources */,
 				53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */,
+				534BB69D2081E31B00757932 /* UITabBarController+PPTopMostController.m in Sources */,
+				534BB69C2081E31B00757932 /* UINavigationController+PPTopMostController.m in Sources */,
 				297C56931ED9126200C44420 /* LoginView.swift in Sources */,
+				534A442120873F03009E719E /* NavigationCell.swift in Sources */,
 				533C92E020762A9400394325 /* SVRadialGradientLayer.m in Sources */,
 				06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */,
+				534BB68F2081E28A00757932 /* RMessageView.m in Sources */,
 				53D4B38220760FBF0063E45F /* NavigationService.swift in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
 				53D4B38020760D9A0063E45F /* TimeUtil.swift in Sources */,
 				061F3E801F8AF09C00BD0D09 /* DataUtil.swift in Sources */,
 				53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */,
+				534BB69B2081E31B00757932 /* UIViewController+PPTopMostController.m in Sources */,
+				534BB6932081E2D400757932 /* HexColors.m in Sources */,
 				533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */,
 				53B306742077584C006E05B7 /* AppCells.swift in Sources */,
 			);

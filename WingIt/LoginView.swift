@@ -97,6 +97,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         loginContainer.layer.cornerRadius = CORNER_RADIUS;
         
         loginButton.layer.cornerRadius = CORNER_RADIUS;
+        
+        UIApplication.shared.statusBarStyle = .default
     }
     
     private func setupLogic() {

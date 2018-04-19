@@ -14,10 +14,12 @@ public func getBackgroundColorFromLesson(type: String) -> UIColor {
         return AppColors.LECTURE_COLOR.withAlphaComponent(0.2)
     case "Lab":
         return AppColors.LAB_COLOR.withAlphaComponent(0.2)
+    case "Computer Lab":
+        return AppColors.LAB_COLOR.withAlphaComponent(0.2)
     case "Tutorial":
         return AppColors.TUTORIAL_COLOR.withAlphaComponent(0.2)
     default:
-        return UIColor.gray
+        return UIColor.clear
     }
 }
 

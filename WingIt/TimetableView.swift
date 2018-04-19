@@ -8,19 +8,21 @@
 
 import UIKit
 
+
 protocol PassData {
     func performSegue(with data: Lesson)
 }
 
 class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PassData {
     
-    @IBOutlet var ToggleSectionOutlet: UISegmentedControl!
+
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var menuButton: UIBarButtonItem!
-    @IBOutlet var classCounter: UIBarButtonItem!
+    @IBOutlet weak var classCounterContainer: UIView!
+    @IBOutlet var classCounter: UILabel!
     
     var lessonData = [Lesson]()
-
+    
     var thisIsFirstLoad = false
     
     var dateLabel : String = String()
@@ -34,13 +36,15 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     
     func scrollToCurrentDay(){
         
+        
+        
         // First scroll day
         let indexPath = IndexPath(item: getDayOfWeek()! - 1, section: 0)
         self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
         self.navigationItem.title = Constants.Formats.dayArray[getDayOfWeek()! - 1]
-
+        
     }
-
+    
     
     
     @IBAction func updateTimetable(_ sender: Any) {
@@ -50,45 +54,73 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        classCounterContainer.layer.masksToBounds = true
+        classCounterContainer.layer.cornerRadius = 18
+        classCounterContainer.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+        classCounterContainer.layer.borderWidth = 0.5
+        
         thisIsFirstLoad = true
-
+        
         if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: AppColors.NAV_TITLE_COLOR]
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+            
+            
             self.navigationController?.navigationBar.prefersLargeTitles = true
             
             navigationItem.largeTitleDisplayMode = .always
         }
         self.navigationController?.navigationBar.shadowImage = UIImage()
-    
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-
+            
+            self.revealViewController().rearViewRevealWidth = self.view.frame.width
+            
             // These allow tapping on the timetable view or swiping to close the menu
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
         }
-
+        
         collectionView.delegate = self
         collectionView.dataSource = self
-
         
-
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
-
+        
         loadWeekData(VC: self)
-
+        
         // Autoscroll to current day on startup
         scrollToCurrentDay()
         
-    
-
+        if self.lessonData.count > 1 {
+            let firstLesson: Lesson = self.lessonData[0]
+            
+            let currentWeekFromData = Calendar.current.component(.weekOfYear, from: firstLesson.eventDate)
+            let currentWeekFromToday = Calendar.current.component(.weekOfYear, from: Date())
+            
+            if (currentWeekFromData != currentWeekFromToday) {
+                RMessage.showNotification(withTitle: "It looks like your timetable is out of date! Update now.", type: .warning, customTypeName: nil, callback: nil)
+            }
+        }
+        
+        self.getClassCountForDay()
+        
+        
     }
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        
+    }
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -98,6 +130,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfDaysInSection
     }
+    
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -134,14 +167,14 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         return cell
     }
     
- 
+    
     
     func performSegue(with data: Lesson)  {
         self.navigationController?.pushViewController(NavigationService.displayDetailedClassView(lessonData: data), animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.size.width, height: self.collectionView.frame.size.height)
+        return CGSize(width: self.view.frame.width, height: self.view.frame.height)
     }
     
     // FEATURE This may need to change if we are extending the number of days?? - WW
@@ -153,9 +186,13 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
             self.navigationItem.title = dayArray[dayIndex]
         }
         
+        self.getClassCountForDay()
         
+    }
+    
+    private  func getClassCountForDay() {
         var ids = [CLong]()
-        hourData[getCurrentXPage()].forEach { (data:(lesson1: CLong?, lesson2: CLong?)?) in
+        self.hourData[getCurrentXPage()].forEach { (data:(lesson1: CLong?, lesson2: CLong?)?) in
             if let datas = data {
                 if datas.lesson1 != nil { ids.append(datas.lesson1!)}
                 if datas.lesson2 != nil { ids.append(datas.lesson2!)}
@@ -163,15 +200,15 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         }
         ids = Array(Set(ids))
         if (ids.count == 0) {
-            self.classCounter.title = "No classes on \(self.navigationItem.title ?? "day")."
+            self.classCounter.text = "No classes"
         } else if (ids.count == 1) {
-            self.classCounter.title = "1 class on \(self.navigationItem.title ?? "day")."
+            self.classCounter.text = "1 class"
         } else {
-            self.classCounter.title = "\(ids.count) classes on \(self.navigationItem.title ?? "day")."
+            self.classCounter.text = "\(ids.count) classes"
         }
     }
-
-
+    
+    
     // FEATURE Will also have to change if we are extending the number of days.
     // Currently labels by getting most recent monday, adding offset to that.
     
@@ -192,10 +229,10 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
             destinationVC.lessonData = senderObject
         }
         
-
+        
         
     }
-  
+    
 }
 
 
