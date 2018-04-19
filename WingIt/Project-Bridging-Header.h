@@ -3,6 +3,9 @@
 //
 
 #import "SWRevealViewController.h"
+#import "SVProgressHUD.h"
+#import "RMessage.h"
+
 void parseEvents(const char* data);
 void initTimetable();
 int queryDate(const char* dateString);
