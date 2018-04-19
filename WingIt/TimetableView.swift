@@ -67,8 +67,12 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
             
             
             self.navigationController?.navigationBar.prefersLargeTitles = true
+            if self.isDeviceIphone5() {
+                navigationItem.largeTitleDisplayMode = .never
+            } else {
+                navigationItem.largeTitleDisplayMode = .always
+            }
             
-            navigationItem.largeTitleDisplayMode = .always
         }
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.tintColor = .white
@@ -112,6 +116,15 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         self.getClassCountForDay()
         
         
+    }
+    
+    public func isDeviceIphone5() -> Bool {
+        
+        if (self.view.frame.size.height == 568) {
+            return true
+        }
+        
+        return false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -200,7 +213,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         }
         ids = Array(Set(ids))
         if (ids.count == 0) {
-            self.classCounter.text = "No classes"
+            self.classCounter.text = "0 classes"
         } else if (ids.count == 1) {
             self.classCounter.text = "1 class"
         } else {

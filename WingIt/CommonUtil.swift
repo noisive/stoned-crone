@@ -6,7 +6,11 @@
 //  Copyright © 2017 Noisive. All rights reserved.
 //
 
+
+
 import Foundation
+
+
 
 public func getBackgroundColorFromLesson(type: String) -> UIColor {
     switch type {

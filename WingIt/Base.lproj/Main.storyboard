@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QRJ-3s-2Y0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QRJ-3s-2Y0">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -517,10 +517,11 @@
                                 </cells>
                             </collectionView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="grR-CZ-vx7">
-                                <rect key="frame" x="16" y="602" width="85" height="36"/>
+                                <rect key="frame" x="282" y="594" width="85" height="36"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Classes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-gY-LEd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3 Classes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-gY-LEd">
                                         <rect key="frame" x="0.0" y="0.0" width="85" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" red="0.0039215686269999999" green="0.54117647059999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -528,12 +529,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="3HS-zs-gbd"/>
-                                    <constraint firstItem="Gne-gY-LEd" firstAttribute="top" secondItem="grR-CZ-vx7" secondAttribute="top" id="B2O-af-5bq"/>
-                                    <constraint firstAttribute="width" constant="85" id="DC0-Zc-oP6"/>
-                                    <constraint firstAttribute="bottom" secondItem="Gne-gY-LEd" secondAttribute="bottom" id="J2P-Pc-fAI"/>
-                                    <constraint firstAttribute="trailing" secondItem="Gne-gY-LEd" secondAttribute="trailing" id="Z09-7i-v1l"/>
-                                    <constraint firstItem="Gne-gY-LEd" firstAttribute="leading" secondItem="grR-CZ-vx7" secondAttribute="leading" id="pGx-Yq-7sB"/>
+                                    <constraint firstAttribute="width" constant="85" id="BTU-JG-OWW"/>
+                                    <constraint firstAttribute="height" constant="36" id="aqB-XM-YUI"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -542,17 +539,23 @@
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="grR-CZ-vx7" secondAttribute="bottom" id="2j6-sm-sSe"/>
                             <constraint firstAttribute="trailing" secondItem="1cv-MI-B9i" secondAttribute="trailing" id="6B6-dy-p0o"/>
                             <constraint firstItem="1cv-MI-B9i" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="IhV-Gc-c9l"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="grR-CZ-vx7" secondAttribute="bottom" constant="8" id="KZJ-io-yJu"/>
                             <constraint firstAttribute="bottom" secondItem="1cv-MI-B9i" secondAttribute="bottom" id="Les-Zd-UDR"/>
-                            <constraint firstItem="grR-CZ-vx7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="N8S-KG-ZXP"/>
                             <constraint firstItem="1cv-MI-B9i" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="TUF-a5-jGA"/>
+                            <constraint firstAttribute="trailing" secondItem="grR-CZ-vx7" secondAttribute="trailing" constant="8" id="u17-B4-Tlo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Monday" id="nbG-qC-Ukr">
                         <barButtonItem key="leftBarButtonItem" tag="1" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" tag="1" largeContentSizeImage="Menu" systemItem="refresh" id="RKv-QB-TG2">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="updateTimetable:" destination="BYZ-38-t0r" id="mm0-Uy-41a"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

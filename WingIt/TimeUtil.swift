@@ -12,12 +12,12 @@ import Foundation
 public class TimeUtil {
     
     //MARK: Static variables
-    //=======================================================================================================
+    //=============================================================================
     
     private static let TIME_OFFSET: Int = 8
     
     //MARK: Static functions
-    //=======================================================================================================
+    //=============================================================================
     
     public static func get24HourTimeFromIndexPath(row: Int) -> String {
         return row + self.TIME_OFFSET >= 10 ? "\(self.TIME_OFFSET + row):00" : "0\(self.TIME_OFFSET + row):00"
