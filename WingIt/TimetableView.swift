@@ -52,6 +52,12 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         self.present(NavigationService.displayLoginView(isUpdatingMode: true), animated: true, completion: nil)
         
     }
+    
+    
+    override func viewDidLayoutSubviews() {
+        self.collectionView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -187,6 +193,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         return CGSize(width: self.view.frame.width, height: self.view.frame.height)
     }
     

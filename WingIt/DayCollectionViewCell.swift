@@ -22,7 +22,6 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     override func awakeFromNib() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         self.tableView.reloadData()
     }
@@ -67,7 +66,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
             currentHourCell = IndexPath(row: currentHour - 8, section: 0)
         }
         
-        self.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
+        //self.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
     }
     
     @objc private func handleTap(sender: UIGestureRecognizer) {

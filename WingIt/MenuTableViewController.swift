@@ -21,7 +21,6 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     //Constants
     private let NAVIGATION_DATA: [(title: String, image: UIImage)] = [
         (title: "Timetable", image: #imageLiteral(resourceName: "Meeting_000000_100")),
-        (title: "Update timetable", image: #imageLiteral(resourceName: "Meeting_000000_100")),
         (title: "About", image: #imageLiteral(resourceName: "Meeting_000000_100"))
     ]
     private let WELCOME_MESSAGES: [String] = [
@@ -124,8 +123,6 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
         if indexPath.row == 0 {
             self.performSegue(withIdentifier: "ShowTimetable", sender: self)
         } else if indexPath.row == 1 {
-            self.performSegue(withIdentifier: "UpdateTimetable", sender: self)
-        } else if indexPath.row == 2 {
             self.performSegue(withIdentifier: "ShowAbout", sender: self)
         }
     }
