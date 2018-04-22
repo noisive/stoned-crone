@@ -22,7 +22,7 @@ func loadWeekData(VC: TimetableView) {
     
     var dayIndex = 0;
     
-    while (dayIndex < VC.numberOfDaysInSection) {
+    while (dayIndex < VC.NUMBER_OF_DAYS_IN_SECTION) {
         
         // Data is stored with Monday = 0
         var searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!

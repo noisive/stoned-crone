@@ -13,5 +13,6 @@ public class AppCells {
     
     public static let LESSON_CELL: String = "LessonCell"
     public static let NAVIGATION_CELL: String = "NavigationCell"
+    public static let DAY_CELL: String = "DayCell"
     
 }

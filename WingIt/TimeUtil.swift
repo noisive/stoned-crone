@@ -24,3 +24,12 @@ public class TimeUtil {
     }
     
 }
+
+extension Date {
+    func dayOfWeek() -> Int {
+        if let USDayOfWeek: Int = Calendar.current.dateComponents([.weekday], from: self).weekday {
+            return USDayOfWeek
+        }
+        return 0
+    }
+}

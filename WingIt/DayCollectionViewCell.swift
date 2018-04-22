@@ -22,6 +22,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     override func awakeFromNib() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorColor = AppColors.CELL_SEPERATOR_COLOR
         
         self.tableView.reloadData()
     }

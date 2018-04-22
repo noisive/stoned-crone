@@ -189,6 +189,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     //==========================================================================
     
     @IBAction func dismiss(_ sender: Any) {
+        SVProgressHUD.dismiss()
         self.dismiss(animated: true, completion: nil)
     }
     
