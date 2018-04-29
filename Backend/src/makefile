@@ -1,24 +1,34 @@
-parsertest.out : libParse.a parsertest.cpp createcsvs.out
-	g++ -std=c++11 -g parsertest.cpp -L. -lm -lParse -o parsertest.out
+optimisationLevel = -g # -O2
+buildDir = ../build/
+binDir = ../bin/
+objectNames = parser.o timetableEvent.o timetable.o date.o
+objects = $(addprefix $(buildDir),$(objectNames))
+libArgs = -L$(buildDir) -lm -lParse
 
-createcsvs.out : libParse.a createcsvs.cpp
-	g++ -std=c++11 -g createcsvs.cpp -L. -lm -lParse -o createcsvs.out
+# $@ expands to the name of the rule.
+$(binDir)parsertest.out : $(buildDir)libParse.a parsertest.cpp $(binDir)createcsvs.out
+	g++ -std=c++11 $(optimisationLevel) parsertest.cpp $(libArgs)
 
-libParse.a : parser.o timetableEvent.o timetable.o date.o
-	ar r libParse.a parser.o timetable.o timetableEvent.o date.o
+$(binDir)createcsvs.out : $(buildDir)libParse.a createcsvs.cpp
+	g++ -std=c++11 $(optimisationLevel) createcsvs.cpp $(libArgs)
 
-timetable.o : timetable.cpp
-	g++ -std=c++11 -g -c timetable.cpp
+$(buildDir)libParse.a : $(objectNames)
+	ar r $@ $(objects)
 
-timetableEvent.o : timetableEvent.cpp 
-	g++ -std=c++11 -g -c timetableEvent.cpp 
+$(buildDir)timetable.o : timetable.cpp
+	g++ -std=c++11 $(optimisationLevel) -c timetable.cpp
 
-date.o : date.cpp
-	g++ -std=c++11 -g -c date.cpp
+$(buildDir)timetableEvent.o : timetableEvent.cpp
+	g++ -std=c++11 $(optimisationLevel) -c timetableEvent.cpp
 
-parser.o : parser.cpp 
-	g++ -std=c++11 -g -c parser.cpp
+$(buildDir)date.o : date.cpp
+	g++ -std=c++11 $(optimisationLevel) -c date.cpp
+
+$(buildDir)parser.o : parser.cpp
+	g++ -std=c++11 $(optimisationLevel) -c parser.cpp
 
 clean :
-	rm -rf *.dSYM
-	rm *.o* *.a
+	# rm -rf *.dSYM
+	# rm *.o* *.a
+	rm -rf ../build/*
+	rm -rf ../bin/*
