@@ -9,24 +9,24 @@
 
 class TimetableEvent {
     private:
-        unsigned long uid;
+        unsigned long uid; // Unique identifier for each TT.
         std::string id;
-        Date date;
-        int duration;
+        Date date; // ISO format, or specific legacy format.
+        int duration; // in hours
         int mapZoom;
-        int startTime;
-        int endTime;
-        int day;
+        int startTime; // hour, in 24h time.
+        int endTime; // not used
+        int day; // Day of week as int, mon=1
         std::string color;
         std::string mapLat;
         std::string mapLong;
-        std::string paperCode;
-        std::string paperName;
-        std::string roomCode;
-        std::string roomName;
+        std::string paperCode; // eg COSC345
+        std::string paperName; // Paper description
+        std::string roomCode; // Eg STDAV1
+        std::string roomName; // Full name of room
         std::string building;
         std::string mapUrl;
-        std::string type;
+        std::string type; // Lecture, lab, tut, etc.
  
         unsigned long hash();
     

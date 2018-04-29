@@ -4,21 +4,21 @@
 #include "timetableEvent.hpp"
 
 TimetableEvent::TimetableEvent(void) {
-    this->uid = 0xCC;
-    this->id = "0xCC";
-    this->date = Date();
-    this->day = 0xCC;
-    this->duration = 0xCC;
-    this->startTime = 0xCC;
-    this->endTime = 0xCC;
+    this->uid = 0xCC; // Unique identifier for each TT.
+    this->id = "0xCC"; // Seems to be unused...
+    this->date = Date(); // ISO format, or specific legacy format.
+    this->day = 0xCC; // Day of week as int, mon=1
+    this->duration = 0xCC; // in hours
+    this->startTime = 0xCC; // hour, in 24h time.
+    this->endTime = 0xCC; // not used
     this->mapLat = "0xCC";
     this->mapLong = "0xCC";
-    this->paperCode = "0xCC";
-    this->paperName = "0xCC";
-    this->roomCode = "0xCC";
-    this->roomName = "0xCC";
+    this->paperCode = "0xCC"; // eg COSC345
+    this->paperName = "0xCC"; // Paper description
+    this->roomCode = "0xCC"; // Eg STDAV1
+    this->roomName = "0xCC"; // Full name of room
     this->building = "0xCC";
-    this->type = "0xCC";
+    this->type = "0xCC"; // Lecture, lab, tut, etc.
 }
 
 unsigned long TimetableEvent::hash() {
