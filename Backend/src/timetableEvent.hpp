@@ -30,15 +30,18 @@ class TimetableEvent {
  
         unsigned long hash();
     
+
     public:
     
         TimetableEvent(void); 
+
+        bool validateEventData();
 
         unsigned long getUID();
 
         bool equals(TimetableEvent other);
         
-        void genUID();
+        void genUID(); // Seems to be unused...
 
         // Wraps the setDate function to parse and add days from evision.
         void fixDate(int startingDate);
