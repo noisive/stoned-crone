@@ -82,9 +82,9 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
 
     // infoSegment is part of json that starts with "\"info\":"
 
-    // Cut off strong strange crap first...
+    // Cut off strange crap first...
     std::string charsBeforeEventType = "div>\\n";
-        infoSegment = infoSegment.substr(indexOf(infoSegment, charsBeforeEventType) + sizeOf(charsBeforeEventType, sizeOf(infoSegment) - 1);
+        infoSegment = infoSegment.substr(indexOf(infoSegment, charsBeforeEventType)), sizeof(infoSegment) - 1);
 
     // Set event type
     int startIndex = 0;
