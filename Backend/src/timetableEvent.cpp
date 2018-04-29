@@ -2,6 +2,8 @@
    @author Will Shaw - 2017
    */
 #include "timetableEvent.hpp"
+#include <assert.h>
+#include <regex>
 
 TimetableEvent::TimetableEvent(void) {
     this->uid = 0xCC; // Unique identifier for each TT.
@@ -138,7 +140,7 @@ void TimetableEvent::fixDate(int startingDate) {
     setDate(date.legacyDate()); 
 }
 
-/* Output a string representation of this event. */
+/* Output a string representation of this event. Useable as CSV. */
 std::string TimetableEvent::toString() { 
     return std::to_string(this->uid) + 
         "," + std::to_string(this->day) + 
@@ -156,3 +158,47 @@ std::string TimetableEvent::toString() {
         "," + this->date.ISODate();
 }
 
+bool TimetableEvent::validateEventData(){
+    // Checks tt events don't contain unexpected characters.
+    assert (this->day < 7 && day > 0);
+    assert (this->duration < 14 && duration > 0);
+
+    std::regex hexrgx("#[\\da-fA-F]{6}");
+    assert(regex_match(this->color, hexrgx));
+
+    std::regex paperrgx("[[:upper:]]{4}\\d{3}");
+    assert(std::regex_match(this->paperCode, paperrgx));
+
+    std::regex upperAlphaNumRgx("[[:upper:][:digit:]]*");
+    assert(std::regex_match(this->roomCode, upperAlphaNumRgx));
+
+    std::regex alphanumrgx("[[:alnum:] ]*");
+    assert(std::regex_match(this->type, alphanumrgx));
+    assert(std::regex_match(this->building, alphanumrgx));
+
+    // TODO validate date
+
+
+    // Ensure none of the string-based items have caught a funny char.
+    const char *blarray[] = {"<",">","\'","\"","\\n",";","/"};
+    std::vector<std::string> blacklist(blarray, std::end(blarray));
+    // TODO make this a soft fail - replace with blank string instead.
+    // For time being, is useful for CI testing, because will crash app instaed of passing bad data.
+    // TODO this should NOT be integrated into master!
+    for (std::string blacklistedChar : blacklist) {
+        std::string rgxString ="[^" + blacklistedChar + "]*";
+        std::regex rgx(rgxString);
+        assert(std::regex_match(this->color, rgx));
+        assert(std::regex_match(this->mapLat, rgx));
+        assert(std::regex_match(this->mapLong, rgx));
+        assert(std::regex_match(this->paperCode, rgx));
+        assert(std::regex_match(this->paperName, rgx));
+        assert(std::regex_match(this->roomCode, rgx));
+        assert(std::regex_match(this->roomName, rgx));
+        assert(std::regex_match(this->building, rgx));
+        assert(std::regex_match(this->mapUrl, rgx));
+        assert(std::regex_match(this->type, rgx));
+    }
+
+    return true;
+}
