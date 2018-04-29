@@ -80,9 +80,16 @@ int Parser::getObjectCount(std::string json) {
 
 TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent) {
 
+    // infoSegment is part of json that starts with "\"info\":"
+
+    // Cut off strong strange crap first...
+    std::string charsBeforeEventType = "div>\\n";
+        infoSegment = infoSegment.substr(indexOf(infoSegment, charsBeforeEventType) + sizeOf(charsBeforeEventType, sizeOf(infoSegment) - 1);
+
     // Set event type
     int startIndex = 0;
-    int endIndex = indexOf(infoSegment, "<");
+    // int startIndex = indexOf(infoSegment, charsBeforeEventType) - sizeof(charsBeforeEventType);
+    int endIndex = indexOf(infoSegment, "<br>");
     ttEvent.setType(infoSegment.substr(startIndex, endIndex));
 
     // Set paper code
