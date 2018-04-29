@@ -107,223 +107,235 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         passwordField.delegate = self
         webView.delegate = self
         
-        self.loginTitle.text = self.isUpdatingMode ? "Log in to Update" : "Log in to eVision"
-        self.loginButton.setTitle(self.isUpdatingMode ? "UPDATE" : "LOGIN", for: .normal)
-        
-        self.PWIsStored = true
-        
-        //Setup gestures
-        let dismissGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
-        self.scrollView.addGestureRecognizer(dismissGesture)
-        
-        //Setup webview
-        let urlBase: URL? = URL(string: "https://evision.otago.ac.nz")
-        if let url = urlBase {
-            let loadRequest: URLRequest = URLRequest(url: url)
-            webView.loadRequest(loadRequest)
+        if self.isUpdatingMode {
+            
+            self.loginTitle.text = "Log in to Update"
+            self.loginButton.setTitle("UPDATE", for: .normal)
+        }else{
+            self.loginButton.setTitle("LOGIN", for: .normal)
+            self.loginTitle.text = "Log in to eVision"
         }
-    
+        /* self.loginTitle.text = self.isUpdatingMode ? "Log in to Update" : "Log in to eVision" */
+        /* self.loginButton.setTitle(self.isUpdatingMode ? "UPDATE" : "LOGIN", for: .normal) */
+
+        self.PWIsStored = true
+
+            //Setup gestures
+            let dismissGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
+            self.scrollView.addGestureRecognizer(dismissGesture)
+
+            //Setup webview
+            let urlBase: URL? = URL(string: "https://evision.otago.ac.nz")
+            if let url = urlBase {
+                let loadRequest: URLRequest = URLRequest(url: url)
+                    webView.loadRequest(loadRequest)
+            }
+
     }
-    
+
     @objc private func endEditing() {
         self.view.endEditing(true)
-        self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
-    
+
     private func beginLogin() {
         self.endEditing()
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.loginContainer.alpha = 0
-            self.loginButton.isEnabled = false
-        }) { (success) in
-            SVProgressHUD.show(withStatus: "Logging you in...")
-        }
-        
+
+            UIView.animate(withDuration: 0.3, animations: {
+                    self.loginContainer.alpha = 0
+                    self.loginButton.isEnabled = false
+                    }) { (success) in
+                SVProgressHUD.show(withStatus: "Logging you in...")
+            }
+
         if let user = usernameField.text, let password = passwordField.text {
             self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
-            self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(password)';")
-            
-            if self.savePasswordSwitch.isOn {
-                storeUserPass(username: user, password: password)
-                self.PWIsStored = true
-            } else {
-                self.PWIsStored = false
-                removeStoredUserPass()
-            }
-            
+                self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(password)';")
+
+                if self.savePasswordSwitch.isOn {
+                    storeUserPass(username: user, password: password)
+                        self.PWIsStored = true
+                } else {
+                    self.PWIsStored = false
+                        removeStoredUserPass()
+                }
+
             //Fire request
             webView.stringByEvaluatingJavaScript(from: self.webClickLogin)
         } else {
             SVProgressHUD.dismiss()
-            self.handleAlert(title: "Login Error", description: "Please ensure your login details are entered correctly.")
+                self.handleAlert(title: "Login Error", description: "Please ensure your login details are entered correctly.")
         }
     }
-    
+
     private func handleAlert(title: String, description: String) {
         let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
     }
-    
+
     private func hideCancelOnNoData() {
         let fileManager = FileManager.default
-        let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
-        
-        if self.isUpdatingMode {
-            cancelButton.isEnabled = true
-            cancelButton.isHidden = false
-        } else {
-            // If we don't have data already.
-            if (!fileManager.fileExists(atPath: dataPath)) {
-                cancelButton.isEnabled = false
-                cancelButton.isHidden = true
-            } else {
+            let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
+
+            if self.isUpdatingMode {
                 cancelButton.isEnabled = true
-                cancelButton.isHidden = false
+                    cancelButton.isHidden = false
+            } else {
+                // If we don't have data already.
+                if (!fileManager.fileExists(atPath: dataPath)) {
+                    cancelButton.isEnabled = false
+                        cancelButton.isHidden = true
+                } else {
+                    cancelButton.isEnabled = true
+                        cancelButton.isHidden = false
+                }
             }
-        }
     }
-    
+
     //MARK: Actions
     //==========================================================================
-    
+
     @IBAction func dismiss(_ sender: Any) {
         SVProgressHUD.dismiss()
-        self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func loginPressed(_ sender: Any) {
         self.beginLogin()
     }
-    
+
     //MARK: Delegates
     //==========================================================================
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+
         guard let usernameText = self.usernameField.text else { return false }
         guard let passwordText = self.passwordField.text else { return false }
-        
+
         switch textField {
-        case self.usernameField:
-            if (usernameText.isEmpty) {
-                self.handleAlert(title: "Username Empty", description: "Please enter your eVision username.")
-            } else if (!usernameText.isEmpty && passwordText.isEmpty) {
-                self.passwordField.becomeFirstResponder()
-            } else {
-                self.beginLogin()
-            }
-        case self.passwordField:
-            if (passwordText.isEmpty) {
-                self.handleAlert(title: "Password Empty", description: "Please enter your eVision password.")
-            } else if (usernameText.isEmpty && !passwordText.isEmpty) {
-                self.usernameField.becomeFirstResponder()
-            } else {
-                self.beginLogin()
-            }
-        default:
-            print("Unknown text field")
+            case self.usernameField:
+                if (usernameText.isEmpty) {
+                    self.handleAlert(title: "Username Empty", description: "Please enter your eVision username.")
+                } else if (!usernameText.isEmpty && passwordText.isEmpty) {
+                    self.passwordField.becomeFirstResponder()
+                } else {
+                    self.beginLogin()
+                }
+            case self.passwordField:
+                if (passwordText.isEmpty) {
+                    self.handleAlert(title: "Password Empty", description: "Please enter your eVision password.")
+                } else if (usernameText.isEmpty && !passwordText.isEmpty) {
+                    self.usernameField.becomeFirstResponder()
+                } else {
+                    self.beginLogin()
+                }
+            default:
+                print("Unknown text field")
         }
         return true
     }
-    
+
     internal func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print("CALLED \(String(describing: request.url?.absoluteString))")
-        
-        if request.url?.absoluteString == "https://com.noisive" {
-            print("JS CALLBACK")
-            return false
-        }
+
+            if request.url?.absoluteString == "https://com.noisive" {
+                print("JS CALLBACK")
+                    return false
+            }
         return true
     }
-    
+
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if (!webView.isLoading) {
-            
+
             let error:Bool = NSString(string: webView.stringByEvaluatingJavaScript(from: webCheckError)!).boolValue
-            if (error) {
-                // Get the error given by eVision.
-                let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webErrorReason)!) as String
-                
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.loginContainer.alpha = 1
-                }) { (success) in
-                    SVProgressHUD.showError(withStatus: reason)
-                    self.loginButton.isEnabled = true
+                if (error) {
+                    // Get the error given by eVision.
+                    let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webErrorReason)!) as String
+
+                        UIView.animate(withDuration: 0.3, animations: {
+                                self.loginContainer.alpha = 1
+                                }) { (success) in
+                            SVProgressHUD.showError(withStatus: reason)
+                                self.loginButton.isEnabled = true
+                        }
+                    return
                 }
-                return
-            }
-            
+
             var header:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webCheckHeader)!) as String
-            header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-            
-            //Web view initial load, grab stored details
-            if (header == "" && !once) {
-                usernameField.text = retrieveStoredUsername()
-                passwordField.text = retrieveStoredPassword()
-                
-                if (retrieveStoredUsername() != "" && retrieveStoredPassword() != "") {
-                    self.savePasswordSwitch.isOn = true
+                header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+
+                //Web view initial load, grab stored details
+                if (header == "" && !once) {
+                    usernameField.text = retrieveStoredUsername()
+                        passwordField.text = retrieveStoredPassword()
+
+                        if (retrieveStoredUsername() != "" && retrieveStoredPassword() != "") {
+                            self.savePasswordSwitch.isOn = true
+                        }
+                    once = true
+
+                        SVProgressHUD.dismiss()
+                        UIView.animate(withDuration: 0.3, animations: {
+                                self.loginContainer.alpha = 1
+                                }, completion: { (success) in
+                                self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
+                                self.usernameField.becomeFirstResponder()
+                                })
                 }
-                once = true
-                
-                SVProgressHUD.dismiss()
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.loginContainer.alpha = 1
-                }, completion: { (success) in
-                    self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
-                    self.usernameField.becomeFirstResponder()
-                })
-            }
-            
+
             switch header {
-                
-            case "System Message":
-                break;
-                
-            case "Home":
-                webView.stringByEvaluatingJavaScript(from: self.webClickTimetable)
-                SVProgressHUD.setStatus(self.isUpdatingMode ? "Updating your timetable..." : "Retrieving your timetable...")
-                break;
-                
-            case "Timetable":
-                webView.stringByEvaluatingJavaScript(from: self.webInsertFunctions)
-                
-                //Check if the json was grabbed
-                if let jsonString:String = webView.stringByEvaluatingJavaScript(from: webGrabCode) {
-                    let json: NSString = NSString(string: jsonString)
-                    
-                    
-                    
-                    parseEvents(json.cString(using: String.Encoding.utf8.rawValue))
-                    initTimetable()
-                    self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
-                    SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
-                    webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
-                    webView.stringByEvaluatingJavaScript(from: webLogout)
-                }
+
+                case "System Message":
+                    break;
+
+                case "Home":
+                    webView.stringByEvaluatingJavaScript(from: self.webClickTimetable)
+                    if self.isUpdatingMode {
+                        SVProgressHUD.setStatus("Updating your timetable...")
+                        }else{
+                        SVProgressHUD.setStatus("Retrieving your timetable...")
+                        }
+                        break;
+
+                case "Timetable":
+                    webView.stringByEvaluatingJavaScript(from: self.webInsertFunctions)
+
+                        //Check if the json was grabbed
+                        if let jsonString:String = webView.stringByEvaluatingJavaScript(from: webGrabCode) {
+                            let json: NSString = NSString(string: jsonString)
+
+
+
+                                parseEvents(json.cString(using: String.Encoding.utf8.rawValue))
+                                initTimetable()
+                                self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
+                                SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
+                                webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
+                                webView.stringByEvaluatingJavaScript(from: webLogout)
+                        }
                     //Issue with getting JSON. Display error and log out
-                else {
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.loginContainer.alpha = 1
-                    }) { (success) in
-                        SVProgressHUD.showError(withStatus: "Something went wrong getting your timetable...")
-                        self.loginButton.isEnabled = true
-                    }
-                    webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
-                    webView.stringByEvaluatingJavaScript(from: webLogout)
-                }
-                
-                break;
-                
-            default:
-                break;
-                
+                        else {
+                            UIView.animate(withDuration: 0.3, animations: {
+                                    self.loginContainer.alpha = 1
+                                    }) { (success) in
+                                SVProgressHUD.showError(withStatus: "Something went wrong getting your timetable...")
+                                    self.loginButton.isEnabled = true
+                            }
+                            webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
+                                webView.stringByEvaluatingJavaScript(from: webLogout)
+                        }
+
+                    break;
+
+                default:
+                    break;
+
             }
         }
     }
