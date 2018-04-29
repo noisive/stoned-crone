@@ -84,7 +84,9 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
 
     // Cut off strange crap first...
     std::string charsBeforeEventType = "div>\\n";
-        infoSegment = infoSegment.substr(indexOf(infoSegment, charsBeforeEventType)), sizeof(infoSegment) - 1);
+        infoSegment = infoSegment.substr(\
+                                         indexOf(infoSegment, charsBeforeEventType) + \
+                                         charsBeforeEventType.length(), infoSegment.length());
 
     // Set event type
     int startIndex = 0;
