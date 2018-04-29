@@ -14,6 +14,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "06A547181F7B12B400967FD7"
+               BuildableName = "libBackend.a"
+               BlueprintName = "Backend"
+               ReferencedContainer = "container:Backend.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "53F8A0071EC3D0010001604A"
                BuildableName = "WingIt.app"
                BlueprintName = "WingIt"
@@ -27,7 +41,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       language = ""
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "NO">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -42,18 +56,33 @@
                <Test
                   Identifier = "WingItUITests/testLoginRaw()">
                </Test>
+               <Test
+                  Identifier = "WingItUITests/testingPlayground()">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "53F8A0071EC3D0010001604A"
-            BuildableName = "WingIt.app"
-            BlueprintName = "WingIt"
+            BlueprintIdentifier = "06934D791F86730B00D308BD"
+            BuildableName = "WingItUITests.xctest"
+            BlueprintName = "WingItUITests"
             ReferencedContainer = "container:WingIt.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "EVISIONUSER"
+            value = "$EVISIONUSER"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "EVISIONPW"
+            value = "$EVISIONPW"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
