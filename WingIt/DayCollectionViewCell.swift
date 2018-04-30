@@ -99,7 +99,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         //Empty cell
         guard let lessonData: (lesson: CLong?, lesson2: CLong?) = self.dataByHour[indexPath.row] else {
             cell.hideLessons()
-            return cell
+            return cell 
         }
         
         //Clash cell
