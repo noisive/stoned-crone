@@ -71,7 +71,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-            //self.hideCancelOnNoData()
+            self.hideCancelOnNoData()
     }
     
     override func viewDidLoad() {
