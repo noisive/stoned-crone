@@ -121,7 +121,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     
     private func getDayOfWeek() -> Int {
         let weekday = Calendar(identifier: .gregorian).component(.weekday, from: Date())
-        return weekday == 1 ? 6 : weekday - 1
+        return weekday == 1 ? 6 : weekday - 2
     }
     
     private func scrollToCurrentDay(){
