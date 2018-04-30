@@ -25,7 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let cacheURL = try! fileManager
             .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         let dataPath = cacheURL.appendingPathComponent("data.csv").path
-
+        print(dataPath)
+        
         // Resets app if given argument --resetdata, so that tests start from a consistent clean state
         if CommandLine.arguments.contains("--resetdata") {
             clearCache()
@@ -90,6 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //                    if (fileName == "cache.db-wal")
                 //                    {
                 let filePathName = "\(cachePath)/\(fileName)"
+                
                 try fileManager.removeItem(atPath: filePathName)
                 //                    }
             }

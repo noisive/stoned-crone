@@ -113,27 +113,27 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
                     if (self.isFirstOccurance(of: lessonOneUID, indexPath: indexPath)) {
                         cell.leftLessonCode.text = lessonOneData.code
                         cell.leftLessonRoom.text = lessonOneData.roomShort
-                        cell.leftLessonRoom.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
-                        cell.leftLessonCode.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
-                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type)
-                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLessonRoom.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
+                        cell.leftLessonCode.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
+                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
+                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
                         
                     } else {
-                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type)
-                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
+                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
                         cell.hideLeftLessonLabels()
                     }
                     if (self.isFirstOccurance(of: lessonTwoUID, indexPath: indexPath)) {
                         cell.rightLessonCode.text = lessonTwoData.code
                         cell.rightLessonRoom.text = lessonTwoData.roomShort
-                        cell.rightLessonRoom.textColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type)
-                        cell.rightLessonCode.textColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type)
-                        cell.rightLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonTwoData.type)
-                        cell.rightLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type)
+                        cell.rightLessonRoom.textColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type, fallback: lessonTwoData)
+                        cell.rightLessonCode.textColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type, fallback: lessonTwoData)
+                        cell.rightLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonTwoData.type, fallback: lessonTwoData)
+                        cell.rightLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type, fallback: lessonTwoData)
                         
                     } else {
-                        cell.rightLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonTwoData.type)
-                        cell.rightLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type)
+                        cell.rightLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonTwoData.type, fallback: lessonTwoData)
+                        cell.rightLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonTwoData.type, fallback: lessonTwoData)
                         cell.hideRightLessonLabels()
                     }
                 } else {
@@ -145,7 +145,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
             
         }
             
-        //Normal cell
+            //Normal cell
         else {
             if let lessonOneUID = lessonData.lesson {
                 cell.hideRightLesson()
@@ -155,14 +155,14 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
                     if (self.isFirstOccurance(of: lessonOneUID, indexPath: indexPath)) {
                         cell.leftLessonCode.text = lessonOneData.code
                         cell.leftLessonRoom.text = lessonOneData.roomShort
-                        cell.leftLessonRoom.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
-                        cell.leftLessonCode.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
-                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type)
-                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLessonRoom.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
+                        cell.leftLessonCode.textColor = getBarBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
+                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
+                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
                         
                     } else {
-                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type)
-                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type)
+                        cell.leftLesson.backgroundColor = getBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
+                        cell.leftLessonBar.backgroundColor = getBarBackgroundColorFromLesson(type: lessonOneData.type, fallback: lessonOneData)
                         cell.hideLeftLessonLabels()
                     }
                 } else {
@@ -215,7 +215,8 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     // Programatically set the height of all timetable cells
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 80
+        return 75
     }
     
 }
+

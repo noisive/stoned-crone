@@ -297,6 +297,9 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                 //Check if the json was grabbed
                 if let jsonString:String = webView.stringByEvaluatingJavaScript(from: webGrabCode) {
                     let json: NSString = NSString(string: jsonString)
+                    
+                    
+                    
                     parseEvents(json.cString(using: String.Encoding.utf8.rawValue))
                     initTimetable()
                     self.present(NavigationService.displayEntryView(), animated: true, completion: nil)

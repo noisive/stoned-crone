@@ -12,7 +12,7 @@ import Foundation
 
 
 
-public func getBackgroundColorFromLesson(type: String) -> UIColor {
+public func getBackgroundColorFromLesson(type: String, fallback: Lesson) -> UIColor {
     switch type {
     case "Lecture":
         return AppColors.LECTURE_COLOR.withAlphaComponent(0.2)
@@ -22,13 +22,15 @@ public func getBackgroundColorFromLesson(type: String) -> UIColor {
         return AppColors.LAB_COLOR.withAlphaComponent(0.2)
     case "Tutorial":
         return AppColors.TUTORIAL_COLOR.withAlphaComponent(0.2)
+    case "Practical":
+        return AppColors.LAB_COLOR.withAlphaComponent(0.2)
     default:
-        return UIColor.clear
+        return UIColor.init(hexString: fallback.colour)
     }
 }
 
-public func getBarBackgroundColorFromLesson(type: String) -> UIColor {
-    return getBackgroundColorFromLesson(type: type).withAlphaComponent(1)
+public func getBarBackgroundColorFromLesson(type: String, fallback: Lesson) -> UIColor {
+    return getBackgroundColorFromLesson(type: type, fallback: fallback).withAlphaComponent(1)
 }
 
 // Call this function when each item is initialised to schedule a
@@ -40,7 +42,7 @@ func setNotification (event: Lesson){
     if isKeyPresentInUserDefaults(key: "noticePeriod"){
         minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
     }
-
+    
     
     //---------------------------------------------------------------------------------------------
     // This section of code has an alternative after it, for if there are multiple weeks of data. Change them when this is implemented. FEATURE
@@ -236,32 +238,33 @@ func checkAndRemoveBadDateData() -> Bool{
     }
     do{
         guard let testdate = formatter.date(from: firstEventDateString) else{
-        throw DateError.BadDate
-    }
-}catch{
-    
-    do {
+            throw DateError.BadDate
+        }
+    }catch{
+        
+        do {
             print("Date format unacceptable. Deleting data...")
             try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
-        // Get user to log in again...
-        return true
-        
+            // Get user to log in again...
+            return true
+            
         } catch let error as NSError {
             print("Error: \(error.domain)")
         }
     }
     
     /*
-    // Hard code year limits.
-    // TODO make this adapt.
-    if let firstEventDateNum = Int(firstEventDateString) {
-        if (timeInterval > Int((upperInterval?.timeIntervalSince1970)!) || firstEventDateNum < Int((lowerInterval?.timeIntervalSince1970)!)) {
-            do {
-                try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
-            } catch let error as NSError {
-                print("Error: \(error.domain)")
-            }
-        }
-    }*/
+     // Hard code year limits.
+     // TODO make this adapt.
+     if let firstEventDateNum = Int(firstEventDateString) {
+     if (timeInterval > Int((upperInterval?.timeIntervalSince1970)!) || firstEventDateNum < Int((lowerInterval?.timeIntervalSince1970)!)) {
+     do {
+     try FileManager.default.removeItem(at: NSURL(fileURLWithPath: dataPath) as URL)
+     } catch let error as NSError {
+     print("Error: \(error.domain)")
+     }
+     }
+     }*/
     return false
 }
+
