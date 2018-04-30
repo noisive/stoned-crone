@@ -388,7 +388,7 @@
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xjv-5d-3d0">
-                                                                        <rect key="frame" x="15" y="0.0" width="362" height="74.666666666666671"/>
+                                                                        <rect key="frame" x="15" y="0.0" width="354" height="74.666666666666671"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1i-IC-VKQ">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="55" height="74.666666666666671"/>
@@ -400,10 +400,10 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7S4-FY-Vvk">
-                                                                                <rect key="frame" x="55" y="0.0" width="307" height="74.666666666666671"/>
+                                                                                <rect key="frame" x="55" y="0.0" width="299" height="74.666666666666671"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8s3-Xu-uXM">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="153.66666666666666" height="74.666666666666671"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="149.66666666666666" height="74.666666666666671"/>
                                                                                         <subviews>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSR-fI-C0Z">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="2" height="75"/>
@@ -413,7 +413,7 @@
                                                                                                 </constraints>
                                                                                             </view>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLASS CODE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jW-ud-a4v">
-                                                                                                <rect key="frame" x="10" y="8" width="135.66666666666666" height="21"/>
+                                                                                                <rect key="frame" x="10" y="8" width="131.66666666666666" height="21"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="height" constant="21" id="4g4-8P-qeb"/>
                                                                                                 </constraints>
@@ -422,7 +422,7 @@
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROOM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hvv-uW-aKx">
-                                                                                                <rect key="frame" x="10" y="29" width="135.66666666666666" height="16"/>
+                                                                                                <rect key="frame" x="10" y="29" width="131.66666666666666" height="16"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="height" constant="16" id="mLK-SL-9MP"/>
                                                                                                 </constraints>
@@ -445,7 +445,7 @@
                                                                                         </constraints>
                                                                                     </view>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgg-Wj-5pR">
-                                                                                        <rect key="frame" x="153.66666666666663" y="0.0" width="153.33333333333337" height="74.666666666666671"/>
+                                                                                        <rect key="frame" x="149.66666666666663" y="0.0" width="149.33333333333337" height="74.666666666666671"/>
                                                                                         <subviews>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZI1-KZ-Qs7">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="2" height="75"/>
@@ -455,7 +455,7 @@
                                                                                                 </constraints>
                                                                                             </view>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CLASS CODE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJv-B1-sak">
-                                                                                                <rect key="frame" x="10" y="8" width="135.33333333333334" height="21"/>
+                                                                                                <rect key="frame" x="10" y="8" width="131.33333333333334" height="21"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="height" constant="21" id="Qzd-o1-Gh5"/>
                                                                                                 </constraints>
@@ -464,7 +464,7 @@
                                                                                                 <nil key="highlightedColor"/>
                                                                                             </label>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ROOM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whL-K1-oX3">
-                                                                                                <rect key="frame" x="10" y="29" width="135.33333333333334" height="16"/>
+                                                                                                <rect key="frame" x="10" y="29" width="131.33333333333334" height="16"/>
                                                                                                 <constraints>
                                                                                                     <constraint firstAttribute="height" constant="16" id="D1K-2A-UPe"/>
                                                                                                 </constraints>
@@ -493,7 +493,7 @@
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstItem="Xjv-5d-3d0" firstAttribute="leading" secondItem="XNV-hC-fGr" secondAttribute="leading" constant="15" id="Dsl-NI-XNL"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="Xjv-5d-3d0" secondAttribute="trailing" id="GIY-uv-7R9"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Xjv-5d-3d0" secondAttribute="trailing" constant="8" id="GIY-uv-7R9"/>
                                                                     <constraint firstItem="Xjv-5d-3d0" firstAttribute="top" secondItem="XNV-hC-fGr" secondAttribute="top" id="ffx-08-r4P"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Xjv-5d-3d0" secondAttribute="bottom" id="xA7-YT-OYr"/>
                                                                 </constraints>
