@@ -107,6 +107,21 @@ class WingItUITests: XCTestCase {
         XCTAssertTrue(app.isDisplayingTT)
 
     }
+    
+    func testCancelButtonNotPresentFresh(){
+        app.launchArguments.append("--resetdata")
+        app.launch()
+        
+        // Waits and checks for allow notifications alert.
+        addUIInterruptionMonitor(withDescription: "Notifications") { (alert) -> Bool in
+            alert.buttons["Allow"].tap()
+            return true
+        }
+        //        launchFinished() // wait for app to load and notification to show.
+        app.tap() // need to interact with the app for the handler to fire.
+        
+        XCTAssertTrue(!cancelButtonExists())
+    }
 
     func testLoginUpdate(){
         
@@ -120,11 +135,21 @@ class WingItUITests: XCTestCase {
 
         _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
         app.buttons["Refresh"].tap()
+        
+        XCTAssertTrue(cancelButtonExists())
         login()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
 
         XCTAssertTrue(app.isDisplayingTT)
 
+    }
+
+    func testCancelButtonExistsOnRefresh(){
+        // Ensure we have a timetable to view
+        testLoginFresh()
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
+        app.buttons["Refresh"].tap()
+        XCTAssertTrue(cancelButtonExists())
     }
 
     func login(){
@@ -154,6 +179,10 @@ class WingItUITests: XCTestCase {
         let query = element
         expectation(for: predicate, evaluatedWith: query, handler: nil)
         waitForExpectations(timeout: 30, handler: nil)
+    }
+    
+    func cancelButtonExists()->Bool{
+        return app.buttons["cancel"].exists
     }
 }
 

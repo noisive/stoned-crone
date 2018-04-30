@@ -18,11 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        UIApplication.shared.statusBarStyle = .lightContent
+
+        
         let fileManager = FileManager.default
         let cacheURL = try! fileManager
             .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         let dataPath = cacheURL.appendingPathComponent("data.csv").path
-
+        print(dataPath)
+        
         // Resets app if given argument --resetdata, so that tests start from a consistent clean state
         if CommandLine.arguments.contains("--resetdata") {
             clearCache()
@@ -70,11 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func promptForLogin(){
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginVC")
-        
-        self.window?.rootViewController = initialViewController
+        self.window?.rootViewController = NavigationService.displayLoginView()
         self.window?.makeKeyAndVisible()
     }
     
@@ -91,6 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 //                    if (fileName == "cache.db-wal")
                 //                    {
                 let filePathName = "\(cachePath)/\(fileName)"
+                
                 try fileManager.removeItem(atPath: filePathName)
                 //                    }
             }
