@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QRJ-3s-2Y0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QRJ-3s-2Y0">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -948,7 +948,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i50-fV-59H">
                                 <rect key="frame" x="0.0" y="0.0" width="75" height="812"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.4.0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSd-mq-uKc">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.4.0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSd-mq-uKc" userLabel="VersionLabel">
                                         <rect key="frame" x="8" y="737" width="59" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="33" id="ntI-sE-4tA"/>
@@ -1100,6 +1100,7 @@
                     <connections>
                         <outlet property="iconContainer" destination="VLB-VU-NWY" id="hCn-SA-F8x"/>
                         <outlet property="tableView" destination="dXp-gy-v47" id="gUv-BE-LAZ"/>
+                        <outlet property="versionLabel" destination="wSd-mq-uKc" id="9ov-1q-iEg"/>
                         <outlet property="welcomeMessage" destination="Tkh-rm-jD5" id="Jy5-oQ-ydu"/>
                         <segue destination="Dsg-Yq-izN" kind="custom" identifier="ShowAbout" customClass="SWRevealViewControllerSeguePushController" id="fpz-wh-a5Y"/>
                         <segue destination="PM4-zz-bZM" kind="custom" identifier="UpdateTimetable" customClass="SWRevealViewControllerSeguePushController" id="xdc-Jk-N3W"/>

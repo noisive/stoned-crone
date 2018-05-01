@@ -17,6 +17,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var iconContainer: UIView!
     @IBOutlet weak var welcomeMessage: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
     
     //Constants
     private let NAVIGATION_DATA: [(title: String, image: UIImage)] = [
@@ -66,6 +67,11 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let randomIndex: Int = Int(arc4random_uniform(UInt32(self.WELCOME_MESSAGES.count) + 0))
         self.welcomeMessage.text = self.WELCOME_MESSAGES[randomIndex]
+        
+        if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
+            versionLabel.text = "Version " + versionNum
+        }
+            
     }
     
     //MARK: Actions
