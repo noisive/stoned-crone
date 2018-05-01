@@ -41,13 +41,13 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
+        self.scrollToCurrentDay()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupLooks()
         self.setupData()
-        self.scrollToCurrentDay()
         self.getClassCountForDay()
         self.doesDataNeedUpdate()
     }
@@ -127,8 +127,10 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     private func scrollToCurrentDay(){
         
         let indexPath = IndexPath(item: self.getDayOfWeek(), section: 0)
-        self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
-        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()]
+        self.collectionView.scrollToItem(at: indexPath, at: .right, animated: false)
+        let dayIndex = getCurrentXPage()
+        self.navigationItem.title = Constants.Formats.dayArray[dayIndex]
+//        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()]
     }
     
     public func isDeviceIphone5() -> Bool {
