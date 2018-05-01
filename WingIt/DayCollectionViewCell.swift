@@ -67,7 +67,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
             currentHourCell = IndexPath(row: currentHour - 8, section: 0)
         }
         
-        //self.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
+        self.tableView.scrollToRow(at: currentHourCell, at: .top, animated: true)
     }
     
     @objc private func handleTap(sender: UIGestureRecognizer) {
