@@ -51,8 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let versionFileURL = cacheURL.appendingPathComponent(".version")
             if !fileManager.fileExists(atPath: versionFileURL.path) {
                 do {
-                    try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
                     clearCache()
+                    try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
                 }
                 catch {
                 }
@@ -68,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 }
             }
+
             // If we don't have data already, prompt for login.
             if !fileManager.fileExists(atPath: dataPath) {
                 
