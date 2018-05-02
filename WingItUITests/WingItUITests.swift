@@ -91,6 +91,7 @@ class WingItUITests: XCTestCase {
     func testLoginFresh(){
         app.launchArguments.append("--resetdata")
         app.launch()
+        _ = app.launchArguments.popLast()
 
         // Waits and checks for allow notifications alert.
         addUIInterruptionMonitor(withDescription: "Notifications") { (alert) -> Bool in
@@ -136,12 +137,24 @@ class WingItUITests: XCTestCase {
         _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
         app.buttons["Refresh"].tap()
         
-        XCTAssertTrue(cancelButtonExists())
         login()
+        
         _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
-
         XCTAssertTrue(app.isDisplayingTT)
 
+    }
+    
+    func testDataPersistenceOnRestart(){
+        
+        // Ensure we have a timetable to view
+        testLoginFresh()
+        app.launch()
+        app.terminate()
+        app.launch()
+        
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        XCTAssertTrue(app.isDisplayingTT)
+        
     }
 
     func testCancelButtonExistsOnRefresh(){
