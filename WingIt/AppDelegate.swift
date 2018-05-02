@@ -47,6 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if CommandLine.arguments.contains("resetdata") {
             clearCache()
         }
+        if ProcessInfo.processInfo.arguments.contains("UITests") {
+            UIApplication.shared.keyWindow?.layer.speed = 100
+        }
         
         // Bring up different initial view for this test - used for debugging login
         if CommandLine.arguments.contains("debugLogin") {

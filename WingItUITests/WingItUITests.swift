@@ -40,7 +40,8 @@ class WingItUITests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         self.eVisionUsername = setUserFromEnv()
         self.eVisionPassword = setPassFromEnv()
-
+        
+        app.launchArguments.append("UITests")
 
         // In UI tests it is usually best to stop immediately when a failure occurs. (They are time-expensive to ru)
         continueAfterFailure = false
