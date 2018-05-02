@@ -65,7 +65,32 @@ class WingItUITests: XCTestCase {
         
 
     }
+    
+    func fastSwipe(refElement:XCUIElement,startdelxy:CGVector,enddeltaxy: CGVector){
+        let swipeStartPoint = refElement.coordinate(withNormalizedOffset: startdelxy)
+        let swipeEndPoint = refElement.coordinate(withNormalizedOffset: enddeltaxy)
+        swipeStartPoint.press(forDuration: 0.001, thenDragTo: swipeEndPoint)
+        
+    }
+    func testSwipePastEndOfArrayFast(){
+        // Ensure we have a timetable to view
+//        testLoginFresh()
+        app.launch()
+        let rightCoord = CGVector(dx: 5, dy: 0)
+        let leftCoord = CGVector(dx: 0, dy: 0)
 
+        // Cannot be a loop, for speed reasons
+        fastSwipe(refElement: app.otherElements["dayView"], startdelxy: rightCoord, enddeltaxy: leftCoord)
+        fastSwipe(refElement: app.otherElements["dayView"], startdelxy: rightCoord, enddeltaxy: leftCoord)
+        fastSwipe(refElement: app.otherElements["dayView"], startdelxy: rightCoord, enddeltaxy: leftCoord)
+        fastSwipe(refElement: app.otherElements["dayView"], startdelxy: rightCoord, enddeltaxy: leftCoord)
+        fastSwipe(refElement: app.otherElements["dayView"], startdelxy: rightCoord, enddeltaxy: leftCoord)
+        fastSwipe(refElement: app.otherElements["dayView"], startdelxy: rightCoord, enddeltaxy: leftCoord)
+        fastSwipe(refElement: app.otherElements["dayView"], startdelxy: rightCoord, enddeltaxy: leftCoord)
+        fastSwipe(refElement: app.otherElements["dayView"], startdelxy: rightCoord, enddeltaxy: leftCoord)
+        
+        XCTAssertTrue(app.isDisplayingTT)
+    }
 
     // Special webview window without any coverplate. For debugging webview login.
     func testLoginRaw(){

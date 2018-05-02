@@ -146,6 +146,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     
     private func getClassCountForDay() {
         var uniqueSubjectIDs = [CLong]()
+        // This is where it crashes if you swipe past the end of the array too fast.
         self.hourData[self.getCurrentXPage()].forEach { (data:(lesson1: CLong?, lesson2: CLong?)?) in
             if let subject = data {
                 if let lessonOne = subject.lesson1 { uniqueSubjectIDs.append(lessonOne)}
