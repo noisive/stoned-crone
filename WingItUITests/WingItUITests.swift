@@ -167,7 +167,7 @@ class WingItUITests: XCTestCase {
 
     func login(){
 
-        _ = app.textFields["Username"].waitForExistence(timeout: 30)
+        _ = app.textFields["Username"].waitForExistence(timeout: 60)
         let usernameTextField = app.textFields["Username"]
         let passwordSecureTextField = app.secureTextFields["Password"]
         
