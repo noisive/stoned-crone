@@ -103,7 +103,7 @@ class WingItUITests: XCTestCase {
         login()
 
         // Wait for a thing to display, then assert it is displaying... Circular? But should work.
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 90)
         XCTAssertTrue(app.isDisplayingTT)
 
     }
