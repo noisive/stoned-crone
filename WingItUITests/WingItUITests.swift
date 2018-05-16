@@ -104,7 +104,7 @@ class WingItUITests: XCTestCase {
         login()
 
         // Wait for a thing to display, then assert it is displaying... Circular? But should work.
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 999)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 120)
         XCTAssertTrue(app.isDisplayingTT)
 
     }
@@ -167,7 +167,7 @@ class WingItUITests: XCTestCase {
 
     func login(){
 
-        _ = app.textFields["Username"].waitForExistence(timeout: 999)
+        _ = app.textFields["Username"].waitForExistence(timeout: 60)
         let usernameTextField = app.textFields["Username"]
         let passwordSecureTextField = app.secureTextFields["Password"]
         
