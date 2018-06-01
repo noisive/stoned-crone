@@ -16,6 +16,7 @@
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
 		06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* CommonUtil.swift */; };
 		06D37CD71F873C7F009318AC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06D37CD61F873C7F009318AC /* Settings.bundle */; };
+		06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5E2EF20C1504500C77382 /* WingItTests.swift */; };
 		297C56931ED9126200C44420 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginView.swift */; };
 		533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 533C92D320762A9200394325 /* SVProgressHUD.bundle */; };
 		533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D420762A9300394325 /* SVProgressAnimatedView.m */; };
@@ -62,6 +63,13 @@
 			remoteGlobalIDString = 53F8A0071EC3D0010001604A;
 			remoteInfo = WingIt;
 		};
+		06E5E2F220C1504500C77382 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53F8A0001EC3D0010001604A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 53F8A0071EC3D0010001604A;
+			remoteInfo = WingIt;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +86,9 @@
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
 		06B38A371F82361E009EDC60 /* CommonUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
 		06D37CD61F873C7F009318AC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		06E5E2ED20C1504500C77382 /* WingItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06E5E2EF20C1504500C77382 /* WingItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItTests.swift; sourceTree = "<group>"; };
+		06E5E2F120C1504500C77382 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		297C56921ED9126200C44420 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		533C92D220762A9200394325 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		533C92D320762A9200394325 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
@@ -144,6 +155,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		06E5E2EA20C1504500C77382 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F8A0051EC3D0010001604A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -173,6 +191,15 @@
 				06934D7E1F86730B00D308BD /* Info.plist */,
 			);
 			path = WingItUITests;
+			sourceTree = "<group>";
+		};
+		06E5E2EE20C1504500C77382 /* WingItTests */ = {
+			isa = PBXGroup;
+			children = (
+				06E5E2EF20C1504500C77382 /* WingItTests.swift */,
+				06E5E2F120C1504500C77382 /* Info.plist */,
+			);
+			path = WingItTests;
 			sourceTree = "<group>";
 		};
 		534635A12079A8EC00497A8D /* SW Reveal Controll */ = {
@@ -294,6 +321,7 @@
 				06D37CD61F873C7F009318AC /* Settings.bundle */,
 				53F8A00A1EC3D0010001604A /* WingIt */,
 				06934D7B1F86730B00D308BD /* WingItUITests */,
+				06E5E2EE20C1504500C77382 /* WingItTests */,
 				53F8A0091EC3D0010001604A /* Products */,
 				9D76A468FCF7B393CEA24F56 /* Frameworks */,
 			);
@@ -304,6 +332,7 @@
 			children = (
 				53F8A0081EC3D0010001604A /* WingIt.app */,
 				06934D7A1F86730B00D308BD /* WingItUITests.xctest */,
+				06E5E2ED20C1504500C77382 /* WingItTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -363,6 +392,24 @@
 			productReference = 06934D7A1F86730B00D308BD /* WingItUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		06E5E2EC20C1504500C77382 /* WingItTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06E5E2F620C1504500C77382 /* Build configuration list for PBXNativeTarget "WingItTests" */;
+			buildPhases = (
+				06E5E2E920C1504500C77382 /* Sources */,
+				06E5E2EA20C1504500C77382 /* Frameworks */,
+				06E5E2EB20C1504500C77382 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				06E5E2F320C1504500C77382 /* PBXTargetDependency */,
+			);
+			name = WingItTests;
+			productName = WingItTests;
+			productReference = 06E5E2ED20C1504500C77382 /* WingItTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		53F8A0071EC3D0010001604A /* WingIt */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F8A01D1EC3D0010001604A /* Build configuration list for PBXNativeTarget "WingIt" */;
@@ -387,13 +434,18 @@
 		53F8A0001EC3D0010001604A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Noisive;
 				TargetAttributes = {
 					06934D791F86730B00D308BD = {
 						CreatedOnToolsVersion = 9.0;
 						DevelopmentTeam = 9L3BH5LC27;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 53F8A0071EC3D0010001604A;
+					};
+					06E5E2EC20C1504500C77382 = {
+						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 53F8A0071EC3D0010001604A;
 					};
@@ -420,12 +472,20 @@
 			targets = (
 				53F8A0071EC3D0010001604A /* WingIt */,
 				06934D791F86730B00D308BD /* WingItUITests */,
+				06E5E2EC20C1504500C77382 /* WingItTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		06934D781F86730B00D308BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06E5E2EB20C1504500C77382 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -471,6 +531,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06E5E2E920C1504500C77382 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +592,11 @@
 			isa = PBXTargetDependency;
 			target = 53F8A0071EC3D0010001604A /* WingIt */;
 			targetProxy = 06934D7F1F86730B00D308BD /* PBXContainerItemProxy */;
+		};
+		06E5E2F320C1504500C77382 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 53F8A0071EC3D0010001604A /* WingIt */;
+			targetProxy = 06E5E2F220C1504500C77382 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -584,6 +657,46 @@
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = WingIt;
+			};
+			name = Release;
+		};
+		06E5E2F420C1504500C77382 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WingItTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "stoned-crone.WingItTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WingIt.app/WingIt";
+			};
+			name = Debug;
+		};
+		06E5E2F520C1504500C77382 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WingItTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "stoned-crone.WingItTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WingIt.app/WingIt";
 			};
 			name = Release;
 		};
@@ -757,6 +870,15 @@
 			buildConfigurations = (
 				06934D811F86730B00D308BD /* Debug */,
 				06934D821F86730B00D308BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06E5E2F620C1504500C77382 /* Build configuration list for PBXNativeTarget "WingItTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06E5E2F420C1504500C77382 /* Debug */,
+				06E5E2F520C1504500C77382 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
