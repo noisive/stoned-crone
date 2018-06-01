@@ -8,6 +8,7 @@
 #include <cstring>
 
 std::string getPathBaseDir (std::string str);
+std::string getPathFileNameNoExt (std::string str);
 
 int main(int argc, char** argv) {
     
@@ -32,7 +33,9 @@ int main(int argc, char** argv) {
     std::string dataPath = getPathBaseDir(inFilePath);
     Timetable timetable(dataPath);
     timetable.parseEvents(dataString);
-    timetable.save();
+    std::string parentDir = getPathBaseDir(dataPath);
+    std::string fileName = getPathFileNameNoExt(inFilePath);
+    timetable.save(parentDir + "/TestOutputs/" + fileName + ".csv");
 
     return 0;
 }
@@ -42,4 +45,11 @@ std::string getPathBaseDir (std::string str) {
   // cout << " folder: " << str.substr(0,found) << endl;
   // cout << " file: " << str.substr(found+1) << endl;
   return str.substr(0, found);
+}
+
+std::string getPathFileNameNoExt (std::string str) {
+  int lastSlash=str.find_last_of("/\\");
+  int lastDot=str.find_last_of(".");
+  std::string FN = str.substr(lastSlash + 1, lastDot - lastSlash - 1);
+  return FN;
 }
