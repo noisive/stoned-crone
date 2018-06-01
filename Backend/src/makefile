@@ -16,25 +16,25 @@ LDLIBS = -L$(buildDir) -lParse
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $(buildDir)/$@ $<
 %.out: %.cpp libParse.a
-	$(gppBin) $< -lm $(LDLIBS)
+	$(CXX) $(CXXFLAGS) -o $(binDir)/$@ $< -lm $(LDLIBS)
 
 gpp= g++ $(CXXFLAGS)
 # $@ expands to the name of the rule.
 # gppBuild= $(gpp) -c -o $(buildDir)/$@
-gppBin= $(gpp) -o $(binDir)/$@
+# gppBin= $(gpp) -o $(binDir)/$@
 objects = $(addprefix $(buildDir)/,$(objectNames))
 libArgs = $(LDLIBS)
 
 all: parsertest.out createcsvs.out
+
+libParse.a : $(objectNames)
+	ar rcs $(buildDir)/$@ $(objects)
 
 # parsertest.out : parsertest.cpp libParse.a
 # 	$(gppBin) $< -lm $(libArgs)
 #
 # createcsvs.out : createcsvs.cpp libParse.a
 # 	$(gppBin) $< -lm $(libArgs)
-
-libParse.a : $(objectNames)
-	ar rcs $(buildDir)/$@ $(objects)
 
 # timetable.o : timetable.cpp
 # 	$(gppBuild) timetable.cpp
