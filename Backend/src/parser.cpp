@@ -87,10 +87,11 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
 
     // Strange crap might not be there - let's check it is first.
     std::string checkCharsBeforeEventType = "<div";
-    int checkIndex = indexOf(infoSegment, checkCharsBeforeEventType) + checkCharsBeforeEventType.length();
+    int checkIndex = indexOf(infoSegment, checkCharsBeforeEventType);
     int startIndex = indexOf(infoSegment, charsBeforeEventType) + charsBeforeEventType.length();
     int endIndex = infoSegment.length();
-    if (startIndex < checkIndex){
+    if (checkIndex == 0){
+//    if (startIndex < checkIndex){
         infoSegment = infoSegment.substr(startIndex, endIndex);
     }
 
