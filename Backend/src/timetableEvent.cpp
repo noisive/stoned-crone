@@ -180,7 +180,7 @@ bool TimetableEvent::validateEventData(){
 
 
     // Ensure none of the string-based items have caught a funny char.
-    const char *blarray[] = {"<",">","\'","\"","\\n",";","/"};
+    const char *blarray[] = {"<",">","\"","\\n",";","/"};
     std::vector<std::string> blacklist(blarray, std::end(blarray));
     // TODO make this a soft fail - replace with blank string instead.
     // For time being, is useful for CI testing, because will crash app instaed of passing bad data.
