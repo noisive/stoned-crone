@@ -1,22 +1,40 @@
 optimisationLevel = -g # -O2
-gpp= g++ -c -std=c++11 $(optimisationLevel)
-gppBuild= $(gpp) -o $(buildDir)/$@
-gppBin= $(gpp) -o $(binDir)/$@
+
+srcs = parser.cpp timetableEvent.cpp timetable.cpp date.cpp
+objectNames = $(subst .cpp,.o,$(srcs))
+
 buildDir = ../build
 binDir = ../bin
-objectNames = parser.o timetableEvent.o timetable.o date.o
-objects = $(addprefix $(buildDir)/,$(objectNames))
-libArgs = -L$(buildDir) -lm -lParse
+# VPATH = src
+COMPILE.cpp = $(gpp)
+CXXFLAGS = -std=c++11 $(optimisationLevel)
+# CFLAGS = -c $(optimisationLevel)
+CXX = g++
+LDLIBS = -L$(buildDir) -lParse
 
+# % is a wildcard, $< expands to first depedency ($^ is all dependencies)
+%.o: %.cpp
+	$(gppBuild) $<
+%.out: %.cpp libParse.a
+	$(gppBin) $< -lm $(LDLIBS)
+
+gpp= g++ $(CXXFLAGS)
 # $@ expands to the name of the rule.
-parsertest.out : libParse.a parsertest.cpp createcsvs.out
-	$(gppBin) parsertest.cpp $(libArgs)
+gppBuild= $(gpp) -c -o $(buildDir)/$@
+gppBin= $(gpp) -o $(binDir)/$@
+objects = $(addprefix $(buildDir)/,$(objectNames))
+libArgs = $(LDLIBS)
 
-createcsvs.out : libParse.a createcsvs.cpp
-	$(gppBin) createcsvs.cpp $(libArgs)
+all: parsertest.out createcsvs.out
+
+# parsertest.out : parsertest.cpp libParse.a
+# 	$(gppBin) $< -lm $(libArgs)
+#
+# createcsvs.out : createcsvs.cpp libParse.a
+# 	$(gppBin) $< -lm $(libArgs)
 
 libParse.a : $(objectNames)
-	ar r $(buildDir)/$@ $(objects)
+	ar rcs $(buildDir)/$@ $(objects)
 
 timetable.o : timetable.cpp
 	$(gppBuild) timetable.cpp
@@ -35,3 +53,6 @@ clean :
 	# rm *.o* *.a
 	rm -rf ../build/*
 	rm -rf ../bin/*
+
+# For debugging. `make print-VAR` prints the value of var.
+print-%: ; @echo $* is $($*)
