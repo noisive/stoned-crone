@@ -14,13 +14,13 @@ LDLIBS = -L$(buildDir) -lParse
 
 # % is a wildcard, $< expands to first depedency ($^ is all dependencies)
 %.o: %.cpp
-	$(gppBuild) $<
+	$(CXX) $(CXXFLAGS) -c -o $(buildDir)/$@ $<
 %.out: %.cpp libParse.a
 	$(gppBin) $< -lm $(LDLIBS)
 
 gpp= g++ $(CXXFLAGS)
 # $@ expands to the name of the rule.
-gppBuild= $(gpp) -c -o $(buildDir)/$@
+# gppBuild= $(gpp) -c -o $(buildDir)/$@
 gppBin= $(gpp) -o $(binDir)/$@
 objects = $(addprefix $(buildDir)/,$(objectNames))
 libArgs = $(LDLIBS)
@@ -36,17 +36,17 @@ all: parsertest.out createcsvs.out
 libParse.a : $(objectNames)
 	ar rcs $(buildDir)/$@ $(objects)
 
-timetable.o : timetable.cpp
-	$(gppBuild) timetable.cpp
+# timetable.o : timetable.cpp
+# 	$(gppBuild) timetable.cpp
 
-timetableEvent.o : timetableEvent.cpp
-	$(gppBuild) timetableEvent.cpp
-
-date.o : date.cpp
-	$(gppBuild) date.cpp
-
-parser.o : parser.cpp
-	$(gppBuild) parser.cpp
+# timetableEvent.o : timetableEvent.cpp
+# 	$(gppBuild) timetableEvent.cpp
+#
+# date.o : date.cpp
+# 	$(gppBuild) date.cpp
+#
+# parser.o : parser.cpp
+# 	$(gppBuild) parser.cpp
 
 clean :
 	# rm -rf *.dSYM
