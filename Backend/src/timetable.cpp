@@ -39,9 +39,13 @@ void Timetable::parseEvents(std::string jumbledData) {
     }
 }
 
-void Timetable::save() {
+void Timetable::save(std::string filePath) {
+    if(filePath != "0x8C"){
+        dataPath = filePath;
+    }else{
+        exportToGoogleCalFile(gCalPath);
+    }
     exportToFile(dataPath);
-    exportToGoogleCalFile(gCalPath);
 }
 
 void Timetable::addMultiple(std::vector<TimetableEvent> events) {
