@@ -217,7 +217,7 @@ void Parser::getWeekStart() {
         // This requires input to be of format dd+mm+yy
         this->weekStart = std::stoi(dayIntString + monthIntString + yearIntString);
     }
-    std::cout<<weekStart << std::endl;
+//    std::cout<<weekStart << std::endl;
 }
 
 std::vector<TimetableEvent> Parser::parseFile(std::string fileName, std::string format) {
