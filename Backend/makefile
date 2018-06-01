@@ -20,7 +20,7 @@ objects = $(addprefix obj/,$(objectNames))
 outs = $(subst .cpp,.out,$(bins))
 binOuts = $(addprefix bin/,$(outs))
 
-all: $(binOuts)
+all: init $(binOuts)
 
 # % is a wildcard.
 # $< expands to first depedency ($^ is all dependencies).
@@ -32,6 +32,9 @@ bin/%.out: %.cpp build/libParse.a
 
 build/libParse.a : $(objects)
 	ar rcs $@ $(objects)
+
+init:
+	mkdir -p build bin obj
 
 clean :
 	rm -rf build/*
