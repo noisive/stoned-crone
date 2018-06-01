@@ -175,7 +175,7 @@ bool TimetableEvent::validateEventData(){
     std::regex alphanumrgx("[[:alnum:]]*");
     assert(std::regex_match(this->type, alphanumrgx));
 
-    std::regex buildingrgx("[[:alnum:] ().]*");
+    std::regex buildingrgx("[[:alnum:] '().]*");
     assert(std::regex_match(this->building, buildingrgx));
     assert(std::regex_match(this->roomName, buildingrgx));
 
