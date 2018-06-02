@@ -10,6 +10,8 @@
 		061F3E801F8AF09C00BD0D09 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061F3E7F1F8AF09C00BD0D09 /* DataUtil.swift */; };
 		062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9441F8B414B005F350E /* KeychainWrapper.swift */; };
 		062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */; };
+		064082FE20C263BB00F568CB /* TestAnswers in Resources */ = {isa = PBXBuildFile; fileRef = 064082FB20C263AA00F568CB /* TestAnswers */; };
+		064082FF20C263BB00F568CB /* TestInputs in Resources */ = {isa = PBXBuildFile; fileRef = 064082FC20C263AA00F568CB /* TestInputs */; };
 		06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* WingItUITests.swift */; };
 		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -78,6 +80,8 @@
 		062EB9441F8B414B005F350E /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
+		064082FB20C263AA00F568CB /* TestAnswers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestAnswers; path = ../Backend/parserTests/TestAnswers; sourceTree = "<group>"; };
+		064082FC20C263AA00F568CB /* TestInputs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestInputs; path = ../Backend/parserTests/TestInputs; sourceTree = "<group>"; };
 		06934D7A1F86730B00D308BD /* WingItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06934D7C1F86730B00D308BD /* WingItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITests.swift; sourceTree = "<group>"; };
 		06934D7E1F86730B00D308BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -182,6 +186,15 @@
 				062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */,
 			);
 			path = SwiftKeychainWrapper;
+			sourceTree = "<group>";
+		};
+		064082FD20C263AA00F568CB /* Test files */ = {
+			isa = PBXGroup;
+			children = (
+				064082FB20C263AA00F568CB /* TestAnswers */,
+				064082FC20C263AA00F568CB /* TestInputs */,
+			);
+			path = "Test files";
 			sourceTree = "<group>";
 		};
 		06934D7B1F86730B00D308BD /* WingItUITests */ = {
@@ -318,6 +331,7 @@
 		53F89FFF1EC3D0010001604A = {
 			isa = PBXGroup;
 			children = (
+				064082FD20C263AA00F568CB /* Test files */,
 				06D37CD61F873C7F009318AC /* Settings.bundle */,
 				53F8A00A1EC3D0010001604A /* WingIt */,
 				06934D7B1F86730B00D308BD /* WingItUITests */,
@@ -489,6 +503,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				064082FE20C263BB00F568CB /* TestAnswers in Resources */,
+				064082FF20C263BB00F568CB /* TestInputs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

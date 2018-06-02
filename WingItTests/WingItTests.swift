@@ -22,21 +22,33 @@ class BackendTest: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testFullTimetables() {
         do {
-            let fileURL = NSURL.fileURL(withPath: "/home/cshome/w/wwarren/stoned-crone/Backend/parserTests/TestInputs/frid17.txt") as URL
-            // reading from disk
-            let testTTString = try String(contentsOf: fileURL)
-            let _ = getDayOfWeek()
-            parseEvents(testTTString)
-            //            initTimetable()
-            
+            let bundle = Bundle(for: type(of: self))
+            //        let inputPath = bundle.path(forResource: "jele17", ofType: "txt")!
+            let inputPaths = bundle.paths(forResourcesOfType: "txt", inDirectory: "TestInputs")
+            for testFilePath in inputPaths{
+                let testFileURL = NSURL.fileURL(withPath: testFilePath) as URL
+                let testTTString = try String(contentsOf: testFileURL)
+                parseEvents(testTTString)
+                initTimetable()
+                validateTimetable()
+                
+                let testFileBase = testFileURL.deletingPathExtension().lastPathComponent
+                let testFileDir = try String(contentsOf: testFileURL.deletingLastPathComponent())
+                let answerFileString = testFileDir.appending(testFileBase + ".csv")
+                let answerFileURL = NSURL.fileURL(withPath: answerFileString) as URL
+                let answerString = try String(contentsOf: answerFileURL)
+                
+                //            XCTAssert(parsedTT == answerString)
+            }
         } catch {
             print("error:", error)
         }
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
     }
+    
+    
+    
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -45,6 +57,6 @@ class BackendTest: XCTestCase {
             print("null")
         }
     }
-    
 }
+
 

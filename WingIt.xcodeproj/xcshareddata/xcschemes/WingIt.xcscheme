@@ -61,6 +61,21 @@
                </Test>
             </SkippedTests>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "06E5E2EC20C1504500C77382"
+               BuildableName = "WingItTests.xctest"
+               BlueprintName = "WingItTests"
+               ReferencedContainer = "container:WingIt.xcodeproj">
+            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "BackendTest/testPerformanceExample()">
+               </Test>
+            </SkippedTests>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
