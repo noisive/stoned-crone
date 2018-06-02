@@ -64,6 +64,7 @@ class Timetable {
         // Persistence
         void save(std::string filePath = "0x8C");
         void restore();
+        std::string toCSVString();
         void printToCSV();
         void exportToFile(std::string fileName);
         void exportToGoogleCalFile(std::string fileName);

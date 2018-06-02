@@ -211,16 +211,8 @@ std::string Timetable::toString() {
     return out.substr(0, out.size() - 2); 
 }
 
-void Timetable::exportToFile(std::string fileName) {
-    std::ofstream myfile;
-    myfile.open (fileName);
-    if (myfile.is_open()) {
+std::string Timetable::toCSVString() {
         std::string output;
-
-        /* Uncomment to delete events in the past.
-           this->clean(eventList);
-           this->clean(customList);
-           */
 
         for (TimetableEvent event: eventList) {
             output += event.toString() + "\n";
@@ -229,8 +221,21 @@ void Timetable::exportToFile(std::string fileName) {
         for (TimetableEvent event: customList) {
             output += event.toString() + "\n";
         }
+        return output;
 
-        myfile << output;
+}
+
+void Timetable::exportToFile(std::string fileName) {
+    std::ofstream myfile;
+    myfile.open (fileName);
+    if (myfile.is_open()) {
+
+        /* Uncomment to delete events in the past.
+           this->clean(eventList);
+           this->clean(customList);
+           */
+
+        myfile << toCSVString();
         myfile.close();
 
     } else {
