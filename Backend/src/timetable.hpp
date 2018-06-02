@@ -49,7 +49,7 @@ class Timetable {
         std::string toString();
 
         // Integration
-        void parseEvents(std::string jumbledData);
+        std::string parseEvents(std::string jumbledData);
         int queryByDate(const char* d);
         TimetableEvent queryResult(int index);
         int merge();

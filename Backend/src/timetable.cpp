@@ -29,11 +29,12 @@ void Timetable::reset() {
     queryStore.clear();
 }
 
-void Timetable::parseEvents(std::string jumbledData) {
+std::string Timetable::parseEvents(std::string jumbledData) {
     reset();
     Parser parser;
     std::vector<TimetableEvent> events = parser.parse(jumbledData);
     addMultiple(events);
+    return toCSVString();
 }
 
 void Timetable::validate(){
