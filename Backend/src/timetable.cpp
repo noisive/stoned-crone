@@ -34,7 +34,10 @@ void Timetable::parseEvents(std::string jumbledData) {
     Parser parser;
     std::vector<TimetableEvent> events = parser.parse(jumbledData);
     addMultiple(events);
-    for (TimetableEvent event : events){
+}
+
+void Timetable::validate(){
+    for (TimetableEvent event : eventList){
         event.validateEventData();
     }
 }

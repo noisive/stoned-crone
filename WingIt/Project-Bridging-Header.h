@@ -8,6 +8,7 @@
 
 void parseEvents(const char* data);
 void initTimetable();
+void validateTimetable();
 int queryDate(const char* dateString);
 const char* queryResult(int index);
 const char* getFirstEventDate();

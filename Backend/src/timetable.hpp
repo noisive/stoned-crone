@@ -56,6 +56,7 @@ class Timetable {
         TimetableEvent getByUID(const char* id);
         void addEvent(const char* event);
     
+        void validate();
         std::string getFirstEventDateString();
         std::string getLastEventDateString();
 

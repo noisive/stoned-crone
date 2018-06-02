@@ -17,6 +17,10 @@ extern "C" void initTimetable() {
     timetable.restore();
 }
 
+extern "C" void validateTimetable() {
+    timetable.validate();
+}
+
 extern "C" int queryDate(const char* dateString) {
     return (int) timetable.queryByDate(dateString);
 }
