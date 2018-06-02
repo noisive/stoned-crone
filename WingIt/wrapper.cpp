@@ -8,9 +8,10 @@
 
 Timetable timetable;
 
-extern "C" void parseEvents(const char* data) {
-    timetable.parseEvents(data);
+extern "C" const char* parseEvents(const char* data) {
+    std::string CSVData = timetable.parseEvents(data);
     timetable.save();
+    return CSVData.c_str();
 }
 
 extern "C" void initTimetable() {
