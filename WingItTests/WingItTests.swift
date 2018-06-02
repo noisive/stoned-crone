@@ -25,22 +25,30 @@ class BackendTest: XCTestCase {
     func testFullTimetables() {
         do {
             let bundle = Bundle(for: type(of: self))
-            //        let inputPath = bundle.path(forResource: "jele17", ofType: "txt")!
             let inputPaths = bundle.paths(forResourcesOfType: "txt", inDirectory: "TestInputs")
             for testFilePath in inputPaths{
                 let testFileURL = NSURL.fileURL(withPath: testFilePath) as URL
+                let testFileBase = testFileURL.deletingPathExtension().lastPathComponent
+//                let testFileDir = try String(contentsOf: testFileURL.deletingLastPathComponent())
+                
+                print("Parsing test file " + testFileBase)
+                
                 let testTTString = try String(contentsOf: testFileURL)
-                parseEvents(testTTString)
+                
+                let resultCString = parseEvents(testTTString)
+                let parsedTTString = String(cString: resultCString!)
+//                free(UnsafeMutablePointer(mutating: resultCString)) // We must free the memory that C++ created for the pointer.
+                
                 initTimetable()
                 validateTimetable()
                 
-                let testFileBase = testFileURL.deletingPathExtension().lastPathComponent
-                let testFileDir = try String(contentsOf: testFileURL.deletingLastPathComponent())
-                let answerFileString = testFileDir.appending(testFileBase + ".csv")
-                let answerFileURL = NSURL.fileURL(withPath: answerFileString) as URL
+                let answerPath = bundle.path(forResource: "TestAnswers/" + testFileBase, ofType: "csv")!
+                let answerFileURL = NSURL.fileURL(withPath: answerPath) as URL
+//                let answerFileString = testFileDir.appending(testFileBase + ".csv")
+//                let answerFileURL = NSURL.fileURL(withPath: answerFileString) as URL
                 let answerString = try String(contentsOf: answerFileURL)
                 
-                //            XCTAssert(parsedTT == answerString)
+                XCTAssert(parsedTTString == answerString)
             }
         } catch {
             print("error:", error)
@@ -50,13 +58,13 @@ class BackendTest: XCTestCase {
     
     
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-            print("null")
-        }
-    }
+//    func testPerformanceExample() {
+//        // This is an example of a performance test case.
+//        self.measure {
+//            // Put the code you want to measure the time of here.
+//            print("null")
+//        }
+//    }
 }
 
 
