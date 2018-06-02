@@ -98,7 +98,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // Set event type
     startIndex = 0;
     // int startIndex = indexOf(infoSegment, charsBeforeEventType) - sizeof(charsBeforeEventType);
-    endIndex = indexOf(infoSegment, "<br>");
+    endIndex = indexOf(infoSegment, "<br");
     ttEvent.setType(infoSegment.substr(startIndex, endIndex));
 
     // Set paper code
