@@ -179,7 +179,11 @@ bool TimetableEvent::validateEventData(){
     assert(std::regex_match(this->building, buildingrgx));
     assert(std::regex_match(this->roomName, buildingrgx));
 
-    // TODO validate date
+    // TODO validate date further
+    std::string dateString = this->date.ISODate();
+    // Regex source http://www.regexlib.com/DisplayPatterns.aspx?cattabindex=4&categoryId=5&AspxAutoDetectCookieSupport=1
+    std::regex datergx("[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))");
+    assert(std::regex_match(this->building, buildingrgx));
 
 
     // Ensure none of the string-based items have caught a funny char.
