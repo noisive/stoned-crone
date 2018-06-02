@@ -309,7 +309,14 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
 
 
 
-                                parseEvents(json.cString(using: String.Encoding.utf8.rawValue))
+                            parseEvents(json.cString(using: String.Encoding.utf8.rawValue))
+                            #if DEBUG
+                                //                                if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
+                                if CommandLine.arguments.contains("testing") {
+//                                if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+                                    validateTimetable()
+                                }
+                            #endif
                                 initTimetable()
                                 self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
                                 SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
