@@ -108,15 +108,12 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         webView.delegate = self
         
         if self.isUpdatingMode {
-            
             self.loginTitle.text = "Log in to Update"
             self.loginButton.setTitle("UPDATE", for: .normal)
         }else{
             self.loginButton.setTitle("LOGIN", for: .normal)
             self.loginTitle.text = "Log in to eVision"
         }
-        /* self.loginTitle.text = self.isUpdatingMode ? "Log in to Update" : "Log in to eVision" */
-        /* self.loginButton.setTitle(self.isUpdatingMode ? "UPDATE" : "LOGIN", for: .normal) */
 
         self.PWIsStored = true
 
