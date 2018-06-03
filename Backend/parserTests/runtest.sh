@@ -13,6 +13,10 @@ FAILED=false
 createCSV() {
     # As of 1/6/18, creates CSV in TestOutputs
     ${SCRIPTDIR}/../bin/createcsvs.out $file
+    parseReturnCode=$?
+    if [ ! $parseReturnCode ]; then
+        FAILED=true
+    fi
 }
 
 diffResult(){
@@ -26,6 +30,7 @@ diffResult(){
     fi
     if [ ! "$diff" = "" ]; then
         FAILED=true
+        printf "Failed!\n"
         echo $diff >> $diffFile
     fi
 }
