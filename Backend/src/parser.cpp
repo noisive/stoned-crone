@@ -69,13 +69,13 @@ int Parser::lastIndexOf(std::string data, std::string pattern) {
      // Actual string matched is at rgxMatch[0]
      long startI = rgxMatchStart.position(0);
      long startL = rgxMatchStart.length(0);
-     if (!std::regex_search(data, rgxMatchEnd, startRgx)){
+     long desiredStart = startI + startL;
+     if (!std::regex_search(data.substr(desiredStart), rgxMatchEnd, endRgx)){
          return "0xCC";
      }
      long endI = rgxMatchEnd.position(0);
 //     int endL = rgxMatch.length(0);
-     long desiredStart = startI + startL;
-     return data.substr(desiredStart, endI - desiredStart);
+     return data.substr(desiredStart, endI);
  }
 
 void Parser::extractJsonArray() {
@@ -106,6 +106,12 @@ int Parser::getObjectCount(std::string json) {
         count++;
     }
     return count;
+}
+
+std::string Parser::parseMixedLangValue(std::string data, std::string key){
+    std::string paperPreRgxStr = key + ":.+?(?=class)class=[^>]*> ";
+    std::string divClose = "<\\\\/div>";
+    return extractSubstrBetween(data, paperPreRgxStr, divClose);
 }
 
 TimetableEvent Parser::parseExam(std::string infoSegment, TimetableEvent ttEvent) {
@@ -140,27 +146,13 @@ TimetableEvent Parser::parseExam(std::string infoSegment, TimetableEvent ttEvent
     ttEvent.setRoomCode(infoSegment.substr(startIndex, endIndex - startIndex));
     
     // Set paper name
-    std::string paperPreRgxStr = "Paper name:.+?(?=class)class=[^>]*> ";
-    std::string divClose = "<\\\\/div>";
-    ttEvent.setPaperName(extractSubstrBetween(infoSegment, paperPreRgxStr, divClose));
+    ttEvent.setPaperName(parseMixedLangValue(infoSegment, "Paper name"));
     
     // Set room name
-    int c = 0;
-    while (c < 4) {
-        startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
-        endIndex = indexOf(infoSegment, "<\\\\", startIndex) - 1; // Cuts space off end.
-        c++;
-    }
-    ttEvent.setRoomName(infoSegment.substr(startIndex, endIndex - startIndex));
-    
+    ttEvent.setRoomName(parseMixedLangValue(infoSegment, "Room"));
+
     // Set building name
-    c = 0;
-    while (c < 2) {
-        startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
-        endIndex = indexOf(infoSegment, "<\\\\", startIndex);
-        c++;
-    }
-    ttEvent.setBuilding(infoSegment.substr(startIndex, endIndex - startIndex));
+    ttEvent.setBuilding(parseMixedLangValue(infoSegment, "Building"));
     
     return ttEvent;
     
