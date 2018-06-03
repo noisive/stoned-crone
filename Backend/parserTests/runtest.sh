@@ -12,7 +12,9 @@ FAILED=false
 
 createCSV() {
     # As of 1/6/18, creates CSV in TestOutputs
-    ${SCRIPTDIR}/../bin/createcsvs.out $file
+    if [ ! `${SCRIPTDIR}/../bin/createcsvs.out $file` ]; then
+        FAILED=true
+    fi
 }
 
 diffResult(){
