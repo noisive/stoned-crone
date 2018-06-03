@@ -9,6 +9,7 @@
  0xCC is used as a default blank 'uninitialised' value.
 */
 #include "parser.hpp"
+#include <regex>
 
 Parser::Parser(void) {
     this->colorMap["lightgrey"] = "#D3D3D3";
@@ -16,19 +17,13 @@ Parser::Parser(void) {
 }
 
 int Parser::indexOf(std::string data, std::string pattern) {
-    return this->indexOf(data, pattern, 0);
-}
+    std::cout << pattern << std::endl;
+    std::regex patternRgx(pattern.c_str());
+    std::smatch rgxMatch;
 
-int Parser::lastIndexOf(std::string data, std::string pattern, int startIndex) {
-    int index = this->indexOf(data, pattern, startIndex);
-    if (index == -1) {
-        return index;
-    }
-    return (int) (index + pattern.length());
-}
-
-int Parser::lastIndexOf(std::string data, std::string pattern) {
-    return this->lastIndexOf(data, pattern, 0);
+    std::regex_search(data, rgxMatch, patternRgx);
+    // Actual string matched is at rgxMatch[0]
+    return rgxMatch.position(0);
 }
 
 int Parser::indexOf(std::string data, std::string pattern, int startIndex) {
@@ -47,6 +42,19 @@ int Parser::indexOf(std::string data, std::string pattern, int startIndex) {
     }
     return -1;
 }
+
+int Parser::lastIndexOf(std::string data, std::string pattern, int startIndex) {
+    int index = this->indexOf(data, pattern, startIndex);
+    if (index == -1) {
+        return index;
+    }
+    return (int) (index + pattern.length());
+}
+
+int Parser::lastIndexOf(std::string data, std::string pattern) {
+    return this->lastIndexOf(data, pattern, 0);
+}
+
 
 void Parser::extractJsonArray() {
     int startIndex = indexOf(this->json, "[");
@@ -83,10 +91,13 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // infoSegment is part of json that starts with "\"info\":"
 
     // Cut off strange crap first...
+    // std::regex charsBeforeEventType("div>\\n");
+    // assert(regex_match(color, hexrgx));
     std::string charsBeforeEventType = "div>\\n";
 
     // Strange crap might not be there - let's check it is first.
-    std::string checkCharsBeforeEventType = "<div";
+    std::string checkCharsBeforeEventType="<div";
+//    int checkIndex = regex_search(infoSegment, checkCharsBeforeEventType);
     int checkIndex = indexOf(infoSegment, checkCharsBeforeEventType);
     int startIndex = indexOf(infoSegment, charsBeforeEventType) + int(charsBeforeEventType.length());
     int endIndex = int(infoSegment.length());
