@@ -123,7 +123,7 @@ func getEventsForDate(searchDate: Date) -> [String]{
     var index: Int32 = 0
     
     while (index < num) {
-        let firstEventDateString = getFirstEventDate()
+        let str = queryResult(index: index)
         arr.append(str)
         index += 1
     }
