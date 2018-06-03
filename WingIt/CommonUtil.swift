@@ -225,7 +225,7 @@ extension UIViewController {
 
 func checkAndRemoveBadDateData() -> Bool{
     // Resets data if bad date. //
-    let fileManager = FileManager.default
+//    let fileManager = FileManager.default
     let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
     
     let formatter = DateFormatter()
@@ -235,7 +235,7 @@ func checkAndRemoveBadDateData() -> Bool{
         case BadDate
     }
     do{
-        guard let testdate = formatter.date(from: firstEventDateString) else{
+        guard let _ = formatter.date(from: firstEventDateString) else{
             throw DateError.BadDate
         }
     }catch{
