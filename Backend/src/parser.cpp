@@ -1,4 +1,4 @@
-/* Parser class implementation.
+/*der> Parser class implementation.
     @author Will Shaw - 2017
  
  An object which parses the extracted (and mangled) timetable json.
@@ -17,7 +17,7 @@ Parser::Parser(void) {
 }
 
 int Parser::indexOf(std::string data, std::string pattern) {
-    std::cout << pattern << std::endl;
+//    std::cout << pattern << std::endl;
     std::regex patternRgx(pattern.c_str());
     std::smatch rgxMatch;
 //    pattern = slashEscape(pattern);
@@ -27,9 +27,6 @@ int Parser::indexOf(std::string data, std::string pattern) {
     }
     // Actual string matched is at rgxMatch[0]
     int firstCharOfMatchPosition = rgxMatch.position(0);
-    // Position is not the index, is the index plus 1?
-    //
-    int compIndex = this->indexOf(data, pattern, 0);
     return firstCharOfMatchPosition;
 }
 
@@ -49,13 +46,25 @@ int Parser::lastIndexOf(std::string data, std::string pattern, int startIndex) {
     if (index == -1) {
         return index;
     }
-    return (int) (index + pattern.length());
+    return index + pattern.length();
 }
 
 int Parser::lastIndexOf(std::string data, std::string pattern) {
     return this->lastIndexOf(data, pattern, 0);
 }
 
+// std::string Parser::extractSubstrBetween(std::string data, std::string startPattern, std::string endPattern){
+//     std::regex startRgx(startPattern.c_str());
+//     std::regex endRgx(endPattern.c_str());
+//     std::smatch rgxMatch;
+//     if (!std::regex_search(data, rgxMatch, startRgx)){
+//         return "0xCC";
+//     }
+//     // Actual string matched is at rgxMatch[0]
+//     int startI = rgxMatch.position(0);
+//     startI = rgxMatch.position(0);
+//     return firstCharOfMatchPosition;
+// }
 
 void Parser::extractJsonArray() {
     int startIndex = indexOf(this->json, "\\[");
@@ -77,7 +86,7 @@ int Parser::getObjectCount(std::string json) {
     int count = 0;
 
     for (int i = startIndex; i < json.size(); i++) {
-        startIndex = lastIndexOf(json, "}},", startIndex);
+        startIndex = lastIndexOf(json, "\\}\\},", startIndex);
         if (startIndex == -1) {
             return count;
         }
@@ -98,7 +107,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     std::string checkCharsBeforeEventType="<div";
 //    int checkIndex = regex_search(infoSegment, checkCharsBeforeEventType);
     int checkIndex = indexOf(infoSegment, checkCharsBeforeEventType);
-    int startIndex = indexOf(infoSegment, charsBeforeEventType) + int(charsBeforeEventType.length());
+    int startIndex = indexOf(infoSegment, charsBeforeEventType) + int(charsBeforeEventType.length() - 1);
     int endIndex = int(infoSegment.length());
     if (checkIndex == 0){
 //    if (startIndex < checkIndex){
@@ -112,16 +121,15 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     ttEvent.setType(infoSegment.substr(startIndex, endIndex));
 
     // Set paper code
-    startIndex = lastIndexOf(infoSegment, "<br>\\\\n", endIndex);
+    std::string paperCodeStart = "<br>\\\\n";
+    startIndex = lastIndexOf(infoSegment, paperCodeStart, endIndex) - 1;
     endIndex = indexOf(infoSegment, "<br>", startIndex);
-    ttEvent.setPaperCode(
-        infoSegment.substr(startIndex, endIndex - startIndex));
+    ttEvent.setPaperCode(infoSegment.substr(startIndex, endIndex - startIndex));
 
     // Set maps url
     startIndex = lastIndexOf(infoSegment, "\"", endIndex);
     endIndex = indexOf(infoSegment, "\"", startIndex);
-    std::string mapUrl = infoSegment.substr(
-        startIndex, endIndex - startIndex - 1);
+    std::string mapUrl = infoSegment.substr(startIndex, endIndex - startIndex - 1);
 
     // Set map lat
     startIndex = lastIndexOf(mapUrl, "=");
@@ -135,14 +143,12 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // Set room code
     startIndex = lastIndexOf(infoSegment, "\">", endIndex);
     endIndex = indexOf(infoSegment, "<\\\\/a>", startIndex);
-    ttEvent.setRoomCode(
-        infoSegment.substr(startIndex, endIndex - startIndex));
+    ttEvent.setRoomCode(infoSegment.substr(startIndex, endIndex - startIndex));
 
     // Set paper name
     startIndex = indexOf(infoSegment, "9'", endIndex) + 11;
     endIndex = indexOf(infoSegment, "<\\\\/", startIndex);
-    ttEvent.setPaperName(
-        infoSegment.substr(startIndex, endIndex - startIndex));
+    ttEvent.setPaperName(infoSegment.substr(startIndex, endIndex - startIndex));
 
     // Set room name
     int c = 0;
@@ -151,8 +157,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
         endIndex = indexOf(infoSegment, "<\\\\", startIndex) - 1; // Cuts space off end.
         c++;
     }
-    ttEvent.setRoomName(
-        infoSegment.substr(startIndex, endIndex - startIndex));
+    ttEvent.setRoomName(infoSegment.substr(startIndex, endIndex - startIndex));
 
     // Set building name
     c = 0;
@@ -161,8 +166,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
         endIndex = indexOf(infoSegment, "<\\\\", startIndex);
         c++;
     }
-    ttEvent.setBuilding(
-        infoSegment.substr(startIndex, endIndex - startIndex));
+    ttEvent.setBuilding(infoSegment.substr(startIndex, endIndex - startIndex));
 
     return ttEvent;
 }
@@ -358,12 +362,16 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
     int endIndex = 0;
 
     std::string infoSegment;
+    std::string jsonRemaining;
 
     for (int i = 0; i <= length; i++) {
         TimetableEvent ttEvent;
+        // Need to escape these additionally for regex: ^ $ \ . * + ? ( ) [ ] { } |
 
         // Set each id
-        startIndex = indexOf(json, ":\"", endIndex);
+        std::string idString = "id\":\"";
+        startIndex = indexOf(json,idString, endIndex) + idString.length();
+        // - 1 to endindex to deal with closing quote.
         endIndex = indexOf(json, ",", startIndex) - 1;
         if (startIndex == -1 || endIndex == -1) {
             std::cerr << "Error scraping json" << std::endl;
@@ -375,20 +383,18 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
         // Set each day
         startIndex = indexOf(json, ":", endIndex) + 1;
         endIndex = indexOf(json, ",", startIndex);
-        ttEvent.setDay(
-            stoi(json.substr(startIndex, endIndex - startIndex), nullptr));
+        std::string dayStr = json.substr(startIndex, endIndex - startIndex);
+        ttEvent.setDay(stoi(dayStr, nullptr));
 
         // Set each start time
         startIndex = indexOf(json, ":", endIndex) + 2;
         endIndex = indexOf(json, ":", startIndex);
-        ttEvent.setStartTime(
-            stoi(json.substr(startIndex, endIndex - startIndex), nullptr));
+        ttEvent.setStartTime(stoi(json.substr(startIndex, endIndex - startIndex), nullptr));
 
         // Set each end time
         startIndex = indexOf(json, ":", endIndex + 4) + 2;
         endIndex = indexOf(json, ":", startIndex);
-        ttEvent.setEndTime(
-            stoi(json.substr(startIndex, endIndex - startIndex), nullptr));
+        ttEvent.setEndTime(stoi(json.substr(startIndex, endIndex - startIndex), nullptr));
 
         // Set each color
         int c = 0;
@@ -400,18 +406,20 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
         ttEvent.setColor(json.substr(startIndex, endIndex - startIndex));
 
         // Run a seperate parse on the info segment (html)
-        std::string infoString = "\\\"info\\\":";
-        startIndex = indexOf(json, infoString, endIndex) +
-                     sizeof(infoString);
-        endIndex = indexOf(json, "/div>\"", endIndex) + sizeof("/div>\"") - 1;
+        std::string infoString = "info\\\":\"";
+        std::string infoEnd =  "/div>\"";
+        startIndex = indexOf(json, infoString, endIndex) + infoString.length() - 1;
+        endIndex = indexOf(json,infoEnd, endIndex) + infoEnd.length() - 1;
         infoSegment = json.substr(startIndex, endIndex - startIndex - 1);
 
         ttEvent = parseInfo(infoSegment, ttEvent);
 
         ttEvent.setDuration(ttEvent.getEndTime() - ttEvent.getStartTime());
 
-        startIndex = indexOf(json, "}},", endIndex) + 2;
+        startIndex = indexOf(json, "\\}\\},", endIndex) + 2;
         endIndex = startIndex + 1;
+        jsonRemaining = json.substr(endIndex);
+//        json = jsonRemaining;
    
         // This will search the colorMap and replace the web color with it's mapped HEX color.
         std::map<std::string, std::string>::iterator it = colorMap.find(ttEvent.getColor());

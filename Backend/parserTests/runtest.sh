@@ -30,6 +30,7 @@ diffResult(){
     fi
     if [ ! "$diff" = "" ]; then
         FAILED=true
+        printf "Failed!\n"
         echo $diff >> $diffFile
     fi
 }
