@@ -54,18 +54,29 @@ int Parser::lastIndexOf(std::string data, std::string pattern) {
     return this->lastIndexOf(data, pattern, 0);
 }
 
-// std::string Parser::extractSubstrBetween(std::string data, std::string startPattern, std::string endPattern){
-//     std::regex startRgx(startPattern.c_str());
-//     std::regex endRgx(endPattern.c_str());
-//     std::smatch rgxMatch;
-//     if (!std::regex_search(data, rgxMatch, startRgx)){
-//         return "0xCC";
-//     }
-//     // Actual string matched is at rgxMatch[0]
-//     int startI = rgxMatch.position(0);
-//     startI = rgxMatch.position(0);
-//     return firstCharOfMatchPosition;
+ std::string Parser::extractSubstrBetween(std::string data, std::string startPattern, std::string endPattern){
+//     int startIndex = indexOf(data, startPattern) + startPattern.length();
+//     int endIndex = indexOf(data, endPattern, startIndex);
+//     return data.substr(startIndex, endIndex - startIndex);
 // }
+     std::regex startRgx(startPattern.c_str());
+     std::regex endRgx(endPattern.c_str());
+     std::smatch rgxMatchStart;
+     std::smatch rgxMatchEnd;
+     if (!std::regex_search(data, rgxMatchStart, startRgx)){
+         return "0xCC";
+     }
+     // Actual string matched is at rgxMatch[0]
+     long startI = rgxMatchStart.position(0);
+     long startL = rgxMatchStart.length(0);
+     if (!std::regex_search(data, rgxMatchEnd, startRgx)){
+         return "0xCC";
+     }
+     long endI = rgxMatchEnd.position(0);
+//     int endL = rgxMatch.length(0);
+     long desiredStart = startI + startL;
+     return data.substr(desiredStart, endI - desiredStart);
+ }
 
 void Parser::extractJsonArray() {
     int startIndex = indexOf(this->json, "\\[");
@@ -100,11 +111,14 @@ int Parser::getObjectCount(std::string json) {
 TimetableEvent Parser::parseExam(std::string infoSegment, TimetableEvent ttEvent) {
     int startIndex = 0;
     int endIndex = indexOf(infoSegment, "<br");
+    
     // Set paper code
-    std::string paperCodeStart = "<br>\\\\n";
+    std::string wierdExamBr = "<br[^>]*>";
+    std::string paperCodeStart = wierdExamBr + "\\\\n";
     startIndex = lastIndexOf(infoSegment, paperCodeStart, endIndex) - 1;
-    endIndex = indexOf(infoSegment, "<br>", startIndex);
-    ttEvent.setPaperCode(infoSegment.substr(startIndex, endIndex - startIndex));
+    endIndex = indexOf(infoSegment, wierdExamBr, startIndex);
+    // - 2 is hack.
+    ttEvent.setPaperCode(infoSegment.substr(startIndex - 2, endIndex - startIndex + 2));
     
     // Set maps url
     startIndex = lastIndexOf(infoSegment, "\"", endIndex);
@@ -126,9 +140,9 @@ TimetableEvent Parser::parseExam(std::string infoSegment, TimetableEvent ttEvent
     ttEvent.setRoomCode(infoSegment.substr(startIndex, endIndex - startIndex));
     
     // Set paper name
-    startIndex = indexOf(infoSegment, "9'", endIndex) + 11;
-    endIndex = indexOf(infoSegment, "<\\\\/", startIndex);
-    ttEvent.setPaperName(infoSegment.substr(startIndex, endIndex - startIndex));
+    std::string paperPreRgxStr = "Paper name:.+?(?=class)class=[^>]*> ";
+    std::string divClose = "<\\\\/div>";
+    ttEvent.setPaperName(extractSubstrBetween(infoSegment, paperPreRgxStr, divClose));
     
     // Set room name
     int c = 0;

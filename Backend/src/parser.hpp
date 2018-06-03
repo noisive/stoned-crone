@@ -27,6 +27,7 @@ class Parser {
         int indexOf(std::string data, std::string pattern, int startIndex);
         int lastIndexOf(std::string data, std::string pattern, int startIndex);
         int lastIndexOf(std::string data, std::string pattern);
+        std::string extractSubstrBetween(std::string data, std::string startPattern, std::string endPattern);
 
         // Parsing Functions
         int getObjectCount(std::string json);
