@@ -35,7 +35,7 @@ class BackendTest: XCTestCase {
                 
                 let testTTString = try String(contentsOf: testFileURL)
                 
-                let parsedTTString = parseEvents(testTTString)
+                let parsedTTString = parseEvents(data: testTTString)
 
                 initTimetable()
                 validateTimetable()
