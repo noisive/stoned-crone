@@ -26,6 +26,9 @@ binOuts = $(addprefix $(mkfile_dir)/bin/,$(outs))
 
 all: init $(binOuts)
 
+test: all
+	$(mkfile_dir)/parserTests/runtest.sh
+
 # % is a wildcard.
 # $< expands to first depedency ($^ is all dependencies).
 # $@ expands to the name of the rule.
