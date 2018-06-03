@@ -11,7 +11,16 @@ Timetable timetable;
 extern "C" const char* B_parseEvents(const char* data) {
     std::string CSVData = timetable.parseEvents(data);
     timetable.save();
-    return CSVData.c_str();
+    
+    size_t bufferSize =  0;
+
+    bufferSize += CSVData.length();
+    bufferSize += 20;
+    char buffer[bufferSize];
+    
+    snprintf(buffer, sizeof(buffer), "%s", CSVData.c_str());
+    
+    return strdup(buffer);
 }
 //std::string parseEvents(std::string data){
 //    return std::string(B_parseEvents(data.c_str()));
