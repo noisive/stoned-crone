@@ -20,28 +20,29 @@ int Parser::indexOf(std::string data, std::string pattern) {
     std::cout << pattern << std::endl;
     std::regex patternRgx(pattern.c_str());
     std::smatch rgxMatch;
+//    pattern = slashEscape(pattern);
 
-    std::regex_search(data, rgxMatch, patternRgx);
+    if (!std::regex_search(data, rgxMatch, patternRgx)){
+        return -1;
+    }
     // Actual string matched is at rgxMatch[0]
-    return rgxMatch.position(0);
+    int firstCharOfMatchPosition = rgxMatch.position(0);
+    // Position is not the index, is the index plus 1?
+    //
+    int compIndex = this->indexOf(data, pattern, 0);
+    return firstCharOfMatchPosition;
 }
 
 int Parser::indexOf(std::string data, std::string pattern, int startIndex) {
-    int patternIndex = 0;
-    for (int i = startIndex; i < data.size(); i++) {
-        if (data[i] == pattern[patternIndex]) {
-            if (patternIndex == pattern.size() - 1) {
-                return (i - patternIndex);
-            }
-            patternIndex++;
-        } else if (data[i] == pattern[0]) {
-            patternIndex = 1;
-        } else {
-            patternIndex = 0;
-        }
+
+    int relIndex = indexOf(data.substr(startIndex), pattern);
+    if (relIndex == -1){
+        return -1;
+    }else{
+        return startIndex + relIndex;
     }
-    return -1;
 }
+
 
 int Parser::lastIndexOf(std::string data, std::string pattern, int startIndex) {
     int index = this->indexOf(data, pattern, startIndex);
@@ -57,8 +58,8 @@ int Parser::lastIndexOf(std::string data, std::string pattern) {
 
 
 void Parser::extractJsonArray() {
-    int startIndex = indexOf(this->json, "[");
-    int endIndex = indexOf(this->json, "]");
+    int startIndex = indexOf(this->json, "\\[");
+    int endIndex = indexOf(this->json, "\\]");
     // Check to ensure the timetable isn't empty and the indexes were found.
     if (startIndex != -1 && endIndex != -1) {
         this->json = this->json.substr(startIndex, endIndex - startIndex + 1);
@@ -91,9 +92,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // infoSegment is part of json that starts with "\"info\":"
 
     // Cut off strange crap first...
-    // std::regex charsBeforeEventType("div>\\n");
-    // assert(regex_match(color, hexrgx));
-    std::string charsBeforeEventType = "div>\\n";
+    std::string charsBeforeEventType = "div>\\\\n";
 
     // Strange crap might not be there - let's check it is first.
     std::string checkCharsBeforeEventType="<div";
@@ -113,7 +112,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     ttEvent.setType(infoSegment.substr(startIndex, endIndex));
 
     // Set paper code
-    startIndex = lastIndexOf(infoSegment, "<br>\\n", endIndex);
+    startIndex = lastIndexOf(infoSegment, "<br>\\\\n", endIndex);
     endIndex = indexOf(infoSegment, "<br>", startIndex);
     ttEvent.setPaperCode(
         infoSegment.substr(startIndex, endIndex - startIndex));
@@ -135,13 +134,13 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
 
     // Set room code
     startIndex = lastIndexOf(infoSegment, "\">", endIndex);
-    endIndex = indexOf(infoSegment, "<\\/a>", startIndex);
+    endIndex = indexOf(infoSegment, "<\\\\/a>", startIndex);
     ttEvent.setRoomCode(
         infoSegment.substr(startIndex, endIndex - startIndex));
 
     // Set paper name
     startIndex = indexOf(infoSegment, "9'", endIndex) + 11;
-    endIndex = indexOf(infoSegment, "<\\/", startIndex);
+    endIndex = indexOf(infoSegment, "<\\\\/", startIndex);
     ttEvent.setPaperName(
         infoSegment.substr(startIndex, endIndex - startIndex));
 
@@ -149,7 +148,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     int c = 0;
     while (c < 4) {
         startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
-        endIndex = indexOf(infoSegment, "<\\", startIndex) - 1; // Cuts space off end.
+        endIndex = indexOf(infoSegment, "<\\\\", startIndex) - 1; // Cuts space off end.
         c++;
     }
     ttEvent.setRoomName(
@@ -159,7 +158,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     c = 0;
     while (c < 2) {
         startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
-        endIndex = indexOf(infoSegment, "<\\", startIndex);
+        endIndex = indexOf(infoSegment, "<\\\\", startIndex);
         c++;
     }
     ttEvent.setBuilding(
@@ -208,8 +207,8 @@ void Parser::getWeekStart() {
         int dateStringLength = indexOf(this->json, " to")-dateStringStartIndex;
         std::string dateSlice = this->json.substr(dateStringStartIndex,dateStringLength);
         
-        // Have to be escaped, will show up like this in debugger. Look like \/ in real data.
-        std::string slashPair = "\\/";
+        // \/ has to be escaped, will show up like "\\/" in debugger. Look like \/ in real data.
+        std::string slashPair = "\\\\/";
         // Day number is until first slash pair
         int slashIndex = indexOf(dateSlice, slashPair);
         std::string dayIntString = dateSlice.substr(0, slashIndex);
@@ -224,7 +223,7 @@ void Parser::getWeekStart() {
             monthIntString = dateSlice.substr(0,2);
         }else{
             // Include full, just in case they change it again.
-            monthIntString = monthFullNameTo2NumString(dateSlice.substr(0,indexOf(dateSlice, "\\/")));
+            monthIntString = monthFullNameTo2NumString(dateSlice.substr(0,indexOf(dateSlice, slashPair)));
         }
         
         slashIndex = indexOf(dateSlice, slashPair);
@@ -401,8 +400,9 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
         ttEvent.setColor(json.substr(startIndex, endIndex - startIndex));
 
         // Run a seperate parse on the info segment (html)
-        startIndex = indexOf(json, "\"info\":", endIndex) +
-                     sizeof("\"info\":");
+        std::string infoString = "\\\"info\\\":";
+        startIndex = indexOf(json, infoString, endIndex) +
+                     sizeof(infoString);
         endIndex = indexOf(json, "/div>\"", endIndex) + sizeof("/div>\"") - 1;
         infoSegment = json.substr(startIndex, endIndex - startIndex - 1);
 
