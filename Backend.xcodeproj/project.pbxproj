@@ -38,6 +38,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		064082F920C2639700F568CB /* TestAnswers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestAnswers; path = Backend/parserTests/TestAnswers; sourceTree = SOURCE_ROOT; };
+		064082FA20C2639700F568CB /* TestInputs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestInputs; path = Backend/parserTests/TestInputs; sourceTree = SOURCE_ROOT; };
 		06934D6A1F86703400D308BD /* parserTests.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = parserTests.xcodeproj; path = Backend/parserTests/parserTests.xcodeproj; sourceTree = SOURCE_ROOT; };
 		06A547191F7B12B400967FD7 /* libBackend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBackend.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		06D026541F7DE061001B79FD /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = src/makefile; sourceTree = "<group>"; };
@@ -63,6 +65,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		064082F820C2637C00F568CB /* Test files */ = {
+			isa = PBXGroup;
+			children = (
+				064082F920C2639700F568CB /* TestAnswers */,
+				064082FA20C2639700F568CB /* TestInputs */,
+			);
+			path = "Test files";
+			sourceTree = "<group>";
+		};
 		0698275E1F863BB900777DAD /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +85,7 @@
 		06A547101F7B12B400967FD7 = {
 			isa = PBXGroup;
 			children = (
+				064082F820C2637C00F568CB /* Test files */,
 				06A5471B1F7B12B400967FD7 /* Backend */,
 				06A5471A1F7B12B400967FD7 /* Products */,
 			);

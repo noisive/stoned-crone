@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     std::string home = getenv("HOME"); 
     
     /* std::ifstream fileStream("./test/ttb.txt"); */
-    std::ifstream fileStream("../parserTests/Test html json/easterjson.txt");
+    std::ifstream fileStream("../parserTests/TestInputs/update_april_29_18_Nad.txt");
     std::string dataString;
 
     fileStream.seekg(0, std::ios::end);   

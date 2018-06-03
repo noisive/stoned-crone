@@ -36,6 +36,7 @@ class WingItUITests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+        app.launchArguments.append("testing")
         // Put setup code here. This method is called before the invocation of each test method in the class.
         self.eVisionUsername = setUserFromEnv()
         self.eVisionPassword = setPassFromEnv()
@@ -48,7 +49,7 @@ class WingItUITests: XCTestCase {
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.\
         // We send a command line argument to our app,
         // to enable it to reset its state
-        //app.launchArguments.append("--uitesting")
+        //app.launchArguments.append("uitesting")
 
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
 
@@ -69,7 +70,7 @@ class WingItUITests: XCTestCase {
     // Special webview window without any coverplate. For debugging webview login.
     func testLoginRaw(){
         // Argument to enter raw
-        app.launchArguments.append("--debugLogin")
+        app.launchArguments.append("debugLogin")
         app.launch()
         print("hi")
 
@@ -89,7 +90,7 @@ class WingItUITests: XCTestCase {
 
     // Test that a fresh login reaches a timetable.
     func testLoginFresh(){
-        app.launchArguments.append("--resetdata")
+        app.launchArguments.append("resetdata")
         app.launch()
         _ = app.launchArguments.popLast()
 
@@ -104,13 +105,13 @@ class WingItUITests: XCTestCase {
         login()
 
         // Wait for a thing to display, then assert it is displaying... Circular? But should work.
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 120)
         XCTAssertTrue(app.isDisplayingTT)
 
     }
     
     func testCancelButtonNotPresentFresh(){
-        app.launchArguments.append("--resetdata")
+        app.launchArguments.append("resetdata")
         app.launch()
         
         // Waits and checks for allow notifications alert.
@@ -167,7 +168,7 @@ class WingItUITests: XCTestCase {
 
     func login(){
 
-        _ = app.textFields["Username"].waitForExistence(timeout: 30)
+        _ = app.textFields["Username"].waitForExistence(timeout: 60)
         let usernameTextField = app.textFields["Username"]
         let passwordSecureTextField = app.secureTextFields["Password"]
         

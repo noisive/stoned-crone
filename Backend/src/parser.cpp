@@ -84,14 +84,21 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
 
     // Cut off strange crap first...
     std::string charsBeforeEventType = "div>\\n";
-        infoSegment = infoSegment.substr(\
-                                         indexOf(infoSegment, charsBeforeEventType) + \
-                                         charsBeforeEventType.length(), infoSegment.length());
+
+    // Strange crap might not be there - let's check it is first.
+    std::string checkCharsBeforeEventType = "<div";
+    int checkIndex = indexOf(infoSegment, checkCharsBeforeEventType);
+    int startIndex = indexOf(infoSegment, charsBeforeEventType) + int(charsBeforeEventType.length());
+    int endIndex = int(infoSegment.length());
+    if (checkIndex == 0){
+//    if (startIndex < checkIndex){
+        infoSegment = infoSegment.substr(startIndex, endIndex);
+    }
 
     // Set event type
-    int startIndex = 0;
+    startIndex = 0;
     // int startIndex = indexOf(infoSegment, charsBeforeEventType) - sizeof(charsBeforeEventType);
-    int endIndex = indexOf(infoSegment, "<br>");
+    endIndex = indexOf(infoSegment, "<br");
     ttEvent.setType(infoSegment.substr(startIndex, endIndex));
 
     // Set paper code
@@ -217,7 +224,7 @@ void Parser::getWeekStart() {
         // This requires input to be of format dd+mm+yy
         this->weekStart = std::stoi(dayIntString + monthIntString + yearIntString);
     }
-    std::cout<<weekStart << std::endl;
+//    std::cout<<weekStart << std::endl;
 }
 
 std::vector<TimetableEvent> Parser::parseFile(std::string fileName, std::string format) {

@@ -49,20 +49,22 @@ class Timetable {
         std::string toString();
 
         // Integration
-        void parseEvents(std::string jumbledData);
+        std::string parseEvents(std::string jumbledData);
         int queryByDate(const char* d);
         TimetableEvent queryResult(int index);
         int merge();
         TimetableEvent getByUID(const char* id);
         void addEvent(const char* event);
     
+        void validate();
         std::string getFirstEventDateString();
         std::string getLastEventDateString();
 
 
         // Persistence
-        void save();
+        void save(std::string filePath = "0x8C");
         void restore();
+        std::string toCSVString();
         void printToCSV();
         void exportToFile(std::string fileName);
         void exportToGoogleCalFile(std::string fileName);

@@ -6,8 +6,9 @@
 #import "SVProgressHUD.h"
 #import "RMessage.h"
 
-void parseEvents(const char* data);
+const char* B_parseEvents(const char* data);
 void initTimetable();
+void validateTimetable();
 int queryDate(const char* dateString);
-const char* queryResult(int index);
-const char* getFirstEventDate();
+const char* B_queryResult(int index);
+const char* B_getFirstEventDate();
