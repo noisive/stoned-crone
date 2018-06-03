@@ -32,6 +32,7 @@ class Parser {
         int getObjectCount(std::string json);
         TimetableEvent parseCSVLine(std::string line);
         TimetableEvent parseInfo(std::string infoString, TimetableEvent ttEvent);
+        TimetableEvent parseExam(std::string infoString, TimetableEvent ttEvent);
 
     public:
         // Constructors

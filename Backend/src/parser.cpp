@@ -27,6 +27,7 @@ int Parser::indexOf(std::string data, std::string pattern) {
     }
     // Actual string matched is at rgxMatch[0]
     int firstCharOfMatchPosition = rgxMatch.position(0);
+    // I can't help but feel this is wrong. This is returning position + 1! TODO
     return firstCharOfMatchPosition;
 }
 
@@ -96,6 +97,61 @@ int Parser::getObjectCount(std::string json) {
     return count;
 }
 
+TimetableEvent Parser::parseExam(std::string infoSegment, TimetableEvent ttEvent) {
+    int startIndex = 0;
+    int endIndex = indexOf(infoSegment, "<br");
+    // Set paper code
+    std::string paperCodeStart = "<br>\\\\n";
+    startIndex = lastIndexOf(infoSegment, paperCodeStart, endIndex) - 1;
+    endIndex = indexOf(infoSegment, "<br>", startIndex);
+    ttEvent.setPaperCode(infoSegment.substr(startIndex, endIndex - startIndex));
+    
+    // Set maps url
+    startIndex = lastIndexOf(infoSegment, "\"", endIndex);
+    endIndex = indexOf(infoSegment, "\"", startIndex);
+    std::string mapUrl = infoSegment.substr(startIndex, endIndex - startIndex - 1);
+    
+    // Set map lat
+    startIndex = lastIndexOf(mapUrl, "=");
+    endIndex = indexOf(mapUrl, ",", startIndex);
+    ttEvent.setMapLat(mapUrl.substr(startIndex, endIndex - startIndex));
+    
+    // Set map long
+    startIndex = indexOf(mapUrl, "&", startIndex);
+    ttEvent.setMapLong(mapUrl.substr(endIndex + 1, startIndex - endIndex - 1));
+    
+    // Set room code
+    startIndex = lastIndexOf(infoSegment, "\">", endIndex);
+    endIndex = indexOf(infoSegment, "<\\\\/a>", startIndex);
+    ttEvent.setRoomCode(infoSegment.substr(startIndex, endIndex - startIndex));
+    
+    // Set paper name
+    startIndex = indexOf(infoSegment, "9'", endIndex) + 11;
+    endIndex = indexOf(infoSegment, "<\\\\/", startIndex);
+    ttEvent.setPaperName(infoSegment.substr(startIndex, endIndex - startIndex));
+    
+    // Set room name
+    int c = 0;
+    while (c < 4) {
+        startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
+        endIndex = indexOf(infoSegment, "<\\\\", startIndex) - 1; // Cuts space off end.
+        c++;
+    }
+    ttEvent.setRoomName(infoSegment.substr(startIndex, endIndex - startIndex));
+    
+    // Set building name
+    c = 0;
+    while (c < 2) {
+        startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
+        endIndex = indexOf(infoSegment, "<\\\\", startIndex);
+        c++;
+    }
+    ttEvent.setBuilding(infoSegment.substr(startIndex, endIndex - startIndex));
+    
+    return ttEvent;
+    
+}
+
 TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent) {
 
     // infoSegment is part of json that starts with "\"info\":"
@@ -119,6 +175,10 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // int startIndex = indexOf(infoSegment, charsBeforeEventType) - sizeof(charsBeforeEventType);
     endIndex = indexOf(infoSegment, "<br");
     ttEvent.setType(infoSegment.substr(startIndex, endIndex));
+    
+    if (ttEvent.getType() == "Examination"){
+        return parseExam(infoSegment, ttEvent);
+    }
 
     // Set paper code
     std::string paperCodeStart = "<br>\\\\n";
