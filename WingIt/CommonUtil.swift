@@ -230,9 +230,7 @@ func checkAndRemoveBadDateData() -> Bool{
     
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
-    let firstEventDateCString = getFirstEventDate()
-    let firstEventDateString = String(cString: firstEventDateCString!)
-    free(UnsafeMutablePointer(mutating: firstEventDateCString)) // We must free the memory that C++ created for the pointer.
+    let firstEventDateString = getFirstEventDate()
     enum DateError: Error {
         case BadDate
     }

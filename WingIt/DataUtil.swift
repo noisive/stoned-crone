@@ -32,10 +32,8 @@ func loadWeekData(VC: TimetableView) {
         // This means the same week of data is displayed every week.
         // FEATURE remove this when more than one week of data is loaded.
 
-        let firstEventDateCString = getFirstEventDate()
-        let firstEventDateString = String(cString: firstEventDateCString!)
-        free(UnsafeMutablePointer(mutating: firstEventDateCString)) // We must free the memory that C++ created for the pointer.
-        
+        let firstEventDateString = getFirstEventDate()
+
         if (firstEventDateString == "0xCC"){
            print("Error: first event date string not found/set")
         }else{
@@ -125,9 +123,7 @@ func getEventsForDate(searchDate: Date) -> [String]{
     var index: Int32 = 0
     
     while (index < num) {
-        let cstr = queryResult(index)
-        let str = String(cString: cstr!)
-        free(UnsafeMutablePointer(mutating: cstr)) // We must free the memory that C++ created for the pointer.
+        let firstEventDateString = getFirstEventDate()
         arr.append(str)
         index += 1
     }

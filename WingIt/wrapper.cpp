@@ -8,11 +8,14 @@
 
 Timetable timetable;
 
-extern "C" const char* parseEvents(const char* data) {
+extern "C" const char* B_parseEvents(const char* data) {
     std::string CSVData = timetable.parseEvents(data);
     timetable.save();
     return CSVData.c_str();
 }
+//std::string parseEvents(std::string data){
+//    return std::string(B_parseEvents(data.c_str()));
+//}
 
 extern "C" void initTimetable() {
     timetable.restore();
@@ -26,7 +29,7 @@ extern "C" int queryDate(const char* dateString) {
     return (int) timetable.queryByDate(dateString);
 }
 
-extern "C" const char* queryResult(int index) {
+extern "C" const char* B_queryResult(int index) {
     
     std::string data = "";
     
@@ -46,8 +49,16 @@ extern "C" const char* queryResult(int index) {
     return strdup(buffer);
 }
 
+//// Wrapper to avoid use of CStrings in swift
+//std::string queryResult(int index){
+//    const char *result = B_queryResult(index);
+//    std::string out = std::string(result);
+//    std::free((char*)result);
+//    return out;
+//}
 
-extern "C" const char* getFirstEventDate() {
+
+extern "C" const char* B_getFirstEventDate() {
     
     std::string data = "";
     
@@ -61,3 +72,10 @@ extern "C" const char* getFirstEventDate() {
     
     return strdup(buffer);
 }
+//std::string getFirstEventDate(){
+//    const char *result = B_getFirstEventDate();
+//    std::string out = std::string(result);
+//    std::free((char*)result);
+//    return out;
+//}
+

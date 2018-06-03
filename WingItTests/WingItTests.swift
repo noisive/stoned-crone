@@ -35,10 +35,8 @@ class BackendTest: XCTestCase {
                 
                 let testTTString = try String(contentsOf: testFileURL)
                 
-                let resultCString = parseEvents(testTTString)
-                let parsedTTString = String(cString: resultCString!)
-//                free(UnsafeMutablePointer(mutating: resultCString)) // We must free the memory that C++ created for the pointer.
-                
+                let parsedTTString = parseEvents(testTTString)
+
                 initTimetable()
                 validateTimetable()
                 

@@ -305,11 +305,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
 
                         //Check if the json was grabbed
                         if let jsonString:String = webView.stringByEvaluatingJavaScript(from: webGrabCode) {
-                            let json: NSString = NSString(string: jsonString)
 
-
-
-                            parseEvents(json.cString(using: String.Encoding.utf8.rawValue))
+                            let _ = parseEvents(data: jsonString)
                             #if DEBUG
                                 //                                if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
                                 if CommandLine.arguments.contains("testing") {
