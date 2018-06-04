@@ -123,31 +123,46 @@ TimetableEvent Parser::parseExam(std::string infoSegment, TimetableEvent ttEvent
     int endIndex = indexOf(infoSegment, "<br");
     
     // Set paper code
-    std::string wierdExamBr = "<br[^>]*>";
-    std::string paperCodeStart = wierdExamBr + "\\\\n";
-    startIndex = lastIndexOf(infoSegment, paperCodeStart, endIndex) - 1;
-    endIndex = indexOf(infoSegment, wierdExamBr, startIndex);
-    // - 2 is hack.
-    ttEvent.setPaperCode(infoSegment.substr(startIndex - 2, endIndex - startIndex + 2));
+//    std::string wierdExamBr = "<br[^>]*>";
+//    std::string paperCodeStart = wierdExamBr + "\\\\n";
+//    startIndex = lastIndexOf(infoSegment, paperCodeStart, endIndex) - 1;
+//    endIndex = indexOf(infoSegment, wierdExamBr, startIndex);
+//    // - 2 is hack.
+    ttEvent.setPaperCode(parseMixedLangValue(infoSegment, "Exam paper"));
     
     // Set maps url
     startIndex = lastIndexOf(infoSegment, "\"", endIndex);
     endIndex = indexOf(infoSegment, "\"", startIndex);
     std::string mapUrl = infoSegment.substr(startIndex, endIndex - startIndex - 1);
     
-    // Set map lat
-    startIndex = lastIndexOf(mapUrl, "=");
-    endIndex = indexOf(mapUrl, ",", startIndex);
-    ttEvent.setMapLat(mapUrl.substr(startIndex, endIndex - startIndex));
+    std::string mapLat = extractSubstrBetween(mapUrl, "(@|q=)", ",");
+    std::string mapLong = extractSubstrBetween(mapUrl, "(@|q=)[^,]*,", "[,&]");
+    
+    ttEvent.setMapLat(mapLat);
+    ttEvent.setMapLong(mapLong);
+
+    // if(startIndex == -1 || endIndex == -1){
+    //     std::cerr << "Invalid map lat/lon" << std::endl;
+    //     ttEvent.setMapLat("0");
+    // }else{
+    //     ttEvent.setMapLat(mapUrl.substr(startIndex, endIndex - startIndex));
+    // }
     
     // Set map long
-    startIndex = indexOf(mapUrl, "&", startIndex);
-    ttEvent.setMapLong(mapUrl.substr(endIndex + 1, startIndex - endIndex - 1));
+//    startIndex = indexOf(mapUrl, "&", startIndex);
+//    if(startIndex == -1 || endIndex == -1){
+//        std::cerr << "Invalid map lat/lon" << std::endl;
+//        ttEvent.setMapLat("0");
+//        endIndex = indexOf(mapUrl, "\"");
+//    }else{
+//        ttEvent.setMapLong(mapUrl.substr(endIndex + 1, startIndex - endIndex - 1));
+//    }
     
     // Set room code
     startIndex = lastIndexOf(infoSegment, "\">", endIndex);
     endIndex = indexOf(infoSegment, "<\\\\/a>", startIndex);
     ttEvent.setRoomCode(infoSegment.substr(startIndex, endIndex - startIndex));
+//    ttEvent.setRoomCode(infoSegment.substr(startIndex, endIndex - startIndex));
     
     // Set paper name
     ttEvent.setPaperName(parseMixedLangValue(infoSegment, "Paper name"));
