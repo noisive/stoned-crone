@@ -79,7 +79,7 @@ int Parser::lastIndexOf(std::string data, std::string pattern) {
      return data.substr(desiredStart, endI);
  }
 
-void Parser::extractJsonArray() {
+bool Parser::extractJsonArray() {
     int startIndex = indexOf(this->json, "\\[");
     int endIndex = indexOf(this->json, "\\]");
     // Check to ensure the timetable isn't empty and the indexes were found.
@@ -87,11 +87,14 @@ void Parser::extractJsonArray() {
         this->json = this->json.substr(startIndex, endIndex - startIndex + 1);
     }else{
         std::cerr << "Error: json not found" << std::endl;
+        return false;
     }
     // No data in json.
     if (endIndex - startIndex < 2){
         std::cerr << "Error: json timetable is empty" << std::endl;
+        return false;
     }
+    return true;
 }
 
 int Parser::getObjectCount(std::string json) {
@@ -421,7 +424,9 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
         return events;
     }
 
-    extractJsonArray();
+    if(!extractJsonArray()){
+        return events;
+    }
 
     int length = getObjectCount(json);
 
