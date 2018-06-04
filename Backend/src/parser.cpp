@@ -18,7 +18,7 @@ Parser::Parser(void) {
 
 int Parser::indexOf(std::string data, std::string pattern) {
 //    std::cout << pattern << std::endl;
-    std::regex patternRgx(pattern.c_str());
+    std::regex patternRgx(pattern);
     std::smatch rgxMatch;
 //    pattern = slashEscape(pattern);
 
@@ -59,8 +59,8 @@ int Parser::lastIndexOf(std::string data, std::string pattern) {
 //     int endIndex = indexOf(data, endPattern, startIndex);
 //     return data.substr(startIndex, endIndex - startIndex);
 // }
-     std::regex startRgx(startPattern.c_str());
-     std::regex endRgx(endPattern.c_str());
+     std::regex startRgx(startPattern);
+     std::regex endRgx(endPattern);
      std::smatch rgxMatchStart;
      std::smatch rgxMatchEnd;
      if (!std::regex_search(data, rgxMatchStart, startRgx)){
@@ -70,7 +70,8 @@ int Parser::lastIndexOf(std::string data, std::string pattern) {
      long startI = rgxMatchStart.position(0);
      long startL = rgxMatchStart.length(0);
      long desiredStart = startI + startL;
-     if (!std::regex_search(data.substr(desiredStart), rgxMatchEnd, endRgx)){
+     std::string searchData = data.substr(desiredStart);
+     if (!std::regex_search(searchData, rgxMatchEnd, endRgx)){
          return "0xCC";
      }
      long endI = rgxMatchEnd.position(0);
@@ -78,7 +79,7 @@ int Parser::lastIndexOf(std::string data, std::string pattern) {
      return data.substr(desiredStart, endI);
  }
 
-void Parser::extractJsonArray() {
+bool Parser::extractJsonArray() {
     int startIndex = indexOf(this->json, "\\[");
     int endIndex = indexOf(this->json, "\\]");
     // Check to ensure the timetable isn't empty and the indexes were found.
@@ -86,11 +87,14 @@ void Parser::extractJsonArray() {
         this->json = this->json.substr(startIndex, endIndex - startIndex + 1);
     }else{
         std::cerr << "Error: json not found" << std::endl;
+        return false;
     }
     // No data in json.
     if (endIndex - startIndex < 2){
         std::cerr << "Error: json timetable is empty" << std::endl;
+        return false;
     }
+    return true;
 }
 
 int Parser::getObjectCount(std::string json) {
@@ -420,7 +424,9 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
         return events;
     }
 
-    extractJsonArray();
+    if(!extractJsonArray()){
+        return events;
+    }
 
     int length = getObjectCount(json);
 

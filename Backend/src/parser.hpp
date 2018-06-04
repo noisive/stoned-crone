@@ -21,7 +21,7 @@ class Parser {
 
         // Base Functions
         void init();
-        void extractJsonArray();
+        bool extractJsonArray();
         void getWeekStart();
         int indexOf(std::string data, std::string pattern);
         int indexOf(std::string data, std::string pattern, int startIndex);
