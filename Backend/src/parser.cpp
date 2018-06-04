@@ -18,7 +18,7 @@ Parser::Parser(void) {
 
 int Parser::indexOf(std::string data, std::string pattern) {
 //    std::cout << pattern << std::endl;
-    std::regex patternRgx(pattern.c_str());
+    std::regex patternRgx(pattern);
     std::smatch rgxMatch;
 //    pattern = slashEscape(pattern);
 
@@ -59,8 +59,8 @@ int Parser::lastIndexOf(std::string data, std::string pattern) {
 //     int endIndex = indexOf(data, endPattern, startIndex);
 //     return data.substr(startIndex, endIndex - startIndex);
 // }
-     std::regex startRgx(startPattern.c_str());
-     std::regex endRgx(endPattern.c_str());
+     std::regex startRgx(startPattern);
+     std::regex endRgx(endPattern);
      std::smatch rgxMatchStart;
      std::smatch rgxMatchEnd;
      if (!std::regex_search(data, rgxMatchStart, startRgx)){
@@ -70,7 +70,8 @@ int Parser::lastIndexOf(std::string data, std::string pattern) {
      long startI = rgxMatchStart.position(0);
      long startL = rgxMatchStart.length(0);
      long desiredStart = startI + startL;
-     if (!std::regex_search(data.substr(desiredStart), rgxMatchEnd, endRgx)){
+     std::string searchData = data.substr(desiredStart);
+     if (!std::regex_search(searchData, rgxMatchEnd, endRgx)){
          return "0xCC";
      }
      long endI = rgxMatchEnd.position(0);
