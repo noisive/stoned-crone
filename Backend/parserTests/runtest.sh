@@ -22,7 +22,9 @@ createCSV() {
 diffResult(){
     csv=$1
     # For some reason, this returns an error code, so fails on -e
-    diff="$(diff "${SCRIPTDIR}/TestOutputs/${csv}" "${SCRIPTDIR}/TestAnswers/${csv}")"
+    # diffcmd="git diff -U0 --word-diff --no-index --"
+    diffcmd="diff"
+    diff="$(${diffcmd} "${SCRIPTDIR}/TestOutputs/${csv}" "${SCRIPTDIR}/TestAnswers/${csv}")"
     # Remove old diffs before replacing
     diffFile="${SCRIPTDIR}/TestDiffs/${csv}.diff"
     if [[ -f "$diffFile" ]]; then

@@ -1,4 +1,4 @@
-/*der> Parser class implementation.
+/* Parser class implementation.
     @author Will Shaw - 2017
  
  An object which parses the extracted (and mangled) timetable json.
@@ -113,9 +113,9 @@ int Parser::getObjectCount(std::string json) {
 }
 
 std::string Parser::parseMixedLangValue(std::string data, std::string key){
-    std::string paperPreRgxStr = key + ":.+?(?=class)class=[^>]*> ";
-    std::string divClose = "<\\\\/div>";
-    return extractSubstrBetween(data, paperPreRgxStr, divClose);
+    std::string paperPreRgxStr = key + ":.+?(?=class)class=[^>]*>(\\\\t)?(<span>)? ?";
+    std::string divClose = "<\\\\/div>"; // Not used.
+    return extractSubstrBetween(data, paperPreRgxStr, " ?<");
 }
 
 TimetableEvent Parser::parseExam(std::string infoSegment, TimetableEvent ttEvent) {
@@ -205,56 +205,46 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     ttEvent.setType(infoSegment.substr(startIndex, endIndex));
     
     if (ttEvent.getType() == "Examination"){
-        return parseExam(infoSegment, ttEvent);
+        ttEvent.setPaperCode(parseMixedLangValue(infoSegment, "Exam paper"));
+        ttEvent.setPaperName(parseMixedLangValue(infoSegment, "Paper name"));
+//        return parseExam(infoSegment, ttEvent);
+    }else{
+
+        // Set paper code
+        std::string brslashn = "<br>\\\\n";
+        std::string br = "<br>";
+        startIndex = lastIndexOf(infoSegment, brslashn, endIndex) - 1;
+        endIndex = indexOf(infoSegment, "<br>", startIndex);
+        // ttEvent.setPaperCode(infoSegment.substr(startIndex, endIndex - startIndex));
+        ttEvent.setPaperCode(extractSubstrBetween(infoSegment, brslashn, br));
+    
+        ttEvent.setPaperName(parseMixedLangValue(infoSegment, "Paper"));
     }
-
-    // Set paper code
-    std::string paperCodeStart = "<br>\\\\n";
-    startIndex = lastIndexOf(infoSegment, paperCodeStart, endIndex) - 1;
-    endIndex = indexOf(infoSegment, "<br>", startIndex);
-    ttEvent.setPaperCode(infoSegment.substr(startIndex, endIndex - startIndex));
-
+    
     // Set maps url
     startIndex = lastIndexOf(infoSegment, "\"", endIndex);
     endIndex = indexOf(infoSegment, "\"", startIndex);
     std::string mapUrl = infoSegment.substr(startIndex, endIndex - startIndex - 1);
+    // std::string mapUrl = extractSubstrBetween(infoSegment, "href=\\\"", "\"");
+    
+    // Matches character before a latitude between -35 and -46, aka all of NZ.
+ infoSegment.substr(startIndex, endIndex - startIndex - 1);
+ std::string mapLat = extractSubstrBetween(infoSegment, ".(?=-(3[5-9]|4[0-6])\\.\\d*(?=,))", ",");
+    // Matches previous lat, then comma, before a longtitude between 16 and 178.
+    // Matches up to any char that isn't . or a digit.
+    std::string mapLong = extractSubstrBetween(infoSegment, ".(-(3[5-9]|4[0-6])\\.\\d*(?=,)),(?=1(6[6-9]|7[0-8]))", "([^0-9.])");
+    
+    ttEvent.setMapLat(mapLat);
+    ttEvent.setMapLong(mapLong);
 
-    // Set map lat
-    startIndex = lastIndexOf(mapUrl, "=");
-    endIndex = indexOf(mapUrl, ",", startIndex);
-    ttEvent.setMapLat(mapUrl.substr(startIndex, endIndex - startIndex));
-
-    // Set map long
-    startIndex = indexOf(mapUrl, "&", startIndex);
-    ttEvent.setMapLong(mapUrl.substr(endIndex + 1, startIndex - endIndex - 1));
-
-    // Set room code
-    startIndex = lastIndexOf(infoSegment, "\">", endIndex);
-    endIndex = indexOf(infoSegment, "<\\\\/a>", startIndex);
-    ttEvent.setRoomCode(infoSegment.substr(startIndex, endIndex - startIndex));
-
-    // Set paper name
-    startIndex = indexOf(infoSegment, "9'", endIndex) + 11;
-    endIndex = indexOf(infoSegment, "<\\\\/", startIndex);
-    ttEvent.setPaperName(infoSegment.substr(startIndex, endIndex - startIndex));
-
+    std::string roomCodeStart = "target[^>]*>";
+    ttEvent.setRoomCode(extractSubstrBetween(infoSegment, roomCodeStart, "<"));
+    
     // Set room name
-    int c = 0;
-    while (c < 4) {
-        startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
-        endIndex = indexOf(infoSegment, "<\\\\", startIndex) - 1; // Cuts space off end.
-        c++;
-    }
-    ttEvent.setRoomName(infoSegment.substr(startIndex, endIndex - startIndex));
+    ttEvent.setRoomName(parseMixedLangValue(infoSegment, "Room"));
 
     // Set building name
-    c = 0;
-    while (c < 2) {
-        startIndex = lastIndexOf(infoSegment, "<span>", endIndex);
-        endIndex = indexOf(infoSegment, "<\\\\", startIndex);
-        c++;
-    }
-    ttEvent.setBuilding(infoSegment.substr(startIndex, endIndex - startIndex));
+    ttEvent.setBuilding(parseMixedLangValue(infoSegment, "Building"));
 
     return ttEvent;
 }
