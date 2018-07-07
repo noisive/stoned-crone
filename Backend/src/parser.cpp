@@ -156,7 +156,7 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
         ttEvent.setPaperName(parseMixedLangValue(infoSegment, "Paper"));
     }
     
-    std::string mapUrl = extractSubstrBetween(infoSegment, "href=\\\\\"", "\"");
+    std::string mapUrl = extractSubstrBetween(infoSegment, "maps\\.google\\.com", "\"");
 
     // Matches character before a latitude between -35 and -46, aka all of NZ.
     std::string latRgx = ".(?=-(3[5-9]|4[0-6])\\.\\d*(?=,))";
