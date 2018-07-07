@@ -157,14 +157,13 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     }
     
     std::string mapUrl = extractSubstrBetween(infoSegment, "maps\\.google\\.com", "\"");
-
     // Matches character before a latitude between -35 and -46, aka all of NZ.
     std::string latRgx = ".(?=-(3[5-9]|4[0-6])\\.\\d*(?=,))";
-// infoSegment.substr(startIndex, endIndex - startIndex - 1);
- std::string mapLat = extractSubstrBetween(mapUrl, latRgx, ",");
     // Matches previous lat, then comma, before a longtitude between 16 and 178.
+    std::string lonRgx = ".(-(3[5-9]|4[0-6])\\.\\d*(?=,)),(?=1(6[6-9]|7[0-8]))";
+ std::string mapLat = extractSubstrBetween(mapUrl, latRgx, ",");
     // Matches up to any char that isn't . or a digit.
-    std::string mapLong = extractSubstrBetween(infoSegment, ".(-(3[5-9]|4[0-6])\\.\\d*(?=,)),(?=1(6[6-9]|7[0-8]))", "([^0-9.])");
+    std::string mapLong = extractSubstrBetween(infoSegment, lonRgx, "([^0-9.])");
     ttEvent.setMapLat(mapLat);
     ttEvent.setMapLong(mapLong);
 
