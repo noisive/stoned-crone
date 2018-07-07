@@ -55,28 +55,24 @@ int Parser::lastIndexOf(std::string data, std::string pattern) {
 }
 
 std::string Parser::extractSubstrBetween(std::string data, std::string startPattern, std::string endPattern){
-    //     int startIndex = indexOf(data, startPattern) + startPattern.length();
-    //     int endIndex = indexOf(data, endPattern, startIndex);
-    //     return data.substr(startIndex, endIndex - startIndex);
-    // }
-std::regex startRgx(startPattern);
-std::regex endRgx(endPattern);
-std::smatch rgxMatchStart;
-std::smatch rgxMatchEnd;
-if (!std::regex_search(data, rgxMatchStart, startRgx)){
-    return "0xCC";
-}
-// Actual string matched is at rgxMatch[0]
-long startI = rgxMatchStart.position(0);
-long startL = rgxMatchStart.length(0);
-long desiredStart = startI + startL;
-std::string searchData = data.substr(desiredStart);
-if (!std::regex_search(searchData, rgxMatchEnd, endRgx)){
-    return "0xCC";
-}
-long endI = rgxMatchEnd.position(0);
-//     int endL = rgxMatch.length(0);
-return data.substr(desiredStart, endI);
+    std::regex startRgx(startPattern);
+    std::regex endRgx(endPattern);
+    std::smatch rgxMatchStart;
+    std::smatch rgxMatchEnd;
+    if (!std::regex_search(data, rgxMatchStart, startRgx)){
+        return "0xCC";
+    }
+    // Actual string matched is at rgxMatch[0]
+    long startI = rgxMatchStart.position(0);
+    long startL = rgxMatchStart.length(0);
+    long desiredStart = startI + startL;
+    std::string searchData = data.substr(desiredStart);
+    if (!std::regex_search(searchData, rgxMatchEnd, endRgx)){
+        return "0xCC";
+    }
+    long endI = rgxMatchEnd.position(0);
+    //     int endL = rgxMatch.length(0);
+    return data.substr(desiredStart, endI);
 }
 
 bool Parser::extractJsonArray() {
