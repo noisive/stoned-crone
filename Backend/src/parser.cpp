@@ -138,17 +138,14 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
 
     // Set event type
     startIndex = 0;
-    // int startIndex = indexOf(infoSegment, charsBeforeEventType) - sizeof(charsBeforeEventType);
     endIndex = indexOf(infoSegment, "<br");
     ttEvent.setType(infoSegment.substr(startIndex, endIndex));
 
     if (ttEvent.getType() == "Examination"){
         ttEvent.setPaperCode(parseMixedLangValue(infoSegment, "Exam paper"));
         ttEvent.setPaperName(parseMixedLangValue(infoSegment, "Paper name"));
-        //        return parseExam(infoSegment, ttEvent);
     }else{
 
-        // Set paper code
         std::string brslashn = "<br>\\\\n";
         std::string br = "<br>";
         ttEvent.setPaperCode(extractSubstrBetween(infoSegment, brslashn, br));
