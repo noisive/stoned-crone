@@ -128,7 +128,6 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     int startIndex = indexOf(infoSegment, charsBeforeEventType) + int(charsBeforeEventType.length() - 1);
     int endIndex = int(infoSegment.length());
     if (checkIndex == 0){
-        //    if (startIndex < checkIndex){
         infoSegment = infoSegment.substr(startIndex, endIndex);
     }
 
@@ -166,271 +165,271 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     ttEvent.setBuilding(parseMixedLangValue(infoSegment, "Building"));
 
     return ttEvent;
-    }
+}
 
 
-    std::string month3CharNameTo2NumString(std::string monthString){
-        std::transform(monthString.begin(), monthString.end(), monthString.begin(), ::tolower);
-        std::string month3Char [] = {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
-        std::string monthNum [] = {"01", "02","03", "04", "05", "06", "07", "08","09", "10", "11", "12"};
+std::string month3CharNameTo2NumString(std::string monthString){
+    std::transform(monthString.begin(), monthString.end(), monthString.begin(), ::tolower);
+    std::string month3Char [] = {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
+    std::string monthNum [] = {"01", "02","03", "04", "05", "06", "07", "08","09", "10", "11", "12"};
 
-        for (int i=0; i<=sizeof(month3Char) / sizeof(month3Char[0]); i++){
-            if (monthString == month3Char[i]){
-                return monthNum[i];
-            }
+    for (int i=0; i<=sizeof(month3Char) / sizeof(month3Char[0]); i++){
+        if (monthString == month3Char[i]){
+            return monthNum[i];
         }
-        std::cerr << "Invalid date format" << std::endl;
-        return "0xCC";
     }
+    std::cerr << "Invalid date format" << std::endl;
+    return "0xCC";
+}
 
-    std::string monthFullNameTo2NumString(std::string monthString){
-        std::transform(monthString.begin(), monthString.end(), monthString.begin(), ::tolower);
-        std::string monthFull [] = {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
-        std::string monthNum [] = {"01", "02","03", "04", "05", "06", "07", "08","09", "10", "11", "12"};
+std::string monthFullNameTo2NumString(std::string monthString){
+    std::transform(monthString.begin(), monthString.end(), monthString.begin(), ::tolower);
+    std::string monthFull [] = {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
+    std::string monthNum [] = {"01", "02","03", "04", "05", "06", "07", "08","09", "10", "11", "12"};
 
-        for (int i=0; i<=sizeof(monthFull) / sizeof(monthFull[0]); i++){
-            if (monthString == monthFull[i]){
-                return monthNum[i];
-            }
+    for (int i=0; i<=sizeof(monthFull) / sizeof(monthFull[0]); i++){
+        if (monthString == monthFull[i]){
+            return monthNum[i];
         }
-        std::cerr << "Invalid date format" << std::endl;
-        return "0xCC";
-
     }
+    std::cerr << "Invalid date format" << std::endl;
+    return "0xCC";
+
+}
 
 
-    void Parser::getWeekStart() {
-        int startIndex = indexOf(this->json, "ng dates ");
-        if (this->json.length() >= 12 && startIndex != -1) {
-            // This was the old json format, which stored its date as "Now showing dates 02\/10\/2017 to". New format is "Now showing dates 26\/Mar\/2017 to"
-            /* std::string date = this->json.substr(startIndex + sizeof("ng dates ") - 1, 12); */
-            int dateStringStartIndex = startIndex + sizeof("ng dates");
-            int dateStringLength = indexOf(this->json, " to")-dateStringStartIndex;
-            std::string dateSlice = this->json.substr(dateStringStartIndex,dateStringLength);
+void Parser::getWeekStart() {
+    int startIndex = indexOf(this->json, "ng dates ");
+    if (this->json.length() >= 12 && startIndex != -1) {
+        // This was the old json format, which stored its date as "Now showing dates 02\/10\/2017 to". New format is "Now showing dates 26\/Mar\/2017 to"
+        /* std::string date = this->json.substr(startIndex + sizeof("ng dates ") - 1, 12); */
+        int dateStringStartIndex = startIndex + sizeof("ng dates");
+        int dateStringLength = indexOf(this->json, " to")-dateStringStartIndex;
+        std::string dateSlice = this->json.substr(dateStringStartIndex,dateStringLength);
 
-            // \/ has to be escaped, will show up like "\\/" in debugger. Look like \/ in real data.
-            std::string slashPair = "\\\\/";
-            // Day number is until first slash pair
-            int slashIndex = indexOf(dateSlice, slashPair);
-            std::string dayIntString = dateSlice.substr(0, slashIndex);
-            // Cut the slash off.
-            dateSlice = dateSlice.substr(slashIndex+2, std::string::npos);
+        // \/ has to be escaped, will show up like "\\/" in debugger. Look like \/ in real data.
+        std::string slashPair = "\\\\/";
+        // Day number is until first slash pair
+        int slashIndex = indexOf(dateSlice, slashPair);
+        std::string dayIntString = dateSlice.substr(0, slashIndex);
+        // Cut the slash off.
+        dateSlice = dateSlice.substr(slashIndex+2, std::string::npos);
 
-            std::string monthIntString;
-            // May be in 3 letter format (eg mar, Nov), or may be in two number form.
-            if(indexOf(dateSlice, slashPair) == 3){
-                monthIntString = month3CharNameTo2NumString(dateSlice.substr(0, 3));
-            }else if(indexOf(dateSlice, slashPair) == 2){
-                monthIntString = dateSlice.substr(0,2);
-            }else{
-                // Include full, just in case they change it again.
-                monthIntString = monthFullNameTo2NumString(dateSlice.substr(0,indexOf(dateSlice, slashPair)));
-            }
-
-            slashIndex = indexOf(dateSlice, slashPair);
-            // npos goes to end position
-            dateSlice = dateSlice.substr(slashIndex+2, std::string::npos);
-            // TODO make this check until " to" instead of assuming 4 digits.
-            std::string yearIntString = dateSlice.substr(0, 4);
-            // This requires input to be of format dd+mm+yy
-            this->weekStart = std::stoi(dayIntString + monthIntString + yearIntString);
+        std::string monthIntString;
+        // May be in 3 letter format (eg mar, Nov), or may be in two number form.
+        if(indexOf(dateSlice, slashPair) == 3){
+            monthIntString = month3CharNameTo2NumString(dateSlice.substr(0, 3));
+        }else if(indexOf(dateSlice, slashPair) == 2){
+            monthIntString = dateSlice.substr(0,2);
+        }else{
+            // Include full, just in case they change it again.
+            monthIntString = monthFullNameTo2NumString(dateSlice.substr(0,indexOf(dateSlice, slashPair)));
         }
-        //    std::cout<<weekStart << std::endl;
+
+        slashIndex = indexOf(dateSlice, slashPair);
+        // npos goes to end position
+        dateSlice = dateSlice.substr(slashIndex+2, std::string::npos);
+        // TODO make this check until " to" instead of assuming 4 digits.
+        std::string yearIntString = dateSlice.substr(0, 4);
+        // This requires input to be of format dd+mm+yy
+        this->weekStart = std::stoi(dayIntString + monthIntString + yearIntString);
     }
+    //    std::cout<<weekStart << std::endl;
+}
 
-    std::vector<TimetableEvent> Parser::parseFile(std::string fileName, std::string format) {
+std::vector<TimetableEvent> Parser::parseFile(std::string fileName, std::string format) {
 
-        std::vector<TimetableEvent> events;
+    std::vector<TimetableEvent> events;
 
-        if (format.compare("csv") == 0) {
+    if (format.compare("csv") == 0) {
 
-            std::string line;
-            std::ifstream file(fileName);
-            if (file.is_open()) {
-                while (getline(file, line)) {
-                    if (line.length() > 1) {
-                        events.push_back(parseCSVLine(line));
-                    }
+        std::string line;
+        std::ifstream file(fileName);
+        if (file.is_open()) {
+            while (getline(file, line)) {
+                if (line.length() > 1) {
+                    events.push_back(parseCSVLine(line));
                 }
-                file.close();
             }
-            else
-                std::cerr << "Unable to open file " << fileName << std::endl;
+            file.close();
         }
         else
-            std::cerr << "Format not supported" << std::endl;
+            std::cerr << "Unable to open file " << fileName << std::endl;
+    }
+    else
+        std::cerr << "Format not supported" << std::endl;
 
+    return events;
+}
+
+TimetableEvent Parser::parseCSVLine(std::string line) {
+
+    int column = 0;
+    std::string build = "";
+    TimetableEvent ttEvent;
+
+    for (int i = 0; i < line.length(); i++) {
+        if (line.at(i) == ',') {
+            switch (column) {
+                case 0:
+                    break;
+                case 1:
+                    ttEvent.setDay(stoi(build));
+                    break;
+                case 2:
+                    ttEvent.setStartTime(stoi(build));
+                    break;
+                case 3:
+                    ttEvent.setDuration(stoi(build));
+                    break;
+                case 4:
+                    ttEvent.setColor(build);
+                    break;
+                case 5:
+                    ttEvent.setType(build);
+                    break;
+                case 6:
+                    ttEvent.setPaperCode(build);
+                    break;
+                case 7:
+                    ttEvent.setPaperName(build);
+                    break;
+                case 8:
+                    ttEvent.setMapLat(build);
+                    break;
+                case 9:
+                    ttEvent.setMapLong(build);
+                    break;
+                case 10:
+                    ttEvent.setRoomCode(build);
+                    break;
+                case 11:
+                    ttEvent.setRoomName(build);
+                    break;
+                case 12:
+                    ttEvent.setBuilding(build);
+                    break;
+            }
+            column++;
+            build = "";
+        } else {
+            build += line.at(i);
+        }
+    }
+
+    // Add the trailing column.
+    // Implicitly constructs date.
+    ttEvent.setDate(build);
+
+    // Once all the data is loaded, generate the UID()
+    // as generating this requires many pieces of information.
+    ttEvent.genUID();
+
+    return ttEvent;
+}
+
+std::vector<TimetableEvent> Parser::parse(const char* data) {
+    std::string strData(data);
+    return parse(strData);
+}
+
+std::vector<TimetableEvent> Parser::parse(std::string data) {
+    this->json = data;
+
+    std::vector<TimetableEvent> events;
+
+    if (this->json == "0xCC" || this->json == "") {
+        std::cerr << "No data given" << std::endl;
         return events;
     }
 
-    TimetableEvent Parser::parseCSVLine(std::string line) {
+    getWeekStart();
 
-        int column = 0;
-        std::string build = "";
+    if (this->weekStart == 0xCC) {
+        std::cerr << "No data given" << std::endl;
+        return events;
+    }
+
+    if(!extractJsonArray()){
+        return events;
+    }
+
+    int length = getObjectCount(json);
+
+    int startIndex = 0;
+    int endIndex = 0;
+
+    std::string infoSegment;
+    std::string jsonRemaining;
+
+    for (int i = 0; i <= length; i++) {
         TimetableEvent ttEvent;
+        // Need to escape these additionally for regex: ^ $ \ . * + ? ( ) [ ] { } |
 
-        for (int i = 0; i < line.length(); i++) {
-            if (line.at(i) == ',') {
-                switch (column) {
-                    case 0:
-                        break;
-                    case 1:
-                        ttEvent.setDay(stoi(build));
-                        break;
-                    case 2:
-                        ttEvent.setStartTime(stoi(build));
-                        break;
-                    case 3:
-                        ttEvent.setDuration(stoi(build));
-                        break;
-                    case 4:
-                        ttEvent.setColor(build);
-                        break;
-                    case 5:
-                        ttEvent.setType(build);
-                        break;
-                    case 6:
-                        ttEvent.setPaperCode(build);
-                        break;
-                    case 7:
-                        ttEvent.setPaperName(build);
-                        break;
-                    case 8:
-                        ttEvent.setMapLat(build);
-                        break;
-                    case 9:
-                        ttEvent.setMapLong(build);
-                        break;
-                    case 10:
-                        ttEvent.setRoomCode(build);
-                        break;
-                    case 11:
-                        ttEvent.setRoomName(build);
-                        break;
-                    case 12:
-                        ttEvent.setBuilding(build);
-                        break;
-                }
-                column++;
-                build = "";
-            } else {
-                build += line.at(i);
-            }
+        // Set each id
+        std::string idString = "id\":\"";
+        startIndex = indexOf(json,idString, endIndex) + idString.length();
+        // - 1 to endindex to deal with closing quote.
+        endIndex = indexOf(json, ",", startIndex) - 1;
+        if (startIndex == -1 || endIndex == -1) {
+            std::cerr << "Error scraping json" << std::endl;
+            // Current approach to a json error? Return empty events.
+            return events;
+        }
+        ttEvent.setId(json.substr(startIndex, endIndex - startIndex));
+
+        // Set each day
+        startIndex = indexOf(json, ":", endIndex) + 1;
+        endIndex = indexOf(json, ",", startIndex);
+        std::string dayStr = json.substr(startIndex, endIndex - startIndex);
+        ttEvent.setDay(stoi(dayStr, nullptr));
+
+        // Set each start time
+        startIndex = indexOf(json, ":", endIndex) + 2;
+        endIndex = indexOf(json, ":", startIndex);
+        ttEvent.setStartTime(stoi(json.substr(startIndex, endIndex - startIndex), nullptr));
+
+        // Set each end time
+        startIndex = indexOf(json, ":", endIndex + 4) + 2;
+        endIndex = indexOf(json, ":", startIndex);
+        ttEvent.setEndTime(stoi(json.substr(startIndex, endIndex - startIndex), nullptr));
+
+        // Set each color
+        int c = 0;
+        while (c < 5) {
+            startIndex = indexOf(json, ":", endIndex) + 2;
+            endIndex = indexOf(json, "\"", startIndex + 2);
+            c++;
+        }
+        ttEvent.setColor(json.substr(startIndex, endIndex - startIndex));
+
+        // Run a seperate parse on the info segment (html)
+        std::string infoString = "info\\\":\"";
+        std::string infoEnd =  "/div>\"";
+        startIndex = indexOf(json, infoString, endIndex) + infoString.length() - 1;
+        endIndex = indexOf(json,infoEnd, endIndex) + infoEnd.length() - 1;
+        infoSegment = json.substr(startIndex, endIndex - startIndex - 1);
+
+        ttEvent = parseInfo(infoSegment, ttEvent);
+
+        ttEvent.setDuration(ttEvent.getEndTime() - ttEvent.getStartTime());
+
+        startIndex = indexOf(json, "\\}\\},", endIndex) + 2;
+        endIndex = startIndex + 1;
+        jsonRemaining = json.substr(endIndex);
+        //        json = jsonRemaining;
+
+        // This will search the colorMap and replace the web color with it's mapped HEX color.
+        std::map<std::string, std::string>::iterator it = colorMap.find(ttEvent.getColor());
+        if (it != colorMap.end()) {
+            ttEvent.setColor(it->second);
         }
 
-        // Add the trailing column.
-        // Implicitly constructs date.
-        ttEvent.setDate(build);
+        ttEvent.fixDate(this->weekStart);
 
-        // Once all the data is loaded, generate the UID()
-        // as generating this requires many pieces of information.
         ttEvent.genUID();
 
-        return ttEvent;
+        events.push_back(ttEvent);
     }
-
-    std::vector<TimetableEvent> Parser::parse(const char* data) {
-        std::string strData(data);
-        return parse(strData);
-    }
-
-    std::vector<TimetableEvent> Parser::parse(std::string data) {
-        this->json = data;
-
-        std::vector<TimetableEvent> events;
-
-        if (this->json == "0xCC" || this->json == "") {
-            std::cerr << "No data given" << std::endl;
-            return events;
-        }
-
-        getWeekStart();
-
-        if (this->weekStart == 0xCC) {
-            std::cerr << "No data given" << std::endl;
-            return events;
-        }
-
-        if(!extractJsonArray()){
-            return events;
-        }
-
-        int length = getObjectCount(json);
-
-        int startIndex = 0;
-        int endIndex = 0;
-
-        std::string infoSegment;
-        std::string jsonRemaining;
-
-        for (int i = 0; i <= length; i++) {
-            TimetableEvent ttEvent;
-            // Need to escape these additionally for regex: ^ $ \ . * + ? ( ) [ ] { } |
-
-            // Set each id
-            std::string idString = "id\":\"";
-            startIndex = indexOf(json,idString, endIndex) + idString.length();
-            // - 1 to endindex to deal with closing quote.
-            endIndex = indexOf(json, ",", startIndex) - 1;
-            if (startIndex == -1 || endIndex == -1) {
-                std::cerr << "Error scraping json" << std::endl;
-                // Current approach to a json error? Return empty events.
-                return events;
-            }
-            ttEvent.setId(json.substr(startIndex, endIndex - startIndex));
-
-            // Set each day
-            startIndex = indexOf(json, ":", endIndex) + 1;
-            endIndex = indexOf(json, ",", startIndex);
-            std::string dayStr = json.substr(startIndex, endIndex - startIndex);
-            ttEvent.setDay(stoi(dayStr, nullptr));
-
-            // Set each start time
-            startIndex = indexOf(json, ":", endIndex) + 2;
-            endIndex = indexOf(json, ":", startIndex);
-            ttEvent.setStartTime(stoi(json.substr(startIndex, endIndex - startIndex), nullptr));
-
-            // Set each end time
-            startIndex = indexOf(json, ":", endIndex + 4) + 2;
-            endIndex = indexOf(json, ":", startIndex);
-            ttEvent.setEndTime(stoi(json.substr(startIndex, endIndex - startIndex), nullptr));
-
-            // Set each color
-            int c = 0;
-            while (c < 5) {
-                startIndex = indexOf(json, ":", endIndex) + 2;
-                endIndex = indexOf(json, "\"", startIndex + 2);
-                c++;
-            }
-            ttEvent.setColor(json.substr(startIndex, endIndex - startIndex));
-
-            // Run a seperate parse on the info segment (html)
-            std::string infoString = "info\\\":\"";
-            std::string infoEnd =  "/div>\"";
-            startIndex = indexOf(json, infoString, endIndex) + infoString.length() - 1;
-            endIndex = indexOf(json,infoEnd, endIndex) + infoEnd.length() - 1;
-            infoSegment = json.substr(startIndex, endIndex - startIndex - 1);
-
-            ttEvent = parseInfo(infoSegment, ttEvent);
-
-            ttEvent.setDuration(ttEvent.getEndTime() - ttEvent.getStartTime());
-
-            startIndex = indexOf(json, "\\}\\},", endIndex) + 2;
-            endIndex = startIndex + 1;
-            jsonRemaining = json.substr(endIndex);
-            //        json = jsonRemaining;
-
-            // This will search the colorMap and replace the web color with it's mapped HEX color.
-            std::map<std::string, std::string>::iterator it = colorMap.find(ttEvent.getColor());
-            if (it != colorMap.end()) {
-                ttEvent.setColor(it->second);
-            }
-
-            ttEvent.fixDate(this->weekStart);
-
-            ttEvent.genUID();
-
-            events.push_back(ttEvent);
-        }
-        return events;
-    }
+    return events;
+}
