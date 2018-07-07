@@ -118,68 +118,6 @@ std::string Parser::parseMixedLangValue(std::string data, std::string key){
     return extractSubstrBetween(data, paperPreRgxStr, " ?<");
 }
 
-TimetableEvent Parser::parseExam(std::string infoSegment, TimetableEvent ttEvent) {
-    int startIndex = 0;
-    int endIndex = indexOf(infoSegment, "<br");
-    
-    // Set paper code
-//    std::string wierdExamBr = "<br[^>]*>";
-//    std::string paperCodeStart = wierdExamBr + "\\\\n";
-//    startIndex = lastIndexOf(infoSegment, paperCodeStart, endIndex) - 1;
-//    endIndex = indexOf(infoSegment, wierdExamBr, startIndex);
-//    // - 2 is hack.
-    ttEvent.setPaperCode(parseMixedLangValue(infoSegment, "Exam paper"));
-    
-    // Set maps url
-    startIndex = lastIndexOf(infoSegment, "\"", endIndex);
-    endIndex = indexOf(infoSegment, "\"", startIndex);
-    std::string mapUrl = infoSegment.substr(startIndex, endIndex - startIndex - 1);
-    
-    // Matches character before a latitude between -35 and -46, aka all of NZ.
-    std::string mapLat = extractSubstrBetween(infoSegment, ".(?=-(3[5-9]|4[0-6])\\.\\d*(?=,))", ",");
-    // Matches previous lat, then comma, before a longtitude between 16 and 178.
-    // Matches up to any char that isn't . or a digit.
-    std::string mapLong = extractSubstrBetween(infoSegment, ".(-(3[5-9]|4[0-6])\\.\\d*(?=,)),(?=1(6[6-9]|7[0-8]))", "([^0-9.])");
-    
-    ttEvent.setMapLat(mapLat);
-    ttEvent.setMapLong(mapLong);
-
-    // if(startIndex == -1 || endIndex == -1){
-    //     std::cerr << "Invalid map lat/lon" << std::endl;
-    //     ttEvent.setMapLat("0");
-    // }else{
-    //     ttEvent.setMapLat(mapUrl.substr(startIndex, endIndex - startIndex));
-    // }
-    
-    // Set map long
-//    startIndex = indexOf(mapUrl, "&", startIndex);
-//    if(startIndex == -1 || endIndex == -1){
-//        std::cerr << "Invalid map lat/lon" << std::endl;
-//        ttEvent.setMapLat("0");
-//        endIndex = indexOf(mapUrl, "\"");
-//    }else{
-//        ttEvent.setMapLong(mapUrl.substr(endIndex + 1, startIndex - endIndex - 1));
-//    }
-    
-    // Set room code
-    startIndex = lastIndexOf(infoSegment, "\">", endIndex);
-    endIndex = indexOf(infoSegment, "<\\\\/a>", startIndex);
-    ttEvent.setRoomCode(infoSegment.substr(startIndex, endIndex - startIndex));
-//    ttEvent.setRoomCode(infoSegment.substr(startIndex, endIndex - startIndex));
-    
-    // Set paper name
-    ttEvent.setPaperName(parseMixedLangValue(infoSegment, "Paper name"));
-    
-    // Set room name
-    ttEvent.setRoomName(parseMixedLangValue(infoSegment, "Room"));
-
-    // Set building name
-    ttEvent.setBuilding(parseMixedLangValue(infoSegment, "Building"));
-    
-    return ttEvent;
-    
-}
-
 TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent) {
 
     // infoSegment is part of json that starts with "\"info\":"
@@ -213,9 +151,6 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
         // Set paper code
         std::string brslashn = "<br>\\\\n";
         std::string br = "<br>";
-        startIndex = lastIndexOf(infoSegment, brslashn, endIndex) - 1;
-        endIndex = indexOf(infoSegment, "<br>", startIndex);
-        // ttEvent.setPaperCode(infoSegment.substr(startIndex, endIndex - startIndex));
         ttEvent.setPaperCode(extractSubstrBetween(infoSegment, brslashn, br));
     
         ttEvent.setPaperName(parseMixedLangValue(infoSegment, "Paper"));
@@ -233,17 +168,12 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // Matches previous lat, then comma, before a longtitude between 16 and 178.
     // Matches up to any char that isn't . or a digit.
     std::string mapLong = extractSubstrBetween(infoSegment, ".(-(3[5-9]|4[0-6])\\.\\d*(?=,)),(?=1(6[6-9]|7[0-8]))", "([^0-9.])");
-    
     ttEvent.setMapLat(mapLat);
     ttEvent.setMapLong(mapLong);
 
     std::string roomCodeStart = "target[^>]*>";
     ttEvent.setRoomCode(extractSubstrBetween(infoSegment, roomCodeStart, "<"));
-    
-    // Set room name
     ttEvent.setRoomName(parseMixedLangValue(infoSegment, "Room"));
-
-    // Set building name
     ttEvent.setBuilding(parseMixedLangValue(infoSegment, "Building"));
 
     return ttEvent;
