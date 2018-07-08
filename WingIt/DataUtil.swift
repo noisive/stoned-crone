@@ -15,7 +15,7 @@ func loadWeekData(VC: TimetableView) {
     formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
     
     // Gives date of most recent Monday
-    let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+    let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: todayDate()))!
     
     // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
     UIApplication.shared.cancelAllLocalNotifications()
