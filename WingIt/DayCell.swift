@@ -55,7 +55,7 @@ class DayCell: UICollectionViewCell, UITableViewDelegate, UITableViewDataSource 
     }
     
     func scrollToCurrentTime(){
-        let currentHour = Calendar.current.component(.hour, from: todayDate())
+        let currentHour = Calendar.current.component(.hour, from: todaysDate())
         var currentHourCell: IndexPath
         // Check if time to scroll to is out of bounds, scroll to min/max if so.
         if currentHour < 8 {
