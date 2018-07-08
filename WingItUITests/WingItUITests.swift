@@ -148,11 +148,16 @@ class WingItUITests: XCTestCase {
     func testDataPersistenceOnRestart(){
         
         // Ensure we have a timetable to view
-        testLoginFresh()
+        app.launchArguments.append("resetdata")
         app.launch()
+        _ = app.launchArguments.popLast()
+        createTestData()
+        app.launch()
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        XCTAssertTrue(app.isDisplayingTT)
+
         app.terminate()
         app.launch()
-        
         _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.isDisplayingTT)
         
@@ -185,6 +190,21 @@ class WingItUITests: XCTestCase {
         passwordSecureTextField.typeText(self.eVisionPassword)
         
         app.buttons["Login"].tap()
+    }
+
+    func createTestData(){
+
+        let fileManager = FileManager.default
+        let cacheURL = try! fileManager
+            .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let dataPath = cacheURL.appendingPathComponent("data.csv").path
+
+        let sampleLine = "464737,1,9,2,#09BBF7,Practical,WINE101,Network Management,-45.8670533441689,170.518171263001,OUSA,OUSA Evison Lounge,OUSA Recreation Centre,2018-04-09"
+        do{
+            try sampleLine.write(to: dataPath, atomically: false, encoding: .utf8)
+        }
+        catch {
+        }
     }
 
     func waitForElement(element: XCUIElement){
