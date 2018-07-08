@@ -11,6 +11,26 @@
 #include "parser.hpp"
 #include <regex>
 
+
+// Default regex strings for parsing
+std::string htmlBetweenKeyAndValueRgx = ":.+?(?=class)class=[^>]*>(\\\\t)?(<span>)? ?";
+std::string divClose = "<\\\\/div>"; // Not used.
+// For cutting off strange html before lecture type in info.
+std::string charsBeforeEventType = "div>\\\\n";
+std::string checkCharsBeforeEventType="<div";
+std::string brslashn = "<br>\\\\n";
+std::string br = "<br>";
+// Matches character before a latitude between -35 and -46, aka all of NZ.
+std::string latRgx = ".(?=-(3[5-9]|4[0-6])\\.\\d*(?=,))";
+// Matches previous lat, then comma, before a longtitude between 16 and 178.
+std::string lonRgx = ".(-(3[5-9]|4[0-6])\\.\\d*(?=,)),(?=1(6[6-9]|7[0-8]))";
+std::string roomCodeStart = "target[^>]*>";
+// \/ has to be escaped, will show up like "\\/" in debugger. Look like \/ in real data.
+std::string slashPair = "\\\\/";
+std::string idString = "id\":\"";
+std::string infoString = "info\\\":\"";
+std::string infoEnd =  "/div>\"";
+
 Parser::Parser(void) {
     this->colorMap["lightgrey"] = "#D3D3D3";
     this->weekStart = 0xCC;
@@ -109,9 +129,8 @@ int Parser::getObjectCount(std::string json) {
 }
 
 std::string Parser::parseMixedLangValue(std::string data, std::string key){
-    std::string paperPreRgxStr = key + ":.+?(?=class)class=[^>]*>(\\\\t)?(<span>)? ?";
-    std::string divClose = "<\\\\/div>"; // Not used.
-    return extractSubstrBetween(data, paperPreRgxStr, " ?<");
+    std::string keyRgxStr = key + htmlBetweenKeyAndValueRgx;
+    return extractSubstrBetween(data, keyRgxStr, " ?<");
 }
 
 TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent) {
@@ -119,10 +138,8 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
     // infoSegment is part of json that starts with "\"info\":"
 
     // Cut off strange crap first...
-    std::string charsBeforeEventType = "div>\\\\n";
 
     // Strange crap might not be there - let's check it is first.
-    std::string checkCharsBeforeEventType="<div";
     //    int checkIndex = regex_search(infoSegment, checkCharsBeforeEventType);
     int checkIndex = indexOf(infoSegment, checkCharsBeforeEventType);
     int startIndex = indexOf(infoSegment, charsBeforeEventType) + int(charsBeforeEventType.length() - 1);
@@ -141,25 +158,18 @@ TimetableEvent Parser::parseInfo(std::string infoSegment, TimetableEvent ttEvent
         ttEvent.setPaperName(parseMixedLangValue(infoSegment, "Paper name"));
     }else{
 
-        std::string brslashn = "<br>\\\\n";
-        std::string br = "<br>";
         ttEvent.setPaperCode(extractSubstrBetween(infoSegment, brslashn, br));
 
         ttEvent.setPaperName(parseMixedLangValue(infoSegment, "Paper"));
     }
 
     std::string mapUrl = extractSubstrBetween(infoSegment, "maps\\.google\\.com", "\"");
-    // Matches character before a latitude between -35 and -46, aka all of NZ.
-    std::string latRgx = ".(?=-(3[5-9]|4[0-6])\\.\\d*(?=,))";
-    // Matches previous lat, then comma, before a longtitude between 16 and 178.
-    std::string lonRgx = ".(-(3[5-9]|4[0-6])\\.\\d*(?=,)),(?=1(6[6-9]|7[0-8]))";
     std::string mapLat = extractSubstrBetween(mapUrl, latRgx, ",");
     // Matches up to any char that isn't . or a digit.
     std::string mapLong = extractSubstrBetween(infoSegment, lonRgx, "([^0-9.])");
     ttEvent.setMapLat(mapLat);
     ttEvent.setMapLong(mapLong);
 
-    std::string roomCodeStart = "target[^>]*>";
     ttEvent.setRoomCode(extractSubstrBetween(infoSegment, roomCodeStart, "<"));
     ttEvent.setRoomName(parseMixedLangValue(infoSegment, "Room"));
     ttEvent.setBuilding(parseMixedLangValue(infoSegment, "Building"));
@@ -207,8 +217,6 @@ void Parser::getWeekStart() {
         int dateStringLength = indexOf(this->json, " to")-dateStringStartIndex;
         std::string dateSlice = this->json.substr(dateStringStartIndex,dateStringLength);
 
-        // \/ has to be escaped, will show up like "\\/" in debugger. Look like \/ in real data.
-        std::string slashPair = "\\\\/";
         // Day number is until first slash pair
         int slashIndex = indexOf(dateSlice, slashPair);
         std::string dayIntString = dateSlice.substr(0, slashIndex);
@@ -367,7 +375,6 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
         // Need to escape these additionally for regex: ^ $ \ . * + ? ( ) [ ] { } |
 
         // Set each id
-        std::string idString = "id\":\"";
         startIndex = indexOf(json,idString, endIndex) + idString.length();
         // - 1 to endindex to deal with closing quote.
         endIndex = indexOf(json, ",", startIndex) - 1;
@@ -404,8 +411,6 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
         ttEvent.setColor(json.substr(startIndex, endIndex - startIndex));
 
         // Run a seperate parse on the info segment (html)
-        std::string infoString = "info\\\":\"";
-        std::string infoEnd =  "/div>\"";
         startIndex = indexOf(json, infoString, endIndex) + infoString.length() - 1;
         endIndex = indexOf(json,infoEnd, endIndex) + infoEnd.length() - 1;
         infoSegment = json.substr(startIndex, endIndex - startIndex - 1);
