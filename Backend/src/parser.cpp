@@ -237,8 +237,7 @@ void Parser::getWeekStart() {
         slashIndex = indexOf(dateSlice, slashPair);
         // npos goes to end position
         dateSlice = dateSlice.substr(slashIndex+2, std::string::npos);
-        // TODO make this check until " to" instead of assuming 4 digits.
-        std::string yearIntString = dateSlice.substr(0, 4);
+        std::string yearIntString = dateSlice.substr(0, indexOf(dateSlice, " to"));
         // This requires input to be of format dd+mm+yy
         this->weekStart = std::stoi(dayIntString + monthIntString + yearIntString);
     }
