@@ -151,12 +151,12 @@ class WingItUITests: XCTestCase {
         app.launchArguments.append("resetdata")
         app.launch()
         _ = app.launchArguments.popLast()
+        app.terminate()
         createTestData()
         // app.launch()
         // _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         // XCTAssertTrue(app.isDisplayingTT)
         //
-        app.terminate()
         app.launch()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.isDisplayingTT)
