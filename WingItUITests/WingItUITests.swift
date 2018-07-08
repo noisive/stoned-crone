@@ -213,7 +213,7 @@ class WingItUITests: XCTestCase {
             .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         let dataPath = cacheURL.appendingPathComponent("data.csv")
 
-        let sampleLine = "464737,1,9,2,#09BBF7,Practical,WINE101,Network Management,-45.8670533441689,170.518171263001,OUSA,OUSA Evison Lounge,OUSA Recreation Centre,2018-04-09"
+        let sampleLine = "464737,1,9,2,#09BBF7,Practical,WINE101,Network Management,-45.8670533441689,170.518171263001,OUSA,OUSA Evison Lounge,OUSA Recreation Centre,2018-07-09"
         do{
             try sampleLine.write(to: dataPath, atomically: false, encoding: .utf8)
         }
