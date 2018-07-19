@@ -2,23 +2,25 @@
    @author Will Shaw - 2017
    */
 #include "timetableEvent.hpp"
+#include <assert.h>
+#include <regex>
 
 TimetableEvent::TimetableEvent(void) {
-    this->uid = 0xCC;
-    this->id = "0xCC";
-    this->date = Date();
-    this->day = 0xCC;
-    this->duration = 0xCC;
-    this->startTime = 0xCC;
-    this->endTime = 0xCC;
+    this->uid = 0xCC; // Unique identifier for each TT.
+    this->id = "0xCC"; // Seems to be unused...
+    this->date = Date(); // ISO format, or specific legacy format.
+    this->day = 0xCC; // Day of week as int, mon=1
+    this->duration = 0xCC; // in hours
+    this->startTime = 0xCC; // hour, in 24h time.
+    this->endTime = 0xCC; // not used
     this->mapLat = "0xCC";
     this->mapLong = "0xCC";
-    this->paperCode = "0xCC";
-    this->paperName = "0xCC";
-    this->roomCode = "0xCC";
-    this->roomName = "0xCC";
+    this->paperCode = "0xCC"; // eg COSC345
+    this->paperName = "0xCC"; // Paper description
+    this->roomCode = "0xCC"; // Eg STDAV1
+    this->roomName = "0xCC"; // Full name of room
     this->building = "0xCC";
-    this->type = "0xCC";
+    this->type = "0xCC"; // Lecture, lab, tut, etc.
 }
 
 unsigned long TimetableEvent::hash() {
@@ -138,7 +140,7 @@ void TimetableEvent::fixDate(int startingDate) {
     setDate(date.legacyDate()); 
 }
 
-/* Output a string representation of this event. */
+/* Output a string representation of this event. Useable as CSV. */
 std::string TimetableEvent::toString() { 
     return std::to_string(this->uid) + 
         "," + std::to_string(this->day) + 
@@ -156,3 +158,53 @@ std::string TimetableEvent::toString() {
         "," + this->date.ISODate();
 }
 
+bool TimetableEvent::validateEventData(){
+    // Checks tt events don't contain unexpected characters.
+    assert (this->day < 7 && day > 0);
+    assert (this->duration < 14 && duration > 0);
+
+    std::regex hexrgx("#[\\da-fA-F]{6}");
+    assert(regex_match(this->color, hexrgx));
+
+    std::regex paperrgx("[[:upper:]]{4}\\d{3}");
+    assert(std::regex_match(this->paperCode, paperrgx));
+
+    std::regex upperAlphaNumRgx("[[:upper:][:digit:]]*");
+    assert(std::regex_match(this->roomCode, upperAlphaNumRgx));
+
+    std::regex alphanumrgx("[[:alnum:]]*");
+    assert(std::regex_match(this->type, alphanumrgx));
+
+    std::regex buildingrgx("[[:alnum:] '().]*");
+    assert(std::regex_match(this->building, buildingrgx));
+    assert(std::regex_match(this->roomName, buildingrgx));
+
+    // TODO validate date further
+    std::string dateString = this->date.ISODate();
+    // Regex source http://www.regexlib.com/DisplayPatterns.aspx?cattabindex=4&categoryId=5&AspxAutoDetectCookieSupport=1
+    std::regex datergx("[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))");
+
+
+    // Ensure none of the string-based items have caught a funny char.
+    const char *blarray[] = {"<",">","\"","\\n",";","/"};
+    std::vector<std::string> blacklist(blarray, std::end(blarray));
+    // TODO make this a soft fail - replace with blank string instead.
+    // For time being, is useful for CI testing, because will crash app instaed of passing bad data.
+    // TODO this should NOT be integrated into master!
+    for (std::string blacklistedChar : blacklist) {
+        std::string rgxString ="[^" + blacklistedChar + "]*";
+        std::regex rgx(rgxString);
+        assert(std::regex_match(this->color, rgx));
+        assert(std::regex_match(this->mapLat, rgx));
+        assert(std::regex_match(this->mapLong, rgx));
+        assert(std::regex_match(this->paperCode, rgx));
+        assert(std::regex_match(this->paperName, rgx));
+        assert(std::regex_match(this->roomCode, rgx));
+        assert(std::regex_match(this->roomName, rgx));
+        assert(std::regex_match(this->building, rgx));
+        assert(std::regex_match(this->mapUrl, rgx));
+        assert(std::regex_match(this->type, rgx));
+    }
+
+    return true;
+}

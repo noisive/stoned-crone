@@ -108,15 +108,12 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         webView.delegate = self
         
         if self.isUpdatingMode {
-            
             self.loginTitle.text = "Log in to Update"
             self.loginButton.setTitle("UPDATE", for: .normal)
         }else{
             self.loginButton.setTitle("LOGIN", for: .normal)
             self.loginTitle.text = "Log in to eVision"
         }
-        /* self.loginTitle.text = self.isUpdatingMode ? "Log in to Update" : "Log in to eVision" */
-        /* self.loginButton.setTitle(self.isUpdatingMode ? "UPDATE" : "LOGIN", for: .normal) */
 
         self.PWIsStored = true
 
@@ -308,11 +305,15 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
 
                         //Check if the json was grabbed
                         if let jsonString:String = webView.stringByEvaluatingJavaScript(from: webGrabCode) {
-                            let json: NSString = NSString(string: jsonString)
 
-
-
-                                parseEvents(json.cString(using: String.Encoding.utf8.rawValue))
+                            let _ = parseEvents(data: jsonString)
+                            #if DEBUG
+                                //                                if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
+                                if CommandLine.arguments.contains("testing") {
+//                                if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+                                    validateTimetable()
+                                }
+                            #endif
                                 initTimetable()
                                 self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
                                 SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")

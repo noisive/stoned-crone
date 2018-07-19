@@ -1,48 +1,49 @@
 #!/bin/bash
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# set -eEuxo pipefail
+set -Euo pipefail
 
 # These folders aren't kept under version control. May need recreating.
-if [ -d TestDiffs ]; then
-    mkdir TestDiffs
-fi
-if [ -d TestComparisons ]; then
-    mkdir TestComparisons
+if [ ! -d ${SCRIPTDIR}/TestDiffs ]; then
+    mkdir ${SCRIPTDIR}/TestDiffs
 fi
 
-extractBaseFile() {
-    local filename=$(basename -- "$1")
-    local extension="${filename##*.}"
-    local filename="${filename%.*}"
-    echo "$filename"
+FAILED=false
+
+createCSV() {
+    # As of 1/6/18, creates CSV in TestOutputs
+    ${SCRIPTDIR}/../bin/createcsvs.out $file
 }
 
-createCSVs() {
-    for file in TestInputs/*; do
-        ../src/createcsvs.out $file
-        # Remove extension and base path from file
-        testname=`extractBaseFile "$file"`
-        mv "TestInputs/data.csv" "TestComparisons/${testname}.csv"
-        rm "TestInputs/GoogleCalFile.csv"
-    done
+diffResult(){
+    csv=$1
+    # For some reason, this returns an error code, so fails on -e
+    diff="$(diff "${SCRIPTDIR}/TestOutputs/${csv}" "${SCRIPTDIR}/TestAnswers/${csv}")"
+    # Remove old diffs before replacing
+    diffFile="${SCRIPTDIR}/TestDiffs/${csv}.diff"
+    if [[ -f "$diffFile" ]]; then
+        rm "$diffFile" > /dev/null 2>&1
+    fi
+    if [ ! "$diff" = "" ]; then
+        FAILED=true
+        echo $diff >> $diffFile
+    fi
 }
 
-diffCSVs() {
-    for file in "TestOutputs/*"; do
-        diff=`diff $file "TestComparisons/${file}"`
-        # Remove old diffs before replacing
-        rm "TestDiffs/${file}.diff" > /dev/null 2>&1
-        if [ $diff = "" ]; then
-            FAILED=true
-            echo $diff >> "TestDiffs/${file}.diff"
-        fi
+main(){
+    for file in ${SCRIPTDIR}/TestInputs/*; do
+        filebase=$(basename $(basename $file) .txt)
+        printf "Testfile: ${filebase}\n"
+        createCSV $file
+        diffResult "${filebase}.csv"
     done
-    if [ $FAILED = true ]; then
-        echo "Some tests failed! Check TestDiffs for more."
+    if [[ $FAILED = true ]]; then
+        printf "Some tests failed! Check TestDiffs for more.\n"
         exit 1
     else
-        echo "All tests pass!"
+        printf "All tests pass!\n"
         exit 0
     fi
 }
 
-createCSVs
-diffCSVs
+main

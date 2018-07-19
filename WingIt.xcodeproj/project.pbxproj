@@ -10,12 +10,16 @@
 		061F3E801F8AF09C00BD0D09 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061F3E7F1F8AF09C00BD0D09 /* DataUtil.swift */; };
 		062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9441F8B414B005F350E /* KeychainWrapper.swift */; };
 		062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */; };
+		064082FE20C263BB00F568CB /* TestAnswers in Resources */ = {isa = PBXBuildFile; fileRef = 064082FB20C263AA00F568CB /* TestAnswers */; };
+		064082FF20C263BB00F568CB /* TestInputs in Resources */ = {isa = PBXBuildFile; fileRef = 064082FC20C263AA00F568CB /* TestInputs */; };
+		0640830120C36D2800F568CB /* Cwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640830020C36D2700F568CB /* Cwrapper.swift */; };
 		06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* WingItUITests.swift */; };
 		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
 		06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* CommonUtil.swift */; };
 		06D37CD71F873C7F009318AC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06D37CD61F873C7F009318AC /* Settings.bundle */; };
+		06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5E2EF20C1504500C77382 /* WingItTests.swift */; };
 		297C56931ED9126200C44420 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginView.swift */; };
 		533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 533C92D320762A9200394325 /* SVProgressHUD.bundle */; };
 		533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D420762A9300394325 /* SVProgressAnimatedView.m */; };
@@ -62,6 +66,13 @@
 			remoteGlobalIDString = 53F8A0071EC3D0010001604A;
 			remoteInfo = WingIt;
 		};
+		06E5E2F220C1504500C77382 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53F8A0001EC3D0010001604A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 53F8A0071EC3D0010001604A;
+			remoteInfo = WingIt;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +81,9 @@
 		062EB9441F8B414B005F350E /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
+		064082FB20C263AA00F568CB /* TestAnswers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestAnswers; path = ../Backend/parserTests/TestAnswers; sourceTree = "<group>"; };
+		064082FC20C263AA00F568CB /* TestInputs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestInputs; path = ../Backend/parserTests/TestInputs; sourceTree = "<group>"; };
+		0640830020C36D2700F568CB /* Cwrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cwrapper.swift; sourceTree = "<group>"; };
 		06934D7A1F86730B00D308BD /* WingItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06934D7C1F86730B00D308BD /* WingItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITests.swift; sourceTree = "<group>"; };
 		06934D7E1F86730B00D308BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +92,9 @@
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
 		06B38A371F82361E009EDC60 /* CommonUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
 		06D37CD61F873C7F009318AC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		06E5E2ED20C1504500C77382 /* WingItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06E5E2EF20C1504500C77382 /* WingItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItTests.swift; sourceTree = "<group>"; };
+		06E5E2F120C1504500C77382 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		297C56921ED9126200C44420 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		533C92D220762A9200394325 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		533C92D320762A9200394325 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
@@ -144,6 +161,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		06E5E2EA20C1504500C77382 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F8A0051EC3D0010001604A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -166,6 +190,15 @@
 			path = SwiftKeychainWrapper;
 			sourceTree = "<group>";
 		};
+		064082FD20C263AA00F568CB /* Test files */ = {
+			isa = PBXGroup;
+			children = (
+				064082FB20C263AA00F568CB /* TestAnswers */,
+				064082FC20C263AA00F568CB /* TestInputs */,
+			);
+			path = "Test files";
+			sourceTree = "<group>";
+		};
 		06934D7B1F86730B00D308BD /* WingItUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +206,15 @@
 				06934D7E1F86730B00D308BD /* Info.plist */,
 			);
 			path = WingItUITests;
+			sourceTree = "<group>";
+		};
+		06E5E2EE20C1504500C77382 /* WingItTests */ = {
+			isa = PBXGroup;
+			children = (
+				06E5E2EF20C1504500C77382 /* WingItTests.swift */,
+				06E5E2F120C1504500C77382 /* Info.plist */,
+			);
+			path = WingItTests;
 			sourceTree = "<group>";
 		};
 		534635A12079A8EC00497A8D /* SW Reveal Controll */ = {
@@ -291,9 +333,11 @@
 		53F89FFF1EC3D0010001604A = {
 			isa = PBXGroup;
 			children = (
+				064082FD20C263AA00F568CB /* Test files */,
 				06D37CD61F873C7F009318AC /* Settings.bundle */,
 				53F8A00A1EC3D0010001604A /* WingIt */,
 				06934D7B1F86730B00D308BD /* WingItUITests */,
+				06E5E2EE20C1504500C77382 /* WingItTests */,
 				53F8A0091EC3D0010001604A /* Products */,
 				9D76A468FCF7B393CEA24F56 /* Frameworks */,
 			);
@@ -304,6 +348,7 @@
 			children = (
 				53F8A0081EC3D0010001604A /* WingIt.app */,
 				06934D7A1F86730B00D308BD /* WingItUITests.xctest */,
+				06E5E2ED20C1504500C77382 /* WingItTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -324,6 +369,7 @@
 				53F8A01A1EC3D0010001604A /* Info.plist */,
 				53F8A0121EC3D0010001604A /* Project.xcdatamodeld */,
 				06A637F81F7DD15F00C5F15F /* wrapper.cpp */,
+				0640830020C36D2700F568CB /* Cwrapper.swift */,
 				53C7D03A1EC9B79D00D0BD9C /* Project-Bridging-Header.h */,
 				534635A12079A8EC00497A8D /* SW Reveal Controll */,
 				534635A22079A8FB00497A8D /* Progress indicator */,
@@ -363,6 +409,24 @@
 			productReference = 06934D7A1F86730B00D308BD /* WingItUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		06E5E2EC20C1504500C77382 /* WingItTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06E5E2F620C1504500C77382 /* Build configuration list for PBXNativeTarget "WingItTests" */;
+			buildPhases = (
+				06E5E2E920C1504500C77382 /* Sources */,
+				06E5E2EA20C1504500C77382 /* Frameworks */,
+				06E5E2EB20C1504500C77382 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				06E5E2F320C1504500C77382 /* PBXTargetDependency */,
+			);
+			name = WingItTests;
+			productName = WingItTests;
+			productReference = 06E5E2ED20C1504500C77382 /* WingItTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		53F8A0071EC3D0010001604A /* WingIt */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53F8A01D1EC3D0010001604A /* Build configuration list for PBXNativeTarget "WingIt" */;
@@ -387,13 +451,18 @@
 		53F8A0001EC3D0010001604A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Noisive;
 				TargetAttributes = {
 					06934D791F86730B00D308BD = {
 						CreatedOnToolsVersion = 9.0;
 						DevelopmentTeam = 9L3BH5LC27;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 53F8A0071EC3D0010001604A;
+					};
+					06E5E2EC20C1504500C77382 = {
+						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 53F8A0071EC3D0010001604A;
 					};
@@ -420,6 +489,7 @@
 			targets = (
 				53F8A0071EC3D0010001604A /* WingIt */,
 				06934D791F86730B00D308BD /* WingItUITests */,
+				06E5E2EC20C1504500C77382 /* WingItTests */,
 			);
 		};
 /* End PBXProject section */
@@ -429,6 +499,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06E5E2EB20C1504500C77382 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				064082FE20C263BB00F568CB /* TestAnswers in Resources */,
+				064082FF20C263BB00F568CB /* TestInputs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +553,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		06E5E2E920C1504500C77382 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53F8A0041EC3D0010001604A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -507,6 +594,7 @@
 				534BB68F2081E28A00757932 /* RMessageView.m in Sources */,
 				53D4B38220760FBF0063E45F /* NavigationService.swift in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
+				0640830120C36D2800F568CB /* Cwrapper.swift in Sources */,
 				53D4B38020760D9A0063E45F /* TimeUtil.swift in Sources */,
 				061F3E801F8AF09C00BD0D09 /* DataUtil.swift in Sources */,
 				53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */,
@@ -524,6 +612,11 @@
 			isa = PBXTargetDependency;
 			target = 53F8A0071EC3D0010001604A /* WingIt */;
 			targetProxy = 06934D7F1F86730B00D308BD /* PBXContainerItemProxy */;
+		};
+		06E5E2F320C1504500C77382 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 53F8A0071EC3D0010001604A /* WingIt */;
+			targetProxy = 06E5E2F220C1504500C77382 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -584,6 +677,46 @@
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = WingIt;
+			};
+			name = Release;
+		};
+		06E5E2F420C1504500C77382 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WingItTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "stoned-crone.WingItTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WingIt.app/WingIt";
+			};
+			name = Debug;
+		};
+		06E5E2F520C1504500C77382 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WingItTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "stoned-crone.WingItTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WingIt.app/WingIt";
 			};
 			name = Release;
 		};
@@ -757,6 +890,15 @@
 			buildConfigurations = (
 				06934D811F86730B00D308BD /* Debug */,
 				06934D821F86730B00D308BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06E5E2F620C1504500C77382 /* Build configuration list for PBXNativeTarget "WingItTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06E5E2F420C1504500C77382 /* Debug */,
+				06E5E2F520C1504500C77382 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
