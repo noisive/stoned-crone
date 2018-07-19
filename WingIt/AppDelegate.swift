@@ -50,6 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ProcessInfo.processInfo.arguments.contains("UITests") {
             UIApplication.shared.keyWindow?.layer.speed = 100
         }
+        if CommandLine.arguments.contains("fakeData") {
+            copyTestData()
+        }
         
         // Bring up different initial view for this test - used for debugging login
         if CommandLine.arguments.contains("debugLogin") {

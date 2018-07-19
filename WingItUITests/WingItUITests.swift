@@ -165,7 +165,7 @@ class WingItUITests: XCTestCase {
         app.launchArguments.append("resetdata")
         app.launch()
         _ = app.launchArguments.popLast()
-        createTestData()
+        app.launchArguments.append("fakeData")
         app.launch()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.isDisplayingTT)
@@ -199,27 +199,6 @@ class WingItUITests: XCTestCase {
         passwordSecureTextField.typeText(self.eVisionPassword)
         
         app.buttons["Login"].tap()
-    }
-    
-    func createTestData(){
-        let fileManager = FileManager.default
-        let cacheURL = try! fileManager
-            .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        let dataURL = cacheURL.appendingPathComponent("data.csv")
-        let bundle = Bundle(for: type(of: self))
-        let testDataURL = bundle.url(forResource: "testData", withExtension: "csv")!
-        do{
-            if fileManager.fileExists(atPath: dataURL.path) {
-                try fileManager.removeItem(at: dataURL)
-            }
-            try fileManager.copyItem(at: testDataURL, to: dataURL)
-            if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
-                let versionFileURL = cacheURL.appendingPathComponent(".version")
-                try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
-            }
-        }catch let error as NSError {
-            print("Error:\(error.description)")
-        }
     }
     
         func waitForElement(element: XCUIElement){
