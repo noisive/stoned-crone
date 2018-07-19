@@ -14,7 +14,7 @@ createCSV() {
     # As of 1/6/18, creates CSV in TestOutputs
     ${SCRIPTDIR}/../bin/createcsvs.out $file
     parseReturnCode=$?
-    if [ ! $parseReturnCode ]; then
+    if [ $parseReturnCode != 0 ]; then
         FAILED=true
     fi
 }
