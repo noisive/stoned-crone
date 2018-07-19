@@ -35,9 +35,9 @@ class WingItUITests: XCTestCase {
     }
 
     override func setUp() {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
         app.launchArguments.append("testing")
-        // Put setup code here. This method is called before the invocation of each test method in the class.
         self.eVisionUsername = setUserFromEnv()
         self.eVisionPassword = setPassFromEnv()
         
@@ -46,7 +46,7 @@ class WingItUITests: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs. (They are time-expensive to ru)
         continueAfterFailure = false
 
-
+//        createTestData()
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.\
         // We send a command line argument to our app,
         // to enable it to reset its state
@@ -165,10 +165,7 @@ class WingItUITests: XCTestCase {
         app.launchArguments.append("resetdata")
         app.launch()
         _ = app.launchArguments.popLast()
-        app.terminate()
-        app.launch()
         createTestData()
-        app.terminate()
         app.launch()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.isDisplayingTT)
@@ -203,24 +200,29 @@ class WingItUITests: XCTestCase {
         
         app.buttons["Login"].tap()
     }
-
+    
     func createTestData(){
-
         let fileManager = FileManager.default
         let cacheURL = try! fileManager
             .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        let dataPath = cacheURL.appendingPathComponent("data.csv")
-
-        let sampleLine = "464737,1,9,2,#09BBF7,Practical,WINE101,Network Management,-45.8670533441689,170.518171263001,OUSA,OUSA Evison Lounge,OUSA Recreation Centre,2018-07-02"
-        // let sampleLine = "464737,1,9,2,#09BBF7,Practical,WINE101,Network Management,-45.8670533441689,170.518171263001,OUSA,OUSA Evison Lounge,OUSA Recreation Centre,2018-07-09\n577162,1,11,1,#D3D3D3,Lecture,EVIS107,Lessons on software design,-45.8664207533545,170.515870883468,CLOCKTOW,Clocktower Offices,Clocktower,2018-07-09\n459568,1,12,1,#D3D3D3,Lecture,SUCK501,Lessons on antagonising students,-45.8636426650169,170.513851671001,BURN1,Burns 1,Arts building,2018-07-09\n478445,1,13,1,#FFD700,Tutorial,STON317,Theory of Computing,-45.8670533441689,170.518171263001,FLAT660,Owheo Room G34 COSC,Owheo Building,2018-07-02\n464992,1,13,1,#09BBF7,Practical,CRON301,Network Management,-45.8670533441689,170.518171263001,LEITH,Owheo Lab G38 COSC,Owheo Building,2018-07-09"
+        let dataURL = cacheURL.appendingPathComponent("data.csv")
+        let bundle = Bundle(for: type(of: self))
+        let testDataURL = bundle.url(forResource: "testData", withExtension: "csv")!
         do{
-            try sampleLine.write(to: dataPath, atomically: false, encoding: .utf8)
-        }
-        catch {
+            if fileManager.fileExists(atPath: dataURL.path) {
+                try fileManager.removeItem(at: dataURL)
+            }
+            try fileManager.copyItem(at: testDataURL, to: dataURL)
+            if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
+                let versionFileURL = cacheURL.appendingPathComponent(".version")
+                try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
+            }
+        }catch let error as NSError {
+            print("Error:\(error.description)")
         }
     }
-
-    func waitForElement(element: XCUIElement){
+    
+        func waitForElement(element: XCUIElement){
         // Search for element, wait till it appears.
         let predicate = NSPredicate(format: "exists == 1")
         let query = element
