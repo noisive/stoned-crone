@@ -17,9 +17,13 @@ Timetable::Timetable(std::string dataBasePath) {
 }
 
 void Timetable::restore() {
+    Timetable::restore(this->dataPath);
+}
+
+void Timetable::restore(std::string dpath) {
     reset();
     Parser parser;
-    std::vector<TimetableEvent> events = parser.parseFile(dataPath, "csv");
+    std::vector<TimetableEvent> events = parser.parseFile(dpath, "csv");
     addMultiple(events);
 }
 

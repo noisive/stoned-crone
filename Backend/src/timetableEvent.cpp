@@ -142,6 +142,7 @@ void TimetableEvent::fixDate(int startingDate) {
     setDate(date.legacyDate()); 
 }
 
+// TODO: include backslashes in this
 std::string csvEscape(std::string s){
     std::string out;
 
@@ -158,7 +159,7 @@ std::string csvEscape(std::string s){
     return out;
 }
 
-std::string csvDeescape(std::string s){
+std::string TimetableEvent::csvDeescape(std::string s){
     std::string out;
     std::string esc = "\\,";
     size_t l = esc.length();
@@ -197,7 +198,7 @@ void testcsvDeescape(){
     assert(0 == strcmp("hel\\,lo","hel\\,lo"));
     std::string result;
     for (int i = 0; i < testNum; i++){
-        result = csvDeescape(tests[i]);
+        result = TimetableEvent::csvDeescape(tests[i]);
         assert(0 == result.compare(results[i])
                 || !(std::cout << result << " != " << results[i] << std::endl));
     }
@@ -206,7 +207,7 @@ void testcsvDeescape(){
 /* Output a string representation of this event. Useable as CSV. */
 std::string TimetableEvent::toString() { 
 //    testcsvEscape();
-    testcsvDeescape();
+//    testcsvDeescape();
     return std::to_string(this->uid) + 
         "," + std::to_string(this->day) + 
         "," + std::to_string(this->startTime) + 

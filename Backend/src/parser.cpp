@@ -276,6 +276,7 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
 
     for (int i = 0; i < line.length(); i++) {
         if (line.at(i) == ',' && line.at(i-1) != '\\') {
+//        if (line.at(i) == ',') {
             switch (column) {
                 case 0:
                     break;
@@ -298,7 +299,7 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
                     ttEvent.setPaperCode(build);
                     break;
                 case 7:
-                    ttEvent.setPaperName(build);
+                    ttEvent.setPaperName(TimetableEvent::csvDeescape(build));
                     break;
                 case 8:
                     ttEvent.setMapLat(build);
@@ -310,10 +311,10 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
                     ttEvent.setRoomCode(build);
                     break;
                 case 11:
-                    ttEvent.setRoomName(build);
+                    ttEvent.setRoomName(TimetableEvent::csvDeescape(build));
                     break;
                 case 12:
-                    ttEvent.setBuilding(build);
+                    ttEvent.setBuilding(TimetableEvent::csvDeescape(build));
                     break;
             }
             column++;

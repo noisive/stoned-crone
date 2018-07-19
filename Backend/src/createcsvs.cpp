@@ -40,6 +40,10 @@ int main(int argc, char** argv) {
     Timetable newTimetable;
     newTimetable.restore(saveFileUrl);
     std::string newTT = newTimetable.toCSVString();
+    if (!(oldTT.compare(newTT) == 0)){
+        std::cout << newTT << std::endl;
+        std::cout << oldTT << std::endl;
+    }
     assert(oldTT.compare(newTT) == 0
                 || !(std::cout << "Error restoring timetable" << std::endl));
 
