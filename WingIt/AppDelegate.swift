@@ -53,6 +53,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if CommandLine.arguments.contains("fakeData") {
             copyTestData()
         }
+
+        // If new version, force update.
+        if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
+            let versionFileURL = cacheURL.appendingPathComponent(".version")
+            if !fileManager.fileExists(atPath: versionFileURL.path) {
+                do {
+                    clearCache()
+                    try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
+                } catch { }
+            }else{
+                do {
+                    let oldVer = try String(contentsOf: versionFileURL, encoding: .utf8)
+                    if oldVer != versionNum {
+                        clearCache()
+                        try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
+                    }
+                } catch { }
+            }
+
+            // If we don't have data already, prompt for login.
+            if !fileManager.fileExists(atPath: dataPath) {
+                promptForLogin()
+            }else{
+                // Get data from CSV
+                initTimetable()
+                if checkAndRemoveBadDateData(){
+                    promptForLogin()
+                }
+            }
+        }
         
         // Bring up different initial view for this test - used for debugging login
         if CommandLine.arguments.contains("debugLogin") {
@@ -66,45 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
-        }else{
-
-            // If new version, force update.
-            if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
-                let versionFileURL = cacheURL.appendingPathComponent(".version")
-                if !fileManager.fileExists(atPath: versionFileURL.path) {
-                    do {
-                        clearCache()
-                        try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
-                    }
-                    catch {
-                    }
-                }else{
-                    do {
-                        let oldVer = try String(contentsOf: versionFileURL, encoding: .utf8)
-                        if oldVer != versionNum {
-                            clearCache()
-                            try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
-                        }
-                    }
-                    catch {
-                    }
-                }
-            }
-            
-            // If we don't have data already, prompt for login.
-            if !fileManager.fileExists(atPath: dataPath) {
-                
-                promptForLogin()
-                
-            }else{
-                // Get data from CSV
-                initTimetable()
-                if checkAndRemoveBadDateData(){
-                    promptForLogin()
-                }
-            }
         }
-        
         
         
         // Register settings bundle.
