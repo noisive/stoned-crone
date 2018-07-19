@@ -4,6 +4,8 @@
 #include "timetableEvent.hpp"
 #include <assert.h>
 #include <regex>
+#include <array>
+#include <iostream>
 
 TimetableEvent::TimetableEvent(void) {
     this->uid = 0xCC; // Unique identifier for each TT.
@@ -140,8 +142,38 @@ void TimetableEvent::fixDate(int startingDate) {
     setDate(date.legacyDate()); 
 }
 
+std::string csvEscape(std::string s){
+    std::string out;
+
+    size_t c = 0;
+    while (c != std::string::npos){ // Until comma not found
+        c = s.find(",");
+        if (c == std::string::npos){
+            out += s;
+        }else{
+            out += s.substr(0, c) + "\\,";
+            s = s.substr(c+1);
+        }
+    }
+    return out;
+}
+
+void testcsvEscape(){
+    const int testNum = 3;
+    std::array<std::string, testNum> tests = {"hel,lo", "hello", "my,mother,is,gas"};
+    std::array<std::string, testNum> results = {"hel\\,lo", "hello", "my\\,mother\\,is\\,gas"};
+    assert(0 == strcmp("hel\\,lo","hel\\,lo"));
+    std::string result;
+    for (int i = 0; i < testNum; i++){
+        result = csvEscape(tests[i]);
+        assert(0 == result.compare(results[i])
+                || !(std::cout << result << " != " << results[i] << std::endl));
+    }
+}
+
 /* Output a string representation of this event. Useable as CSV. */
 std::string TimetableEvent::toString() { 
+    testcsvEscape();
     return std::to_string(this->uid) + 
         "," + std::to_string(this->day) + 
         "," + std::to_string(this->startTime) + 
@@ -172,7 +204,7 @@ bool TimetableEvent::validateEventData(){
     std::regex upperAlphaNumRgx("[[:upper:][:digit:]]*");
     assert(std::regex_match(this->roomCode, upperAlphaNumRgx));
 
-    std::regex alphanumrgx("[[:alnum:]]*");
+    std::regex alphanumrgx("[[:alnum:] ]*");
     assert(std::regex_match(this->type, alphanumrgx));
 
     std::regex buildingrgx("[[:alnum:] '().]*");
