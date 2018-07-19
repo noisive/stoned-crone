@@ -15,7 +15,7 @@ func loadWeekData(VC: TimetableView) {
     formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
     
     // Gives date of most recent Monday
-    let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+    let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: todaysDate()))!
     
     // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
     UIApplication.shared.cancelAllLocalNotifications()
@@ -70,7 +70,7 @@ func loadWeekData(VC: TimetableView) {
             
             let eventDate = formatter.date(from: eventDateString)
             
-            let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, colour: colour, code: paperCode, type: type, roomShort: roomCode, roomFull: roomName, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
+            let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, colour: colour, code: paperCode, type: type, roomShort: roomCode, roomFull: roomName, building: building, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
             
             setNotification(event: lesson)
             

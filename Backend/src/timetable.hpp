@@ -63,6 +63,7 @@ class Timetable {
 
         // Persistence
         void save(std::string filePath = "0x8C");
+        void restore(std::string dpath);
         void restore();
         std::string toCSVString();
         void printToCSV();

@@ -49,12 +49,13 @@ func setNotification (event: Lesson){
     
     // Get Monday's date, then transform fire date based on lesson's weekday
     var dateFormatter = DateFormatter()
-    let today = Date()
+    let today = todaysDate()
+    // Todo: potentially change this to a call to getDayOfWeek
     let todayWeekday: Int = Calendar.current.component(.weekday, from: today)
     
     // Gives date of most recent Monday
     var mondaysDate: Date {
-        return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
     }
     
     // Add the day to monday
@@ -88,7 +89,7 @@ func setNotification (event: Lesson){
     localNotification.timeZone = TimeZone(identifier: "NZST")
     
     // first check notification isn't in the past. if it is, skip the rest.
-    if notificationTimeAndDate < Date(){
+    if notificationTimeAndDate < today{
         return
     }
     localNotification.fireDate = notificationTimeAndDate
@@ -118,8 +119,19 @@ func convertUMTtoNZT(current: Date) -> Date{
     return (updated)!
 }
 
+func todaysDate() -> Date {
+    // Allows mocking the date for testing
+    if CommandLine.arguments.contains("mockdate") {
+        let mockDate = Date()
+        return mockDate
+    }else{
+        return Date()
+    }
+
+}
+
 func getDayOfWeek() -> Int? {
-    let todayDate = Date()
+    let todayDate = todaysDate()
     let myCalendar = Calendar(identifier: .gregorian)
     let weekDay = myCalendar.component(.weekday, from: todayDate)
     // Weekday 1 is sunday, we want to return sunday as 7

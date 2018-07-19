@@ -56,7 +56,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     }
     
     func scrollToCurrentTime(){
-        let currentHour = Calendar.current.component(.hour, from: Date())
+        let currentHour = Calendar.current.component(.hour, from: todaysDate())
         var currentHourCell: IndexPath
         // Check if time to scroll to is out of bounds, scroll to min/max if so.
         if currentHour < 8 {
@@ -193,8 +193,9 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     
     func calculateDayLabel() -> String {
         
+        // This is currently replicated in commonUtil. TODO.
         // Gives date of most recent Monday
-        let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
+        let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: todaysDate()))!
         
         
         let format = DateFormatter()

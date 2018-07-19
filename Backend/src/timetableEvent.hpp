@@ -93,6 +93,7 @@ class TimetableEvent {
         std::string toString();
 
         std::string toCSVRow() const; 
+        static std::string csvDeescape(std::string s);
 };
 
 #endif // TIMETABLEEVENT_H_
