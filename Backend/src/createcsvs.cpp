@@ -34,7 +34,14 @@ int main(int argc, char** argv) {
     timetable.parseEvents(dataString);
     std::string parentDir = getPathBaseDir(dataPath);
     std::string fileName = getPathFileNameNoExt(inFilePath);
-    timetable.save(parentDir + "/TestOutputs/" + fileName + ".csv");
+    std::string saveFileUrl = parentDir + "/TestOutputs/" + fileName + ".csv";
+    timetable.save(saveFileUrl);
+    std::string oldTT = timetable.toCSVString();
+    Timetable newTimetable;
+    newTimetable.restore(saveFileUrl);
+    std::string newTT = newTimetable.toCSVString();
+    assert(oldTT.compare(newTT) == 0
+                || !(std::cout << "Error restoring timetable" << std::endl));
 
     return 0;
 }
