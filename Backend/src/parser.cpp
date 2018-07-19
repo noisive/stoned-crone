@@ -46,7 +46,7 @@ int Parser::indexOf(std::string data, std::string pattern) {
         return -1;
     }
     // Actual string matched is at rgxMatch[0]
-    int firstCharOfMatchPosition = rgxMatch.position(0);
+    int firstCharOfMatchPosition = int(rgxMatch.position(0));
     // I can't help but feel this is wrong. This is returning position + 1! TODO
     return firstCharOfMatchPosition;
 }
@@ -67,7 +67,7 @@ int Parser::lastIndexOf(std::string data, std::string pattern, int startIndex) {
     if (index == -1) {
         return index;
     }
-    return index + pattern.length();
+    return int(index + pattern.length());
 }
 
 int Parser::lastIndexOf(std::string data, std::string pattern) {
@@ -269,12 +269,13 @@ std::vector<TimetableEvent> Parser::parseFile(std::string fileName, std::string 
 
 TimetableEvent Parser::parseCSVLine(std::string line) {
 
+//    std::cerr << line << std::endl;
     int column = 0;
     std::string build = "";
     TimetableEvent ttEvent;
 
     for (int i = 0; i < line.length(); i++) {
-        if (line.at(i) == ',') {
+        if (line.at(i) == ',' && line.at(i-1) != '\\') {
             switch (column) {
                 case 0:
                     break;
@@ -372,7 +373,7 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
         // Need to escape these additionally for regex: ^ $ \ . * + ? ( ) [ ] { } |
 
         // Set each id
-        startIndex = indexOf(json,idString, endIndex) + idString.length();
+        startIndex = int(indexOf(json,idString, endIndex) + idString.length());
         // - 1 to endindex to deal with closing quote.
         endIndex = indexOf(json, ",", startIndex) - 1;
         if (startIndex == -1 || endIndex == -1) {
@@ -408,8 +409,8 @@ std::vector<TimetableEvent> Parser::parse(std::string data) {
         ttEvent.setColor(json.substr(startIndex, endIndex - startIndex));
 
         // Run a seperate parse on the info segment (html)
-        startIndex = indexOf(json, infoString, endIndex) + infoString.length() - 1;
-        endIndex = indexOf(json,infoEnd, endIndex) + infoEnd.length() - 1;
+        startIndex = int(indexOf(json, infoString, endIndex) + infoString.length() - 1);
+        endIndex = int(indexOf(json,infoEnd, endIndex) + infoEnd.length() - 1);
         infoSegment = json.substr(startIndex, endIndex - startIndex - 1);
 
         ttEvent = parseInfo(infoSegment, ttEvent);

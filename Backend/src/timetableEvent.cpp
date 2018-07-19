@@ -181,12 +181,12 @@ std::string TimetableEvent::toString() {
         "," + this->color +  
         "," + this->type + 
         "," + this->paperCode + 
-        "," + this->paperName + 
+        "," + csvEscape(this->paperName) + 
         "," + this->mapLat + 
         "," + this->mapLong + 
         "," + this->roomCode +
-        "," + this->roomName +
-        "," + this->building +
+        "," + csvEscape(this->roomName) +
+        "," + csvEscape(this->building) +
         "," + this->date.ISODate();
 }
 
