@@ -58,12 +58,12 @@ class WingItUITests: XCTestCase {
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app.launchArguments.removeAll()
         super.tearDown()
     }
 
 
     func testingPlayground(){
-        
 
     }
     // Special webview window without any coverplate. For debugging webview login.
@@ -124,6 +124,34 @@ class WingItUITests: XCTestCase {
 
     }
     
+    func testLoginUpdate(){
+        
+        app.launchArguments.append("fakeData")
+        app.launch()
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
+        app.buttons["Refresh"].tap()
+        
+        login()
+        
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        XCTAssertTrue(app.isDisplayingTT)
+
+    }
+    
+    
+    func testDataPersistenceOnRestart(){
+        
+        // Ensure we have a timetable to view
+        app.launchArguments.append("resetdata")
+        app.launch()
+        _ = app.launchArguments.popLast()
+        app.launchArguments.append("fakeData")
+        app.launch()
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        XCTAssertTrue(app.isDisplayingTT)
+        
+    }
+
     func testCancelButtonNotPresentFresh(){
         app.launchArguments.append("resetdata")
         app.launch()
@@ -139,42 +167,9 @@ class WingItUITests: XCTestCase {
         XCTAssertTrue(!cancelButtonExists())
     }
 
-    func testLoginUpdate(){
-        
-        // Ensure we have a timetable to view
-        testLoginFresh()
-//        // Avoid each test having to relaunch the app (unless required).
-//        if (!WingItUITests.launched) {
-//            app.launch()
-//            WingItUITests.launched = true
-//        }
-
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
-        app.buttons["Refresh"].tap()
-        
-        login()
-        
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
-        XCTAssertTrue(app.isDisplayingTT)
-
-    }
-    
-    func testDataPersistenceOnRestart(){
-        
-        // Ensure we have a timetable to view
-        app.launchArguments.append("resetdata")
-        app.launch()
-        _ = app.launchArguments.popLast()
+    func testCancelButtonExistsOnRefresh(){
         app.launchArguments.append("fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
-        XCTAssertTrue(app.isDisplayingTT)
-        
-    }
-
-    func testCancelButtonExistsOnRefresh(){
-        // Ensure we have a timetable to view
-        testLoginFresh()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
         app.buttons["Refresh"].tap()
         XCTAssertTrue(cancelButtonExists())
