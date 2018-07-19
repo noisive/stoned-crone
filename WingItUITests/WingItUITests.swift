@@ -148,14 +148,11 @@ class WingItUITests: XCTestCase {
     func testDataPersistenceOnRestart(){
         
         // Ensure we have a timetable to view
-        app.launchArguments.append("resetdata")
+        testLoginFresh()
         app.launch()
-        _ = app.launchArguments.popLast()
         app.terminate()
         app.launch()
-        createTestData()
-        app.terminate()
-        app.launch()
+        
         _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.isDisplayingTT)
         
@@ -188,22 +185,6 @@ class WingItUITests: XCTestCase {
         passwordSecureTextField.typeText(self.eVisionPassword)
         
         app.buttons["Login"].tap()
-    }
-
-    func createTestData(){
-
-        let fileManager = FileManager.default
-        let cacheURL = try! fileManager
-            .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        let dataPath = cacheURL.appendingPathComponent("data.csv")
-
-        let sampleLine = "464737,1,9,2,#09BBF7,Practical,WINE101,Network Management,-45.8670533441689,170.518171263001,OUSA,OUSA Evison Lounge,OUSA Recreation Centre,2018-07-02"
-        // let sampleLine = "464737,1,9,2,#09BBF7,Practical,WINE101,Network Management,-45.8670533441689,170.518171263001,OUSA,OUSA Evison Lounge,OUSA Recreation Centre,2018-07-09\n577162,1,11,1,#D3D3D3,Lecture,EVIS107,Lessons on software design,-45.8664207533545,170.515870883468,CLOCKTOW,Clocktower Offices,Clocktower,2018-07-09\n459568,1,12,1,#D3D3D3,Lecture,SUCK501,Lessons on antagonising students,-45.8636426650169,170.513851671001,BURN1,Burns 1,Arts building,2018-07-09\n478445,1,13,1,#FFD700,Tutorial,STON317,Theory of Computing,-45.8670533441689,170.518171263001,FLAT660,Owheo Room G34 COSC,Owheo Building,2018-07-02\n464992,1,13,1,#09BBF7,Practical,CRON301,Network Management,-45.8670533441689,170.518171263001,LEITH,Owheo Lab G38 COSC,Owheo Building,2018-07-09"
-        do{
-            try sampleLine.write(to: dataPath, atomically: false, encoding: .utf8)
-        }
-        catch {
-        }
     }
 
     func waitForElement(element: XCUIElement){
