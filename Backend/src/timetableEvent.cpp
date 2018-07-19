@@ -158,10 +158,30 @@ std::string csvEscape(std::string s){
     return out;
 }
 
+std::string csvDeescape(std::string s){
+    std::string out;
+    std::string esc = "\\,";
+    size_t l = esc.length();
+
+    size_t c = 0;
+    do {
+        c = s.find(esc);
+        if (c == std::string::npos){
+            out += s;
+        }else{
+            out += s.substr(0, c) + ",";
+            s = s.substr(c + l);
+        }
+    }
+    while (c != std::string::npos);
+    return out;
+
+}
+
 void testcsvEscape(){
     const int testNum = 3;
-    std::array<std::string, testNum> tests = {"hel,lo", "hello", "my,mother,is,gas"};
-    std::array<std::string, testNum> results = {"hel\\,lo", "hello", "my\\,mother\\,is\\,gas"};
+    std::array<std::string, testNum> tests = {"try,again", "hello", "my,mother,is,gas"};
+    std::array<std::string, testNum> results = {"try\\,again", "hello", "my\\,mother\\,is\\,gas"};
     assert(0 == strcmp("hel\\,lo","hel\\,lo"));
     std::string result;
     for (int i = 0; i < testNum; i++){
@@ -170,10 +190,23 @@ void testcsvEscape(){
                 || !(std::cout << result << " != " << results[i] << std::endl));
     }
 }
+void testcsvDeescape(){
+    const int testNum = 3;
+    std::array<std::string, testNum> tests = {"try\\,again", "hello", "my\\,mother\\,is\\,gas"};
+    std::array<std::string, testNum> results = {"try,again", "hello", "my,mother,is,gas"};
+    assert(0 == strcmp("hel\\,lo","hel\\,lo"));
+    std::string result;
+    for (int i = 0; i < testNum; i++){
+        result = csvDeescape(tests[i]);
+        assert(0 == result.compare(results[i])
+                || !(std::cout << result << " != " << results[i] << std::endl));
+    }
+}
 
 /* Output a string representation of this event. Useable as CSV. */
 std::string TimetableEvent::toString() { 
 //    testcsvEscape();
+    testcsvDeescape();
     return std::to_string(this->uid) + 
         "," + std::to_string(this->day) + 
         "," + std::to_string(this->startTime) + 
