@@ -26,6 +26,9 @@
                   Identifier = "WingItUITests/testLoginRaw()">
                </Test>
                <Test
+                  Identifier = "WingItUITests/testSwipePastEndOfArrayFast()">
+               </Test>
+               <Test
                   Identifier = "WingItUITests/testingPlayground()">
                </Test>
             </SkippedTests>
