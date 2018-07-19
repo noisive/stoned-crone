@@ -173,7 +173,7 @@ void testcsvEscape(){
 
 /* Output a string representation of this event. Useable as CSV. */
 std::string TimetableEvent::toString() { 
-    testcsvEscape();
+//    testcsvEscape();
     return std::to_string(this->uid) + 
         "," + std::to_string(this->day) + 
         "," + std::to_string(this->startTime) + 
