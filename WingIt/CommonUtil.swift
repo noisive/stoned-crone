@@ -278,3 +278,28 @@ func checkAndRemoveBadDateData() -> Bool{
     return false
 }
 
+// Delete all files in app cache dir, including our data csvs.
+func clearCache(){
+    let fileManager = FileManager.default
+    let cacheURL = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    do {
+        let cachePath = cacheURL.path
+        let fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
+        
+        for fileName in fileNames {
+            
+            //                    if (fileName == "cache.db-wal")
+            //                    {
+            let filePathName = "\(cachePath)/\(fileName)"
+            
+            try fileManager.removeItem(atPath: filePathName)
+            //                    }
+        }
+        
+        //            let files = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
+        
+        
+    } catch {
+        print("Could not clear: \(error)")
+    }
+}

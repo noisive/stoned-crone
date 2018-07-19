@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
         }else{
-            
+
             // If new version, force update.
             if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
                 let versionFileURL = cacheURL.appendingPathComponent(".version")
@@ -120,31 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
     }
     
-    // Delete all files in app cache dir, including our data csvs.
-    func clearCache(){
-        let fileManager = FileManager.default
-        let cacheURL = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        do {
-            let cachePath = cacheURL.path
-            let fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
-            
-            for fileName in fileNames {
-                
-                //                    if (fileName == "cache.db-wal")
-                //                    {
-                let filePathName = "\(cachePath)/\(fileName)"
-                
-                try fileManager.removeItem(atPath: filePathName)
-                //                    }
-            }
-            
-            //            let files = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
-            
-            
-        } catch {
-            print("Could not clear: \(error)")
-        }
-    }
+   
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
