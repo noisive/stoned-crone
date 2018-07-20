@@ -293,3 +293,43 @@ func copyTestData(){
     }
 }
 
+func HandleLaunchArgs() {
+    //    let userDefaults: UserDefaults
+    var args = CommandLine.arguments
+    
+    // Resets app if given argument resetdata, so that tests start from a consistent clean state
+    if args.contains("-reset") {
+        //        let defaultsName = Bundle.main.bundleIdentifier!
+        //    userDefaults.removePersistentDomain(forName: defaultsName)
+        clearCache()
+    }
+    
+    
+    if args.contains("-UITests") {
+        UIApplication.shared.keyWindow?.layer.speed = 100
+    }
+    
+    
+    // Resets app if given argument resetdata, so that tests start from a consistent clean state
+    if args.contains("-fakeData") {
+        copyTestData()
+        if !args.contains("-mockDate") {
+            mockDateTime() // Will use default
+        }
+    }
+    
+    // Expect argument of the form "mockDate [date]",
+    // where [date] is of the ISO form yyyy-MM-dd.
+    //    if args.contains("-mockDate") {
+    //        if let mockDateStr = UserDefaults.standard.string(forKey: "mockDate"){
+    if let i = args.index(of: "-mockDate"){
+        let mockDateStr = args[i+1]
+        mockDateTime(mockStrO: mockDateStr)
+    }
+    if let i = args.index(of: "-mockTime"){
+        let mockTimeStr = args[i+1]
+        mockDateTime(mockStrO: mockTimeStr)
+    }
+    //    }
+    
+}
