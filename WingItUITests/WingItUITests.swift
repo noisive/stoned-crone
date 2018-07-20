@@ -167,6 +167,32 @@ class WingItUITests: XCTestCase {
         XCTAssertTrue(cancelButtonExists())
     }
 
+    func testClassesAppearEachDay(){
+        app.launchArguments.append("-fakeData")
+        app.launch()
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 10)
+        for _ in 0...5 {
+            XCTAssertTrue(classAppears)
+            app.otherElements["dayView"].swipeLeft()
+        }
+    }
+
+    func testOpensToCurrentDayFri(){
+        app.launchArguments += ["-mockDate", "2018-10-05"]
+        app.launchArguments.append("-fakeData")
+        app.launch()
+        _ = app.otherElements["Friday"].waitForExistence(timeout: 10)
+        XTAssert(otherElements["Friday"].exists)
+    }
+    func testOpensToCurrentDayMon(){
+        // app.launchArguments += ["-mockDate", "2018-10-05"]
+        // Fakedata should set default mock date (which is monday).
+        app.launchArguments.append("-fakeData")
+        app.launch()
+        _ = app.otherElements["Monday"].waitForExistence(timeout: 10)
+        XTAssert(otherElements["Monday"].exists)
+    }
+
     func login(){
 
         _ = app.textFields["Username"].waitForExistence(timeout: 60)
