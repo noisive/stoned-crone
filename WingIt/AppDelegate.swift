@@ -13,24 +13,25 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
+
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        
         #if DEBUG
-            // If we are running unit tests, don't wait till app has finished launching.
-            // Load dummy instead.
-            if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
-                let viewController = UIViewController()
-                let label = UILabel()
-                label.text = "Running tests..."
-                label.frame = viewController.view.frame
-                label.textAlignment = .center
-                label.textColor = .white
-                viewController.view.addSubview(label)
-                self.window!.rootViewController = viewController
-                return true
-            }
+        // If we are running unit tests, don't wait till app has finished launching.
+        // Load dummy instead.
+        if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
+            let viewController = UIViewController()
+            let label = UILabel()
+            label.text = "Running tests..."
+            label.frame = viewController.view.frame
+            label.textAlignment = .center
+            label.textColor = .white
+            viewController.view.addSubview(label)
+            self.window!.rootViewController = viewController
+            return true
+        }
         #endif
         // Override point for customization after application launch.
         
@@ -43,16 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let dataPath = cacheURL.appendingPathComponent("data.csv").path
         print(dataPath)
         
-        // Resets app if given argument resetdata, so that tests start from a consistent clean state
-        if CommandLine.arguments.contains("resetdata") {
-            clearCache()
-        }
-        if ProcessInfo.processInfo.arguments.contains("UITests") {
-            UIApplication.shared.keyWindow?.layer.speed = 100
-        }
-        if CommandLine.arguments.contains("fakeData") {
-            copyTestData()
-        }
+        #if DEBUG // not compiled when shipped
+        HandleLaunchArgs()
+        #endif
 
         // If new version, force update.
         if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {

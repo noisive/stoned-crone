@@ -127,7 +127,7 @@ func todaysDate() -> Date {
     }else{
         return Date()
     }
-
+    
 }
 
 func getDayOfWeek() -> Int? {
@@ -237,7 +237,7 @@ extension UIViewController {
 
 func checkAndRemoveBadDateData() -> Bool{
     // Resets data if bad date. //
-//    let fileManager = FileManager.default
+    //    let fileManager = FileManager.default
     let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
     
     let formatter = DateFormatter()
@@ -309,18 +309,61 @@ func copyTestData(){
     let cacheURL = try! fileManager
         .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
     let dataURL = cacheURL.appendingPathComponent("data.csv")
-//    let bundle = Bundle(for: type(of: self))
+    //    let bundle = Bundle(for: type(of: self))
     let testDataURL = Bundle.main.url(forResource: "testData", withExtension: "csv")!
     do{
         if fileManager.fileExists(atPath: dataURL.path) {
             try fileManager.removeItem(at: dataURL)
         }
         try fileManager.copyItem(at: testDataURL, to: dataURL)
-        if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
-            let versionFileURL = cacheURL.appendingPathComponent(".version")
-            try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
-        }
+                if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
+                    let versionFileURL = cacheURL.appendingPathComponent(".version")
+                    try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
+                }
     }catch let error as NSError {
         print("Error:\(error.description)")
     }
+}
+
+var mockDate: Date?
+
+func HandleLaunchArgs() {
+    let userDefaults: UserDefaults
+    
+    // Resets app if given argument resetdata, so that tests start from a consistent clean state
+    if CommandLine.arguments.contains("-reset") {
+        let defaultsName = Bundle.main.bundleIdentifier!
+        //    userDefaults.removePersistentDomain(forName: defaultsName)
+        clearCache()
+    }
+    
+    
+    if CommandLine.arguments.contains("-UITests") {
+        UIApplication.shared.keyWindow?.layer.speed = 100
+    }
+    
+    
+    // Resets app if given argument resetdata, so that tests start from a consistent clean state
+    if CommandLine.arguments.contains("-fakeData") {
+        copyTestData()
+    }
+    
+    
+    // Expect argument of the form "mockDate [date]",
+    // where [date] is of the ISO form yyyy-MM-dd.
+    if CommandLine.arguments.contains("-mockDate") {
+        if let mockDateStr = UserDefaults.standard.string(forKey: "mockDate"){
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
+            if let mockDateOpt = formatter.date(from: mockDateStr){
+                mockDate = mockDateOpt
+                print(mockDate)
+            } else {
+                print("Error: Invalid date argument format. Will be set to 2018-08-01")
+                print("Expect form `mockDate [date]`, where [date] is of form yyyy-MM-dd.")
+                mockDate = formatter.date(from: "2018-08-01")
+            }
+        }
+    }
+    
 }

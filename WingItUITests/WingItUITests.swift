@@ -37,11 +37,12 @@ class WingItUITests: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         super.setUp()
-        app.launchArguments.append("testing")
+        app.launchArguments.append("-testing")
+        app.launchArguments.append("-reset")
+        app.launchArguments.append("-UITests")
+        
         self.eVisionUsername = setUserFromEnv()
         self.eVisionPassword = setPassFromEnv()
-        
-        app.launchArguments.append("UITests")
 
         // In UI tests it is usually best to stop immediately when a failure occurs. (They are time-expensive to ru)
         continueAfterFailure = false
@@ -69,7 +70,7 @@ class WingItUITests: XCTestCase {
     // Special webview window without any coverplate. For debugging webview login.
     func testLoginRaw(){
         // Argument to enter raw
-        app.launchArguments.append("debugLogin")
+        app.launchArguments.append("-debugLogin")
         app.launch()
         print("hi")
         
@@ -104,10 +105,7 @@ class WingItUITests: XCTestCase {
 
     // Test that a fresh login reaches a timetable.
     func testLoginFresh(){
-        app.launchArguments.append("resetdata")
         app.launch()
-        _ = app.launchArguments.popLast()
-
         // Waits and checks for allow notifications alert.
         addUIInterruptionMonitor(withDescription: "Notifications") { (alert) -> Bool in
             alert.buttons["Allow"].tap()
@@ -126,7 +124,7 @@ class WingItUITests: XCTestCase {
     
     func testLoginUpdate(){
         
-        app.launchArguments.append("fakeData")
+        app.launchArguments.append("-fakeData")
         app.launch()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
         app.buttons["Refresh"].tap()
@@ -140,12 +138,8 @@ class WingItUITests: XCTestCase {
     
     
     func testDataPersistenceOnRestart(){
-        
-        // Ensure we have a timetable to view
-        app.launchArguments.append("resetdata")
-        app.launch()
-        _ = app.launchArguments.popLast()
-        app.launchArguments.append("fakeData")
+        app.launchArguments.append("-mockDate 2018-08-01")
+        app.launchArguments.append("-fakeData")
         app.launch()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.isDisplayingTT)
@@ -153,7 +147,6 @@ class WingItUITests: XCTestCase {
     }
 
     func testCancelButtonNotPresentFresh(){
-        app.launchArguments.append("resetdata")
         app.launch()
         
         // Waits and checks for allow notifications alert.
@@ -168,7 +161,7 @@ class WingItUITests: XCTestCase {
     }
 
     func testCancelButtonExistsOnRefresh(){
-        app.launchArguments.append("fakeData")
+        app.launchArguments.append("-fakeData")
         app.launch()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
         app.buttons["Refresh"].tap()
