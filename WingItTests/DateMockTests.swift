@@ -22,19 +22,19 @@ class DateMockTests: XCTestCase {
     }
     
     func testDateMock() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        var userCalendar = Calendar.current // user calendar
+//        userCalendar.timeZone = TimeZone(abbreviation: "NZST")!
+        userCalendar.timeZone = TimeZone.current
         mockDateTime(mockStrO: "2010-02-27+13:05")
         // Specify date components
         var dateComponents = DateComponents()
+        dateComponents.timeZone = TimeZone(abbreviation: "UTC")
         dateComponents.year = 2010
         dateComponents.month = 2
         dateComponents.day = 27
-        dateComponents.timeZone = TimeZone(abbreviation: "UTC")
         dateComponents.hour = 13
         dateComponents.minute = 05
         // Create date from components
-        var userCalendar = Calendar.current // user calendar
         var someDateTime = userCalendar.date(from: dateComponents)
         var today = todaysDate()
         XCTAssert(today == someDateTime)
@@ -42,18 +42,29 @@ class DateMockTests: XCTestCase {
         mockDateTime(mockStrO: "2029-12-01")
         // Specify date components
         dateComponents = DateComponents()
+        dateComponents.timeZone = TimeZone(abbreviation: "UTC")
         dateComponents.year = 2029
         dateComponents.month = 12
         dateComponents.day = 01
-        dateComponents.timeZone = TimeZone(abbreviation: "UTC")
         // Set to the default for the function, whatever that is...
         dateComponents.hour = 12
         dateComponents.minute = 00
         // Create date from components
-        userCalendar = Calendar.current // user calendar
         someDateTime = userCalendar.date(from: dateComponents)
         today = todaysDate()
         XCTAssert(today == someDateTime)
+    }
+    
+    func testDayMock(){
+        mockDateTime()
+        var day = getDayOfWeek()
+        XCTAssert(getDayOfWeek() == 1)
+        mockDateTime(mockStrO: "2018-10-5")
+        day = getDayOfWeek()
+        XCTAssert(getDayOfWeek() == 5)
+        mockDateTime(mockStrO: "2018-10-7")
+        day = getDayOfWeek()
+        XCTAssert(getDayOfWeek() == 7)
     }
     
 }

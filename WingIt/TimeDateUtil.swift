@@ -33,8 +33,8 @@ public class TimeUtil {
 //}
 
 func getDayOfWeek() -> Int {
-    let todayDate = todaysDate()
     let myCalendar = Calendar(identifier: .gregorian)
+    let todayDate = todaysDate()
     let weekDay = myCalendar.component(.weekday, from: todayDate)
     // Weekday 1 is sunday, we want to return sunday as 7
     if weekDay == 1 {
