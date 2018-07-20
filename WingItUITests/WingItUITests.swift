@@ -138,7 +138,6 @@ class WingItUITests: XCTestCase {
     
     
     func testDataPersistenceOnRestart(){
-        app.launchArguments.append("-mockDate 2018-08-01")
         app.launchArguments.append("-fakeData")
         app.launch()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 60)

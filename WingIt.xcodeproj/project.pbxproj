@@ -15,6 +15,7 @@
 		0640830120C36D2800F568CB /* Cwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640830020C36D2700F568CB /* Cwrapper.swift */; };
 		0675D6E721006406003B0233 /* testData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 0675D6E421005669003B0233 /* testData.csv */; };
 		06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* WingItUITests.swift */; };
+		06940F662101542A00EF3E96 /* freezer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06940F652101542A00EF3E96 /* freezer.swift */; };
 		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
@@ -89,6 +90,7 @@
 		06934D7A1F86730B00D308BD /* WingItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06934D7C1F86730B00D308BD /* WingItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITests.swift; sourceTree = "<group>"; };
 		06934D7E1F86730B00D308BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06940F652101542A00EF3E96 /* freezer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = freezer.swift; path = "/home/cshome/w/wwarren/stoned-crone/freezer.swift"; sourceTree = "<absolute>"; };
 		069827641F87041000777DAD /* LoginDebugController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDebugController.swift; sourceTree = "<group>"; };
 		06A5475D1F7B1D9600967FD7 /* libBackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBackend.a; path = "../../Library/Developer/Xcode/DerivedData/Project-faabexjzkhonsfdsetxpryushahl/Build/Products/Debug-iphonesimulator/libBackend.a"; sourceTree = "<group>"; };
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				064082FD20C263AA00F568CB /* Test files */,
 				06D37CD61F873C7F009318AC /* Settings.bundle */,
 				53F8A00A1EC3D0010001604A /* WingIt */,
+				06940F652101542A00EF3E96 /* freezer.swift */,
 				06934D7B1F86730B00D308BD /* WingItUITests */,
 				06E5E2EE20C1504500C77382 /* WingItTests */,
 				53F8A0091EC3D0010001604A /* Products */,
@@ -576,6 +579,7 @@
 				53B306762077643A006E05B7 /* AppColors.swift in Sources */,
 				53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */,
 				534BB68D2081E28A00757932 /* RMessage.m in Sources */,
+				06940F662101542A00EF3E96 /* freezer.swift in Sources */,
 				53F8A00E1EC3D0010001604A /* TimetableView.swift in Sources */,
 				06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */,
 				53F8A0141EC3D0010001604A /* Project.xcdatamodeld in Sources */,

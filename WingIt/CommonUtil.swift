@@ -329,30 +329,36 @@ var mockDate: Date?
 
 func HandleLaunchArgs() {
     let userDefaults: UserDefaults
+    var args = CommandLine.arguments
     
     // Resets app if given argument resetdata, so that tests start from a consistent clean state
-    if CommandLine.arguments.contains("-reset") {
+    if args.contains("-reset") {
         let defaultsName = Bundle.main.bundleIdentifier!
         //    userDefaults.removePersistentDomain(forName: defaultsName)
         clearCache()
     }
     
     
-    if CommandLine.arguments.contains("-UITests") {
+    if args.contains("-UITests") {
         UIApplication.shared.keyWindow?.layer.speed = 100
     }
     
     
     // Resets app if given argument resetdata, so that tests start from a consistent clean state
-    if CommandLine.arguments.contains("-fakeData") {
+    if args.contains("-fakeData") {
         copyTestData()
+        if !args.contains("-mockDate") {
+            args += ["-mockDate", "2018-08-01"]
+        }
     }
     
     
     // Expect argument of the form "mockDate [date]",
     // where [date] is of the ISO form yyyy-MM-dd.
-    if CommandLine.arguments.contains("-mockDate") {
-        if let mockDateStr = UserDefaults.standard.string(forKey: "mockDate"){
+//    if args.contains("-mockDate") {
+//        if let mockDateStr = UserDefaults.standard.string(forKey: "mockDate"){
+    if let i = args.index(of: "-mockDate"){
+        let mockDateStr = args[i+1]
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
             if let mockDateOpt = formatter.date(from: mockDateStr){
@@ -364,6 +370,6 @@ func HandleLaunchArgs() {
                 mockDate = formatter.date(from: "2018-08-01")
             }
         }
-    }
+//    }
     
 }
