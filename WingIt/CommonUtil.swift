@@ -110,38 +110,6 @@ func setNotification (event: Lesson){
     // print(UIApplication.shared.scheduledLocalNotifications!)
 }
 
-// Account for the default UMT time, which is giving wrong date regardless of how the timezone is set!!!
-func convertUMTtoNZT(current: Date) -> Date{
-    var timeDiff = DateComponents()
-    //NZ is + 13. Will break for DST, should try to get proper timezones working eventually.
-    timeDiff.hour = 13
-    let updated = Calendar.current.date(byAdding: timeDiff, to: current)
-    return (updated)!
-}
-
-func todaysDate() -> Date {
-    // Allows mocking the date for testing
-    if CommandLine.arguments.contains("mockdate") {
-        let mockDate = Date()
-        return mockDate
-    }else{
-        return Date()
-    }
-    
-}
-
-func getDayOfWeek() -> Int? {
-    let todayDate = todaysDate()
-    let myCalendar = Calendar(identifier: .gregorian)
-    let weekDay = myCalendar.component(.weekday, from: todayDate)
-    // Weekday 1 is sunday, we want to return sunday as 7
-    if weekDay == 1 {
-        return 7
-    }else{
-        return weekDay - 1
-    }
-}
-
 func storeUserPass(username: String, password: String){
     var saveSuccessful: Bool = KeychainWrapper.standard.set(username, forKey: "WingItStoredUser")
     if saveSuccessful{
@@ -327,13 +295,39 @@ func copyTestData(){
 
 var mockDate: Date?
 
+// If called without argument, will use default date.
+func mockDateTime(mockStrO: String?=nil){
+    var mockStr: String
+    // 1st Oct is a monday. Nice num to work with.
+    let defaultDate = "2018-10-01"
+    if let _ = mockStrO {
+        mockStr = mockStrO!
+    }else{
+        mockStr = defaultDate
+    }
+    let formatter = DateFormatter()
+    let formatStr = "yyyy-MM-dd+HH:mm" // ISO datetime format.
+    formatter.dateFormat = formatStr
+//    let mockStrWithTime = mockStr + "+13:00"
+    if let mockDateOpt = formatter.date(from: mockStr){
+        mockDate = mockDateOpt
+//    } else if let mockDateOpt = formatter.date(from: mockStrWithTime){
+    } else if let mockDateOpt = formatter.date(from: mockStr + "+23:00"){
+        mockDate = mockDateOpt
+    } else {
+        print("Error: Invalid date argument format: \"\(mockStr)\". Will be set to mon, \(defaultDate)")
+        print("Expect form `mockDate [dateTime]`, where [dateTime] is of form \(formatStr). The time portion is optional.")
+        mockDate = formatter.date(from: defaultDate)
+    }
+}
+
 func HandleLaunchArgs() {
-    let userDefaults: UserDefaults
+    //    let userDefaults: UserDefaults
     var args = CommandLine.arguments
     
     // Resets app if given argument resetdata, so that tests start from a consistent clean state
     if args.contains("-reset") {
-        let defaultsName = Bundle.main.bundleIdentifier!
+        //        let defaultsName = Bundle.main.bundleIdentifier!
         //    userDefaults.removePersistentDomain(forName: defaultsName)
         clearCache()
     }
@@ -348,10 +342,9 @@ func HandleLaunchArgs() {
     if args.contains("-fakeData") {
         copyTestData()
         if !args.contains("-mockDate") {
-            args += ["-mockDate", "2018-08-01"]
+            mockDateTime() // Will use default
         }
     }
-    
     
     // Expect argument of the form "mockDate [date]",
     // where [date] is of the ISO form yyyy-MM-dd.
@@ -359,17 +352,12 @@ func HandleLaunchArgs() {
 //        if let mockDateStr = UserDefaults.standard.string(forKey: "mockDate"){
     if let i = args.index(of: "-mockDate"){
         let mockDateStr = args[i+1]
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
-            if let mockDateOpt = formatter.date(from: mockDateStr){
-                mockDate = mockDateOpt
-                print(mockDate)
-            } else {
-                print("Error: Invalid date argument format. Will be set to 2018-08-01")
-                print("Expect form `mockDate [date]`, where [date] is of form yyyy-MM-dd.")
-                mockDate = formatter.date(from: "2018-08-01")
-            }
-        }
+        mockDateTime(mockStrO: mockDateStr)
+    }
+    if let i = args.index(of: "-mockTime"){
+        let mockTimeStr = args[i+1]
+        mockDateTime(mockStrO: mockTimeStr)
+    }
 //    }
     
 }
