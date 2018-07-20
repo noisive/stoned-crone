@@ -24,13 +24,23 @@ public class TimeUtil {
     }
     
 }
+//
+//// Returns 1 for sunday, 7 for saturday
+//func dayOfWeek() -> Int {
+//    let myCalendar = Calendar(identifier: .gregorian)
+//    let weekDay = myCalendar.component(.weekday, from: todaysDate())
+//    return weekDay
+//}
 
-extension Date {
-    func dayOfWeek() -> Int {
-        if let USDayOfWeek: Int = Calendar.current.dateComponents([.weekday], from: self).weekday {
-            return USDayOfWeek
-        }
-        return 0
+func getDayOfWeek() -> Int {
+    let todayDate = todaysDate()
+    let myCalendar = Calendar(identifier: .gregorian)
+    let weekDay = myCalendar.component(.weekday, from: todayDate)
+    // Weekday 1 is sunday, we want to return sunday as 7
+    if weekDay == 1 {
+        return 7
+    }else{
+        return weekDay - 1
     }
 }
 
@@ -53,15 +63,73 @@ func todaysDate() -> Date {
     
 }
 
-func getDayOfWeek() -> Int? {
-    let todayDate = todaysDate()
-    let myCalendar = Calendar(identifier: .gregorian)
-    let weekDay = myCalendar.component(.weekday, from: todayDate)
-    // Weekday 1 is sunday, we want to return sunday as 7
-    if weekDay == 1 {
-        return 7
+var mockDate: Date?
+
+// If called without argument, will use default date.
+func mockDateTime(mockStrO: String?=nil){
+    var mockStr: String
+    // 1st Oct is a monday. Nice num to work with.
+    let defaultDate = "2018-10-01"
+    let defaultTime = "+23:00"
+    let defaultDateTime = defaultDate + defaultTime
+    if let _ = mockStrO {
+        mockStr = mockStrO!
     }else{
-        return weekDay - 1
+        mockStr = defaultDate
+    }
+    let formatter = DateFormatter()
+    let formatStr = "yyyy-MM-dd+HH:mm" // ISO datetime format.
+    formatter.dateFormat = formatStr
+    //    let mockStrWithTime = mockStr + "+13:00"
+    if let mockDateOpt = formatter.date(from: mockStr){
+        mockDate = mockDateOpt
+        //    } else if let mockDateOpt = formatter.date(from: mockStrWithTime){
+    } else if let mockDateOpt = formatter.date(from: mockStr + defaultTime){
+        mockDate = mockDateOpt
+    } else {
+        print("Error: Invalid date argument format: \"\(mockStr)\". Will be set to mon, \(defaultDateTime)")
+        print("Expect form `mockDate [dateTime]`, where [dateTime] is of form \(formatStr). The time portion is optional.")
+        mockDate = formatter.date(from: defaultDate)
     }
 }
 
+func HandleLaunchArgs() {
+    //    let userDefaults: UserDefaults
+    var args = CommandLine.arguments
+    
+    // Resets app if given argument resetdata, so that tests start from a consistent clean state
+    if args.contains("-reset") {
+        //        let defaultsName = Bundle.main.bundleIdentifier!
+        //    userDefaults.removePersistentDomain(forName: defaultsName)
+        clearCache()
+    }
+    
+    
+    if args.contains("-UITests") {
+        UIApplication.shared.keyWindow?.layer.speed = 100
+    }
+    
+    
+    // Resets app if given argument resetdata, so that tests start from a consistent clean state
+    if args.contains("-fakeData") {
+        copyTestData()
+        if !args.contains("-mockDate") {
+            mockDateTime() // Will use default
+        }
+    }
+    
+    // Expect argument of the form "mockDate [date]",
+    // where [date] is of the ISO form yyyy-MM-dd.
+    //    if args.contains("-mockDate") {
+    //        if let mockDateStr = UserDefaults.standard.string(forKey: "mockDate"){
+    if let i = args.index(of: "-mockDate"){
+        let mockDateStr = args[i+1]
+        mockDateTime(mockStrO: mockDateStr)
+    }
+    if let i = args.index(of: "-mockTime"){
+        let mockTimeStr = args[i+1]
+        mockDateTime(mockStrO: mockTimeStr)
+    }
+    //    }
+    
+}
