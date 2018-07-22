@@ -338,19 +338,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="grR-CZ-vx7">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="grR-CZ-vx7" userLabel="ClassNumberBox">
                                 <rect key="frame" x="282" y="594" width="85" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3 Classes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-gY-LEd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3 Classes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-gY-LEd" userLabel="ClassNumberLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="85" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <accessibility key="accessibilityConfiguration" label="ClassNumberLabel"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" red="0.0039215686269999999" green="0.54117647059999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" label="ClassNumberBox">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jv0-ai-nJK">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
@@ -425,6 +429,9 @@
                                                                                             </label>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0039215686269999999" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <accessibility key="accessibilityConfiguration" label="LClass">
+                                                                                            <bool key="isElement" value="YES"/>
+                                                                                        </accessibility>
                                                                                         <constraints>
                                                                                             <constraint firstItem="8jW-ud-a4v" firstAttribute="top" secondItem="8s3-Xu-uXM" secondAttribute="top" constant="8" id="5XH-T5-VvH"/>
                                                                                             <constraint firstItem="ZSR-fI-C0Z" firstAttribute="top" secondItem="8s3-Xu-uXM" secondAttribute="top" id="QhB-aa-Nhy"/>
@@ -467,6 +474,9 @@
                                                                                             </label>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0039215686269999999" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <accessibility key="accessibilityConfiguration" label="RClass">
+                                                                                            <bool key="isElement" value="YES"/>
+                                                                                        </accessibility>
                                                                                         <constraints>
                                                                                             <constraint firstItem="whL-K1-oX3" firstAttribute="top" secondItem="MJv-B1-sak" secondAttribute="bottom" id="EeU-7a-XzE"/>
                                                                                             <constraint firstItem="ZI1-KZ-Qs7" firstAttribute="leading" secondItem="rgg-Wj-5pR" secondAttribute="leading" id="IXi-YQ-4Cg"/>
@@ -490,8 +500,14 @@
                                                                     <constraint firstItem="Xjv-5d-3d0" firstAttribute="top" secondItem="XNV-hC-fGr" secondAttribute="top" id="ffx-08-r4P"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Xjv-5d-3d0" secondAttribute="bottom" id="xA7-YT-OYr"/>
                                                                 </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibiltyIdentifier" value=""/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </tableViewCellContentView>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <accessibility key="accessibilityConfiguration" label="LessonCell">
+                                                                <bool key="isElement" value="YES"/>
+                                                            </accessibility>
                                                             <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <connections>
                                                                 <outlet property="leftLesson" destination="8s3-Xu-uXM" id="3aD-cp-ktj"/>
@@ -533,6 +549,9 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="53h-Fq-4GW"/>
                                     <constraint firstItem="TcX-yX-hhY" firstAttribute="top" secondItem="xNd-NX-R4g" secondAttribute="top" id="9IB-Q4-AJR"/>

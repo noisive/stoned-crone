@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06060CDA21054A2100507B89 /* TimetableEventPositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06060CD921054A2100507B89 /* TimetableEventPositionTests.swift */; };
 		061F3E801F8AF09C00BD0D09 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061F3E7F1F8AF09C00BD0D09 /* DataUtil.swift */; };
 		062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9441F8B414B005F350E /* KeychainWrapper.swift */; };
 		062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */; };
 		064082FE20C263BB00F568CB /* TestAnswers in Resources */ = {isa = PBXBuildFile; fileRef = 064082FB20C263AA00F568CB /* TestAnswers */; };
 		064082FF20C263BB00F568CB /* TestInputs in Resources */ = {isa = PBXBuildFile; fileRef = 064082FC20C263AA00F568CB /* TestInputs */; };
 		0640830120C36D2800F568CB /* Cwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640830020C36D2700F568CB /* Cwrapper.swift */; };
+		0660DB1821054C9D006D9D56 /* WingItUITestsSuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0660DB1721054C9D006D9D56 /* WingItUITestsSuper.swift */; };
+		0660DB1A21054E70006D9D56 /* StabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0660DB1921054E70006D9D56 /* StabilityTests.swift */; };
 		0675D6E721006406003B0233 /* testData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 0675D6E421005669003B0233 /* testData.csv */; };
-		06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* WingItUITests.swift */; };
+		06934D7D1F86730B00D308BD /* LoginAndRefreshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* LoginAndRefreshTests.swift */; };
 		06940F682101883500EF3E96 /* DateMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06940F672101883500EF3E96 /* DateMockTests.swift */; };
 		06940F6A2101935900EF3E96 /* TimeDateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B37F20760D9A0063E45F /* TimeDateUtil.swift */; };
 		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
@@ -79,6 +82,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06060CD921054A2100507B89 /* TimetableEventPositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableEventPositionTests.swift; sourceTree = "<group>"; };
 		061F3E7F1F8AF09C00BD0D09 /* DataUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUtil.swift; sourceTree = "<group>"; };
 		062EB9431F8B414B005F350E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		062EB9441F8B414B005F350E /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
@@ -87,9 +91,11 @@
 		064082FB20C263AA00F568CB /* TestAnswers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestAnswers; path = ../Backend/parserTests/TestAnswers; sourceTree = "<group>"; };
 		064082FC20C263AA00F568CB /* TestInputs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestInputs; path = ../Backend/parserTests/TestInputs; sourceTree = "<group>"; };
 		0640830020C36D2700F568CB /* Cwrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cwrapper.swift; sourceTree = "<group>"; };
+		0660DB1721054C9D006D9D56 /* WingItUITestsSuper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITestsSuper.swift; sourceTree = "<group>"; };
+		0660DB1921054E70006D9D56 /* StabilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StabilityTests.swift; sourceTree = "<group>"; };
 		0675D6E421005669003B0233 /* testData.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testData.csv; sourceTree = "<group>"; };
 		06934D7A1F86730B00D308BD /* WingItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		06934D7C1F86730B00D308BD /* WingItUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITests.swift; sourceTree = "<group>"; };
+		06934D7C1F86730B00D308BD /* LoginAndRefreshTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAndRefreshTests.swift; sourceTree = "<group>"; };
 		06934D7E1F86730B00D308BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06940F672101883500EF3E96 /* DateMockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMockTests.swift; sourceTree = "<group>"; };
 		069827641F87041000777DAD /* LoginDebugController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDebugController.swift; sourceTree = "<group>"; };
@@ -207,8 +213,11 @@
 		06934D7B1F86730B00D308BD /* WingItUITests */ = {
 			isa = PBXGroup;
 			children = (
+				0660DB1921054E70006D9D56 /* StabilityTests.swift */,
+				0660DB1721054C9D006D9D56 /* WingItUITestsSuper.swift */,
+				06060CD921054A2100507B89 /* TimetableEventPositionTests.swift */,
 				0675D6E421005669003B0233 /* testData.csv */,
-				06934D7C1F86730B00D308BD /* WingItUITests.swift */,
+				06934D7C1F86730B00D308BD /* LoginAndRefreshTests.swift */,
 				06934D7E1F86730B00D308BD /* Info.plist */,
 			);
 			path = WingItUITests;
@@ -557,7 +566,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06934D7D1F86730B00D308BD /* WingItUITests.swift in Sources */,
+				06934D7D1F86730B00D308BD /* LoginAndRefreshTests.swift in Sources */,
+				06060CDA21054A2100507B89 /* TimetableEventPositionTests.swift in Sources */,
+				0660DB1821054C9D006D9D56 /* WingItUITestsSuper.swift in Sources */,
+				0660DB1A21054E70006D9D56 /* StabilityTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
