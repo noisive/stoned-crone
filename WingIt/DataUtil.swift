@@ -38,7 +38,7 @@ func loadWeekData(VC: TimetableView) {
         }else{
             // TODO: Check date if no class on monday.
             let firstMondaysDate = getMondaysDate()
-            searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: firstMondaysDate!)!
+            searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: firstMondaysDate)!
         }
         
         

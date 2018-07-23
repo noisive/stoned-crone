@@ -8,7 +8,7 @@
 
 import XCTest
 
-class DateMockTests: XCTestCase {
+class DateTimeTests: XCTestCase {
     
 
     override func setUp() {
@@ -65,6 +65,23 @@ class DateMockTests: XCTestCase {
         mockDateTime(mockStrO: "2018-10-7")
         day = getDayOfWeek()
         XCTAssert(getDayOfWeek() == 7)
+    }
+    
+    func testRecentMondayIsCorrect(){
+        let formatter = DateFormatter()
+        let formatStr = "yyyy-MM-dd+HH:mm zzz" // ISO datetime format.
+        formatter.dateFormat = formatStr
+        let actualMonday = formatter.date(from: "2018-10-01+12:00 UTC")!
+        mockDateTime(mockStrO: "2018-10-01") // A monday.
+        testMonday = getMondaysDate()
+        XCTAssert(testMonday == actualMonday)
+        mockDateTime(mockStrO: "2018-10-05") // Friday
+        testMonday = getMondaysDate()
+        XCTAssert(testMonday == actualMonday)
+        mockDateTime(mockStrO: "2018-10-07") // Sunday
+        testMonday = getMondaysDate()
+        XCTAssert(testMonday == actualMonday)
+        
     }
     
 }
