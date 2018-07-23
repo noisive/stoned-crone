@@ -38,15 +38,21 @@ class WingItUITestsSuper: XCTestCase {
     }
     
     func tapLessonCell(index: Int){
-        let lessons = app/*@START_MENU_TOKEN@*/.collectionViews.tables/*[[".otherElements[\"day\"].collectionViews",".cells.tables",".tables",".otherElements[\"dayView\"].collectionViews",".collectionViews"],[[[-1,4,1],[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.cells
-        let lesson = lessons.element(boundBy: index)
+        let lessonsQuery = app/*@START_MENU_TOKEN@*/.collectionViews.tables/*[[".otherElements[\"day\"].collectionViews",".cells.tables",".tables",".otherElements[\"dayView\"].collectionViews",".collectionViews"],[[[-1,4,1],[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.cells
+        let lessons = lessonsQuery.allElementsBoundByIndex
+        let lesson = lessons[index]
         scrollToLessonCell(element: lesson)
         lesson.tap()
     }
+    
     func scrollToLessonCell(element: XCUIElement) {
         while !element.visible() {
             app.otherElements["dayView"].swipeUp()
         }
+    }
+    
+    func tapBackButton(){
+        app.navigationBars.buttons.element(boundBy: 0).tap()
     }
     
     

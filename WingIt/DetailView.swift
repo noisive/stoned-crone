@@ -23,10 +23,10 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet var buttonEffectViews: [UIVisualEffectView]!
     @IBOutlet weak var changeMapType: UIButton!
-    
+
     //Variables
     public var lessonData : Lesson!
-    
+
     //Constants
     private let MAP_CORNER_RADIUS: CGFloat = 13
     private let BUTTONS_CORNER_RADIUS: CGFloat = 5

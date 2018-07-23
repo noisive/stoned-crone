@@ -28,7 +28,8 @@ class TimetableEventPositionTests: WingItUITestsSuper {
     func testClassesAppearEachDay(){
         setUpFakeData()
         for _ in 0...5 {
-//            XCTAssertTrue(classAppears)
+            tapLessonCell(index: 1)
+            XCTAssert(app.cells["CodeCell"].staticTexts["TEST001"].exists)
             app.otherElements["dayView"].swipeLeft()
         }
     }
@@ -45,14 +46,31 @@ class TimetableEventPositionTests: WingItUITestsSuper {
     
     func test8amSlot(){
         setUpFakeData()
+        tapLessonCell(index: 1)
+        XCTAssertFalse(app.cells["CodeCell"].staticTexts["TIME008"].exists, "Not in 5pm slot by mistake")
+        if app.cells["CodeCell"].exists {
+            tapBackButton()
+        }
         tapLessonCell(index: 0)
-        XCTAssert(app.cells["CodeCell"].staticTexts["TEST008"].exists)
-        // XTAssert() // not in 9am slot
+        XCTAssert(app.cells["CodeCell"].staticTexts["TIME008"].exists)
     }
     func test6pmSlot(){
         setUpFakeData()
+        tapLessonCell(index: 9)
+        XCTAssertFalse(app.cells["CodeCell"].staticTexts["TIME018"].exists, "Not in 5pm slot by mistake")
+        if app.cells["CodeCell"].exists {
+            tapBackButton()
+        }
         tapLessonCell(index: 10)
-        XCTAssert(app.cells["CodeCell"].staticTexts["TEST018"].exists)
+        XCTAssert(app.cells["CodeCell"].staticTexts["TIME018"].exists)
+    }
+    func test2HourCellAppearsInBoth(){
+        setUpFakeData()
+        tapLessonCell(index: 3)
+        XCTAssert(app.cells["CodeCell"].staticTexts["HOUR002"].exists)
+        tapBackButton()
+        tapLessonCell(index: 4)
+        XCTAssert(app.cells["CodeCell"].staticTexts["HOUR002"].exists)
     }
 
 }

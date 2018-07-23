@@ -875,7 +875,7 @@
                             <outlet property="delegate" destination="bhx-dZ-ymS" id="QqT-um-aL8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Software Engineering" id="QhG-ug-DhC"/>
+                    <navigationItem key="navigationItem" title="Software Engineering" id="QhG-ug-DhC" userLabel="Back Button"/>
                     <connections>
                         <outlet property="changeMapType" destination="bAN-xu-dvd" id="pgK-FA-ouM"/>
                         <outlet property="codeLabel" destination="t3E-y9-Ax4" id="qXo-OX-IOa"/>
