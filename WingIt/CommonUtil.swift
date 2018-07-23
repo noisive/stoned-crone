@@ -48,13 +48,7 @@ func setNotification (event: Lesson){
     // This section of code has an alternative after it, for if there are multiple weeks of data. Change them when this is implemented. FEATURE
     
     // Get Monday's date, then transform fire date based on lesson's weekday
-    var dateFormatter = DateFormatter()
-    let today = todaysDate()
-    // Todo: potentially change this to a call to getDayOfWeek
-    let todayWeekday: Int = getDayOfWeek()
-    
-    // Gives date of most recent Monday
-    var mondaysDate: Date = getMondaysDate()
+    let mondaysDate: Date = getMondaysDate()
 
     // Add the day to monday
     var interval = DateComponents()
@@ -87,7 +81,7 @@ func setNotification (event: Lesson){
     localNotification.timeZone = TimeZone(identifier: "NZST")
     
     // first check notification isn't in the past. if it is, skip the rest.
-    if notificationTimeAndDate < today{
+    if notificationTimeAndDate < todaysDate(){
         return
     }
     localNotification.fireDate = notificationTimeAndDate
