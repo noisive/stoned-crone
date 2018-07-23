@@ -25,15 +25,14 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         _ = app.otherElements["dayView"].waitForExistence(timeout: 10)
     }
     
-    // Doesn't currently work because entering detail view jumps you back.
     func testClassesAppearEachDay(){
         setUpFakeData()
         let lessons = ["MOND001", "TUES001", "WEDS001", "THURS001", "FRID001"]
         let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
         for i in 0...4 {
 //            XCTAssert(app.otherElements[days[i]].exists)
-            let timeCell = getCell(at: 1) // These tests all in 9am slot
-            XCTAssert(timeCell.staticTexts[lessons[i]].exists)
+            // Tests all in 9am slot.
+            XCTAssert(lessonExists(withCode: lessons[i], atTime: 9))
             app.otherElements["dayView"].swipeLeft()
         }
     }
@@ -42,6 +41,7 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         app.launchArguments += ["-mockDate", "2018-10-05"]
         setUpFakeData()
         XCTAssertTrue(app.otherElements["Friday"].exists)
+        XCTAssertFalse(app.otherElements["Monday"].exists)
     }
     func testOpensToCurrentDayMon(){
         setUpFakeData()
@@ -61,11 +61,8 @@ class TimetableEventPositionTests: WingItUITestsSuper {
 
     func test2HourCellAppearsInBoth(){
         setUpFakeData()
-        tapLessonCell(index: 3)
-        XCTAssert(app.cells["CodeCell"].staticTexts["HOUR002"].exists)
-        tapBackButton()
-        tapLessonCell(index: 4)
-        XCTAssert(app.cells["CodeCell"].staticTexts["HOUR002"].exists)
+        XCTAssert(lessonExists(withCode: "HOUR002", atIndex: 3))
+        XCTAssert(lessonExists(withCode: "HOUR002", atIndex: 4), "Is it in the second slot too?")
     }
     
     func getCell(at index: Int) -> XCUIElement{
