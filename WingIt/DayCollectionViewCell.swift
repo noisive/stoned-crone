@@ -205,7 +205,8 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         
         // We are basically just adding 13 to UMT... DK how robust it is, but only thing that seems to work.
         // Test early and late in day.
-        let offsetDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!)
+//        let offsetDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!)
+        let offsetDate = Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!
         
         return format.string(from: offsetDate)
     }

@@ -106,31 +106,20 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
             let firstLesson: Lesson = self.lessonData[0]
             
             let currentWeekFromData = Calendar.current.component(.weekOfYear, from: firstLesson.eventDate)
-            var currentWeekFromToday = Calendar.current.component(.weekOfYear, from: Date())
-            
-            //Current week from date thinks that sunday is a new week, so compensate for that
-            if self.getDayOfWeek() == 6 {
-                currentWeekFromToday -= 1
-            }
-            
+            let currentWeekFromToday = Calendar.current.component(.weekOfYear, from: todaysDate())
+
             if (currentWeekFromData != currentWeekFromToday) {
                 RMessage.showNotification(withTitle: "It looks like your timetable is out of date! Update now.", type: .warning, customTypeName: nil, callback: nil)
             }
         }
     }
-    
-    private func getDayOfWeek() -> Int {
-        let weekday = Calendar(identifier: .gregorian).component(.weekday, from: Date())
-        return weekday == 1 ? 6 : weekday - 2
-    }
-    
+
     private func scrollToCurrentDay(){
         
-        let indexPath = IndexPath(item: self.getDayOfWeek(), section: 0)
+        let indexPath = IndexPath(item: getDayOfWeek() - 1, section: 0)
         self.collectionView.scrollToItem(at: indexPath, at: .right, animated: false)
         let dayIndex = getCurrentXPage()
         self.navigationItem.title = Constants.Formats.dayArray[dayIndex]
-//        self.navigationItem.title = Constants.Formats.dayArray[self.getDayOfWeek()]
     }
     
     public func isDeviceIphone5() -> Bool {
