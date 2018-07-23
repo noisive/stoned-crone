@@ -49,6 +49,7 @@ func loadWeekData(VC: TimetableView) {
         for event in getEventsForDate(searchDate: searchDate) {
             
             let eventArr = event.components(separatedBy: "|")
+            // TODO these are sometimes force-unwrapped, causing crashes when the data is erroneous. Should be handled.
             
             //Define all data from CSV file and cast to correct data type.
             let uid = CLong(eventArr[0])!

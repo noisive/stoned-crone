@@ -58,20 +58,24 @@ class DateTimeTests: XCTestCase {
     func testDayMock(){
         mockDateTime()
         var day = getDayOfWeek()
-        XCTAssert(getDayOfWeek() == 1)
+        XCTAssert(day == 1)
         mockDateTime(mockStrO: "2018-10-5")
         day = getDayOfWeek()
-        XCTAssert(getDayOfWeek() == 5)
+        XCTAssert(day == 5)
+        mockDateTime(mockStrO: "2018-10-6")
+        day = getDayOfWeek()
+        XCTAssert(day == 6)
         mockDateTime(mockStrO: "2018-10-7")
         day = getDayOfWeek()
-        XCTAssert(getDayOfWeek() == 7)
+        XCTAssert(day == 7)
     }
     
     func testRecentMondayIsCorrect(){
+        var testMonday: Date
         let formatter = DateFormatter()
         let formatStr = "yyyy-MM-dd+HH:mm zzz" // ISO datetime format.
         formatter.dateFormat = formatStr
-        let actualMonday = formatter.date(from: "2018-10-01+12:00 UTC")!
+        let actualMonday = formatter.date(from: "2018-10-01+00:00 UTC")!
         mockDateTime(mockStrO: "2018-10-01") // A monday.
         testMonday = getMondaysDate()
         XCTAssert(testMonday == actualMonday)

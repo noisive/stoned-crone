@@ -24,28 +24,36 @@ public class TimeUtil {
     }
     
 }
-//
-//// Returns 1 for sunday, 7 for saturday
-//func dayOfWeek() -> Int {
-//    let myCalendar = Calendar(identifier: .gregorian)
-//    let weekDay = myCalendar.component(.weekday, from: todaysDate())
-//    return weekDay
-//}
 
 func getDayOfWeek() -> Int {
-    let myCalendar = Calendar(identifier: .gregorian)
-    let todayDate = todaysDate()
-    let weekDay = myCalendar.component(.weekday, from: todayDate)
-    // Weekday 1 is sunday, we want to return sunday as 7
-    if weekDay == 1 {
-        return 7
-    }else{
-        return weekDay - 1
+    let formatter = DateFormatter()
+    let formatStr = "e" // Just gives day of week, with Wed=2
+    formatter.timeZone = TimeZone(abbreviation: "UTC")
+    formatter.dateFormat = formatStr
+    var weekDay = Int(formatter.string(from: todaysDate()))! - 1 // -1 is hack because this always returns the wrong number.
+    if weekDay == -1 { // Sat
+        weekDay = 6
     }
+    if weekDay == 0 { // Sunday, which we want to treat as 7
+        weekDay = 7
+    }
+    return weekDay
 }
 
 func getMondaysDate() -> Date {
-    return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: todaysDate()))!
+    var today = todaysDate()
+    // Sunday should be treated same week, so if today is sunday, substract 1.
+    if getDayOfWeek() == 7 { //Sunday
+        var interval = DateComponents()
+        interval.day = -1
+//        today = Calendar.current.date(byAdding: interval, to: today)!
+        today = Calendar.current.date(byAdding: .day, value: -1, to: today)!
+    }
+    var comp: DateComponents = Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)
+    comp.timeZone = TimeZone(secondsFromGMT: 0)
+    let mondayDate = Calendar(identifier: .iso8601).date(from: comp)!
+//    print("Monday \(mondayDate)")
+    return mondayDate
 }
 
 // Account for the default UMT time, which is giving wrong date regardless of how the timezone is set!!!
@@ -58,13 +66,21 @@ func convertUMTtoNZT(current: Date) -> Date{
 }
 
 func todaysDate() -> Date {
+    var date: Date
+    
     // Allows mocking the date for testing
     if let _ = mockDate {
-        return mockDate!
+        date = mockDate!
     }else{
-        return Date()
+        date = Date()
     }
     
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone(identifier: "UTC")!
+    let formatStr = "eee, yyyy-MM-dd+HH:mm zzz" // ISO datetime format.
+    formatter.dateFormat = formatStr
+    print(formatter.string(from: date))
+    return date
 }
 
 var mockDate: Date?
