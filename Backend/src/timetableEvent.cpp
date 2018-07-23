@@ -144,6 +144,8 @@ void TimetableEvent::fixDate(int startingDate) {
 
 // TODO: include backslashes in this
 std::string csvEscape(std::string s){
+    return s;
+    /*
     std::string out;
 
     size_t c = 0;
@@ -157,9 +159,12 @@ std::string csvEscape(std::string s){
         }
     }
     return out;
+     */
 }
 
 std::string TimetableEvent::csvDeescape(std::string s){
+    return s;
+    /*
     std::string out;
     std::string esc = "\\,";
     size_t l = esc.length();
@@ -176,7 +181,7 @@ std::string TimetableEvent::csvDeescape(std::string s){
     }
     while (c != std::string::npos);
     return out;
-
+     */
 }
 
 void testcsvEscape(){

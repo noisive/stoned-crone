@@ -275,8 +275,8 @@ TimetableEvent Parser::parseCSVLine(std::string line) {
     TimetableEvent ttEvent;
 
     for (int i = 0; i < line.length(); i++) {
-        if (line.at(i) == ',' && line.at(i-1) != '\\') {
-//        if (line.at(i) == ',') {
+//        if (line.at(i) == ',' && line.at(i-1) != '\\') {
+        if (line.at(i) == '|') {
             switch (column) {
                 case 0:
                     break;
