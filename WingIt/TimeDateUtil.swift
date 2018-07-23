@@ -42,7 +42,8 @@ func getDayOfWeek() -> Int {
 
 func getMondaysDate() -> Date {
     var today = todaysDate()
-    // Sunday should be treated same week, so if today is sunday, substract 1.
+    // Sunday should be treated same week, but is considered the start of the next week
+    // so if today is sunday, substract 1 day so the calc is run from saturday.
     if getDayOfWeek() == 7 { //Sunday
         var interval = DateComponents()
         interval.day = -1
@@ -74,12 +75,13 @@ func todaysDate() -> Date {
     }else{
         date = Date()
     }
-    
+    #if debug
     let formatter = DateFormatter()
     formatter.timeZone = TimeZone(identifier: "UTC")!
     let formatStr = "eee, yyyy-MM-dd+HH:mm zzz" // ISO datetime format.
     formatter.dateFormat = formatStr
     print(formatter.string(from: date))
+    #endif
     return date
 }
 

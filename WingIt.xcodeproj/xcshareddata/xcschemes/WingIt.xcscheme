@@ -65,6 +65,9 @@
                   Identifier = "StabilityTests/testSwipePastEndOfArrayFast()">
                </Test>
                <Test
+                  Identifier = "TimetableEventPositionTests/testClassesAppearEachDay()">
+               </Test>
+               <Test
                   Identifier = "WingItUITests/testLoginRaw()">
                </Test>
                <Test

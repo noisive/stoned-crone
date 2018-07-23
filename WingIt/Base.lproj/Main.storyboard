@@ -334,7 +334,7 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="Day">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="dayView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -353,10 +353,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration" label="ClassNumberBox">
-                                    <bool key="isElement" value="YES"/>
+                                    <bool key="isElement" value="NO"/>
                                 </accessibility>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jv0-ai-nJK">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jv0-ai-nJK" userLabel="DayCollection">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="dpJ-up-6IL">
@@ -373,7 +373,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="377" height="672"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rbj-Pg-4kz">
+                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rbj-Pg-4kz" userLabel="LessonTable">
                                                     <rect key="frame" x="0.0" y="0.0" width="377" height="672"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <prototypes>
@@ -389,6 +389,9 @@
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1i-IC-VKQ">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="55" height="74.666666666666671"/>
+                                                                                <accessibility key="accessibilityConfiguration">
+                                                                                    <bool key="isElement" value="NO"/>
+                                                                                </accessibility>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="55" id="hyJ-GV-Nzm"/>
                                                                                 </constraints>
@@ -429,8 +432,8 @@
                                                                                             </label>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0039215686269999999" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                        <accessibility key="accessibilityConfiguration" label="LClass">
-                                                                                            <bool key="isElement" value="YES"/>
+                                                                                        <accessibility key="accessibilityConfiguration" identifier="LClass" label="LClass">
+                                                                                            <bool key="isElement" value="NO"/>
                                                                                         </accessibility>
                                                                                         <constraints>
                                                                                             <constraint firstItem="8jW-ud-a4v" firstAttribute="top" secondItem="8s3-Xu-uXM" secondAttribute="top" constant="8" id="5XH-T5-VvH"/>
@@ -474,8 +477,8 @@
                                                                                             </label>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0039215686269999999" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                                        <accessibility key="accessibilityConfiguration" label="RClass">
-                                                                                            <bool key="isElement" value="YES"/>
+                                                                                        <accessibility key="accessibilityConfiguration" identifier="LClass" label="RClass">
+                                                                                            <bool key="isElement" value="NO"/>
                                                                                         </accessibility>
                                                                                         <constraints>
                                                                                             <constraint firstItem="whL-K1-oX3" firstAttribute="top" secondItem="MJv-B1-sak" secondAttribute="bottom" id="EeU-7a-XzE"/>
@@ -500,12 +503,9 @@
                                                                     <constraint firstItem="Xjv-5d-3d0" firstAttribute="top" secondItem="XNV-hC-fGr" secondAttribute="top" id="ffx-08-r4P"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Xjv-5d-3d0" secondAttribute="bottom" id="xA7-YT-OYr"/>
                                                                 </constraints>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibiltyIdentifier" value=""/>
-                                                                </userDefinedRuntimeAttributes>
                                                             </tableViewCellContentView>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <accessibility key="accessibilityConfiguration" label="LessonCell">
+                                                            <accessibility key="accessibilityConfiguration" identifier="LessonCell" label="LessonCell">
                                                                 <bool key="isElement" value="YES"/>
                                                             </accessibility>
                                                             <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -564,7 +564,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <accessibility key="accessibilityConfiguration" identifier="dayView" label="day">
-                            <bool key="isElement" value="YES"/>
+                            <bool key="isElement" value="NO"/>
                         </accessibility>
                         <constraints>
                             <constraint firstItem="jv0-ai-nJK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="256-0h-67w"/>
@@ -598,18 +598,18 @@
             </objects>
             <point key="canvasLocation" x="1255.2" y="758.86699507389164"/>
         </scene>
-        <!--Software Engineering-->
+        <!--Lesson Details-->
         <scene sceneID="P4V-Z7-zem">
             <objects>
-                <tableViewController storyboardIdentifier="DetailedClassView" id="bhx-dZ-ymS" customClass="DetailView" customModule="WingIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="GFd-z8-cx5">
+                <tableViewController storyboardIdentifier="DetailedClassView" id="bhx-dZ-ymS" userLabel="Lesson Details" customClass="DetailView" customModule="WingIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="GFd-z8-cx5" userLabel="LessonDetailView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="VEV-ja-nJV">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Hxp-xc-QWv" detailTextLabel="tS0-u0-H8z" style="IBUITableViewCellStyleValue1" id="MEV-CE-HjS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Hxp-xc-QWv" detailTextLabel="tS0-u0-H8z" style="IBUITableViewCellStyleValue1" id="MEV-CE-HjS" userLabel="NameCell">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MEV-CE-HjS" id="pNt-0l-qls">
@@ -632,9 +632,12 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="NameCell" label="NameCell">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="ZCV-W0-VSs" detailTextLabel="t3E-y9-Ax4" style="IBUITableViewCellStyleValue1" id="QmK-ca-yGh">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="ZCV-W0-VSs" detailTextLabel="t3E-y9-Ax4" style="IBUITableViewCellStyleValue1" id="QmK-ca-yGh" userLabel="CodeCell">
                                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QmK-ca-yGh" id="qZT-ew-vhu">
@@ -657,6 +660,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="CodeCell" label="CodeCell">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Nvi-ni-kkP" detailTextLabel="Qv7-VJ-UPZ" style="IBUITableViewCellStyleValue1" id="r8I-tc-H6L">
@@ -694,7 +700,7 @@
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Vwe-Sq-Lnk" detailTextLabel="5ru-a5-8qJ" style="IBUITableViewCellStyleValue1" id="VoW-7l-hLo">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Vwe-Sq-Lnk" detailTextLabel="5ru-a5-8qJ" style="IBUITableViewCellStyleValue1" id="VoW-7l-hLo" userLabel="TimeCell">
                                         <rect key="frame" x="0.0" y="154" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VoW-7l-hLo" id="6XT-rR-r9I">
@@ -717,6 +723,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="TimeCell" label="TimeCell">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="gbM-Fc-jg5" detailTextLabel="8lF-oY-POn" style="IBUITableViewCellStyleValue1" id="BbP-7u-aOQ">
