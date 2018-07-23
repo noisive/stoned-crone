@@ -41,6 +41,7 @@ class WingItUITestsSuper: XCTestCase {
         let lessonsQuery = app/*@START_MENU_TOKEN@*/.collectionViews.tables/*[[".otherElements[\"day\"].collectionViews",".cells.tables",".tables",".otherElements[\"dayView\"].collectionViews",".collectionViews"],[[[-1,4,1],[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.cells
         let lessons = lessonsQuery.allElementsBoundByIndex
         let lesson = lessons[index]
+//        let lesson = lessons.element(boundBy: index)
         scrollToLessonCell(element: lesson)
         lesson.tap()
     }
