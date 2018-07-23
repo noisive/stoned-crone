@@ -55,6 +55,14 @@ class WingItUITestsSuper: XCTestCase {
     func tapBackButton(){
         app.navigationBars.buttons.element(boundBy: 0).tap()
     }
+
+    func lessonExists(withCode: String, atIndex: Int){
+        let timeCell = getCell(at: atIndex)
+        return timeCell.staticTexts[withCode].exists
+    }
+    func lessonExists(withCode: String, atTime: Int){
+        return lessonExists(withCode: withCode, atIndex: atTime-8)
+    }
     
     
     func testingPlayground(){

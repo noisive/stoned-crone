@@ -50,18 +50,15 @@ class TimetableEventPositionTests: WingItUITestsSuper {
     
     func test8amSlot(){
         setUpFakeData()
-        var timeCell = getCell(at: 1)
-        XCTAssertFalse(timeCell.staticTexts["TIME008"].exists,  "Is it in 9am slot by mistake?")
-        timeCell = getCell(at: 0)
-        XCTAssert(timeCell.staticTexts["TIME008"].exists)
+        XCTAssertFalse(lessonExists(withCode: "TIME008", atTime: 9),  "Is it in 9am slot by mistake?")
+        XCTAssert(lessonExists(withCode: "TIME008", atTime: 8))
     }
     func test6pmSlot(){
         setUpFakeData()
-        var timeCell = getCell(at: 9)
-        XCTAssertFalse(timeCell.staticTexts["TIME018"].exists, "Is it in 5pm slot by mistake?")
-        timeCell = getCell(at: 10)
-        XCTAssert(timeCell.staticTexts["TIME018"].exists)
+        XCTAssertFalse(lessonExists(withCode: "TIME018", atTime: 17), "Is it in 5pm slot by mistake?")
+        XCTAssert(lessonExists(withCode: "TIME018", atTime: 18))
     }
+
     func test2HourCellAppearsInBoth(){
         setUpFakeData()
         tapLessonCell(index: 3)
