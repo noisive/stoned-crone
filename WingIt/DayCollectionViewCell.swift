@@ -193,9 +193,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     
     func calculateDayLabel() -> String {
         
-        // This is currently replicated in commonUtil. TODO.
-        // Gives date of most recent Monday
-        let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: todaysDate()))!
+        let mondaysDate = getMondaysDate()
         
         
         let format = DateFormatter()

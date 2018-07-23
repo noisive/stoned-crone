@@ -53,10 +53,31 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "LoginAndRefreshTests/testLoginRaw()">
+               </Test>
+               <Test
+                  Identifier = "LoginAndRefreshTests/testSwipePastEndOfArrayFast()">
+               </Test>
+               <Test
+                  Identifier = "LoginAndRefreshTests/testingPlayground()">
+               </Test>
+               <Test
+                  Identifier = "StabilityTests/testSwipePastEndOfArrayFast()">
+               </Test>
+               <Test
                   Identifier = "WingItUITests/testLoginRaw()">
                </Test>
                <Test
+                  Identifier = "WingItUITests/testSwipePastEndOfArrayFast()">
+               </Test>
+               <Test
                   Identifier = "WingItUITests/testingPlayground()">
+               </Test>
+               <Test
+                  Identifier = "WingItUITestsSuper">
+               </Test>
+               <Test
+                  Identifier = "WingItUITestsSuper/testingPlayground()">
                </Test>
             </SkippedTests>
          </TestableReference>
