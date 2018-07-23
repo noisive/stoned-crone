@@ -209,19 +209,19 @@ std::string TimetableEvent::toString() {
 //    testcsvEscape();
 //    testcsvDeescape();
     return std::to_string(this->uid) + 
-        "," + std::to_string(this->day) + 
-        "," + std::to_string(this->startTime) + 
-        "," + std::to_string(this->duration) + 
-        "," + this->color +  
-        "," + this->type + 
-        "," + this->paperCode + 
-        "," + csvEscape(this->paperName) + 
-        "," + this->mapLat + 
-        "," + this->mapLong + 
-        "," + this->roomCode +
-        "," + csvEscape(this->roomName) +
-        "," + csvEscape(this->building) +
-        "," + this->date.ISODate();
+        "|" + std::to_string(this->day) + 
+        "|" + std::to_string(this->startTime) + 
+        "|" + std::to_string(this->duration) + 
+        "|" + this->color +  
+        "|" + this->type + 
+        "|" + this->paperCode + 
+        "|" + csvEscape(this->paperName) + 
+        "|" + this->mapLat + 
+        "|" + this->mapLong + 
+        "|" + this->roomCode +
+        "|" + csvEscape(this->roomName) +
+        "|" + csvEscape(this->building) +
+        "|" + this->date.ISODate();
 }
 
 bool TimetableEvent::validateEventData(){

@@ -48,7 +48,7 @@ func loadWeekData(VC: TimetableView) {
         
         for event in getEventsForDate(searchDate: searchDate) {
             
-            let eventArr = event.components(separatedBy: ",")
+            let eventArr = event.components(separatedBy: "|")
             
             //Define all data from CSV file and cast to correct data type.
             let uid = CLong(eventArr[0])!
