@@ -46,7 +46,7 @@ class BackendTest: XCTestCase {
 //                let answerFileURL = NSURL.fileURL(withPath: answerFileString) as URL
                 let answerString = try String(contentsOf: answerFileURL)
                 
-                XCTAssert(parsedTTString == answerString)
+                XCTAssert(parsedTTString == answerString, "TT parses and restores correctly")
             }
         } catch {
             print("error:", error)
