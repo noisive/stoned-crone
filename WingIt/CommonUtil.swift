@@ -54,10 +54,8 @@ func setNotification (event: Lesson){
     let todayWeekday: Int = getDayOfWeek()
     
     // Gives date of most recent Monday
-    var mondaysDate: Date {
-        return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
-    }
-    
+    var mondaysDate: Date = getMondaysDate()
+
     // Add the day to monday
     var interval = DateComponents()
     interval.day = event.day

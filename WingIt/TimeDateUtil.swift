@@ -44,6 +44,10 @@ func getDayOfWeek() -> Int {
     }
 }
 
+func getMondaysDate() -> Date {
+    return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: todaysDate()))!
+}
+
 // Account for the default UMT time, which is giving wrong date regardless of how the timezone is set!!!
 func convertUMTtoNZT(current: Date) -> Date{
     var timeDiff = DateComponents()

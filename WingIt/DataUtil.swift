@@ -14,8 +14,7 @@ func loadWeekData(VC: TimetableView) {
     
     formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
     
-    // Gives date of most recent Monday
-    let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: todaysDate()))!
+    let mondaysDate = getMondaysDate()
     
     // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
     UIApplication.shared.cancelAllLocalNotifications()
@@ -38,7 +37,7 @@ func loadWeekData(VC: TimetableView) {
            print("Error: first event date string not found/set")
         }else{
             // TODO: Check date if no class on monday.
-            let firstMondaysDate = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: formatter.date(from: firstEventDateString)!))
+            let firstMondaysDate = getMondaysDate()
             searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: firstMondaysDate!)!
         }
         
