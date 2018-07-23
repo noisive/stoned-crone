@@ -60,7 +60,7 @@ class WingItUITestsSuper: XCTestCase {
         let timeCell = getCell(at: atIndex)
         return timeCell.staticTexts[withCode].exists
     }
-    func lessonExists(withCode: String, atTime: Int){
+    func lessonExists(withCode: String, atTime: Int) -> Bool{
         return lessonExists(withCode: withCode, atIndex: atTime-8)
     }
     
