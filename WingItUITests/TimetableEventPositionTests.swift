@@ -25,11 +25,16 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         _ = app.otherElements["dayView"].waitForExistence(timeout: 10)
     }
     
+    // Doesn't currently work because entering detail view jumps you back.
     func testClassesAppearEachDay(){
         setUpFakeData()
-        for _ in 0...5 {
-            tapLessonCell(index: 1)
-            XCTAssert(app.cells["CodeCell"].staticTexts["TEST001"].exists)
+        let lessons = ["MOND001", "TUES001", "WEDS001", "THURS001", "FRID001"]
+        let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+        for i in 0...5 {
+//            XCTAssert(app.otherElements[days[i]].exists)
+            tapLessonCell(index: 1) // These tests are all in the 9am slot.
+            XCTAssert(app.cells["CodeCell"].staticTexts[lessons[i]].exists, "\(lessons[i]) appears in correct location")
+            tapBackButton()
             app.otherElements["dayView"].swipeLeft()
         }
     }
