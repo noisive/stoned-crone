@@ -13,24 +13,25 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
+
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        
         #if DEBUG
-            // If we are running unit tests, don't wait till app has finished launching.
-            // Load dummy instead.
-            if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
-                let viewController = UIViewController()
-                let label = UILabel()
-                label.text = "Running tests..."
-                label.frame = viewController.view.frame
-                label.textAlignment = .center
-                label.textColor = .white
-                viewController.view.addSubview(label)
-                self.window!.rootViewController = viewController
-                return true
-            }
+        // If we are running unit tests, don't wait till app has finished launching.
+        // Load dummy instead.
+        if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
+            let viewController = UIViewController()
+            let label = UILabel()
+            label.text = "Running tests..."
+            label.frame = viewController.view.frame
+            label.textAlignment = .center
+            label.textColor = .white
+            viewController.view.addSubview(label)
+            self.window!.rootViewController = viewController
+            return true
+        }
         #endif
         // Override point for customization after application launch.
         
@@ -43,9 +44,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let dataPath = cacheURL.appendingPathComponent("data.csv").path
         print(dataPath)
         
-        // Resets app if given argument resetdata, so that tests start from a consistent clean state
-        if CommandLine.arguments.contains("resetdata") {
-            clearCache()
+        #if DEBUG // not compiled when shipped
+        HandleLaunchArgs()
+        #endif
+
+        // If new version, force update.
+        if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
+            let versionFileURL = cacheURL.appendingPathComponent(".version")
+            if !fileManager.fileExists(atPath: versionFileURL.path) {
+                do {
+                    clearCache()
+                    try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
+                } catch { }
+            }else{
+                do {
+                    let oldVer = try String(contentsOf: versionFileURL, encoding: .utf8)
+                    if oldVer != versionNum {
+                        clearCache()
+                        try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
+                    }
+                } catch { }
+            }
+
+            // If we don't have data already, prompt for login.
+            if !fileManager.fileExists(atPath: dataPath) {
+                promptForLogin()
+            }else{
+                // Get data from CSV
+                initTimetable()
+                if checkAndRemoveBadDateData(){
+                    promptForLogin()
+                }
+            }
         }
         
         // Bring up different initial view for this test - used for debugging login
@@ -60,45 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
-        }else{
-            
-            // If new version, force update.
-            if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
-                let versionFileURL = cacheURL.appendingPathComponent(".version")
-                if !fileManager.fileExists(atPath: versionFileURL.path) {
-                    do {
-                        clearCache()
-                        try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
-                    }
-                    catch {
-                    }
-                }else{
-                    do {
-                        let oldVer = try String(contentsOf: versionFileURL, encoding: .utf8)
-                        if oldVer != versionNum {
-                            clearCache()
-                            try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
-                        }
-                    }
-                    catch {
-                    }
-                }
-            }
-            
-            // If we don't have data already, prompt for login.
-            if !fileManager.fileExists(atPath: dataPath) {
-                
-                promptForLogin()
-                
-            }else{
-                // Get data from CSV
-                initTimetable()
-                if checkAndRemoveBadDateData(){
-                    promptForLogin()
-                }
-            }
         }
-        
         
         
         // Register settings bundle.
@@ -117,31 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
     }
     
-    // Delete all files in app cache dir, including our data csvs.
-    func clearCache(){
-        let fileManager = FileManager.default
-        let cacheURL = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-        do {
-            let cachePath = cacheURL.path
-            let fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
-            
-            for fileName in fileNames {
-                
-                //                    if (fileName == "cache.db-wal")
-                //                    {
-                let filePathName = "\(cachePath)/\(fileName)"
-                
-                try fileManager.removeItem(atPath: filePathName)
-                //                    }
-            }
-            
-            //            let files = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
-            
-            
-        } catch {
-            print("Could not clear: \(error)")
-        }
-    }
+   
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

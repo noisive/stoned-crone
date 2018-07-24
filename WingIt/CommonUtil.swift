@@ -48,16 +48,8 @@ func setNotification (event: Lesson){
     // This section of code has an alternative after it, for if there are multiple weeks of data. Change them when this is implemented. FEATURE
     
     // Get Monday's date, then transform fire date based on lesson's weekday
-    var dateFormatter = DateFormatter()
-    let today = todaysDate()
-    // Todo: potentially change this to a call to getDayOfWeek
-    let todayWeekday: Int = Calendar.current.component(.weekday, from: today)
-    
-    // Gives date of most recent Monday
-    var mondaysDate: Date {
-        return Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))!
-    }
-    
+    let mondaysDate: Date = getMondaysDate()
+
     // Add the day to monday
     var interval = DateComponents()
     interval.day = event.day
@@ -89,7 +81,7 @@ func setNotification (event: Lesson){
     localNotification.timeZone = TimeZone(identifier: "NZST")
     
     // first check notification isn't in the past. if it is, skip the rest.
-    if notificationTimeAndDate < today{
+    if notificationTimeAndDate < todaysDate(){
         return
     }
     localNotification.fireDate = notificationTimeAndDate
@@ -108,38 +100,6 @@ func setNotification (event: Lesson){
     
     // DEBUG print out currently scheduled notifications
     // print(UIApplication.shared.scheduledLocalNotifications!)
-}
-
-// Account for the default UMT time, which is giving wrong date regardless of how the timezone is set!!!
-func convertUMTtoNZT(current: Date) -> Date{
-    var timeDiff = DateComponents()
-    //NZ is + 13. Will break for DST, should try to get proper timezones working eventually.
-    timeDiff.hour = 13
-    let updated = Calendar.current.date(byAdding: timeDiff, to: current)
-    return (updated)!
-}
-
-func todaysDate() -> Date {
-    // Allows mocking the date for testing
-    if CommandLine.arguments.contains("mockdate") {
-        let mockDate = Date()
-        return mockDate
-    }else{
-        return Date()
-    }
-
-}
-
-func getDayOfWeek() -> Int? {
-    let todayDate = todaysDate()
-    let myCalendar = Calendar(identifier: .gregorian)
-    let weekDay = myCalendar.component(.weekday, from: todayDate)
-    // Weekday 1 is sunday, we want to return sunday as 7
-    if weekDay == 1 {
-        return 7
-    }else{
-        return weekDay - 1
-    }
 }
 
 func storeUserPass(username: String, password: String){
@@ -237,7 +197,7 @@ extension UIViewController {
 
 func checkAndRemoveBadDateData() -> Bool{
     // Resets data if bad date. //
-//    let fileManager = FileManager.default
+    //    let fileManager = FileManager.default
     let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
     
     let formatter = DateFormatter()
@@ -278,3 +238,90 @@ func checkAndRemoveBadDateData() -> Bool{
     return false
 }
 
+// Delete all files in app cache dir, including our data csvs.
+func clearCache(){
+    let fileManager = FileManager.default
+    let cacheURL = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    do {
+        let cachePath = cacheURL.path
+        let fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
+        
+        for fileName in fileNames {
+            
+            //                    if (fileName == "cache.db-wal")
+            //                    {
+            let filePathName = "\(cachePath)/\(fileName)"
+            
+            try fileManager.removeItem(atPath: filePathName)
+            //                    }
+        }
+        
+        //            let files = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
+        
+        
+    } catch {
+        print("Could not clear: \(error)")
+    }
+}
+
+func copyTestData(){
+    let fileManager = FileManager.default
+    let cacheURL = try! fileManager
+        .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    let dataURL = cacheURL.appendingPathComponent("data.csv")
+    //    let bundle = Bundle(for: type(of: self))
+    let testDataURL = Bundle.main.url(forResource: "testData", withExtension: "csv")!
+    do{
+        if fileManager.fileExists(atPath: dataURL.path) {
+            try fileManager.removeItem(at: dataURL)
+        }
+        try fileManager.copyItem(at: testDataURL, to: dataURL)
+                if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
+                    let versionFileURL = cacheURL.appendingPathComponent(".version")
+                    try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
+                }
+    }catch let error as NSError {
+        print("Error:\(error.description)")
+    }
+}
+
+func HandleLaunchArgs() {
+    //    let userDefaults: UserDefaults
+    var args = CommandLine.arguments
+    
+    // Resets app if given argument resetdata, so that tests start from a consistent clean state
+    if args.contains("-reset") {
+        //        let defaultsName = Bundle.main.bundleIdentifier!
+        //    userDefaults.removePersistentDomain(forName: defaultsName)
+        clearCache()
+    }
+    
+    
+    if args.contains("-UITests") {
+        UIApplication.shared.keyWindow?.layer.speed = 100
+    }
+    
+    
+    // Resets app if given argument resetdata, so that tests start from a consistent clean state
+    if args.contains("-fakeData") {
+        copyTestData()
+        if !args.contains("-mockDate") {
+            mockDateTime() // Will use default
+        }
+    }
+    
+    // Expect argument of the form "mockDate [date]",
+    // where [date] is of the ISO form yyyy-MM-dd.
+    //    if args.contains("-mockDate") {
+    //        if let mockDateStr = UserDefaults.standard.string(forKey: "mockDate"){
+    if let i = args.index(of: "-mockDate"){
+        let mockDateStr = args[i+1]
+        mockDateTime(mockStrO: mockDateStr)
+    }
+    if let i = args.index(of: "-mockTime"){
+        let mockTimeStr = args[i+1]
+        mockDateTime(mockStrO: mockTimeStr)
+    }
+    //    }
+    
+}

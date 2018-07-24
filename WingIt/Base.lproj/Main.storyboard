@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QRJ-3s-2Y0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QRJ-3s-2Y0">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AvenirNext.ttc">
-            <string>AvenirNext-DemiBold</string>
-            <string>AvenirNext-Medium</string>
-            <string>AvenirNext-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Reveal View Controller-->
         <scene sceneID="SCI-M8-DVT">
@@ -341,25 +334,29 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="Day">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="dayView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="grR-CZ-vx7">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="grR-CZ-vx7" userLabel="ClassNumberBox">
                                 <rect key="frame" x="282" y="594" width="85" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3 Classes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-gY-LEd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3 Classes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gne-gY-LEd" userLabel="ClassNumberLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="85" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <accessibility key="accessibilityConfiguration" label="ClassNumberLabel"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" red="0.0039215686269999999" green="0.54117647059999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" label="ClassNumberBox">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jv0-ai-nJK">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jv0-ai-nJK" userLabel="DayCollection">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="dpJ-up-6IL">
@@ -376,7 +373,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="377" height="672"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rbj-Pg-4kz">
+                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rbj-Pg-4kz" userLabel="LessonTable">
                                                     <rect key="frame" x="0.0" y="0.0" width="377" height="672"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <prototypes>
@@ -392,6 +389,9 @@
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1i-IC-VKQ">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="55" height="74.666666666666671"/>
+                                                                                <accessibility key="accessibilityConfiguration">
+                                                                                    <bool key="isElement" value="NO"/>
+                                                                                </accessibility>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="55" id="hyJ-GV-Nzm"/>
                                                                                 </constraints>
@@ -432,6 +432,9 @@
                                                                                             </label>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0039215686269999999" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <accessibility key="accessibilityConfiguration" identifier="LClass" label="LClass">
+                                                                                            <bool key="isElement" value="NO"/>
+                                                                                        </accessibility>
                                                                                         <constraints>
                                                                                             <constraint firstItem="8jW-ud-a4v" firstAttribute="top" secondItem="8s3-Xu-uXM" secondAttribute="top" constant="8" id="5XH-T5-VvH"/>
                                                                                             <constraint firstItem="ZSR-fI-C0Z" firstAttribute="top" secondItem="8s3-Xu-uXM" secondAttribute="top" id="QhB-aa-Nhy"/>
@@ -474,6 +477,9 @@
                                                                                             </label>
                                                                                         </subviews>
                                                                                         <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0039215686269999999" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                        <accessibility key="accessibilityConfiguration" identifier="LClass" label="RClass">
+                                                                                            <bool key="isElement" value="NO"/>
+                                                                                        </accessibility>
                                                                                         <constraints>
                                                                                             <constraint firstItem="whL-K1-oX3" firstAttribute="top" secondItem="MJv-B1-sak" secondAttribute="bottom" id="EeU-7a-XzE"/>
                                                                                             <constraint firstItem="ZI1-KZ-Qs7" firstAttribute="leading" secondItem="rgg-Wj-5pR" secondAttribute="leading" id="IXi-YQ-4Cg"/>
@@ -499,6 +505,9 @@
                                                                 </constraints>
                                                             </tableViewCellContentView>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <accessibility key="accessibilityConfiguration" identifier="LessonCell" label="LessonCell">
+                                                                <bool key="isElement" value="YES"/>
+                                                            </accessibility>
                                                             <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <connections>
                                                                 <outlet property="leftLesson" destination="8s3-Xu-uXM" id="3aD-cp-ktj"/>
@@ -540,6 +549,9 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="53h-Fq-4GW"/>
                                     <constraint firstItem="TcX-yX-hhY" firstAttribute="top" secondItem="xNd-NX-R4g" secondAttribute="top" id="9IB-Q4-AJR"/>
@@ -552,7 +564,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <accessibility key="accessibilityConfiguration" identifier="dayView" label="day">
-                            <bool key="isElement" value="YES"/>
+                            <bool key="isElement" value="NO"/>
                         </accessibility>
                         <constraints>
                             <constraint firstItem="jv0-ai-nJK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="256-0h-67w"/>
@@ -567,7 +579,7 @@
                         <barButtonItem key="leftBarButtonItem" tag="1" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" tag="1" largeContentSizeImage="Menu" systemItem="refresh" id="RKv-QB-TG2">
+                        <barButtonItem key="rightBarButtonItem" tag="1" largeContentSizeImage="Refresh" systemItem="refresh" id="RKv-QB-TG2" userLabel="Refresh">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="updateTimetable:" destination="BYZ-38-t0r" id="mm0-Uy-41a"/>
@@ -586,18 +598,18 @@
             </objects>
             <point key="canvasLocation" x="1255.2" y="758.86699507389164"/>
         </scene>
-        <!--Software Engineering-->
+        <!--Lesson Details-->
         <scene sceneID="P4V-Z7-zem">
             <objects>
-                <tableViewController storyboardIdentifier="DetailedClassView" id="bhx-dZ-ymS" customClass="DetailView" customModule="WingIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="GFd-z8-cx5">
+                <tableViewController storyboardIdentifier="DetailedClassView" id="bhx-dZ-ymS" userLabel="Lesson Details" customClass="DetailView" customModule="WingIt" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="GFd-z8-cx5" userLabel="LessonDetailView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
                             <tableViewSection id="VEV-ja-nJV">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Hxp-xc-QWv" detailTextLabel="tS0-u0-H8z" style="IBUITableViewCellStyleValue1" id="MEV-CE-HjS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Hxp-xc-QWv" detailTextLabel="tS0-u0-H8z" style="IBUITableViewCellStyleValue1" id="MEV-CE-HjS" userLabel="NameCell">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MEV-CE-HjS" id="pNt-0l-qls">
@@ -620,9 +632,12 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="NameCell" label="NameCell">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="ZCV-W0-VSs" detailTextLabel="t3E-y9-Ax4" style="IBUITableViewCellStyleValue1" id="QmK-ca-yGh">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="ZCV-W0-VSs" detailTextLabel="t3E-y9-Ax4" style="IBUITableViewCellStyleValue1" id="QmK-ca-yGh" userLabel="CodeCell">
                                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QmK-ca-yGh" id="qZT-ew-vhu">
@@ -645,6 +660,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="CodeCell" label="CodeCell">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Nvi-ni-kkP" detailTextLabel="Qv7-VJ-UPZ" style="IBUITableViewCellStyleValue1" id="r8I-tc-H6L">
@@ -682,7 +700,7 @@
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Vwe-Sq-Lnk" detailTextLabel="5ru-a5-8qJ" style="IBUITableViewCellStyleValue1" id="VoW-7l-hLo">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Vwe-Sq-Lnk" detailTextLabel="5ru-a5-8qJ" style="IBUITableViewCellStyleValue1" id="VoW-7l-hLo" userLabel="TimeCell">
                                         <rect key="frame" x="0.0" y="154" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VoW-7l-hLo" id="6XT-rR-r9I">
@@ -705,6 +723,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration" identifier="TimeCell" label="TimeCell">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="gbM-Fc-jg5" detailTextLabel="8lF-oY-POn" style="IBUITableViewCellStyleValue1" id="BbP-7u-aOQ">
@@ -854,7 +875,7 @@
                             <outlet property="delegate" destination="bhx-dZ-ymS" id="QqT-um-aL8"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Software Engineering" id="QhG-ug-DhC"/>
+                    <navigationItem key="navigationItem" title="Software Engineering" id="QhG-ug-DhC" userLabel="Back Button"/>
                     <connections>
                         <outlet property="changeMapType" destination="bAN-xu-dvd" id="pgK-FA-ouM"/>
                         <outlet property="codeLabel" destination="t3E-y9-Ax4" id="qXo-OX-IOa"/>
@@ -1135,6 +1156,7 @@
         <image name="Delete_ffffff_100" width="104" height="104"/>
         <image name="Feedback_ffffff_100" width="104" height="104"/>
         <image name="Menu" width="28" height="28"/>
+        <image name="Refresh" width="16" height="16"/>
         <image name="Share_ffffff_100" width="104" height="104"/>
         <image name="cancel" width="30" height="30"/>
         <image name="iTunesArtwork" width="332" height="320"/>

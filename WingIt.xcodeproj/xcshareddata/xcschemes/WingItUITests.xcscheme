@@ -23,10 +23,19 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "StabilityTests/testSwipePastEndOfArrayFast()">
+               </Test>
+               <Test
                   Identifier = "WingItUITests/testLoginRaw()">
                </Test>
                <Test
+                  Identifier = "WingItUITests/testSwipePastEndOfArrayFast()">
+               </Test>
+               <Test
                   Identifier = "WingItUITests/testingPlayground()">
+               </Test>
+               <Test
+                  Identifier = "WingItUITestsSuper/testingPlayground()">
                </Test>
             </SkippedTests>
          </TestableReference>

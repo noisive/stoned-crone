@@ -193,9 +193,7 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
     
     func calculateDayLabel() -> String {
         
-        // This is currently replicated in commonUtil. TODO.
-        // Gives date of most recent Monday
-        let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: todaysDate()))!
+        let mondaysDate = getMondaysDate()
         
         
         let format = DateFormatter()
@@ -207,7 +205,8 @@ class DayCollectionViewCell: UICollectionViewCell, UITableViewDelegate, UITableV
         
         // We are basically just adding 13 to UMT... DK how robust it is, but only thing that seems to work.
         // Test early and late in day.
-        let offsetDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!)
+//        let offsetDate = convertUMTtoNZT(current: Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!)
+        let offsetDate = Calendar.current.date(byAdding: .day, value: offset, to: mondaysDate)!
         
         return format.string(from: offsetDate)
     }

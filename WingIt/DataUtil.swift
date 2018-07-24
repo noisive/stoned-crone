@@ -14,8 +14,7 @@ func loadWeekData(VC: TimetableView) {
     
     formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
     
-    // Gives date of most recent Monday
-    let mondaysDate: Date = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: todaysDate()))!
+    let mondaysDate = getMondaysDate()
     
     // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
     UIApplication.shared.cancelAllLocalNotifications()
@@ -25,7 +24,7 @@ func loadWeekData(VC: TimetableView) {
     while (dayIndex < VC.NUMBER_OF_DAYS_IN_SECTION) {
         
         // Data is stored with Monday = 0
-        var searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
+        let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
         
         // ------------------------------------------------------------------
         // Temporary change to make data static based on first week in timetable data.
@@ -38,8 +37,7 @@ func loadWeekData(VC: TimetableView) {
            print("Error: first event date string not found/set")
         }else{
             // TODO: Check date if no class on monday.
-            let firstMondaysDate = Calendar(identifier: .iso8601).date(from: Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: formatter.date(from: firstEventDateString)!))
-            searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: firstMondaysDate!)!
+            print("")
         }
         
         
@@ -50,10 +48,11 @@ func loadWeekData(VC: TimetableView) {
         for event in getEventsForDate(searchDate: searchDate) {
             
             let eventArr = event.components(separatedBy: "|")
+            // TODO these are sometimes force-unwrapped, causing crashes when the data is erroneous. Should be handled.
             
             //Define all data from CSV file and cast to correct data type.
             let uid = CLong(eventArr[0])!
-            let dayNumber = Int(eventArr[1])! - 1 //Minus 1 as Monday should be 0
+            let dayNumber = Int(eventArr[1])!
             let startTime = Int(eventArr[2])! - 8 // We start the day at 8 am
             let duration = Int(eventArr[3])
             let colour = eventArr[4]
@@ -91,19 +90,6 @@ func loadWeekData(VC: TimetableView) {
         dayIndex += 1
     }
     
-//VC.lessonData.append(Lesson(uid: 20, classID: "COSC341", start: 3, duration: 4, colour: "", code: "COSC345", type: "Lecture", roomShort: "TG08", roomFull: "St. Davids theatre", paperName: "Software Engineering", day: 0, eventDate: Date(), latitude: -45.866714, longitude: 170.512027))
-// VC.lessonData.append(Lesson(uid: 21, classID: "COSC301", start: 3, duration: 4, colour: "", code: "COSC301", type: "Lab", roomShort: "OWG38", roomFull: "St. Davids theatre", paperName: "Software", day: 0, eventDate: Date(), latitude: -45.866714, longitude: 170.512027))
-////    
-//  VC.lessonData.append(Lesson(uid: 22, classID: "COSC341", start: 3, duration: 4, colour: "", code: "PHYC18", type: "Tutorial", roomShort: "OWG34", roomFull: "St. Davids theatre", paperName: "Phyc", day: 0, eventDate: Date(), latitude: -45.866714, longitude: 170.512027))
-////    
-////
-//    VC.hourData[4][2] = nil
-//    VC.hourData[4][3] = ((lesson: 20, lesson2: nil))
-//    VC.hourData[4][4] = ((lesson: 20, lesson2: nil))
-//    VC.hourData[4][6] = ((lesson: 21, lesson2: 22))
-//    
-//    
-//    
     VC.collectionView.reloadData()
     
 }
