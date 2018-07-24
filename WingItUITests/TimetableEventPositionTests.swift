@@ -65,10 +65,4 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         XCTAssert(lessonExists(withCode: "HOUR002", atIndex: 4), "Is it in the second slot too?")
     }
     
-    func getCell(at index: Int) -> XCUIElement{
-        let lessonsQuery = app.collectionViews.tables.cells
-        let lessons = lessonsQuery.allElementsBoundByIndex
-        return lessons[index]
-    }
-
 }
