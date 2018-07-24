@@ -56,6 +56,12 @@ class WingItUITestsSuper: XCTestCase {
         app.navigationBars.buttons.element(boundBy: 0).tap()
     }
 
+    func getCell(at index: Int) -> XCUIElement{
+        let lessonsQuery = app.collectionViews.tables.cells
+        let lessons = lessonsQuery.allElementsBoundByIndex
+        return lessons[index]
+    }
+
     func lessonExists(withCode: String, atIndex: Int) -> Bool{
         let timeCell = getCell(at: atIndex)
         return timeCell.staticTexts[withCode].exists
