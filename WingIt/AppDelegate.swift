@@ -35,8 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         // Override point for customization after application launch.
         
-        UIApplication.shared.statusBarStyle = .lightContent
-        
+        var preferredStatusBarStyle: UIStatusBarStyle{return .lightContent}
         
         let fileManager = FileManager.default
         let cacheURL = try! fileManager
