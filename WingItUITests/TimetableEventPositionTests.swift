@@ -62,7 +62,8 @@ class TimetableEventPositionTests: WingItUITestsSuper {
     func test2HourCellAppearsInBoth(){
         setUpFakeData()
         XCTAssert(lessonExists(withCode: "HOUR002", atIndex: 3))
-        XCTAssert(lessonExists(withCode: "HOUR002", atIndex: 4), "Is it in the second slot too?")
+        tapLessonCell(index: 4)
+        XCTAssert(app.cells["CodeCell"].staticTexts["HOUR002"].exists, "Is it in the second slot too?")
     }
     
 }
