@@ -47,19 +47,23 @@ func getDayOfWeek() -> Int {
 }
 
 func getMondaysDate() -> Date {
-    var today = todaysDate()
+    let today = todaysDate()
+    return getDateOfMostRecentMonday(from: today)
+}
+
+func getDateOfMostRecentMonday(from dateI: Date) -> Date {
+    var date = dateI
     // Sunday should be treated same week, but is considered the start of the next week
     // so if today is sunday, substract 1 day so the calc is run from saturday.
     if getDayOfWeek() == 7 { //Sunday
         var interval = DateComponents()
         interval.day = -1
-//        today = Calendar.current.date(byAdding: interval, to: today)!
-        today = Calendar.current.date(byAdding: .day, value: -1, to: today)!
+        date = Calendar.current.date(byAdding: .day, value: -1, to: date)!
     }
-    var comp: DateComponents = Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)
+    var comp: DateComponents = Calendar(identifier: .iso8601).dateComponents([.yearForWeekOfYear, .weekOfYear], from: date)
     comp.timeZone = TimeZone(secondsFromGMT: 0)
     let mondayDate = Calendar(identifier: .iso8601).date(from: comp)!
-//    print("Monday \(mondayDate)")
+    //    print("Monday \(mondayDate)")
     return mondayDate
 }
 
