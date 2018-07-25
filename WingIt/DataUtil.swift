@@ -96,10 +96,8 @@ func getEventsForDate(searchDate: Date) -> [String]{
     format.dateFormat = "yyyy-MM-dd"
     format.timeZone = TimeZone.init(abbreviation: "NZST")
     let date = format.string(from: searchDate)
-    
-   
+
     var arr = [String]()
-    
     let num = queryDate(date.cString(using: String.Encoding.utf8))
     var index: Int32 = 0
     

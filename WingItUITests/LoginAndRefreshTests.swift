@@ -157,7 +157,8 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         app.launchArguments += ["-mockDate", "2018-10-15"]
         setUpFakeData()
         app.otherElements["RMessageView"].tap()
-        XCTAssert(app.navigationBars["Login"].exists)
+        XCTAssertTrue(cancelButtonExists())
+//        XCTAssert(app.navigationBars["Login"].exists)
     }
     
     func cancelButtonExists()->Bool{

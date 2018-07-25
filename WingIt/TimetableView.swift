@@ -126,7 +126,8 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
     
     private func updateSegue(){
-        self.navigationController?.pushViewController(NavigationService.displayLoginView(), animated: true)
+        updateTimetable(self)
+//        self.performSegue(withIdentifier: "UpdateTimetable", sender: self)
     }
 
     private func scrollToCurrentDay(){
@@ -235,10 +236,16 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowDetail" {
+        switch segue.identifier{
+        case "ShowDetail":
             let senderObject = sender as! Lesson
             let destinationVC = segue.destination as! DetailView
             destinationVC.lessonData = senderObject
+        case "UpdateTimetable":
+            let destination = segue.destination as! LoginView
+            destination.isUpdatingMode = true
+        default:
+            return
         }
     }
 }
