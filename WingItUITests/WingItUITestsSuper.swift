@@ -96,4 +96,12 @@ extension XCUIElement {
         guard self.exists && !self.frame.isEmpty else { return false }
         return XCUIApplication().windows.element(boundBy: 0).frame.contains(self.frame)
     }
+    func forceTap() {
+        if self.isHittable {
+            self.tap()
+        } else {
+            let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx: 0.0, dy: 0.0))
+            coordinate.tap()
+        }
+    }
 }
