@@ -105,12 +105,10 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         
         app.launchArguments.append("-fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
         app.buttons["Refresh"].tap()
-        
         login()
-        
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 120)
         XCTAssertTrue(app.isDisplayingTT)
         
     }
@@ -119,7 +117,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     func testDataPersistenceOnRestart(){
         app.launchArguments.append("-fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
         XCTAssertTrue(app.isDisplayingTT)
         
     }
@@ -141,7 +139,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     func testCancelButtonExistsOnRefresh(){
         app.launchArguments.append("-fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
         app.buttons["Refresh"].tap()
         XCTAssertTrue(cancelButtonExists())
     }
