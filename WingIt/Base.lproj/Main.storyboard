@@ -172,6 +172,7 @@
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZZF-fX-oiF">
                                                 <rect key="frame" x="294" y="263" width="51" height="31"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="Remember Login Button"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="6wg-A3-5Hs"/>
                                                     <constraint firstAttribute="width" constant="49" id="XKU-Op-cFA"/>

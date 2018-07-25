@@ -56,8 +56,12 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         usernameTextField.typeText(self.eVisionUsername)
         passwordSecureTextField.tap()
         passwordSecureTextField.typeText(self.eVisionPassword)
-        app.buttons["Remember Login Button"].tap()
-        app.buttons["Login"].tap()
+        let rememSwitch = app.switches["Remember Login Button"]
+        let isOn = (rememSwitch.value as! String).toBool()
+        if !isOn! {
+            rememSwitch.tap()
+        }
+            app.buttons["Login"].tap()
     }
     
     // Special webview window without any coverplate. For debugging webview login.
