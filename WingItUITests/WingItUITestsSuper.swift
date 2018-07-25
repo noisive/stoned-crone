@@ -30,6 +30,16 @@ class WingItUITestsSuper: XCTestCase {
         app.launchArguments.append("-UITests")
         // In UI tests it is usually best to stop immediately when a failure occurs. (They are time-expensive to ru)
         continueAfterFailure = false
+        app.launch()
+        // Waits and checks for allow notifications alert.
+        addUIInterruptionMonitor(withDescription: "Notifications") { (alert) -> Bool in
+            alert.buttons["Allow"].tap()
+            return true
+        }
+        //        launchFinished() // wait for app to load and notification to show.
+        app.tap() // need to interact with the app for the handler to fire.
+        app.terminate()
+        
     }
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
@@ -69,11 +79,10 @@ class WingItUITestsSuper: XCTestCase {
     func lessonExists(withCode: String, atTime: Int) -> Bool{
         return lessonExists(withCode: withCode, atIndex: atTime-8)
     }
-    
-    
-    func testingPlayground(){
 
-    }
+//    func testingPlayground(){
+//
+//    }
 }
 
 extension XCUIApplication {
