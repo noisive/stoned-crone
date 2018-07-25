@@ -311,6 +311,13 @@ func HandleLaunchArgs() {
             mockDateTime() // Will use default
         }
     }
+    if let i = args.index(of: "-fakeDataAt"){
+        let fakeURL = URL(fileURLWithPath: args[i+1])
+        copyTestData(fakeDataURL: fakeURL)
+        if !args.contains("-mockDate") {
+            mockDateTime() // Will use default
+        }
+    }
     
     // Expect argument of the form "mockDate [date]",
     // where [date] is of the ISO form yyyy-MM-dd.

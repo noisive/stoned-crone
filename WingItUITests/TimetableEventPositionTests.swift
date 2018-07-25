@@ -37,6 +37,12 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         }
     }
     
+    func testOutdatedDataStillAppears(){
+        app.launchArguments += ["-mockDate", "2018-10-15"]
+        setUpFakeData()
+        XCTAssert(lessonExists(withCode: "MOND001", atTime: 9))
+    }
+    
     func testOpensToCurrentDayFri(){
         app.launchArguments += ["-mockDate", "2018-10-05"]
         setUpFakeData()
