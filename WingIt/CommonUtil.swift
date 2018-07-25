@@ -200,14 +200,12 @@ func checkAndRemoveBadDateData() -> Bool{
     //    let fileManager = FileManager.default
     let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
     
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
     let firstEventDateString = getFirstEventDate()
     enum DateError: Error {
         case BadDate
     }
     do{
-        guard let _ = formatter.date(from: firstEventDateString) else{
+        guard let _ = dateFromISOString(str: firstEventDateString) else{
             throw DateError.BadDate
         }
     }catch{
@@ -294,7 +292,7 @@ func HandleLaunchArgs() {
     //    let userDefaults: UserDefaults
     var args = CommandLine.arguments
     
-    // Resets app if given argument resetdata, so that tests start from a consistent clean state
+    // Resets app if given argument reset, so that tests start from a consistent clean state
     if args.contains("-reset") {
         //        let defaultsName = Bundle.main.bundleIdentifier!
         //    userDefaults.removePersistentDomain(forName: defaultsName)
@@ -307,7 +305,6 @@ func HandleLaunchArgs() {
     }
     
     
-    // Resets app if given argument resetdata, so that tests start from a consistent clean state
     if args.contains("-fakeData") {
         copyTestData()
         if !args.contains("-mockDate") {

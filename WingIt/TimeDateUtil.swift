@@ -25,6 +25,12 @@ public class TimeUtil {
     
 }
 
+func dateFromISOString(str: String) -> Date?{
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
+    return formatter.date(from: str)
+}
+
 func getDayOfWeek() -> Int {
     let formatter = DateFormatter()
     let formatStr = "e" // Just gives day of week, with Wed=2
