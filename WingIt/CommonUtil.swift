@@ -296,6 +296,7 @@ func HandleLaunchArgs() {
     if args.contains("-reset") {
         //        let defaultsName = Bundle.main.bundleIdentifier!
         //    userDefaults.removePersistentDomain(forName: defaultsName)
+        removeStoredUserPass()
         clearCache()
     }
     
@@ -377,3 +378,16 @@ func loadDummyUIForUnitTesting(VC: AppDelegate) -> Bool{
     }
 }
 #endif
+
+extension String {
+    func toBool() -> Bool? {
+        switch self {
+        case "True", "true", "yes", "1":
+            return true
+        case "False", "false", "no", "0":
+            return false
+        default:
+            return nil
+        }
+    }
+}
