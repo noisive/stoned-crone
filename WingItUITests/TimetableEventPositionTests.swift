@@ -16,15 +16,7 @@ class TimetableEventPositionTests: WingItUITestsSuper {
     override func tearDown() {
         super.tearDown()
     }
-    
-    func setUpFakeData(){
-        // app.launchArguments += ["-mockDate", "2018-10-05"]
-        // Fakedata should set default mock date (which is monday).
-        app.launchArguments.append("-fakeData")
-        app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 10)
-    }
-    
+
     func testClassesAppearEachDay(){
         setUpFakeData()
         let lessons = ["MOND001", "TUES001", "WEDS001", "THURS001", "FRID001"]
@@ -42,7 +34,7 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         setUpFakeData()
         XCTAssert(lessonExists(withCode: "MOND001", atTime: 9))
     }
-    
+
     func testOpensToCurrentDayFri(){
         app.launchArguments += ["-mockDate", "2018-10-05"]
         setUpFakeData()
@@ -70,6 +62,20 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         XCTAssert(lessonExists(withCode: "HOUR002", atIndex: 3))
         tapLessonCell(index: 4)
         XCTAssert(app.cells["CodeCell"].staticTexts["HOUR002"].exists, "Is it in the second slot too?")
+    }
+    
+    func testRemainsOnDayAfterDetailview(){
+        setUpFakeData()
+        app.swipeLeft()
+        XCTAssertTrue(app.otherElements["Tuesday"].exists)
+        tapLessonCell(index: 1)
+        XCTAssert(app.cells["CodeCell"].staticTexts["TUES001"].exists)
+        tapBackButton()
+        XCTAssertFalse(lessonExists(withCode: "MOND001", atIndex: 1))
+        XCTAssert(lessonExists(withCode: "TUES001", atIndex: 1))
+//        XCTAssertFalse(app.otherElements["Monday"].exists)
+//        XCTAssertTrue(app.otherElements["Wednesday"].exists)
+//        XCTAssertTrue(app.otherElements["Tuesday"].exists)
     }
     
 }

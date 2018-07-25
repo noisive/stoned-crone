@@ -27,6 +27,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     //Variables
     public var isUpdatingMode: Bool!
     private var PWIsStored: Bool = false
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
     
     //Constants
     private let CORNER_RADIUS: CGFloat = 3.5;
@@ -319,6 +321,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                     SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
                     webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
                     webView.stringByEvaluatingJavaScript(from: webLogout)
+                    appDelegate.firstLoadSoScrollToToday = true
                 }
                     //Issue with getting JSON. Display error and log out
                 else {

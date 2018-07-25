@@ -111,6 +111,16 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         
     }
     
+    func testReturnsToCurrentDayAfterUpdate(){
+        app.launchArguments += ["-mockDate", "2018-10-05"]
+        setUpFakeData()
+        app.swipeRight()
+        XCTAssertTrue(app.otherElements["Thursday"].exists)
+        app.buttons["Refresh"].tap()
+        login()
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        XCTAssertTrue(app.otherElements["Friday"].exists)
+    }
     
     func testDataPersistenceOnRestart(){
         app.launchArguments.append("-fakeData")

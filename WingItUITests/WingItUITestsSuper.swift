@@ -53,6 +53,14 @@ class WingItUITestsSuper: XCTestCase {
         }
     }
     
+    func setUpFakeData(){
+        // app.launchArguments += ["-mockDate", "2018-10-05"]
+        // Fakedata should set default mock date (which is monday).
+        app.launchArguments.append("-fakeData")
+        app.launch()
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 10)
+    }
+    
     func tapBackButton(){
         app.navigationBars.buttons.element(boundBy: 0).tap()
     }

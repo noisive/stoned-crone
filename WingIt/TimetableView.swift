@@ -30,6 +30,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     public var hourData: [[(lesson: CLong?, lesson2: CLong?)?]]!
     private var thisIsFirstLoad: Bool = false
     override var preferredStatusBarStyle: UIStatusBarStyle{return .lightContent}
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     //Constants
     public let NUMBER_OF_DAYS_IN_SECTION: Int = 7
@@ -41,7 +42,10 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.scrollToCurrentDay()
+        if appDelegate.firstLoadSoScrollToToday {
+            self.scrollToCurrentDay()
+            appDelegate.firstLoadSoScrollToToday = false
+        }
     }
 
     override func viewDidLoad() {
