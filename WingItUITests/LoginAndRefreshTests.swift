@@ -56,7 +56,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         usernameTextField.typeText(self.eVisionUsername)
         passwordSecureTextField.tap()
         passwordSecureTextField.typeText(self.eVisionPassword)
-        
+        app.buttons["Remember Login Button"].tap()
         app.buttons["Login"].tap()
     }
     
@@ -105,10 +105,20 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         app.launch()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
         app.buttons["Refresh"].tap()
-        login()
+//        login()
+        // Should automatically update now
         _ = app.otherElements["dayView"].waitForExistence(timeout: 120)
         XCTAssertTrue(app.isDisplayingTT)
         
+    }
+    
+    func testLogout(){
+        menuButton.tap()
+        app.tables["Menu"].staticTexts["Log out/change login"].tap()
+        let usernameTextField = app.textFields["Username"]
+        XCTAssertFalse(usernameTextField.exists)
+        let loginFieldExists = usernameTextField.waitForExistence(timeout: 60)
+        XCTAssert(loginFieldExists)
     }
     
     func testReturnsToCurrentDayAfterUpdate(){

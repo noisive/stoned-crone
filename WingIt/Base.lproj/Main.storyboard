@@ -161,7 +161,7 @@
                                                     <action selector="loginPressed:" destination="PM4-zz-bZM" eventType="touchUpInside" id="eTu-Qb-EvK"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remeber login details?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-PE-o4j">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rememeber me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-PE-o4j">
                                                 <rect key="frame" x="16" y="267" width="270" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="o86-Of-ojT"/>

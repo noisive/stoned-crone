@@ -131,6 +131,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
             self.performSegue(withIdentifier: "ShowTimetable", sender: self)
         } else if indexPath.row == 1 {
             clearCache()
+            removeStoredUserPass()
             self.performSegue(withIdentifier: "LogOut", sender: self)
         } else if indexPath.row == 2 {
             self.performSegue(withIdentifier: "ShowAbout", sender: self)
@@ -143,13 +144,13 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
         return view
     }
     
-    //MARK: Pass data
-    //=================================================================
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "LogOut" {
-            let destination = segue.destination as! LoginView
-            destination.isUpdatingMode = false
-        }
-    }
+//    //MARK: Pass data
+//    //=================================================================
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "LogOut" {
+//            let destination = segue.destination as! LoginView
+//            destination.isUpdatingMode = false
+//        }
+//    }
 }

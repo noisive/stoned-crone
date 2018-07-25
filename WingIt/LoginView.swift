@@ -80,7 +80,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         super.viewDidLoad()
         setupLogic()
         setupLooks()
-        
+
         
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show(withStatus: "Loading eVision...")
@@ -109,6 +109,10 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         passwordField.delegate = self
         webView.delegate = self
         
+        if self.isUpdatingMode == nil {
+            self.isUpdatingMode = false
+        }
+        
         if self.isUpdatingMode {
             self.loginTitle.text = "Log in to Update"
             self.loginButton.setTitle("UPDATE", for: .normal)
@@ -116,8 +120,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             self.loginButton.setTitle("LOG IN", for: .normal)
             self.loginTitle.text = "Log in to eVision"
         }
-        
-        self.PWIsStored = true
+//        self.PWIsStored = true
         
         //Setup gestures
         let dismissGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
@@ -276,16 +279,22 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                 
                 if (retrieveStoredUsername() != "" && retrieveStoredPassword() != "") {
                     self.savePasswordSwitch.isOn = true
+                    self.PWIsStored = true
                 }
                 once = true
                 
-                SVProgressHUD.dismiss()
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.loginContainer.alpha = 1
-                }, completion: { (success) in
-                    self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
-                    self.usernameField.becomeFirstResponder()
-                })
+                // Bypass manual login, do the steps automatically
+                if !self.PWIsStored {
+                    SVProgressHUD.dismiss()
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.loginContainer.alpha = 1
+                    }, completion: { (success) in
+                        self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
+                        self.usernameField.becomeFirstResponder()
+                    })
+                }else{
+                    beginLogin()
+                }
             }
             
             switch header {
