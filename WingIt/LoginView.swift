@@ -113,7 +113,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             self.loginTitle.text = "Log in to Update"
             self.loginButton.setTitle("UPDATE", for: .normal)
         }else{
-            self.loginButton.setTitle("LOGIN", for: .normal)
+            self.loginButton.setTitle("LOG IN", for: .normal)
             self.loginTitle.text = "Log in to eVision"
         }
         

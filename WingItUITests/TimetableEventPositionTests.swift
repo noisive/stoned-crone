@@ -73,6 +73,7 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         tapBackButton()
         XCTAssertFalse(lessonExists(withCode: "MOND001", atIndex: 1))
         XCTAssert(lessonExists(withCode: "TUES001", atIndex: 1))
+//        XCTAssert(app.navigationBars["Monday"].exists)
 //        XCTAssertFalse(app.otherElements["Monday"].exists)
 //        XCTAssertTrue(app.otherElements["Wednesday"].exists)
 //        XCTAssertTrue(app.otherElements["Tuesday"].exists)

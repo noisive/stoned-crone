@@ -111,11 +111,22 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
             
             let currentWeekFromData = Calendar.current.component(.weekOfYear, from: firstLesson.eventDate)
             let currentWeekFromToday = Calendar.current.component(.weekOfYear, from: todaysDate())
+            let weekDifference = currentWeekFromToday - currentWeekFromData
+            var s = ""
 
-            if (currentWeekFromData != currentWeekFromToday) {
-                RMessage.showNotification(withTitle: "It looks like your timetable is out of date! Update now.", type: .warning, customTypeName: nil, callback: nil)
+            if (weekDifference != 0) {
+                if weekDifference > 1 {s="s"}
+                RMessage.showNotification(
+                    withTitle: "It looks like your timetable is \(weekDifference) week\(s) old. Refresh now to continue receiving notifications.",
+                    type: .warning,
+                    customTypeName: nil,
+                    callback: updateSegue)
             }
         }
+    }
+    
+    private func updateSegue(){
+        self.navigationController?.pushViewController(NavigationService.displayLoginView(), animated: true)
     }
 
     private func scrollToCurrentDay(){

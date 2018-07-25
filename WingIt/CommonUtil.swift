@@ -358,6 +358,7 @@ func checkVersionFile(){
     }
 }
 #if DEBUG
+
 func loadDummyUIForUnitTesting(VC: AppDelegate) -> Bool{
     // If we are running unit tests, don't wait till app has finished launching.
     // Load dummy instead.

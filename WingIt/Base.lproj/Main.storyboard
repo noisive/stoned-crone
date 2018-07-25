@@ -585,6 +585,9 @@
                                 <action selector="updateTimetable:" destination="BYZ-38-t0r" id="mm0-Uy-41a"/>
                             </connections>
                         </barButtonItem>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibiltyIdentifier" value="DayNav"/>
+                        </userDefinedRuntimeAttributes>
                     </navigationItem>
                     <connections>
                         <outlet property="classCounter" destination="TcX-yX-hhY" id="Dwr-gq-5va"/>
