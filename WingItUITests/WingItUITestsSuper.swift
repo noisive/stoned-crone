@@ -22,7 +22,10 @@ class WingItUITestsSuper: XCTestCase {
     var app: XCUIApplication! = XCUIApplication()
     // Track whether app is launched or not. (Some UI tests don't need restarts.)
     static var launched = false
+    var backButton: XCUIElement!
+    var menuButton: XCUIElement!
     
+
     override func setUp() {
         super.setUp()
         app.launchArguments.append("-testing")
@@ -31,6 +34,8 @@ class WingItUITestsSuper: XCTestCase {
         // In UI tests it is usually best to stop immediately when a failure occurs. (They are time-expensive to ru)
         continueAfterFailure = false
 
+        backButton = app.navigationBars.buttons.element(boundBy: 0)
+        menuButton = app.navigationBars.buttons["Menu Button"]
     }
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
@@ -59,10 +64,6 @@ class WingItUITestsSuper: XCTestCase {
         app.launchArguments.append("-fakeData")
         app.launch()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 10)
-    }
-    
-    func tapBackButton(){
-        app.navigationBars.buttons.element(boundBy: 0).tap()
     }
 
     func getCell(at index: Int) -> XCUIElement{

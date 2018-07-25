@@ -97,6 +97,9 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="About View"/>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="dataSource" destination="nwj-yo-oeX" id="aqx-1y-Lnv"/>
                             <outlet property="delegate" destination="nwj-yo-oeX" id="RF6-0L-8Pd"/>
@@ -288,6 +291,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0K-EG-fZA">
                                 <rect key="frame" x="24" y="52" width="30" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Cancel Button"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="RIO-BT-174"/>
                                     <constraint firstAttribute="width" constant="30" id="RxO-KG-vC9"/>
@@ -299,6 +303,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration" identifier="Login View"/>
                         <constraints>
                             <constraint firstItem="1c5-uh-vDW" firstAttribute="top" secondItem="HQp-gX-4Dh" secondAttribute="bottom" id="PjV-G4-1aD"/>
                             <constraint firstAttribute="bottom" secondItem="3vt-l9-ZVc" secondAttribute="bottom" id="S5E-wU-dvy"/>
@@ -575,9 +580,12 @@
                             <constraint firstAttribute="trailing" secondItem="xNd-NX-R4g" secondAttribute="trailing" constant="8" id="X7u-dG-lC2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Monday" id="nbG-qC-Ukr" userLabel="DayNav">
-                        <barButtonItem key="leftBarButtonItem" tag="1" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9">
+                    <navigationItem key="navigationItem" title="Monday" id="nbG-qC-Ukr" userLabel="Day Navbar">
+                        <barButtonItem key="leftBarButtonItem" tag="1" image="Menu" largeContentSizeImage="Menu" id="Ijd-hh-eA9" userLabel="Menu Button">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Menu Button"/>
+                            </userDefinedRuntimeAttributes>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" tag="1" largeContentSizeImage="Refresh" systemItem="refresh" id="RKv-QB-TG2" userLabel="Refresh">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -586,7 +594,7 @@
                             </connections>
                         </barButtonItem>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="accessibiltyIdentifier" value="DayNav"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Day Navbar"/>
                         </userDefinedRuntimeAttributes>
                     </navigationItem>
                     <connections>
@@ -1052,6 +1060,9 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
                                 </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Menu"/>
+                                </userDefinedRuntimeAttributes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z9c-Tb-sVi">
                                 <rect key="frame" x="83" y="52" width="218" height="68"/>

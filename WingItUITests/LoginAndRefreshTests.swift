@@ -141,7 +141,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         //        launchFinished() // wait for app to load and notification to show.
         app.tap() // need to interact with the app for the handler to fire.
         
-        XCTAssertTrue(!cancelButtonExists())
+        XCTAssertFalse(app.buttons["Cancel Button"].exists)
     }
     
     func testCancelButtonExistsOnRefresh(){
@@ -149,7 +149,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         app.launch()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
         app.buttons["Refresh"].tap()
-        XCTAssertTrue(cancelButtonExists())
+        XCTAssertTrue(app.buttons["Cancel Button"].exists)
     }
     
     
@@ -157,12 +157,8 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         app.launchArguments += ["-mockDate", "2018-10-15"]
         setUpFakeData()
         app.otherElements["RMessageView"].tap()
-        XCTAssertTrue(cancelButtonExists())
+        XCTAssertTrue(app.collectionViews["Login View"].exists)
 //        XCTAssert(app.navigationBars["Login"].exists)
     }
-    
-    func cancelButtonExists()->Bool{
-        return app.buttons["cancel"].exists
-    }
-    
+
 }
