@@ -245,18 +245,11 @@ func clearCache(){
         let fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
         
         for fileName in fileNames {
-            
-            //                    if (fileName == "cache.db-wal")
-            //                    {
-            let filePathName = "\(cachePath)/\(fileName)"
-            
-            try fileManager.removeItem(atPath: filePathName)
-            //                    }
+            if fileName == "data.csv" || fileName == ".version" {
+                let filePathName = "\(cachePath)/\(fileName)"
+                try fileManager.removeItem(atPath: filePathName)
+            }
         }
-        
-        //            let files = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
-        
-        
     } catch {
         print("Could not clear: \(error)")
     }
