@@ -288,6 +288,9 @@
                                     <constraint firstItem="hDN-j8-zPN" firstAttribute="centerX" secondItem="3vt-l9-ZVc" secondAttribute="centerX" id="joI-vV-kK0"/>
                                     <constraint firstItem="hDN-j8-zPN" firstAttribute="leading" secondItem="3vt-l9-ZVc" secondAttribute="leading" constant="8" id="sHu-KX-WfO"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="Login View"/>
+                                </userDefinedRuntimeAttributes>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0K-EG-fZA">
                                 <rect key="frame" x="24" y="52" width="30" height="30"/>
@@ -1138,8 +1141,8 @@
                         <outlet property="versionLabel" destination="wSd-mq-uKc" id="9ov-1q-iEg"/>
                         <outlet property="welcomeMessage" destination="Tkh-rm-jD5" id="Jy5-oQ-ydu"/>
                         <segue destination="Dsg-Yq-izN" kind="custom" identifier="ShowAbout" customClass="SWRevealViewControllerSeguePushController" id="fpz-wh-a5Y"/>
-                        <segue destination="PM4-zz-bZM" kind="custom" identifier="UpdateTimetable" customClass="SWRevealViewControllerSeguePushController" id="xdc-Jk-N3W"/>
                         <segue destination="K8I-l8-n3N" kind="custom" identifier="ShowTimetable" customClass="SWRevealViewControllerSeguePushController" id="GLa-4W-1Kc"/>
+                        <segue destination="PM4-zz-bZM" kind="custom" identifier="LogOut" customClass="SWRevealViewControllerSeguePushController" id="0Dj-34-PBL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dky-ac-JCT" userLabel="First Responder" sceneMemberID="firstResponder"/>

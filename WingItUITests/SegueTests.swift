@@ -40,7 +40,8 @@ class SegueTests: WingItUITestsSuper {
         menuButton.tap()
 //        menuOptions[1].tap()
         app.tables["Menu"].staticTexts["Log out/change login"].tap()
-        XCTAssert(app.collectionViews["Login View"].exists)
+//        app.scrollViews
+        XCTAssert(app.scrollViews["Login View"].exists)
         XCTAssertFalse(app.buttons["Cancel Button"].exists)
     }
 }

@@ -22,6 +22,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     //Constants
     private let NAVIGATION_DATA: [(title: String, image: UIImage)] = [
         (title: "Timetable", image: #imageLiteral(resourceName: "Meeting_000000_100")),
+        (title: "Log out/change login", image: #imageLiteral(resourceName: "Meeting_000000_100")),
         (title: "About", image: #imageLiteral(resourceName: "Meeting_000000_100"))
     ]
     private let WELCOME_MESSAGES: [String] = [
@@ -129,6 +130,9 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
         if indexPath.row == 0 {
             self.performSegue(withIdentifier: "ShowTimetable", sender: self)
         } else if indexPath.row == 1 {
+            clearCache()
+            self.performSegue(withIdentifier: "LogOut", sender: self)
+        } else if indexPath.row == 2 {
             self.performSegue(withIdentifier: "ShowAbout", sender: self)
         }
     }
@@ -143,9 +147,9 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     //=================================================================
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "UpdateTimetable" {
+        if segue.identifier == "LogOut" {
             let destination = segue.destination as! LoginView
-            destination.isUpdatingMode = true
+            destination.isUpdatingMode = false
         }
     }
 }
