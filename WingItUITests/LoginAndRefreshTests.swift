@@ -56,7 +56,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         usernameTextField.typeText(self.eVisionUsername)
         passwordSecureTextField.tap()
         passwordSecureTextField.typeText(self.eVisionPassword)
-        
+        app.buttons["Remember Login Button"].tap()
         app.buttons["Login"].tap()
     }
     
@@ -92,9 +92,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         }
         //        launchFinished() // wait for app to load and notification to show.
         app.tap() // need to interact with the app for the handler to fire.
-        
         login()
-        
         // Wait for a thing to display, then assert it is displaying... Circular? But should work.
         _ = app.otherElements["dayView"].waitForExistence(timeout: 120)
         XCTAssertTrue(app.isDisplayingTT)
@@ -105,21 +103,39 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         
         app.launchArguments.append("-fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
         app.buttons["Refresh"].tap()
-        
-        login()
-        
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+//        login()
+        // Should automatically update now
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 120)
         XCTAssertTrue(app.isDisplayingTT)
         
     }
     
+    func testLogout(){
+        menuButton.tap()
+        app.tables["Menu"].staticTexts["Log out/change login"].tap()
+        let usernameTextField = app.textFields["Username"]
+        XCTAssertFalse(usernameTextField.exists)
+        let loginFieldExists = usernameTextField.waitForExistence(timeout: 60)
+        XCTAssert(loginFieldExists)
+    }
+    
+    func testReturnsToCurrentDayAfterUpdate(){
+        app.launchArguments += ["-mockDate", "2018-10-05"]
+        setUpFakeData()
+        app.swipeRight()
+        XCTAssertTrue(app.otherElements["Thursday"].exists)
+        app.buttons["Refresh"].tap()
+        login()
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        XCTAssertTrue(app.otherElements["Friday"].exists)
+    }
     
     func testDataPersistenceOnRestart(){
         app.launchArguments.append("-fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
         XCTAssertTrue(app.isDisplayingTT)
         
     }
@@ -135,19 +151,24 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         //        launchFinished() // wait for app to load and notification to show.
         app.tap() // need to interact with the app for the handler to fire.
         
-        XCTAssertTrue(!cancelButtonExists())
+        XCTAssertFalse(app.buttons["Cancel Button"].exists)
     }
     
     func testCancelButtonExistsOnRefresh(){
         app.launchArguments.append("-fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 40)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
         app.buttons["Refresh"].tap()
-        XCTAssertTrue(cancelButtonExists())
+        XCTAssertTrue(app.buttons["Cancel Button"].exists)
     }
     
-    func cancelButtonExists()->Bool{
-        return app.buttons["cancel"].exists
-    }
     
+    func testUpdateBannerRefreshesOnTap(){
+        app.launchArguments += ["-mockDate", "2018-10-15"]
+        setUpFakeData()
+        app.otherElements["RMessageView"].tap()
+        XCTAssertTrue(app.collectionViews["Login View"].exists)
+//        XCTAssert(app.navigationBars["Login"].exists)
+    }
+
 }

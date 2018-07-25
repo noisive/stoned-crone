@@ -10,12 +10,6 @@ import Foundation
 
 /** Adds the events retrieved from the C++ lib into the correct timeslots. */
 func loadWeekData(VC: TimetableView) {
-    let formatter = DateFormatter()
-    
-    formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
-    
-    let mondaysDate = getMondaysDate()
-    
     // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
     UIApplication.shared.cancelAllLocalNotifications()
     
@@ -23,27 +17,30 @@ func loadWeekData(VC: TimetableView) {
     
     while (dayIndex < VC.NUMBER_OF_DAYS_IN_SECTION) {
         
-        // Data is stored with Monday = 0
-        let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
         
+        var mondaysDate = getMondaysDate()
         // ------------------------------------------------------------------
         // Temporary change to make data static based on first week in timetable data.
         // This means the same week of data is displayed every week.
         // FEATURE remove this when more than one week of data is loaded.
-
+        
         let firstEventDateString = getFirstEventDate()
-
+        
         if (firstEventDateString == "0xCC"){
-           print("Error: first event date string not found/set")
+            print("Error: first event date string not found/set")
         }else{
             // TODO: Check date if no class on monday.
-            print("")
+            let firstEventDate = dateFromISOString(str: firstEventDateString)
+            if firstEventDate != nil {
+                mondaysDate = getDateOfMostRecentMonday(from: firstEventDate!)
+            }
         }
         
-        
+
         // End temp change -------------------------------------------------
-        
-        
+        // Data is stored with Monday = 0
+        let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
+
         
         for event in getEventsForDate(searchDate: searchDate) {
             
@@ -65,9 +62,7 @@ func loadWeekData(VC: TimetableView) {
             let roomName = eventArr[11]
             let building = eventArr[12]
             let eventDateString = eventArr[13]
-
-            
-            let eventDate = formatter.date(from: eventDateString)
+            let eventDate = dateFromISOString(str: eventDateString)
             
             let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, colour: colour, code: paperCode, type: type, roomShort: roomCode, roomFull: roomName, building: building, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
             
@@ -101,10 +96,8 @@ func getEventsForDate(searchDate: Date) -> [String]{
     format.dateFormat = "yyyy-MM-dd"
     format.timeZone = TimeZone.init(abbreviation: "NZST")
     let date = format.string(from: searchDate)
-    
-   
+
     var arr = [String]()
-    
     let num = queryDate(date.cString(using: String.Encoding.utf8))
     var index: Int32 = 0
     

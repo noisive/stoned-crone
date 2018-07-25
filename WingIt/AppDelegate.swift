@@ -13,71 +13,38 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
     
+    var firstLoadSoScrollToToday: Bool = true
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        
-        #if DEBUG
-        // If we are running unit tests, don't wait till app has finished launching.
-        // Load dummy instead.
-        if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
-            let viewController = UIViewController()
-            let label = UILabel()
-            label.text = "Running tests..."
-            label.frame = viewController.view.frame
-            label.textAlignment = .center
-            label.textColor = .white
-            viewController.view.addSubview(label)
-            self.window!.rootViewController = viewController
-            return true
-        }
-        #endif
         // Override point for customization after application launch.
         
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-        
+        var preferredStatusBarStyle: UIStatusBarStyle{return .lightContent}
+
+        #if DEBUG
+        if loadDummyUIForUnitTesting(VC: self) { return true }
+        #endif
+        #if DEBUG // not compiled when shipped
+        HandleLaunchArgs()
+        #endif
+        checkVersionFile()
+
         let fileManager = FileManager.default
         let cacheURL = try! fileManager
             .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
         let dataPath = cacheURL.appendingPathComponent("data.csv").path
         print(dataPath)
-        
-        #if DEBUG // not compiled when shipped
-        HandleLaunchArgs()
-        #endif
-
-        // If new version, force update.
-        if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
-            let versionFileURL = cacheURL.appendingPathComponent(".version")
-            if !fileManager.fileExists(atPath: versionFileURL.path) {
-                do {
-                    clearCache()
-                    try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
-                } catch { }
-            }else{
-                do {
-                    let oldVer = try String(contentsOf: versionFileURL, encoding: .utf8)
-                    if oldVer != versionNum {
-                        clearCache()
-                        try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
-                    }
-                } catch { }
-            }
-
-            // If we don't have data already, prompt for login.
-            if !fileManager.fileExists(atPath: dataPath) {
+        // If we don't have data already, prompt for login.
+        if !fileManager.fileExists(atPath: dataPath) {
+            promptForLogin()
+        }else{
+            // Get data from CSV
+            initTimetable()
+            if checkAndRemoveBadDateData(){
                 promptForLogin()
-            }else{
-                // Get data from CSV
-                initTimetable()
-                if checkAndRemoveBadDateData(){
-                    promptForLogin()
-                }
             }
         }
-        
+
         // Bring up different initial view for this test - used for debugging login
         if CommandLine.arguments.contains("debugLogin") {
             clearCache()
@@ -97,7 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.register(defaults: [String : Any]())
         
         // Register intent to use notifications
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+        application.registerUserNotificationSettings(
+            UIUserNotificationSettings(
+                types: [.alert, .badge, .sound], categories: nil))
         
         return true
     }

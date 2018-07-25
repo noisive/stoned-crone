@@ -62,7 +62,16 @@
                   Identifier = "LoginAndRefreshTests/testingPlayground()">
                </Test>
                <Test
+                  Identifier = "StabilityAndSanityTests/testSwipePastEndOfArrayFast()">
+               </Test>
+               <Test
+                  Identifier = "StabilityAndSanityTests/testingPlayground()">
+               </Test>
+               <Test
                   Identifier = "StabilityTests/testSwipePastEndOfArrayFast()">
+               </Test>
+               <Test
+                  Identifier = "StabilityTests/testingPlayground()">
                </Test>
                <Test
                   Identifier = "WingItUITests/testLoginRaw()">

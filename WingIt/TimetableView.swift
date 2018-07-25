@@ -29,6 +29,8 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     public var lessonData : [Lesson] = [Lesson]()
     public var hourData: [[(lesson: CLong?, lesson2: CLong?)?]]!
     private var thisIsFirstLoad: Bool = false
+    override var preferredStatusBarStyle: UIStatusBarStyle{return .lightContent}
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     //Constants
     public let NUMBER_OF_DAYS_IN_SECTION: Int = 7
@@ -40,10 +42,12 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
-        self.scrollToCurrentDay()
+        if appDelegate.firstLoadSoScrollToToday {
+            self.scrollToCurrentDay()
+            appDelegate.firstLoadSoScrollToToday = false
+        }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupLooks()
@@ -107,11 +111,23 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
             
             let currentWeekFromData = Calendar.current.component(.weekOfYear, from: firstLesson.eventDate)
             let currentWeekFromToday = Calendar.current.component(.weekOfYear, from: todaysDate())
+            let weekDifference = currentWeekFromToday - currentWeekFromData
+            var s = ""
 
-            if (currentWeekFromData != currentWeekFromToday) {
-                RMessage.showNotification(withTitle: "It looks like your timetable is out of date! Update now.", type: .warning, customTypeName: nil, callback: nil)
+            if (weekDifference != 0) {
+                if weekDifference > 1 {s="s"}
+                RMessage.showNotification(
+                    withTitle: "It looks like your timetable is \(weekDifference) week\(s) old. Refresh now to continue receiving notifications.",
+                    type: .warning,
+                    customTypeName: nil,
+                    callback: updateSegue)
             }
         }
+    }
+    
+    private func updateSegue(){
+        updateTimetable(self)
+//        self.performSegue(withIdentifier: "UpdateTimetable", sender: self)
     }
 
     private func scrollToCurrentDay(){
@@ -220,10 +236,16 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowDetail" {
+        switch segue.identifier{
+        case "ShowDetail":
             let senderObject = sender as! Lesson
             let destinationVC = segue.destination as! DetailView
             destinationVC.lessonData = senderObject
+        case "UpdateTimetable":
+            let destination = segue.destination as! LoginView
+            destination.isUpdatingMode = true
+        default:
+            return
         }
     }
 }

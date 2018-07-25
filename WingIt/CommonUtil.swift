@@ -200,14 +200,12 @@ func checkAndRemoveBadDateData() -> Bool{
     //    let fileManager = FileManager.default
     let dataPath = NSHomeDirectory()+"/Library/Caches/data.csv"
     
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
     let firstEventDateString = getFirstEventDate()
     enum DateError: Error {
         case BadDate
     }
     do{
-        guard let _ = formatter.date(from: firstEventDateString) else{
+        guard let _ = dateFromISOString(str: firstEventDateString) else{
             throw DateError.BadDate
         }
     }catch{
@@ -264,13 +262,18 @@ func clearCache(){
     }
 }
 
-func copyTestData(){
+func copyTestData(fakeDataURL: URL? = nil){
     let fileManager = FileManager.default
     let cacheURL = try! fileManager
         .url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
     let dataURL = cacheURL.appendingPathComponent("data.csv")
     //    let bundle = Bundle(for: type(of: self))
-    let testDataURL = Bundle.main.url(forResource: "testData", withExtension: "csv")!
+    var testDataURL: URL
+    if fakeDataURL == nil {
+        testDataURL = Bundle.main.url(forResource: "testData", withExtension: "csv")!
+    }else{
+        testDataURL = fakeDataURL!
+    }
     do{
         if fileManager.fileExists(atPath: dataURL.path) {
             try fileManager.removeItem(at: dataURL)
@@ -289,7 +292,7 @@ func HandleLaunchArgs() {
     //    let userDefaults: UserDefaults
     var args = CommandLine.arguments
     
-    // Resets app if given argument resetdata, so that tests start from a consistent clean state
+    // Resets app if given argument reset, so that tests start from a consistent clean state
     if args.contains("-reset") {
         //        let defaultsName = Bundle.main.bundleIdentifier!
         //    userDefaults.removePersistentDomain(forName: defaultsName)
@@ -302,9 +305,15 @@ func HandleLaunchArgs() {
     }
     
     
-    // Resets app if given argument resetdata, so that tests start from a consistent clean state
     if args.contains("-fakeData") {
         copyTestData()
+        if !args.contains("-mockDate") {
+            mockDateTime() // Will use default
+        }
+    }
+    if let i = args.index(of: "-fakeDataAt"){
+        let fakeURL = URL(fileURLWithPath: args[i+1])
+        copyTestData(fakeDataURL: fakeURL)
         if !args.contains("-mockDate") {
             mockDateTime() // Will use default
         }
@@ -325,3 +334,46 @@ func HandleLaunchArgs() {
     //    }
     
 }
+
+func checkVersionFile(){
+    // If new version, force update.
+    if let versionNum = Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String {
+        let fileManager = FileManager.default
+        let cacheURL = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let versionFileURL = cacheURL.appendingPathComponent(".version")
+        if !fileManager.fileExists(atPath: versionFileURL.path) {
+            do {
+                clearCache()
+                try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
+            } catch { }
+        }else{
+            do {
+                let oldVer = try String(contentsOf: versionFileURL, encoding: .utf8)
+                if oldVer != versionNum {
+                    clearCache()
+                    try versionNum.write(to: versionFileURL, atomically: false, encoding: .utf8)
+                }
+            } catch { }
+        }
+    }
+}
+#if DEBUG
+
+func loadDummyUIForUnitTesting(VC: AppDelegate) -> Bool{
+    // If we are running unit tests, don't wait till app has finished launching.
+    // Load dummy instead.
+    if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
+        let viewController = UIViewController()
+        let label = UILabel()
+        label.text = "Running tests..."
+        label.frame = viewController.view.frame
+        label.textAlignment = .center
+        label.textColor = .white
+        viewController.view.addSubview(label)
+        VC.window!.rootViewController = viewController
+        return true
+    }else{
+        return false
+    }
+}
+#endif
