@@ -29,21 +29,21 @@ class BackendTest: XCTestCase {
             for testFilePath in inputPaths{
                 let testFileURL = NSURL.fileURL(withPath: testFilePath) as URL
                 let testFileBase = testFileURL.deletingPathExtension().lastPathComponent
-//                let testFileDir = try String(contentsOf: testFileURL.deletingLastPathComponent())
+                //                let testFileDir = try String(contentsOf: testFileURL.deletingLastPathComponent())
                 
                 print("Parsing test file " + testFileBase)
                 
                 let testTTString = try String(contentsOf: testFileURL)
                 
                 let parsedTTString = parseEvents(data: testTTString)
-
+                
                 initTimetable()
                 validateTimetable()
                 
                 let answerPath = bundle.path(forResource: "TestAnswers/" + testFileBase, ofType: "csv")!
                 let answerFileURL = NSURL.fileURL(withPath: answerPath) as URL
-//                let answerFileString = testFileDir.appending(testFileBase + ".csv")
-//                let answerFileURL = NSURL.fileURL(withPath: answerFileString) as URL
+                //                let answerFileString = testFileDir.appending(testFileBase + ".csv")
+                //                let answerFileURL = NSURL.fileURL(withPath: answerFileString) as URL
                 let answerString = try String(contentsOf: answerFileURL)
                 
                 XCTAssert(parsedTTString == answerString)
@@ -53,16 +53,28 @@ class BackendTest: XCTestCase {
         }
     }
     
+    func testLessonInitFromTestTTs(){
+        do {
+            let bundle = Bundle(for: type(of: self))
+            let inputPaths = bundle.paths(forResourcesOfType: "csv", inDirectory: "TestAnswers")
+            for testFilePath in inputPaths{
+                let VC = TimetableView()
+                copyTestData(fakeDataURL: URL(fileURLWithPath: testFilePath))
+                loadWeekData(VC: VC)
+            }
+        }
+    }
     
     
     
-//    func testPerformanceExample() {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            // Put the code you want to measure the time of here.
-//            print("null")
-//        }
-//    }
+    
+    //    func testPerformanceExample() {
+    //        // This is an example of a performance test case.
+    //        self.measure {
+    //            // Put the code you want to measure the time of here.
+    //            print("null")
+    //        }
+    //    }
 }
 
 

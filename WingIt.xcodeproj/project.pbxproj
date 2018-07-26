@@ -33,7 +33,6 @@
 		06D61716210974D300F58A30 /* 1PasswordExtension.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */; };
 		06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5E2EF20C1504500C77382 /* WingItTests.swift */; };
 		06E758982107E8E6007BDF76 /* WingItTestsSuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E758972107E8E6007BDF76 /* WingItTestsSuper.swift */; };
-		06E7589B2107FD9B007BDF76 /* TestAnswers in Resources */ = {isa = PBXBuildFile; fileRef = 064082FB20C263AA00F568CB /* TestAnswers */; };
 		06E7589D21083958007BDF76 /* SegueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E7589C21083957007BDF76 /* SegueTests.swift */; };
 		297C56931ED9126200C44420 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginView.swift */; };
 		533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 533C92D320762A9200394325 /* SVProgressHUD.bundle */; };
@@ -551,7 +550,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06E7589B2107FD9B007BDF76 /* TestAnswers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

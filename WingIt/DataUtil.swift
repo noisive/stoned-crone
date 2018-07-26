@@ -9,11 +9,14 @@
 import Foundation
 
 /** Adds the events retrieved from the C++ lib into the correct timeslots. */
-func loadWeekData(VC: TimetableView) {
-    
+func initWeekData(VC: TimetableView) {
     // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
     UIApplication.shared.cancelAllLocalNotifications()
-    
+    loadWeekData(VC: VC)
+    VC.collectionView.reloadData()
+}
+
+func loadWeekData(VC: TimetableView){
     var dayIndex = 0;
     while (dayIndex < VC.NUMBER_OF_DAYS_IN_SECTION) {
         var mondaysDate = getMondaysDate()
@@ -26,6 +29,7 @@ func loadWeekData(VC: TimetableView) {
         
         if (firstEventDateString == "0xCC"){
             print("Error: first event date string not found/set")
+            mondaysDate = getMondaysDate()
         }else{
             // TODO: Check date if no class on monday.
             let firstEventDate = dateFromISOString(str: firstEventDateString)
@@ -37,7 +41,7 @@ func loadWeekData(VC: TimetableView) {
         
         // Data is stored with Monday = 0
         let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
-
+        
         for event in getEventsForDate(searchDate: searchDate) {
             let lesson = Lesson(eventCSVStr: event)
             VC.lessonData.append(lesson)
@@ -55,7 +59,6 @@ func loadWeekData(VC: TimetableView) {
         }
         dayIndex += 1
     }
-    VC.collectionView.reloadData()
 }
 
 /** Retrieves the events for a given date from the C++ library. */
