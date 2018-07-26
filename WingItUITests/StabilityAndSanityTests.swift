@@ -33,22 +33,4 @@ class StabilityAndSanityTests: WingItUITestsSuper {
         XCTAssertTrue(app.isDisplayingTT)
     }
     
-    func testTTChecks(){
-        app.launch()
-        do {
-            let bundle = Bundle(for: type(of: self))
-            let inputPaths = bundle.paths(forResourcesOfType: "csv", inDirectory: "TestAnswers")
-            app.launchArguments += ["-mockDate", "2018-6-15"]
-            for testFilePath in inputPaths{
-//                let testFileURL = NSURL.fileURL(withPath: testFilePath) as URL
-                app.launchArguments += ["-fakeDataAt", testFilePath]
-                app.launch()
-                _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
-                app.terminate()
-                // Take the fake data args out
-                app.launchArguments.removeLast()
-                app.launchArguments.removeLast()
-            }
-        }
-    }
 }
