@@ -5,6 +5,8 @@
 #import "SWRevealViewController.h"
 #import "SVProgressHUD.h"
 #import "RMessage.h"
+#import "OnePasswordExtension.h"
+
 
 const char* B_parseEvents(const char* data);
 void initTimetable();
