@@ -117,11 +117,12 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     }
     
     func testLogout(){
+        setUpFakeData()
         menuButton.tap()
         app.tables["Menu"].staticTexts["Log out/change login"].tap()
         let usernameTextField = app.textFields["Username"]
         XCTAssertFalse(usernameTextField.exists)
-        let loginFieldExists = usernameTextField.waitForExistence(timeout: 60)
+        let loginFieldExists = usernameTextField.waitForExistence(timeout: 40)
         XCTAssert(loginFieldExists)
     }
     
@@ -171,8 +172,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         app.launchArguments += ["-mockDate", "2018-10-15"]
         setUpFakeData()
         app.otherElements["RMessageView"].tap()
-        XCTAssertTrue(app.collectionViews["Login View"].exists)
-//        XCTAssert(app.navigationBars["Login"].exists)
+        XCTAssertTrue(app.scrollViews["Login View"].exists)
     }
 
 }
