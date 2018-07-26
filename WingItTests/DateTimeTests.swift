@@ -90,7 +90,7 @@ class DateTimeTests: XCTestCase {
         let app = UIApplication.shared
         setNotificationFromFakeLesson(dateStr: "2018-10-01", time24H: 8)
         let scheduledNotifs = app.scheduledLocalNotifications ?? []
-        XCTAssert(scheduledNotifs[0].fireDate == dateFromISOString(str: "2018-10-07+02:45"))
+        XCTAssert(scheduledNotifs[0].fireDate == getDateFromISOString(str: "2018-9-30+18:45"))
     }
     
     func testStaleEventDoesNotCreateNotification(){

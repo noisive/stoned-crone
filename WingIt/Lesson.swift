@@ -76,7 +76,7 @@ public class Lesson {
         let roomName = eventArr[11]
         let building = eventArr[12]
         let eventDateString = eventArr[13]
-        var eventDate = dateFromISOString(str: eventDateString)
+        var eventDate = getDateFromISOString(str: eventDateString)
         
         let paperErrorName = "Error parsing paper: \"\(paperName)\". Time, date and details may be false. Please report this to the developers."
         // Check if any optionals are nil, replace them with random stuff if so.
