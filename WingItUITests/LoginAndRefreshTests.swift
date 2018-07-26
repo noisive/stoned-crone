@@ -104,14 +104,12 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     }
     
     func testLoginUpdate(){
-        
-        app.launchArguments.append("-fakeData")
+//        app.launchArguments.append("-fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
+        login()
         app.buttons["Refresh"].tap()
-//        login()
         // Should automatically update now
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 120)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.isDisplayingTT)
         
     }

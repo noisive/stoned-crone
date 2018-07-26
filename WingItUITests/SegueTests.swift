@@ -23,7 +23,6 @@ class SegueTests: WingItUITestsSuper {
         super.tearDown()
     }
     
-//    XCUIApplication().navigationBars["Monday"]/*@START_MENU_TOKEN@*/.buttons["Menu Button"]/*[[".buttons[\"Cancel\"]",".buttons[\"Menu Button\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
     func testMenuButton(){
         menuButton.tap()
         XCTAssert(app.tables["Menu"].exists)
