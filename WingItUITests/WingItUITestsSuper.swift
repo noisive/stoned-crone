@@ -40,6 +40,7 @@ class WingItUITestsSuper: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         app.launchArguments.removeAll()
+        app.terminate()
         super.tearDown()
     }
     
@@ -95,5 +96,26 @@ extension XCUIElement {
     func visible() -> Bool {
         guard self.exists && !self.frame.isEmpty else { return false }
         return XCUIApplication().windows.element(boundBy: 0).frame.contains(self.frame)
+    }
+    func forceTap() {
+        if self.isHittable {
+            self.tap()
+        } else {
+            let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx: 0.0, dy: 0.0))
+            coordinate.tap()
+        }
+    }
+}
+
+extension String {
+    func toBool() -> Bool? {
+        switch self {
+        case "True", "true", "yes", "1":
+            return true
+        case "False", "false", "no", "0":
+            return false
+        default:
+            return nil
+        }
     }
 }

@@ -56,8 +56,12 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         usernameTextField.typeText(self.eVisionUsername)
         passwordSecureTextField.tap()
         passwordSecureTextField.typeText(self.eVisionPassword)
-        app.buttons["Remember Login Button"].tap()
-        app.buttons["Login"].tap()
+        let rememSwitch = app.switches["Remember Login Button"]
+        let isOn = (rememSwitch.value as! String).toBool()
+        if !isOn! {
+            rememSwitch.tap()
+        }
+            app.buttons["Login"].tap()
     }
     
     // Special webview window without any coverplate. For debugging webview login.
@@ -100,24 +104,23 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     }
     
     func testLoginUpdate(){
-        
-        app.launchArguments.append("-fakeData")
+//        app.launchArguments.append("-fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
+        login()
         app.buttons["Refresh"].tap()
-//        login()
         // Should automatically update now
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 120)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.isDisplayingTT)
         
     }
     
     func testLogout(){
+        setUpFakeData()
         menuButton.tap()
         app.tables["Menu"].staticTexts["Log out/change login"].tap()
         let usernameTextField = app.textFields["Username"]
         XCTAssertFalse(usernameTextField.exists)
-        let loginFieldExists = usernameTextField.waitForExistence(timeout: 60)
+        let loginFieldExists = usernameTextField.waitForExistence(timeout: 40)
         XCTAssert(loginFieldExists)
     }
     
@@ -167,8 +170,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         app.launchArguments += ["-mockDate", "2018-10-15"]
         setUpFakeData()
         app.otherElements["RMessageView"].tap()
-        XCTAssertTrue(app.collectionViews["Login View"].exists)
-//        XCTAssert(app.navigationBars["Login"].exists)
+        XCTAssertTrue(app.scrollViews["Login View"].exists)
     }
 
 }

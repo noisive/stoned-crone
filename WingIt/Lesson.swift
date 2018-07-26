@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Lesson {
+public class Lesson {
     
     var uid : CLong!
     var classID : String!
@@ -25,7 +25,7 @@ public struct Lesson {
     var colour : String!
     var latitude : Double!
     var longitude : Double!
-    
+
     init(uid: CLong, classID: String, start : Int, duration: Int, colour: String, code: String, type: String, roomShort: String, roomFull : String, building: String, paperName: String, day: Int, eventDate: Date, latitude: Double, longitude: Double) {
     //init(uid: CLong, classID: String, start : Int, length: Int, code: String, type: classType, roomShort: String, roomFull : String, paperName: String, day: Int, latitude: Double, longitude: Double) {
         self.uid = uid;
@@ -46,4 +46,93 @@ public struct Lesson {
         
     }
     
+    static var nextUid = 101
+    static var nextDefaultTime = 1
+    static var nextDefaultDate = todaysDate()
+    static var nextDefaultDay = 1
+    /* Converts a cpp eventString into a Lesson object */
+    convenience init(eventCSVStr: String){
+        var eventArr = eventCSVStr.components(separatedBy: "|")
+        // TODO these are sometimes force-unwrapped, causing crashes when the data is erroneous. Should be handled.
+        
+        // Prevent crashes when we try to access elements of the array. Instead, will just be garbage.
+        while eventArr.count < 14{
+            eventArr.append("0xCC")
+        }
+        
+        //Define all data from CSV file and cast to correct data type.
+        // Var variables are optionals, any may return nil.
+        var uid = CLong(eventArr[0])
+        var dayNumber = Int(eventArr[1])
+        var startTime = Int(eventArr[2])
+        var duration = Int(eventArr[3])
+        let colour = eventArr[4]
+        let type = eventArr[5]
+        let paperCode = eventArr[6]
+        var paperName = eventArr[7]
+        var latitude = Double(eventArr[8])
+        var longitude = Double(eventArr[9])
+        let roomCode = eventArr[10]
+        let roomName = eventArr[11]
+        let building = eventArr[12]
+        let eventDateString = eventArr[13]
+        var eventDate = getDateFromISOString(str: eventDateString)
+        
+        let paperErrorName = "Error parsing paper: \"\(paperName)\". Time, date and details may be false. Please report this to the developers."
+        // Check if any optionals are nil, replace them with random stuff if so.
+        var failed = false
+        if uid == nil {
+            failed = true
+            uid = Lesson.nextUid
+            Lesson.nextUid += 1
+        }
+        if dayNumber == nil {
+            failed = true
+            dayNumber = Lesson.nextDefaultDay
+        }
+        if startTime == nil {
+            failed = true
+            startTime = Lesson.nextDefaultTime
+            Lesson.incrementDefaultTime()
+        }
+        if duration == nil {
+            failed = true
+            duration = 1
+        }
+        if latitude == nil {
+            failed = true
+            latitude = -45.8670533441689
+        }
+        if longitude == nil {
+            failed = true
+            longitude = 170.518171263001
+        }
+        if eventDate == nil {
+            failed = true
+            eventDate = Lesson.nextDefaultDate
+        }
+
+        if failed {
+            paperName = paperErrorName
+        }
+        
+//        startTime = startTime! - 8 // We start the day at 8 am
+        
+        self.init(uid: uid!, classID: paperCode, start: startTime!, duration: duration!, colour: colour, code: paperCode, type: type, roomShort: roomCode, roomFull: roomName, building: building, paperName: paperName, day: dayNumber!, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
+    }
+    
+    static func incrementDefaultDay(){
+        Lesson.nextDefaultDay += 1
+        Lesson.nextDefaultDate = Calendar.current.date(byAdding: DateComponents(day: 1), to: Lesson.nextDefaultDate)!
+        
+    }
+    static func incrementDefaultTime(){
+        if Lesson.nextDefaultTime == 10 {
+            Lesson.incrementDefaultDay()
+            Lesson.nextDefaultTime = 1
+        }else{
+            Lesson.nextDefaultTime += 1
+        }
+    }
+
 }

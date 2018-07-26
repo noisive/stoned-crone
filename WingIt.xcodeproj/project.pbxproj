@@ -19,15 +19,19 @@
 		0675D6E721006406003B0233 /* testData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 0675D6E421005669003B0233 /* testData.csv */; };
 		06934D7D1F86730B00D308BD /* LoginAndRefreshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* LoginAndRefreshTests.swift */; };
 		06940F682101883500EF3E96 /* DateTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06940F672101883500EF3E96 /* DateTimeTests.swift */; };
-		06940F6A2101935900EF3E96 /* TimeDateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B37F20760D9A0063E45F /* TimeDateUtil.swift */; };
 		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
 		06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* CommonUtil.swift */; };
 		06D37CD71F873C7F009318AC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06D37CD61F873C7F009318AC /* Settings.bundle */; };
+		06D61711210974D300F58A30 /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D6170A210974D200F58A30 /* OnePasswordExtension.m */; };
+		06D61712210974D300F58A30 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170B210974D200F58A30 /* README.md */; };
+		06D61713210974D300F58A30 /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170C210974D200F58A30 /* 1Password.xcassets */; };
+		06D61714210974D300F58A30 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170D210974D200F58A30 /* .gitignore */; };
+		06D61715210974D300F58A30 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170E210974D200F58A30 /* LICENSE.txt */; };
+		06D61716210974D300F58A30 /* 1PasswordExtension.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */; };
 		06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5E2EF20C1504500C77382 /* WingItTests.swift */; };
 		06E758982107E8E6007BDF76 /* WingItTestsSuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E758972107E8E6007BDF76 /* WingItTestsSuper.swift */; };
-		06E7589B2107FD9B007BDF76 /* TestAnswers in Resources */ = {isa = PBXBuildFile; fileRef = 064082FB20C263AA00F568CB /* TestAnswers */; };
 		06E7589D21083958007BDF76 /* SegueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E7589C21083957007BDF76 /* SegueTests.swift */; };
 		297C56931ED9126200C44420 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginView.swift */; };
 		533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 533C92D320762A9200394325 /* SVProgressHUD.bundle */; };
@@ -106,6 +110,13 @@
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
 		06B38A371F82361E009EDC60 /* CommonUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
 		06D37CD61F873C7F009318AC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		06D6170A210974D200F58A30 /* OnePasswordExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnePasswordExtension.m; sourceTree = "<group>"; };
+		06D6170B210974D200F58A30 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		06D6170C210974D200F58A30 /* 1Password.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = 1Password.xcassets; sourceTree = "<group>"; };
+		06D6170D210974D200F58A30 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		06D6170E210974D200F58A30 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1PasswordExtension.podspec; sourceTree = "<group>"; };
+		06D61710210974D200F58A30 /* OnePasswordExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnePasswordExtension.h; sourceTree = "<group>"; };
 		06E5E2ED20C1504500C77382 /* WingItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06E5E2EF20C1504500C77382 /* WingItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItTests.swift; sourceTree = "<group>"; };
 		06E5E2F120C1504500C77382 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -228,6 +239,21 @@
 			);
 			path = WingItUITests;
 			sourceTree = "<group>";
+		};
+		06D61709210974D200F58A30 /* onepassword-app-extension */ = {
+			isa = PBXGroup;
+			children = (
+				06D6170A210974D200F58A30 /* OnePasswordExtension.m */,
+				06D6170B210974D200F58A30 /* README.md */,
+				06D6170C210974D200F58A30 /* 1Password.xcassets */,
+				06D6170D210974D200F58A30 /* .gitignore */,
+				06D6170E210974D200F58A30 /* LICENSE.txt */,
+				06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */,
+				06D61710210974D200F58A30 /* OnePasswordExtension.h */,
+			);
+			name = "onepassword-app-extension";
+			path = "WingIt/onepassword-app-extension";
+			sourceTree = SOURCE_ROOT;
 		};
 		06E5E2EE20C1504500C77382 /* WingItTests */ = {
 			isa = PBXGroup;
@@ -398,6 +424,7 @@
 				534635A22079A8FB00497A8D /* Progress indicator */,
 				533C92DA20762A9300394325 /* SVProgressHUD-Prefix.pch */,
 				534BB6862081E21F00757932 /* Notifications */,
+				06D61709210974D200F58A30 /* onepassword-app-extension */,
 				062EB9421F8B414B005F350E /* SwiftKeychainWrapper */,
 			);
 			path = WingIt;
@@ -491,7 +518,7 @@
 					};
 					53F8A0071EC3D0010001604A = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 9L3BH5LC27;
+						DevelopmentTeam = UY5WX2EN9V;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -522,7 +549,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06E7589B2107FD9B007BDF76 /* TestAnswers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,12 +565,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06D61715210974D300F58A30 /* LICENSE.txt in Resources */,
+				06D61713210974D300F58A30 /* 1Password.xcassets in Resources */,
 				0675D6E721006406003B0233 /* testData.csv in Resources */,
+				06D61716210974D300F58A30 /* 1PasswordExtension.podspec in Resources */,
 				533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */,
 				534BB6902081E28A00757932 /* RMessageDefaultDesign.json in Resources */,
+				06D61714210974D300F58A30 /* .gitignore in Resources */,
 				06D37CD71F873C7F009318AC /* Settings.bundle in Resources */,
 				53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */,
 				534BB68E2081E28A00757932 /* RMessageView.xib in Resources */,
+				06D61712210974D300F58A30 /* README.md in Resources */,
 				53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */,
 				53F8A0111EC3D0010001604A /* Main.storyboard in Resources */,
 			);
@@ -589,7 +620,6 @@
 				06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */,
 				06E758982107E8E6007BDF76 /* WingItTestsSuper.swift in Sources */,
 				06940F682101883500EF3E96 /* DateTimeTests.swift in Sources */,
-				06940F6A2101935900EF3E96 /* TimeDateUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,6 +656,7 @@
 				534BB68F2081E28A00757932 /* RMessageView.m in Sources */,
 				53D4B38220760FBF0063E45F /* NavigationService.swift in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
+				06D61711210974D300F58A30 /* OnePasswordExtension.m in Sources */,
 				0640830120C36D2800F568CB /* Cwrapper.swift in Sources */,
 				53D4B38020760D9A0063E45F /* TimeDateUtil.swift in Sources */,
 				061F3E801F8AF09C00BD0D09 /* DataUtil.swift in Sources */,
@@ -870,7 +901,7 @@
 				CLANG_WARN_COMMA = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 9L3BH5LC27;
+				DEVELOPMENT_TEAM = UY5WX2EN9V;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -879,7 +910,7 @@
 				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingItt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -900,7 +931,7 @@
 				CLANG_WARN_COMMA = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = 9L3BH5LC27;
+				DEVELOPMENT_TEAM = UY5WX2EN9V;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -909,7 +940,7 @@
 				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingIt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingItt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "WingIt/Project-Bridging-Header.h";

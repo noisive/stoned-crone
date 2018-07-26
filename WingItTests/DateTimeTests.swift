@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import WingIt
 
 class DateTimeTests: XCTestCase {
     
@@ -57,17 +58,13 @@ class DateTimeTests: XCTestCase {
     
     func testDayMock(){
         mockDateTime()
-        var day = getDayOfWeek()
-        XCTAssert(day == 1)
+        XCTAssert(getDayOfWeek() == 1)
         mockDateTime(mockStrO: "2018-10-5")
-        day = getDayOfWeek()
-        XCTAssert(day == 5)
+        XCTAssert(getDayOfWeek() == 5)
         mockDateTime(mockStrO: "2018-10-6")
-        day = getDayOfWeek()
-        XCTAssert(day == 6)
+        XCTAssert(getDayOfWeek() == 6)
         mockDateTime(mockStrO: "2018-10-7")
-        day = getDayOfWeek()
-        XCTAssert(day == 7)
+        XCTAssert(getDayOfWeek() == 7)
     }
     
     func testRecentMondayIsCorrect(){
@@ -85,7 +82,49 @@ class DateTimeTests: XCTestCase {
         mockDateTime(mockStrO: "2018-10-07") // Sunday
         testMonday = getMondaysDate()
         XCTAssert(testMonday == actualMonday)
-        
     }
     
+    func testNotification8AM(){
+        UIApplication.shared.cancelAllLocalNotifications()
+        mockDateTime(mockStrO: "2018-10-01+01:00")
+        let app = UIApplication.shared
+        let desiredNotificationTime = setNotificationAndReturnDesiredTime(fakeLessonDateStr: "2018-10-01", fakeLessonTime24H: 8)
+        let scheduledNotifs = app.scheduledLocalNotifications ?? []
+        XCTAssert(scheduledNotifs[0].fireDate == desiredNotificationTime)
+    }
+    
+    func testNotification6PM(){
+        UIApplication.shared.cancelAllLocalNotifications()
+        mockDateTime(mockStrO: "2018-10-01+01:00")
+        let app = UIApplication.shared
+        let desiredNotificationTime = setNotificationAndReturnDesiredTime(fakeLessonDateStr: "2018-10-01", fakeLessonTime24H: 18)
+        let scheduledNotifs = app.scheduledLocalNotifications ?? []
+        XCTAssert(scheduledNotifs[0].fireDate == desiredNotificationTime)
+    }
+
+    func testStaleEventDoesNotCreateNotification(){
+        let app = UIApplication.shared
+        app.cancelAllLocalNotifications()
+        mockDateTime(mockStrO: "2018-10-01+08:01")
+        let _ = setNotificationAndReturnDesiredTime(fakeLessonDateStr: "2018-10-01", fakeLessonTime24H: 8)
+        var scheduledNotifs = app.scheduledLocalNotifications ?? []
+        XCTAssert(scheduledNotifs.count == 0)
+        mockDateTime(mockStrO: "2018-10-01+07:44")
+        let _ = setNotificationAndReturnDesiredTime(fakeLessonDateStr: "2018-10-01", fakeLessonTime24H: 8)
+        scheduledNotifs = app.scheduledLocalNotifications ?? []
+        XCTAssert(scheduledNotifs.count == 1)
+    }
+    
+    func setNotificationAndReturnDesiredTime(fakeLessonDateStr dateStr: String, fakeLessonTime24H time24H: Int) -> Date {
+        let date = getDateFromISOString(str: dateStr)!
+        let day = getDayOfWeek(date: date)
+        let lesson = Lesson(uid: 1, classID: "NOTI0\(time24H)", start: time24H, duration: 1, colour: "#FFFFFF", code: "NOTI008", type: "Lecture", roomShort: "T", roomFull: "T", building: "T", paperName: "T", day: day, eventDate: date, latitude: -45, longitude: 175)
+        setNotification(event: lesson)
+        
+        var desiredNotificationTimeNZT = getDateFromISOString(str: "\(dateStr)+\(time24H - 1):45")
+        let desiredNotificationTimeUTC = convertNZTtoUTC(date: desiredNotificationTimeNZT!)
+//        var desiredNotificationTime = getDateFromISOString(str: "2018-9-30+18:45")
+//        var desiredNotificationTime = getDateFromISOString(str: "2018-10-1+04:45")
+        return desiredNotificationTimeUTC
+    }
 }

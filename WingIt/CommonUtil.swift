@@ -5,12 +5,7 @@
 //  Created by William Warren on 10/2/17.
 //  Copyright © 2017 Noisive. All rights reserved.
 //
-
-
-
 import Foundation
-
-
 
 public func getBackgroundColorFromLesson(type: String, fallback: Lesson) -> UIColor {
     switch type {
@@ -33,9 +28,13 @@ public func getBarBackgroundColorFromLesson(type: String, fallback: Lesson) -> U
     return getBackgroundColorFromLesson(type: type, fallback: fallback).withAlphaComponent(1)
 }
 
-// Call this function when each item is initialised to schedule a
+/* Call this function when each item is initialised to schedule a
 // notification [minsBeforeNotification] minutes before that event.
-// @param the event struct to be used.
+// Timezone note: All times are stored as UTC, but with numbers that would be
+// correct for current region. Only when objectively correct times are
+// needed, like for scheduling the notification, are they converted back
+// with a function.
+// @param the event struct to be used. */
 func setNotification (event: Lesson){
     
     var minsBeforeNotification = 15 // Default to 15 mins before lecture
@@ -43,28 +42,28 @@ func setNotification (event: Lesson){
         minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
     }
     
-    
     //---------------------------------------------------------------------------------------------
     // This section of code has an alternative after it, for if there are multiple weeks of data. Change them when this is implemented. FEATURE
     
     // Get Monday's date, then transform fire date based on lesson's weekday
     let mondaysDate: Date = getMondaysDate()
+//    let calendar = Calendar(from: <#T##Decoder#>)
 
     // Add the day to monday
     var interval = DateComponents()
-    interval.day = event.day
+    interval.day = event.day - 1
     
-    // Start time plus 7 gives correct hours for before lecture
-    interval.hour = event.startTime + 7
+    // We want notifications just before the start hour
+    interval.hour = event.startTime - 1
     interval.minute = 60 - minsBeforeNotification
     
-    let notificationTimeAndDate = Calendar.current.date(byAdding: interval, to: mondaysDate)!
+    var cal = Calendar.current
+    cal.timeZone = TimeZone(abbreviation: "UTC")!
+    let notificationTimeAndDate = cal.date(byAdding: interval, to: mondaysDate)!
     
     // End weekday date code
     //-----------------------------------------------------------------------------------------------
-    
-    
-    
+
     /* This section of code loads the notification for the actual event date, rather than the weekday. Use this for when multiple weeks are loaded.
      
      // Add the notification time to the date of the event
@@ -78,16 +77,16 @@ func setNotification (event: Lesson){
      */
     
     let localNotification = UILocalNotification()
-    localNotification.timeZone = TimeZone(identifier: "NZST")
+//    localNotification.timeZone = TimeZone(identifier: "NZST")
     
     // first check notification isn't in the past. if it is, skip the rest.
     if notificationTimeAndDate < todaysDate(){
         return
     }
-    localNotification.fireDate = notificationTimeAndDate
+    localNotification.fireDate = convertNZTtoUTC(date: notificationTimeAndDate)
     localNotification.soundName = UILocalNotificationDefaultSoundName
     
-    var eventTime = event.startTime + 8
+    var eventTime = event.startTime!
     if eventTime > 12{
         eventTime -= 12
     }
@@ -99,7 +98,7 @@ func setNotification (event: Lesson){
     UIApplication.shared.scheduleLocalNotification(localNotification)
     
     // DEBUG print out currently scheduled notifications
-    // print(UIApplication.shared.scheduledLocalNotifications!)
+     print(UIApplication.shared.scheduledLocalNotifications!)
 }
 
 func storeUserPass(username: String, password: String){
@@ -205,7 +204,7 @@ func checkAndRemoveBadDateData() -> Bool{
         case BadDate
     }
     do{
-        guard let _ = dateFromISOString(str: firstEventDateString) else{
+        guard let _ = getDateFromISOString(str: firstEventDateString) else{
             throw DateError.BadDate
         }
     }catch{
@@ -245,18 +244,11 @@ func clearCache(){
         let fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
         
         for fileName in fileNames {
-            
-            //                    if (fileName == "cache.db-wal")
-            //                    {
-            let filePathName = "\(cachePath)/\(fileName)"
-            
-            try fileManager.removeItem(atPath: filePathName)
-            //                    }
+            if fileName == "data.csv" || fileName == ".version" {
+                let filePathName = "\(cachePath)/\(fileName)"
+                try fileManager.removeItem(atPath: filePathName)
+            }
         }
-        
-        //            let files = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
-        
-        
     } catch {
         print("Could not clear: \(error)")
     }
@@ -296,6 +288,7 @@ func HandleLaunchArgs() {
     if args.contains("-reset") {
         //        let defaultsName = Bundle.main.bundleIdentifier!
         //    userDefaults.removePersistentDomain(forName: defaultsName)
+        removeStoredUserPass()
         clearCache()
     }
     
@@ -377,3 +370,16 @@ func loadDummyUIForUnitTesting(VC: AppDelegate) -> Bool{
     }
 }
 #endif
+
+extension String {
+    func toBool() -> Bool? {
+        switch self {
+        case "True", "true", "yes", "1":
+            return true
+        case "False", "false", "no", "0":
+            return false
+        default:
+            return nil
+        }
+    }
+}

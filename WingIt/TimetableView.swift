@@ -99,7 +99,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         self.hourData = [[(lesson: CLong?, lesson2: CLong?)?]](repeating: [(lesson: CLong?, lesson2: CLong?)?](repeating: nil, count: 14), count: 7)
         self.thisIsFirstLoad = true
         
-        loadWeekData(VC: self)
+        initWeekData(VC: self)
 
         self.collectionView.delegate = self
         self.collectionView.dataSource = self

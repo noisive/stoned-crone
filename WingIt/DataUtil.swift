@@ -9,15 +9,16 @@
 import Foundation
 
 /** Adds the events retrieved from the C++ lib into the correct timeslots. */
-func loadWeekData(VC: TimetableView) {
+func initWeekData(VC: TimetableView) {
     // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
     UIApplication.shared.cancelAllLocalNotifications()
-    
+    loadWeekData(VC: VC)
+    VC.collectionView.reloadData()
+}
+
+func loadWeekData(VC: TimetableView){
     var dayIndex = 0;
-    
     while (dayIndex < VC.NUMBER_OF_DAYS_IN_SECTION) {
-        
-        
         var mondaysDate = getMondaysDate()
         // ------------------------------------------------------------------
         // Temporary change to make data static based on first week in timetable data.
@@ -28,50 +29,25 @@ func loadWeekData(VC: TimetableView) {
         
         if (firstEventDateString == "0xCC"){
             print("Error: first event date string not found/set")
+            mondaysDate = getMondaysDate()
         }else{
             // TODO: Check date if no class on monday.
-            let firstEventDate = dateFromISOString(str: firstEventDateString)
+            let firstEventDate = getDateFromISOString(str: firstEventDateString)
             if firstEventDate != nil {
                 mondaysDate = getDateOfMostRecentMonday(from: firstEventDate!)
             }
         }
-        
-
         // End temp change -------------------------------------------------
+        
         // Data is stored with Monday = 0
         let searchDate = Calendar.current.date(byAdding: .day, value: dayIndex, to: mondaysDate)!
-
         
         for event in getEventsForDate(searchDate: searchDate) {
-            
-            let eventArr = event.components(separatedBy: "|")
-            // TODO these are sometimes force-unwrapped, causing crashes when the data is erroneous. Should be handled.
-            
-            //Define all data from CSV file and cast to correct data type.
-            let uid = CLong(eventArr[0])!
-            let dayNumber = Int(eventArr[1])!
-            let startTime = Int(eventArr[2])! - 8 // We start the day at 8 am
-            let duration = Int(eventArr[3])
-            let colour = eventArr[4]
-            let type = eventArr[5]
-            let paperCode = eventArr[6]
-            let paperName = eventArr[7]
-            let latitude = Double(eventArr[8])
-            let longitude = Double(eventArr[9])
-            let roomCode = eventArr[10]
-            let roomName = eventArr[11]
-            let building = eventArr[12]
-            let eventDateString = eventArr[13]
-            let eventDate = dateFromISOString(str: eventDateString)
-            
-            let lesson = Lesson(uid: uid, classID: paperCode, start: startTime, duration: duration!, colour: colour, code: paperCode, type: type, roomShort: roomCode, roomFull: roomName, building: building, paperName: paperName, day: dayNumber, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
-            
+            let lesson = Lesson(eventCSVStr: event)
+            VC.lessonData.append(lesson)
             setNotification(event: lesson)
             
-            let hour = lesson.startTime!
-            
-            VC.lessonData.append(lesson)
-            
+            let hour = lesson.startTime! - 8
             // Create array spots for each hour a class runs for (i.e. 2 hour tutorial gets two cells)
             for hoursIntoClass in 0..<lesson.duration! {
                 if (VC.hourData[dayIndex][hour + hoursIntoClass]?.lesson == nil) {
@@ -80,13 +56,9 @@ func loadWeekData(VC: TimetableView) {
                     VC.hourData[dayIndex][hour]?.lesson2 = lesson.uid
                 }
             }
-            
         }
         dayIndex += 1
     }
-    
-    VC.collectionView.reloadData()
-    
 }
 
 /** Retrieves the events for a given date from the C++ library. */

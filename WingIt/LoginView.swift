@@ -14,15 +14,16 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     //==========================================================================
     
     //Outlets
-    @IBOutlet var loginContainer: UIView!
-    @IBOutlet var loginButton: UIButton!
-    @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var usernameField: UITextField!
-    @IBOutlet var passwordField: UITextField!
-    @IBOutlet var cancelButton: UIButton!
-    @IBOutlet var savePasswordSwitch: UISwitch!
+    @IBOutlet weak var loginContainer: UIView!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var savePasswordSwitch: UISwitch!
     @IBOutlet weak var webView: UIWebView!
-    @IBOutlet var loginTitle: UILabel!
+    @IBOutlet weak var loginTitle: UILabel!
+    @IBOutlet weak var genericpasswordSigninButton: UIButton!
     
     //Variables
     public var isUpdatingMode: Bool!
@@ -33,7 +34,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     //Constants
     private let CORNER_RADIUS: CGFloat = 3.5;
     
-    //HTML
+    //HTML and JS
     private let webCheckError: String = "document.getElementsByClassName('sv-panel-danger').length > 0;"
     private let webErrorReason: String = "document.getElementsByClassName('sv-panel sv-panel-danger')[0].getElementsByTagName('strong')[0].innerHTML"
     private let webClickLogin: String = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-primary')[0].click();"
@@ -81,7 +82,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         setupLogic()
         setupLooks()
 
-        
+        self.genericpasswordSigninButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
+
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show(withStatus: "Loading eVision...")
         self.loginContainer.alpha = 0
@@ -201,6 +203,20 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     @IBAction func dismiss(_ sender: Any) {
         SVProgressHUD.dismiss()
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func findLoginFromGenericPassword(_ sender: UIButton){
+        //        var error: NSError
+        OnePasswordExtension.shared().findLogin(forURLString: "https://evision.otago.ac.nz", for: self, sender: sender, completion: { (loginDict, error) in
+            if loginDict == nil {
+//                if error!.code != AppExtensionErrorCodeCancelledByUser {
+//                    print("Error invoking GenericPassword App Extension for find login: \(error)");
+//                }
+                return
+            }
+            self.usernameField.text = loginDict![AppExtensionUsernameKey] as? String
+            self.passwordField.text = loginDict![AppExtensionPasswordKey] as? String
+        })
     }
     
     @IBAction func loginPressed(_ sender: Any) {

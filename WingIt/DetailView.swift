@@ -112,9 +112,9 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
         self.roomLabel.text = lessonData.roomFull
         self.typeLabel.text = lessonData.type
         
-        let startTime = TimeUtil.get24HourTimeFromIndexPath(row: lessonData.startTime)
-        let endTime = TimeUtil.get24HourTimeFromIndexPath(row: lessonData.startTime + lessonData.duration)
-        timeLabel.text = "\(startTime) - \(endTime)"
+        let startTime = lessonData.startTime!
+        let endTime = startTime + lessonData.duration
+        timeLabel.text = "\(startTime):00 - \(endTime):50"
         
         self.setupMap()
     }

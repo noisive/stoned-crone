@@ -8,6 +8,10 @@
 
 import Foundation
 
+// Timezone note: All times are stored as UTC, but with numbers that would be
+// correct for current region. Only when objectively correct times are
+// needed, like for scheduling the notification, are they converted back
+// with a function.
 
 public class TimeUtil {
     
@@ -25,18 +29,31 @@ public class TimeUtil {
     
 }
 
-func dateFromISOString(str: String) -> Date?{
+func getDateFromISOString(str: String) -> Date?{
     let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
-    return formatter.date(from: str)
+    let defaultTZ = " UTC"
+    let defaultTime = "+12:00" + defaultTZ
+    let formatStr = "yyyy-MM-dd+HH:mm zzz" // ISO datetime format.
+    formatter.dateFormat = formatStr
+    var date: Date?
+    if let dateOpt = formatter.date(from: str + defaultTZ){
+        date = dateOpt
+        //    } else if let mockDateOpt = formatter.date(from: mockStrWithTime){
+    } else if let dateOpt = formatter.date(from: str + defaultTime){
+        date = dateOpt
+    } else {
+        print("Error: Invalid date argument format: \"\(str)\".")
+        print("Expected form \(formatStr) (without the timezone). The time portion is optional.")
+    }
+    return date
 }
 
-func getDayOfWeek() -> Int {
+func getDayOfWeek(date: Date) -> Int {
     let formatter = DateFormatter()
     let formatStr = "e" // Just gives day of week, with Wed=2
     formatter.timeZone = TimeZone(abbreviation: "UTC")
     formatter.dateFormat = formatStr
-    var weekDay = Int(formatter.string(from: todaysDate()))! - 1 // -1 is hack because this always returns the wrong number.
+    var weekDay = Int(formatter.string(from: date))! - 1 // -1 is hack because this always returns the wrong number.
     if weekDay == -1 { // Sat
         weekDay = 6
     }
@@ -44,6 +61,9 @@ func getDayOfWeek() -> Int {
         weekDay = 7
     }
     return weekDay
+}
+func getDayOfWeek() -> Int {
+    return getDayOfWeek(date: todaysDate())
 }
 
 func getMondaysDate() -> Date {
@@ -67,14 +87,28 @@ func getDateOfMostRecentMonday(from dateI: Date) -> Date {
     return mondayDate
 }
 
-// Account for the default UMT time, which is giving wrong date regardless of how the timezone is set!!!
-func convertUMTtoNZT(current: Date) -> Date{
+// See timezone note at top of file.
+func convertNZTtoUTC(date current: Date) -> Date{
     var timeDiff = DateComponents()
-    //NZ is + 13. Will break for DST, should try to get proper timezones working eventually.
-    timeDiff.hour = 13
+    if Calendar.current.timeZone.isDaylightSavingTime() {
+        timeDiff.hour = -13
+    }else{
+        timeDiff.hour = -12
+    }
     let updated = Calendar.current.date(byAdding: timeDiff, to: current)
     return (updated)!
 }
+
+//func convertUTCtoNZT(date current: Date) -> Date{
+//    var timeDiff = DateComponents()
+//    if Calendar.current.timeZone.isDaylightSavingTime() {
+//        timeDiff.hour = 13
+//    }else{
+//        timeDiff.hour = 12
+//    }
+//    let updated = Calendar.current.date(byAdding: timeDiff, to: current)
+//    return (updated)!
+//}
 
 func todaysDate() -> Date {
     var date: Date
@@ -102,27 +136,16 @@ func mockDateTime(mockStrO: String?=nil){
     var mockStr: String
     // 1st Oct is a monday. Nice num to work with.
     let defaultDate = "2018-10-01"
-    let defaultTZ = " UTC"
-    let defaultTime = "+12:00" + defaultTZ
-    let defaultDateTime = defaultDate + defaultTime
     if let _ = mockStrO {
         mockStr = mockStrO!
     }else{
         mockStr = defaultDate
     }
-    let formatter = DateFormatter()
-    let formatStr = "yyyy-MM-dd+HH:mm zzz" // ISO datetime format.
-    formatter.dateFormat = formatStr
-    //    let mockStrWithTime = mockStr + "+13:00"
-    if let mockDateOpt = formatter.date(from: mockStr + defaultTZ){
-        mockDate = mockDateOpt
-        //    } else if let mockDateOpt = formatter.date(from: mockStrWithTime){
-    } else if let mockDateOpt = formatter.date(from: mockStr + defaultTime){
+    if let mockDateOpt = getDateFromISOString(str: mockStr){
         mockDate = mockDateOpt
     } else {
-        print("Error: Invalid date argument format: \"\(mockStr)\". Will be set to mon, \(defaultDateTime)")
-        print("Expect form `mockDate [dateTime]`, where [dateTime] is of form \(formatStr). The time portion is optional.")
-        mockDate = formatter.date(from: defaultDateTime)
+        print("Error: Invalid date argument format: \"\(mockStr)\". Will be set to mon, \(defaultDate)")
+        mockDate = getDateFromISOString(str: defaultDate)
     }
 }
 
