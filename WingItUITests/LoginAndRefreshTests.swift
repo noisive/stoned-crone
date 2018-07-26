@@ -114,6 +114,20 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         
     }
     
+    func testUpdateNoInternet(){
+        app.launchArguments.append("-fakeData")
+        app.launchArguments.append("-no-reachability")
+        app.launch()
+        app.buttons["Refresh"].tap()
+        let cancelOption = app.alerts["No Internet Connection"].buttons["Cancel"]
+        XCTAssertTrue(cancelOption.exists)
+        cancelOption.tap()
+        XCTAssertTrue(app.isDisplayingTT)
+        let retryButton = app.alerts["No Internet Connection"].buttons["Retry"]
+        XCTAssertTrue(retryButton.exists)
+        retryButton.tap()
+    }
+    
     func testLogout(){
         setUpFakeData()
         menuButton.tap()

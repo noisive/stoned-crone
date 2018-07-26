@@ -28,8 +28,9 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     //Variables
     public var isUpdatingMode: Bool!
     private var PWIsStored: Bool = false
-    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let reachability = Reachability()!
     
     //Constants
     private let CORNER_RADIUS: CGFloat = 3.5;
@@ -75,6 +76,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.hideCancelOnNoData()
+        self.checkNetworkAlert()
     }
     
     override func viewDidLoad() {
@@ -83,7 +85,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         setupLooks()
 
         self.genericpasswordSigninButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
-
+        
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show(withStatus: "Loading eVision...")
         self.loginContainer.alpha = 0
@@ -194,6 +196,19 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                 cancelButton.isEnabled = true
                 cancelButton.isHidden = false
             }
+        }
+    }
+    private func checkNetworkAlert(){
+        if reachability.connection == .none || CommandLine.arguments.contains("-no-reachability") {
+            let alert = UIAlertController(title:  "No Internet Connection", message:  "Make sure your device is connected to the internet.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
+                self.reloadInputViews()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                self.dismiss(self)
+            }))
+            //            alert.accessibilityIdentifier = "No network alert"
+            self.present(alert, animated: true)
         }
     }
     

@@ -31,6 +31,7 @@
 		06D61714210974D300F58A30 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170D210974D200F58A30 /* .gitignore */; };
 		06D61715210974D300F58A30 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170E210974D200F58A30 /* LICENSE.txt */; };
 		06D61716210974D300F58A30 /* 1PasswordExtension.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */; };
+		06D61718210979CB00F58A30 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D61717210979CB00F58A30 /* Reachability.swift */; };
 		06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5E2EF20C1504500C77382 /* WingItTests.swift */; };
 		06E758982107E8E6007BDF76 /* WingItTestsSuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E758972107E8E6007BDF76 /* WingItTestsSuper.swift */; };
 		06E7589B2107FD9B007BDF76 /* TestAnswers in Resources */ = {isa = PBXBuildFile; fileRef = 064082FB20C263AA00F568CB /* TestAnswers */; };
@@ -119,6 +120,7 @@
 		06D6170E210974D200F58A30 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1PasswordExtension.podspec; sourceTree = "<group>"; };
 		06D61710210974D200F58A30 /* OnePasswordExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnePasswordExtension.h; sourceTree = "<group>"; };
+		06D61717210979CB00F58A30 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		06E5E2ED20C1504500C77382 /* WingItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06E5E2EF20C1504500C77382 /* WingItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItTests.swift; sourceTree = "<group>"; };
 		06E5E2F120C1504500C77382 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				064082FD20C263AA00F568CB /* Test files */,
 				06D37CD61F873C7F009318AC /* Settings.bundle */,
 				53F8A00A1EC3D0010001604A /* WingIt */,
+				06D61717210979CB00F58A30 /* Reachability.swift */,
 				06934D7B1F86730B00D308BD /* WingItUITests */,
 				06E5E2EE20C1504500C77382 /* WingItTests */,
 				53F8A0091EC3D0010001604A /* Products */,
@@ -669,6 +672,7 @@
 				534BB6932081E2D400757932 /* HexColors.m in Sources */,
 				533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */,
 				53B306742077584C006E05B7 /* AppCells.swift in Sources */,
+				06D61718210979CB00F58A30 /* Reachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
