@@ -236,16 +236,18 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier{
-        case "ShowDetail":
-            let senderObject = sender as! Lesson
-            let destinationVC = segue.destination as! DetailView
-            destinationVC.lessonData = senderObject
-        case "UpdateTimetable":
-            let destination = segue.destination as! LoginView
-            destination.isUpdatingMode = true
-        default:
-            return
+        if let ID = segue.identifier {
+            switch ID {
+            case "ShowDetail":
+                let senderObject = sender as! Lesson
+                let destinationVC = segue.destination as! DetailView
+                destinationVC.lessonData = senderObject
+            case "UpdateTimetable":
+                let destination = segue.destination as! LoginView
+                destination.isUpdatingMode = true
+            default:
+                return
+            }
         }
     }
 }

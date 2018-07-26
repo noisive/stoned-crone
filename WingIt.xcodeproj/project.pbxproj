@@ -133,7 +133,6 @@
 		533C92D720762A9300394325 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		533C92D820762A9300394325 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
 		533C92D920762A9300394325 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		533C92DA20762A9300394325 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		533C92DB20762A9400394325 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		534635A32079A8FC00497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		534635A42079A90E00497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
@@ -425,7 +424,6 @@
 				53C7D03A1EC9B79D00D0BD9C /* Project-Bridging-Header.h */,
 				534635A12079A8EC00497A8D /* SW Reveal Controll */,
 				534635A22079A8FB00497A8D /* Progress indicator */,
-				533C92DA20762A9300394325 /* SVProgressHUD-Prefix.pch */,
 				534BB6862081E21F00757932 /* Notifications */,
 				06D61709210974D200F58A30 /* onepassword-app-extension */,
 				062EB9421F8B414B005F350E /* SwiftKeychainWrapper */,
