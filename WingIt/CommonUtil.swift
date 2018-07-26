@@ -5,12 +5,7 @@
 //  Created by William Warren on 10/2/17.
 //  Copyright © 2017 Noisive. All rights reserved.
 //
-
-
-
 import Foundation
-
-
 
 public func getBackgroundColorFromLesson(type: String, fallback: Lesson) -> UIColor {
     switch type {

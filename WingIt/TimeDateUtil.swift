@@ -8,6 +8,10 @@
 
 import Foundation
 
+// Timezone note: All times are stored as UTC, but with numbers that would be
+// correct for current region. Only when objectively correct times are
+// needed, like for scheduling the notification, are they converted back
+// with a function.
 
 public class TimeUtil {
     
@@ -83,7 +87,7 @@ func getDateOfMostRecentMonday(from dateI: Date) -> Date {
     return mondayDate
 }
 
-// Account for the default UMT time, which is giving wrong date regardless of how the timezone is set!!!
+// See timezone note at top of file.
 func convertNZTtoUTC(date current: Date) -> Date{
     var timeDiff = DateComponents()
     if Calendar.current.timeZone.isDaylightSavingTime() {
@@ -105,7 +109,7 @@ func convertNZTtoUTC(date current: Date) -> Date{
 //    let updated = Calendar.current.date(byAdding: timeDiff, to: current)
 //    return (updated)!
 //}
-//
+
 func todaysDate() -> Date {
     var date: Date
     
