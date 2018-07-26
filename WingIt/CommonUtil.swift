@@ -33,9 +33,13 @@ public func getBarBackgroundColorFromLesson(type: String, fallback: Lesson) -> U
     return getBackgroundColorFromLesson(type: type, fallback: fallback).withAlphaComponent(1)
 }
 
-// Call this function when each item is initialised to schedule a
+/* Call this function when each item is initialised to schedule a
 // notification [minsBeforeNotification] minutes before that event.
-// @param the event struct to be used.
+// Timezone note: All times are stored as UTC, but with numbers that would be
+// correct for current region. Only when objectively correct times are
+// needed, like for scheduling the notification, are they converted back
+// with a function.
+// @param the event struct to be used. */
 func setNotification (event: Lesson){
     
     var minsBeforeNotification = 15 // Default to 15 mins before lecture
@@ -48,6 +52,7 @@ func setNotification (event: Lesson){
     
     // Get Monday's date, then transform fire date based on lesson's weekday
     let mondaysDate: Date = getMondaysDate()
+//    let calendar = Calendar(from: <#T##Decoder#>)
 
     // Add the day to monday
     var interval = DateComponents()
@@ -57,7 +62,9 @@ func setNotification (event: Lesson){
     interval.hour = event.startTime - 1
     interval.minute = 60 - minsBeforeNotification
     
-    let notificationTimeAndDate = Calendar.current.date(byAdding: interval, to: mondaysDate)!
+    var cal = Calendar.current
+    cal.timeZone = TimeZone(abbreviation: "UTC")!
+    let notificationTimeAndDate = cal.date(byAdding: interval, to: mondaysDate)!
     
     // End weekday date code
     //-----------------------------------------------------------------------------------------------
@@ -81,10 +88,10 @@ func setNotification (event: Lesson){
     if notificationTimeAndDate < todaysDate(){
         return
     }
-    localNotification.fireDate = notificationTimeAndDate
+    localNotification.fireDate = convertNZTtoUTC(date: notificationTimeAndDate)
     localNotification.soundName = UILocalNotificationDefaultSoundName
     
-    var eventTime = event.startTime
+    var eventTime = event.startTime!
     if eventTime > 12{
         eventTime -= 12
     }

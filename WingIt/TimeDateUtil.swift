@@ -84,14 +84,28 @@ func getDateOfMostRecentMonday(from dateI: Date) -> Date {
 }
 
 // Account for the default UMT time, which is giving wrong date regardless of how the timezone is set!!!
-func convertUMTtoNZT(current: Date) -> Date{
+func convertNZTtoUTC(date current: Date) -> Date{
     var timeDiff = DateComponents()
-    //NZ is + 13. Will break for DST, should try to get proper timezones working eventually.
-    timeDiff.hour = 13
+    if Calendar.current.timeZone.isDaylightSavingTime() {
+        timeDiff.hour = -13
+    }else{
+        timeDiff.hour = -12
+    }
     let updated = Calendar.current.date(byAdding: timeDiff, to: current)
     return (updated)!
 }
 
+//func convertUTCtoNZT(date current: Date) -> Date{
+//    var timeDiff = DateComponents()
+//    if Calendar.current.timeZone.isDaylightSavingTime() {
+//        timeDiff.hour = 13
+//    }else{
+//        timeDiff.hour = 12
+//    }
+//    let updated = Calendar.current.date(byAdding: timeDiff, to: current)
+//    return (updated)!
+//}
+//
 func todaysDate() -> Date {
     var date: Date
     
