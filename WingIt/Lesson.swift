@@ -116,7 +116,7 @@ public class Lesson {
             paperName = paperErrorName
         }
         
-        startTime = startTime! - 8 // We start the day at 8 am
+//        startTime = startTime! - 8 // We start the day at 8 am
         
         self.init(uid: uid!, classID: paperCode, start: startTime!, duration: duration!, colour: colour, code: paperCode, type: type, roomShort: roomCode, roomFull: roomName, building: building, paperName: paperName, day: dayNumber!, eventDate: (eventDate)!, latitude: latitude!, longitude: longitude!)
     }

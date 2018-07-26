@@ -53,8 +53,8 @@ func setNotification (event: Lesson){
     var interval = DateComponents()
     interval.day = event.day - 1
     
-    // Start time plus 7 gives correct hours for before lecture
-    interval.hour = event.startTime + 7
+    // We want notifications just before the start hour
+    interval.hour = event.startTime - 1
     interval.minute = 60 - minsBeforeNotification
     
     let notificationTimeAndDate = Calendar.current.date(byAdding: interval, to: mondaysDate)!
@@ -84,7 +84,7 @@ func setNotification (event: Lesson){
     localNotification.fireDate = notificationTimeAndDate
     localNotification.soundName = UILocalNotificationDefaultSoundName
     
-    var eventTime = event.startTime + 8
+    var eventTime = event.startTime
     if eventTime > 12{
         eventTime -= 12
     }

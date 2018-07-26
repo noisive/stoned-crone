@@ -47,7 +47,7 @@ func loadWeekData(VC: TimetableView){
             VC.lessonData.append(lesson)
             setNotification(event: lesson)
             
-            let hour = lesson.startTime!
+            let hour = lesson.startTime! - 8
             // Create array spots for each hour a class runs for (i.e. 2 hour tutorial gets two cells)
             for hoursIntoClass in 0..<lesson.duration! {
                 if (VC.hourData[dayIndex][hour + hoursIntoClass]?.lesson == nil) {
