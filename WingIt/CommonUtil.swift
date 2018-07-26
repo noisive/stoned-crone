@@ -43,7 +43,6 @@ func setNotification (event: Lesson){
         minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
     }
     
-    
     //---------------------------------------------------------------------------------------------
     // This section of code has an alternative after it, for if there are multiple weeks of data. Change them when this is implemented. FEATURE
     
@@ -52,7 +51,7 @@ func setNotification (event: Lesson){
 
     // Add the day to monday
     var interval = DateComponents()
-    interval.day = event.day
+    interval.day = event.day - 1
     
     // Start time plus 7 gives correct hours for before lecture
     interval.hour = event.startTime + 7
@@ -62,9 +61,7 @@ func setNotification (event: Lesson){
     
     // End weekday date code
     //-----------------------------------------------------------------------------------------------
-    
-    
-    
+
     /* This section of code loads the notification for the actual event date, rather than the weekday. Use this for when multiple weeks are loaded.
      
      // Add the notification time to the date of the event
@@ -78,7 +75,7 @@ func setNotification (event: Lesson){
      */
     
     let localNotification = UILocalNotification()
-    localNotification.timeZone = TimeZone(identifier: "NZST")
+//    localNotification.timeZone = TimeZone(identifier: "NZST")
     
     // first check notification isn't in the past. if it is, skip the rest.
     if notificationTimeAndDate < todaysDate(){
@@ -99,7 +96,7 @@ func setNotification (event: Lesson){
     UIApplication.shared.scheduleLocalNotification(localNotification)
     
     // DEBUG print out currently scheduled notifications
-    // print(UIApplication.shared.scheduledLocalNotifications!)
+     print(UIApplication.shared.scheduledLocalNotifications!)
 }
 
 func storeUserPass(username: String, password: String){

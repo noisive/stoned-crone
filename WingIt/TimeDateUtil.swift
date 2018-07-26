@@ -31,12 +31,12 @@ func dateFromISOString(str: String) -> Date?{
     return formatter.date(from: str)
 }
 
-func getDayOfWeek() -> Int {
+func getDayOfWeek(date: Date) -> Int {
     let formatter = DateFormatter()
     let formatStr = "e" // Just gives day of week, with Wed=2
     formatter.timeZone = TimeZone(abbreviation: "UTC")
     formatter.dateFormat = formatStr
-    var weekDay = Int(formatter.string(from: todaysDate()))! - 1 // -1 is hack because this always returns the wrong number.
+    var weekDay = Int(formatter.string(from: date))! - 1 // -1 is hack because this always returns the wrong number.
     if weekDay == -1 { // Sat
         weekDay = 6
     }
@@ -44,6 +44,9 @@ func getDayOfWeek() -> Int {
         weekDay = 7
     }
     return weekDay
+}
+func getDayOfWeek() -> Int {
+    return getDayOfWeek(date: todaysDate())
 }
 
 func getMondaysDate() -> Date {

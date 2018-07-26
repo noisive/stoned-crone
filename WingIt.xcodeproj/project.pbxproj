@@ -19,7 +19,6 @@
 		0675D6E721006406003B0233 /* testData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 0675D6E421005669003B0233 /* testData.csv */; };
 		06934D7D1F86730B00D308BD /* LoginAndRefreshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* LoginAndRefreshTests.swift */; };
 		06940F682101883500EF3E96 /* DateTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06940F672101883500EF3E96 /* DateTimeTests.swift */; };
-		06940F6A2101935900EF3E96 /* TimeDateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B37F20760D9A0063E45F /* TimeDateUtil.swift */; };
 		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
@@ -624,7 +623,6 @@
 				06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */,
 				06E758982107E8E6007BDF76 /* WingItTestsSuper.swift in Sources */,
 				06940F682101883500EF3E96 /* DateTimeTests.swift in Sources */,
-				06940F6A2101935900EF3E96 /* TimeDateUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

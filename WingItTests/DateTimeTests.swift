@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import WingIt
 
 class DateTimeTests: XCTestCase {
     
@@ -57,17 +58,13 @@ class DateTimeTests: XCTestCase {
     
     func testDayMock(){
         mockDateTime()
-        var day = getDayOfWeek()
-        XCTAssert(day == 1)
+        XCTAssert(getDayOfWeek() == 1)
         mockDateTime(mockStrO: "2018-10-5")
-        day = getDayOfWeek()
-        XCTAssert(day == 5)
+        XCTAssert(getDayOfWeek() == 5)
         mockDateTime(mockStrO: "2018-10-6")
-        day = getDayOfWeek()
-        XCTAssert(day == 6)
+        XCTAssert(getDayOfWeek() == 6)
         mockDateTime(mockStrO: "2018-10-7")
-        day = getDayOfWeek()
-        XCTAssert(day == 7)
+        XCTAssert(getDayOfWeek() == 7)
     }
     
     func testRecentMondayIsCorrect(){
@@ -85,7 +82,30 @@ class DateTimeTests: XCTestCase {
         mockDateTime(mockStrO: "2018-10-07") // Sunday
         testMonday = getMondaysDate()
         XCTAssert(testMonday == actualMonday)
-        
     }
     
+    func testNotification8AM(){
+        UIApplication.shared.cancelAllLocalNotifications()
+        mockDateTime(mockStrO: "2018-10-01+01:00")
+        let app = UIApplication.shared
+        setNotificationFromFakeLesson(dateStr: "2018-10-01", time24H: 8)
+        let scheduledNotifs = app.scheduledLocalNotifications ?? []
+        XCTAssert(scheduledNotifs[0].fireDate == dateFromISOString(str: "2018-10-07+02:45"))
+    }
+    
+    func testStaleEventDoesNotCreateNotification(){
+        UIApplication.shared.cancelAllLocalNotifications()
+        mockDateTime(mockStrO: "2018-10-01+09:00")
+        let app = UIApplication.shared
+        setNotificationFromFakeLesson(dateStr: "2018-10-1", time24H: 8)
+        let scheduledNotifs = app.scheduledLocalNotifications ?? []
+        XCTAssert(scheduledNotifs.count == 0)
+    }
+    
+    func setNotificationFromFakeLesson(dateStr: String, time24H: Int){
+        let date = dateFromISOString(str: dateStr)!
+        let day = getDayOfWeek(date: date)
+        let lesson = Lesson(uid: 1, classID: "NOTI0\(time24H)", start: time24H, duration: 1, colour: "#FFFFFF", code: "NOTI008", type: "Lecture", roomShort: "T", roomFull: "T", building: "T", paperName: "T", day: day, eventDate: date, latitude: -45, longitude: 175)
+        setNotification(event: lesson)
+    }
 }
