@@ -32,7 +32,7 @@ func loadWeekData(VC: TimetableView){
             mondaysDate = getMondaysDate()
         }else{
             // TODO: Check date if no class on monday.
-            let firstEventDate = dateFromISOString(str: firstEventDateString)
+            let firstEventDate = getDateFromISOString(str: firstEventDateString)
             if firstEventDate != nil {
                 mondaysDate = getDateOfMostRecentMonday(from: firstEventDate!)
             }

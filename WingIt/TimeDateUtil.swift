@@ -25,10 +25,23 @@ public class TimeUtil {
     
 }
 
-func dateFromISOString(str: String) -> Date?{
+func getDateFromISOString(str: String) -> Date?{
     let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd" // ISO date format.
-    return formatter.date(from: str)
+    let defaultTZ = " UTC"
+    let defaultTime = "+12:00" + defaultTZ
+    let formatStr = "yyyy-MM-dd+HH:mm zzz" // ISO datetime format.
+    formatter.dateFormat = formatStr
+    var date: Date?
+    if let dateOpt = formatter.date(from: str + defaultTZ){
+        date = dateOpt
+        //    } else if let mockDateOpt = formatter.date(from: mockStrWithTime){
+    } else if let dateOpt = formatter.date(from: str + defaultTime){
+        date = dateOpt
+    } else {
+        print("Error: Invalid date argument format: \"\(str)\".")
+        print("Expected form \(formatStr) (without the timezone). The time portion is optional.")
+    }
+    return date
 }
 
 func getDayOfWeek(date: Date) -> Int {
@@ -105,27 +118,16 @@ func mockDateTime(mockStrO: String?=nil){
     var mockStr: String
     // 1st Oct is a monday. Nice num to work with.
     let defaultDate = "2018-10-01"
-    let defaultTZ = " UTC"
-    let defaultTime = "+12:00" + defaultTZ
-    let defaultDateTime = defaultDate + defaultTime
     if let _ = mockStrO {
         mockStr = mockStrO!
     }else{
         mockStr = defaultDate
     }
-    let formatter = DateFormatter()
-    let formatStr = "yyyy-MM-dd+HH:mm zzz" // ISO datetime format.
-    formatter.dateFormat = formatStr
-    //    let mockStrWithTime = mockStr + "+13:00"
-    if let mockDateOpt = formatter.date(from: mockStr + defaultTZ){
-        mockDate = mockDateOpt
-        //    } else if let mockDateOpt = formatter.date(from: mockStrWithTime){
-    } else if let mockDateOpt = formatter.date(from: mockStr + defaultTime){
+    if let mockDateOpt = getDateFromISOString(str: mockStr){
         mockDate = mockDateOpt
     } else {
-        print("Error: Invalid date argument format: \"\(mockStr)\". Will be set to mon, \(defaultDateTime)")
-        print("Expect form `mockDate [dateTime]`, where [dateTime] is of form \(formatStr). The time portion is optional.")
-        mockDate = formatter.date(from: defaultDateTime)
+        print("Error: Invalid date argument format: \"\(mockStr)\". Will be set to mon, \(defaultDate)")
+        mockDate = getDateFromISOString(str: defaultDate)
     }
 }
 

@@ -202,7 +202,7 @@ func checkAndRemoveBadDateData() -> Bool{
         case BadDate
     }
     do{
-        guard let _ = dateFromISOString(str: firstEventDateString) else{
+        guard let _ = getDateFromISOString(str: firstEventDateString) else{
             throw DateError.BadDate
         }
     }catch{
