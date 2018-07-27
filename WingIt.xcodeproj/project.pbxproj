@@ -522,7 +522,6 @@
 					};
 					53F8A0071EC3D0010001604A = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = UY5WX2EN9V;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -907,7 +906,7 @@
 				CLANG_WARN_COMMA = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = UY5WX2EN9V;
+				DEVELOPMENT_TEAM = 9L3BH5LC27;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -916,7 +915,7 @@
 				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingItt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -937,7 +936,7 @@
 				CLANG_WARN_COMMA = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = UY5WX2EN9V;
+				DEVELOPMENT_TEAM = 9L3BH5LC27;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -946,7 +945,7 @@
 				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingItt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "WingIt/Project-Bridging-Header.h";
