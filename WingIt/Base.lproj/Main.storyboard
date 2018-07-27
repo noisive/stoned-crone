@@ -228,7 +228,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rmt-xy-F9a" userLabel="genericpasswordSigninButton">
                                                         <rect key="frame" x="265" y="3" width="27" height="44"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="genericpasswordSigninButton"/>
-                                                        <state key="normal" image="onepassword-button"/>
+                                                        <state key="normal" image="UIButtonBarAction-button"/>
                                                         <connections>
                                                             <action selector="findLoginFromGenericPassword:" destination="PM4-zz-bZM" eventType="touchUpInside" id="ubP-Ke-hrU"/>
                                                         </connections>
@@ -940,7 +940,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="K8I-l8-n3N" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="n5e-Bk-XY5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" largeTitles="YES" id="n5e-Bk-XY5">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0028536693427855804" green="0.54101066438728818" blue="0.99908632040023804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1203,10 +1203,10 @@
         <image name="Menu" width="28" height="28"/>
         <image name="Refresh" width="16" height="16"/>
         <image name="Share_ffffff_100" width="104" height="104"/>
+        <image name="UIButtonBarAction-button" width="27" height="27"/>
         <image name="cancel" width="30" height="30"/>
         <image name="iTunesArtwork" width="332" height="320"/>
         <image name="lock" width="30" height="30"/>
-        <image name="onepassword-button" width="27" height="27"/>
         <image name="user_male" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>

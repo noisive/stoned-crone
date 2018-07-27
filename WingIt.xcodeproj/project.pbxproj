@@ -11,6 +11,7 @@
 		061F3E801F8AF09C00BD0D09 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061F3E7F1F8AF09C00BD0D09 /* DataUtil.swift */; };
 		062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9441F8B414B005F350E /* KeychainWrapper.swift */; };
 		062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */; };
+		063A25DF210A99FD00967041 /* SystemIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 063A25DE210A99FC00967041 /* SystemIcons.xcassets */; };
 		064082FE20C263BB00F568CB /* TestAnswers in Resources */ = {isa = PBXBuildFile; fileRef = 064082FB20C263AA00F568CB /* TestAnswers */; };
 		064082FF20C263BB00F568CB /* TestInputs in Resources */ = {isa = PBXBuildFile; fileRef = 064082FC20C263AA00F568CB /* TestInputs */; };
 		0640830120C36D2800F568CB /* Cwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640830020C36D2700F568CB /* Cwrapper.swift */; };
@@ -96,6 +97,7 @@
 		062EB9441F8B414B005F350E /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
+		063A25DE210A99FC00967041 /* SystemIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SystemIcons.xcassets; sourceTree = "<group>"; };
 		064082FB20C263AA00F568CB /* TestAnswers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestAnswers; path = ../Backend/parserTests/TestAnswers; sourceTree = "<group>"; };
 		064082FC20C263AA00F568CB /* TestInputs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestInputs; path = ../Backend/parserTests/TestInputs; sourceTree = "<group>"; };
 		0640830020C36D2700F568CB /* Cwrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cwrapper.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				534635A92079A94800497A8D /* App Definitions */,
 				53CDC1E41EDC1EB300A2ED5A /* Cells */,
 				53CDC1E61EDC1EC900A2ED5A /* Data Structures */,
+				063A25DE210A99FC00967041 /* SystemIcons.xcassets */,
 				53F8A0151EC3D0010001604A /* Assets.xcassets */,
 				53F8A0171EC3D0010001604A /* LaunchScreen.storyboard */,
 				53F8A01A1EC3D0010001604A /* Info.plist */,
@@ -567,6 +570,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06D61715210974D300F58A30 /* LICENSE.txt in Resources */,
+				063A25DF210A99FD00967041 /* SystemIcons.xcassets in Resources */,
 				06D61713210974D300F58A30 /* 1Password.xcassets in Resources */,
 				0675D6E721006406003B0233 /* testData.csv in Resources */,
 				06D61716210974D300F58A30 /* 1PasswordExtension.podspec in Resources */,
