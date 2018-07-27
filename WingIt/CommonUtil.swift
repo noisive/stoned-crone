@@ -92,7 +92,7 @@ func scheduleNotification(datetime: Date, soundName: String, message: String){
     localNotification.alertBody = message
     UIApplication.shared.scheduleLocalNotification(localNotification)
     // DEBUG print out currently scheduled notifications
-    print(UIApplication.shared.scheduledLocalNotifications!)
+//    print(UIApplication.shared.scheduledLocalNotifications!)
 }
 
 func storeUserPass(username: String, password: String){
@@ -240,7 +240,14 @@ func clearCache(){
         for fileName in fileNames {
             if fileName == "data.csv" || fileName == ".version" {
                 let filePathName = "\(cachePath)/\(fileName)"
-                try fileManager.removeItem(atPath: filePathName)
+                try? fileManager.removeItem(atPath: filePathName)
+                URLCache.shared.removeAllCachedResponses()
+                if let cookies = HTTPCookieStorage.shared.cookies {
+                    for cookie in cookies {
+                        HTTPCookieStorage.shared.deleteCookie(cookie)
+                    }
+                }
+
             }
         }
     } catch {

@@ -59,6 +59,9 @@
                   Identifier = "LoginAndRefreshTests/testSwipePastEndOfArrayFast()">
                </Test>
                <Test
+                  Identifier = "LoginAndRefreshTests/testUpdateNoInternet()">
+               </Test>
+               <Test
                   Identifier = "LoginAndRefreshTests/testingPlayground()">
                </Test>
                <Test
