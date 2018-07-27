@@ -41,14 +41,10 @@ func setNotification (event: Lesson){
     if isKeyPresentInUserDefaults(key: "noticePeriod"){
         minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
     }
-    
     //---------------------------------------------------------------------------------------------
     // This section of code has an alternative after it, for if there are multiple weeks of data. Change them when this is implemented. FEATURE
-    
     // Get Monday's date, then transform fire date based on lesson's weekday
     let mondaysDate: Date = getMondaysDate()
-//    let calendar = Calendar(from: <#T##Decoder#>)
-
     // Add the day to monday
     var interval = DateComponents()
     interval.day = event.day - 1
@@ -60,10 +56,9 @@ func setNotification (event: Lesson){
     var cal = Calendar.current
     cal.timeZone = TimeZone(abbreviation: "UTC")!
     let notificationTimeAndDate = cal.date(byAdding: interval, to: mondaysDate)!
-    
     // End weekday date code
+    
     //-----------------------------------------------------------------------------------------------
-
     /* This section of code loads the notification for the actual event date, rather than the weekday. Use this for when multiple weeks are loaded.
      
      // Add the notification time to the date of the event
@@ -76,29 +71,26 @@ func setNotification (event: Lesson){
      
      */
     
-    let localNotification = UILocalNotification()
-//    localNotification.timeZone = TimeZone(identifier: "NZST")
-    
     // first check notification isn't in the past. if it is, skip the rest.
-    if notificationTimeAndDate < todaysDate(){
-        return
-    }
-    localNotification.fireDate = convertNZTtoUTC(date: notificationTimeAndDate)
-    localNotification.soundName = UILocalNotificationDefaultSoundName
-    
+    if notificationTimeAndDate < todaysDate(){ return }
+
     var eventTime = event.startTime!
-    if eventTime > 12{
-        eventTime -= 12
-    }
+    if eventTime > 12{ eventTime -= 12 }
     // Message example: COSC345 Lecture coming up at 11
     let notificationMessage = "\((event.code)!) \((event.type)!) starts at \(eventTime) in \((event.roomShort)!)"
-    localNotification.alertBody = notificationMessage
     
+    scheduleNotification(datetime: convertNZTtoUTC(date: notificationTimeAndDate), soundName: UILocalNotificationDefaultSoundName, message: notificationMessage)
+}
+
+func scheduleNotification(datetime: Date, soundName: String, message: String){
     
+    let localNotification = UILocalNotification()
+    localNotification.fireDate = datetime
+    localNotification.soundName = soundName
+    localNotification.alertBody = message
     UIApplication.shared.scheduleLocalNotification(localNotification)
-    
     // DEBUG print out currently scheduled notifications
-     print(UIApplication.shared.scheduledLocalNotifications!)
+    print(UIApplication.shared.scheduledLocalNotifications!)
 }
 
 func storeUserPass(username: String, password: String){
@@ -282,6 +274,7 @@ func copyTestData(fakeDataURL: URL? = nil){
 
 var noReachabilityArg = false
 var testing = false
+var skipLogin = false
 func HandleLaunchArgs() {
     //    let userDefaults: UserDefaults
     var args = CommandLine.arguments
