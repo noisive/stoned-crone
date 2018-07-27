@@ -65,6 +65,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
         self.navigationController?.navigationBar.tintColor = .white
         self.iconContainer.layer.cornerRadius = self.ICON_CORNER_RADIUS
         self.tableView.separatorColor = AppColors.CELL_SEPERATOR_COLOR
+        var preferredStatusBarStyle: UIStatusBarStyle{return .lightContent}
         
         let randomIndex: Int = Int(arc4random_uniform(UInt32(self.WELCOME_MESSAGES.count) + 0))
         self.welcomeMessage.text = self.WELCOME_MESSAGES[randomIndex]

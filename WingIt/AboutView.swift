@@ -11,6 +11,8 @@ import UIKit
 
 class AboutView: UITableViewController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle{return .lightContent}
+    
     @IBOutlet weak var menuButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()

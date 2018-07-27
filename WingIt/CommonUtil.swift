@@ -19,6 +19,8 @@ public func getBackgroundColorFromLesson(type: String, fallback: Lesson) -> UICo
         return AppColors.TUTORIAL_COLOR.withAlphaComponent(0.2)
     case "Practical":
         return AppColors.LAB_COLOR.withAlphaComponent(0.2)
+    case "Examination":
+        return AppColors.EXAM_COLOR.withAlphaComponent(0.2)
     default:
         return UIColor.init(hexString: fallback.colour)
     }
@@ -41,14 +43,10 @@ func setNotification (event: Lesson){
     if isKeyPresentInUserDefaults(key: "noticePeriod"){
         minsBeforeNotification = UserDefaults.standard.integer(forKey: "noticePeriod")
     }
-    
     //---------------------------------------------------------------------------------------------
     // This section of code has an alternative after it, for if there are multiple weeks of data. Change them when this is implemented. FEATURE
-    
     // Get Monday's date, then transform fire date based on lesson's weekday
     let mondaysDate: Date = getMondaysDate()
-//    let calendar = Calendar(from: <#T##Decoder#>)
-
     // Add the day to monday
     var interval = DateComponents()
     interval.day = event.day - 1
@@ -60,10 +58,9 @@ func setNotification (event: Lesson){
     var cal = Calendar.current
     cal.timeZone = TimeZone(abbreviation: "UTC")!
     let notificationTimeAndDate = cal.date(byAdding: interval, to: mondaysDate)!
-    
     // End weekday date code
+    
     //-----------------------------------------------------------------------------------------------
-
     /* This section of code loads the notification for the actual event date, rather than the weekday. Use this for when multiple weeks are loaded.
      
      // Add the notification time to the date of the event
@@ -76,29 +73,26 @@ func setNotification (event: Lesson){
      
      */
     
-    let localNotification = UILocalNotification()
-//    localNotification.timeZone = TimeZone(identifier: "NZST")
-    
     // first check notification isn't in the past. if it is, skip the rest.
-    if notificationTimeAndDate < todaysDate(){
-        return
-    }
-    localNotification.fireDate = convertNZTtoUTC(date: notificationTimeAndDate)
-    localNotification.soundName = UILocalNotificationDefaultSoundName
-    
+    if notificationTimeAndDate < todaysDate(){ return }
+
     var eventTime = event.startTime!
-    if eventTime > 12{
-        eventTime -= 12
-    }
+    if eventTime > 12{ eventTime -= 12 }
     // Message example: COSC345 Lecture coming up at 11
     let notificationMessage = "\((event.code)!) \((event.type)!) starts at \(eventTime) in \((event.roomShort)!)"
-    localNotification.alertBody = notificationMessage
     
+    scheduleNotification(datetime: convertNZTtoUTC(date: notificationTimeAndDate), soundName: UILocalNotificationDefaultSoundName, message: notificationMessage)
+}
+
+func scheduleNotification(datetime: Date, soundName: String, message: String){
     
+    let localNotification = UILocalNotification()
+    localNotification.fireDate = datetime
+    localNotification.soundName = soundName
+    localNotification.alertBody = message
     UIApplication.shared.scheduleLocalNotification(localNotification)
-    
     // DEBUG print out currently scheduled notifications
-     print(UIApplication.shared.scheduledLocalNotifications!)
+//    print(UIApplication.shared.scheduledLocalNotifications!)
 }
 
 func storeUserPass(username: String, password: String){
@@ -238,19 +232,31 @@ func checkAndRemoveBadDateData() -> Bool{
 // Delete all files in app cache dir, including our data csvs.
 func clearCache(){
     let fileManager = FileManager.default
-    let cacheURL = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-    do {
-        let cachePath = cacheURL.path
-        let fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
-        
-        for fileName in fileNames {
-            if fileName == "data.csv" || fileName == ".version" {
-                let filePathName = "\(cachePath)/\(fileName)"
-                try fileManager.removeItem(atPath: filePathName)
-            }
+    URLCache.shared.removeAllCachedResponses()
+    if let cookies = HTTPCookieStorage.shared.cookies {
+        for cookie in cookies {
+            HTTPCookieStorage.shared.deleteCookie(cookie)
         }
+    }
+    let cacheURL = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    var fileNames = Array<String>()
+    let cachePath = cacheURL.path
+    do {
+        fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
     } catch {
-        print("Could not clear: \(error)")
+        print("Could not load filenames to clear: \(error)")
+    }
+    
+    for fileName in fileNames {
+//        if fileName == "data.csv" || fileName == ".version" {
+            let filePathName = "\(cachePath)/\(fileName)"
+            do {
+                try fileManager.removeItem(atPath: filePathName)
+            } catch {
+                print("Could not clear: \(error)")
+            }
+
+//        }
     }
 }
 
@@ -280,6 +286,9 @@ func copyTestData(fakeDataURL: URL? = nil){
     }
 }
 
+var noReachabilityArg = false
+var testing = false
+var skipLogin = false
 func HandleLaunchArgs() {
     //    let userDefaults: UserDefaults
     var args = CommandLine.arguments
@@ -291,13 +300,18 @@ func HandleLaunchArgs() {
         removeStoredUserPass()
         clearCache()
     }
-    
-    
     if args.contains("-UITests") {
         UIApplication.shared.keyWindow?.layer.speed = 100
     }
-    
-    
+    if args.contains("-testing") {
+        testing = true
+    }
+    if args.contains("-skipLogin") {
+        skipLogin = true
+    }
+    if args.contains("-noReachability"){
+        noReachabilityArg = true
+    }
     if args.contains("-fakeData") {
         copyTestData()
         if !args.contains("-mockDate") {

@@ -19,13 +19,14 @@ class NavigationCell: UITableViewCell {
     
     //Variables
     private let CORNER_RADIUS: CGFloat = 5.0
-    
+    var preferredStatusBarStyle: UIStatusBarStyle{return .lightContent}
+
     //MARK: Nib loading
     //================================================================
     
     override func awakeFromNib() {
         super.awakeFromNib()
-    
+
     }
 
     //MARK: Delegates
@@ -37,4 +38,16 @@ class NavigationCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+// Required for UIBarStyle to set correctly
+extension UITabBarController {
+    open override var childViewControllerForStatusBarStyle: UIViewController? {
+        return selectedViewController
+    }
+}
+extension UINavigationController {
+    open override var childViewControllerForStatusBarStyle: UIViewController? {
+        return visibleViewController
+    }
 }

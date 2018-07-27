@@ -59,6 +59,9 @@
                   Identifier = "LoginAndRefreshTests/testSwipePastEndOfArrayFast()">
                </Test>
                <Test
+                  Identifier = "LoginAndRefreshTests/testUpdateNoInternet()">
+               </Test>
+               <Test
                   Identifier = "LoginAndRefreshTests/testingPlayground()">
                </Test>
                <Test
@@ -72,6 +75,9 @@
                </Test>
                <Test
                   Identifier = "StabilityTests/testingPlayground()">
+               </Test>
+               <Test
+                  Identifier = "TimetableEventPositionTests/test2HourCellAppearsInBoth()">
                </Test>
                <Test
                   Identifier = "WingItUITests/testLoginRaw()">

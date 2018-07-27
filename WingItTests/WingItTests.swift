@@ -58,8 +58,10 @@ class BackendTest: XCTestCase {
             let bundle = Bundle(for: type(of: self))
             let inputPaths = bundle.paths(forResourcesOfType: "csv", inDirectory: "TestAnswers")
             for testFilePath in inputPaths{
+                print("Loading test file " + testFilePath)
                 let VC = TimetableView()
                 copyTestData(fakeDataURL: URL(fileURLWithPath: testFilePath))
+                VC.hourData = [[(lesson: CLong?, lesson2: CLong?)?]](repeating: [(lesson: CLong?, lesson2: CLong?)?](repeating: nil, count: 14), count: 7)
                 loadWeekData(VC: VC)
             }
         }

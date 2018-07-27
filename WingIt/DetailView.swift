@@ -114,7 +114,7 @@ class DetailView: UITableViewController, MKMapViewDelegate, PDetailedClassView {
         
         let startTime = lessonData.startTime!
         let endTime = startTime + lessonData.duration
-        timeLabel.text = "\(startTime):00 - \(endTime):50"
+        timeLabel.text = "\(startTime):00 - \(endTime - 1):50"
         
         self.setupMap()
     }

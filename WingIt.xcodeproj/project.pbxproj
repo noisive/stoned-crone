@@ -11,6 +11,7 @@
 		061F3E801F8AF09C00BD0D09 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061F3E7F1F8AF09C00BD0D09 /* DataUtil.swift */; };
 		062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9441F8B414B005F350E /* KeychainWrapper.swift */; };
 		062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */; };
+		063A25DF210A99FD00967041 /* SystemIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 063A25DE210A99FC00967041 /* SystemIcons.xcassets */; };
 		064082FE20C263BB00F568CB /* TestAnswers in Resources */ = {isa = PBXBuildFile; fileRef = 064082FB20C263AA00F568CB /* TestAnswers */; };
 		064082FF20C263BB00F568CB /* TestInputs in Resources */ = {isa = PBXBuildFile; fileRef = 064082FC20C263AA00F568CB /* TestInputs */; };
 		0640830120C36D2800F568CB /* Cwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640830020C36D2700F568CB /* Cwrapper.swift */; };
@@ -30,6 +31,7 @@
 		06D61714210974D300F58A30 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170D210974D200F58A30 /* .gitignore */; };
 		06D61715210974D300F58A30 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170E210974D200F58A30 /* LICENSE.txt */; };
 		06D61716210974D300F58A30 /* 1PasswordExtension.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */; };
+		06D61718210979CB00F58A30 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D61717210979CB00F58A30 /* Reachability.swift */; };
 		06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5E2EF20C1504500C77382 /* WingItTests.swift */; };
 		06E758982107E8E6007BDF76 /* WingItTestsSuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E758972107E8E6007BDF76 /* WingItTestsSuper.swift */; };
 		06E7589D21083958007BDF76 /* SegueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E7589C21083957007BDF76 /* SegueTests.swift */; };
@@ -95,6 +97,7 @@
 		062EB9441F8B414B005F350E /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
+		063A25DE210A99FC00967041 /* SystemIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SystemIcons.xcassets; sourceTree = "<group>"; };
 		064082FB20C263AA00F568CB /* TestAnswers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestAnswers; path = ../Backend/parserTests/TestAnswers; sourceTree = "<group>"; };
 		064082FC20C263AA00F568CB /* TestInputs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestInputs; path = ../Backend/parserTests/TestInputs; sourceTree = "<group>"; };
 		0640830020C36D2700F568CB /* Cwrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cwrapper.swift; sourceTree = "<group>"; };
@@ -117,6 +120,7 @@
 		06D6170E210974D200F58A30 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1PasswordExtension.podspec; sourceTree = "<group>"; };
 		06D61710210974D200F58A30 /* OnePasswordExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnePasswordExtension.h; sourceTree = "<group>"; };
+		06D61717210979CB00F58A30 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		06E5E2ED20C1504500C77382 /* WingItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		06E5E2EF20C1504500C77382 /* WingItTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItTests.swift; sourceTree = "<group>"; };
 		06E5E2F120C1504500C77382 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -131,7 +135,6 @@
 		533C92D720762A9300394325 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		533C92D820762A9300394325 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
 		533C92D920762A9300394325 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		533C92DA20762A9300394325 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		533C92DB20762A9400394325 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		534635A32079A8FC00497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		534635A42079A90E00497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
@@ -385,6 +388,7 @@
 				064082FD20C263AA00F568CB /* Test files */,
 				06D37CD61F873C7F009318AC /* Settings.bundle */,
 				53F8A00A1EC3D0010001604A /* WingIt */,
+				06D61717210979CB00F58A30 /* Reachability.swift */,
 				06934D7B1F86730B00D308BD /* WingItUITests */,
 				06E5E2EE20C1504500C77382 /* WingItTests */,
 				53F8A0091EC3D0010001604A /* Products */,
@@ -413,6 +417,7 @@
 				534635A92079A94800497A8D /* App Definitions */,
 				53CDC1E41EDC1EB300A2ED5A /* Cells */,
 				53CDC1E61EDC1EC900A2ED5A /* Data Structures */,
+				063A25DE210A99FC00967041 /* SystemIcons.xcassets */,
 				53F8A0151EC3D0010001604A /* Assets.xcassets */,
 				53F8A0171EC3D0010001604A /* LaunchScreen.storyboard */,
 				53F8A01A1EC3D0010001604A /* Info.plist */,
@@ -422,7 +427,6 @@
 				53C7D03A1EC9B79D00D0BD9C /* Project-Bridging-Header.h */,
 				534635A12079A8EC00497A8D /* SW Reveal Controll */,
 				534635A22079A8FB00497A8D /* Progress indicator */,
-				533C92DA20762A9300394325 /* SVProgressHUD-Prefix.pch */,
 				534BB6862081E21F00757932 /* Notifications */,
 				06D61709210974D200F58A30 /* onepassword-app-extension */,
 				062EB9421F8B414B005F350E /* SwiftKeychainWrapper */,
@@ -518,7 +522,6 @@
 					};
 					53F8A0071EC3D0010001604A = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = UY5WX2EN9V;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -566,6 +569,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06D61715210974D300F58A30 /* LICENSE.txt in Resources */,
+				063A25DF210A99FD00967041 /* SystemIcons.xcassets in Resources */,
 				06D61713210974D300F58A30 /* 1Password.xcassets in Resources */,
 				0675D6E721006406003B0233 /* testData.csv in Resources */,
 				06D61716210974D300F58A30 /* 1PasswordExtension.podspec in Resources */,
@@ -665,6 +669,7 @@
 				534BB6932081E2D400757932 /* HexColors.m in Sources */,
 				533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */,
 				53B306742077584C006E05B7 /* AppCells.swift in Sources */,
+				06D61718210979CB00F58A30 /* Reachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -901,7 +906,7 @@
 				CLANG_WARN_COMMA = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = UY5WX2EN9V;
+				DEVELOPMENT_TEAM = 9L3BH5LC27;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -910,7 +915,7 @@
 				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingItt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -931,7 +936,7 @@
 				CLANG_WARN_COMMA = NO;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = UY5WX2EN9V;
+				DEVELOPMENT_TEAM = 9L3BH5LC27;
 				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -940,7 +945,7 @@
 				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingItt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "WingIt/Project-Bridging-Header.h";

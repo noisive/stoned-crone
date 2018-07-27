@@ -28,8 +28,10 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     //Variables
     public var isUpdatingMode: Bool!
     private var PWIsStored: Bool = false
-    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    override var preferredStatusBarStyle: UIStatusBarStyle{return .default}
 
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let reachability = Reachability()!
     
     //Constants
     private let CORNER_RADIUS: CGFloat = 3.5;
@@ -75,6 +77,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.hideCancelOnNoData()
+        self.checkNetworkAlert()
     }
     
     override func viewDidLoad() {
@@ -102,7 +105,6 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         
         loginButton.layer.cornerRadius = CORNER_RADIUS;
         
-        var preferredStatusBarStyle: UIStatusBarStyle{return .default}
     }
     
     private func setupLogic() {
@@ -194,6 +196,20 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                 cancelButton.isEnabled = true
                 cancelButton.isHidden = false
             }
+        }
+    }
+    private func checkNetworkAlert(){
+        return
+        if reachability.connection == .none || noReachabilityArg {
+            let alert = UIAlertController(title:  "No Internet Connection", message:  "Make sure your device is connected to the internet.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
+                self.reloadInputViews()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                self.dismiss(self)
+            }))
+            //            alert.accessibilityIdentifier = "No network alert"
+            self.present(alert, animated: true)
         }
     }
     
@@ -336,7 +352,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                     let _ = parseEvents(data: jsonString)
                     #if DEBUG
                     //                                if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
-                    if CommandLine.arguments.contains("testing") {
+                    if testing {
                         //                                if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
                         validateTimetable()
                     }

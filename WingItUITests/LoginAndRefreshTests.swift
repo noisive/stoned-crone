@@ -62,6 +62,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
             rememSwitch.tap()
         }
             app.buttons["Login"].tap()
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 80)
     }
     
     // Special webview window without any coverplate. For debugging webview login.
@@ -97,8 +98,6 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         //        launchFinished() // wait for app to load and notification to show.
         app.tap() // need to interact with the app for the handler to fire.
         login()
-        // Wait for a thing to display, then assert it is displaying... Circular? But should work.
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 120)
         XCTAssertTrue(app.isDisplayingTT)
         
     }
@@ -112,6 +111,20 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.isDisplayingTT)
         
+    }
+    
+    func testUpdateNoInternet(){
+        app.launchArguments.append("-fakeData")
+        app.launchArguments.append("-noReachability")
+        app.launch()
+        app.buttons["Refresh"].tap()
+        let cancelOption = app.alerts["No Internet Connection"].buttons["Cancel"]
+        XCTAssertTrue(cancelOption.exists)
+        cancelOption.tap()
+        XCTAssertTrue(app.isDisplayingTT)
+        let retryButton = app.alerts["No Internet Connection"].buttons["Retry"]
+        XCTAssertTrue(retryButton.exists)
+        retryButton.tap()
     }
     
     func testLogout(){
