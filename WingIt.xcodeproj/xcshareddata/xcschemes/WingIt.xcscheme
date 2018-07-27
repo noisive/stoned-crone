@@ -77,6 +77,9 @@
                   Identifier = "StabilityTests/testingPlayground()">
                </Test>
                <Test
+                  Identifier = "TimetableEventPositionTests/test2HourCellAppearsInBoth()">
+               </Test>
+               <Test
                   Identifier = "WingItUITests/testLoginRaw()">
                </Test>
                <Test
