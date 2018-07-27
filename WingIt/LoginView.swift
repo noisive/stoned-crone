@@ -28,6 +28,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     //Variables
     public var isUpdatingMode: Bool!
     private var PWIsStored: Bool = false
+    override var preferredStatusBarStyle: UIStatusBarStyle{return .default}
 
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let reachability = Reachability()!
@@ -104,7 +105,6 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         
         loginButton.layer.cornerRadius = CORNER_RADIUS;
         
-        var preferredStatusBarStyle: UIStatusBarStyle{return .default}
     }
     
     private func setupLogic() {

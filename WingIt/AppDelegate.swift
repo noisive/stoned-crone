@@ -15,11 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var firstLoadSoScrollToToday: Bool = true
+    var preferredStatusBarStyle: UIStatusBarStyle{return .lightContent}
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        var preferredStatusBarStyle: UIStatusBarStyle{return .lightContent}
 
         #if DEBUG
         if loadDummyUIForUnitTesting(VC: self) { return true }
@@ -59,13 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
         }
         
-        
         // Register settings bundle.
         UserDefaults.standard.register(defaults: [String : Any]())
-        
         // Register intent to use notifications
-        application.registerUserNotificationSettings(
-            UIUserNotificationSettings(
+        application.registerUserNotificationSettings( UIUserNotificationSettings(
                 types: [.alert, .badge, .sound], categories: nil))
         
         return true
