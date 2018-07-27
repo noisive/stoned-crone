@@ -12,6 +12,7 @@
 		062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9441F8B414B005F350E /* KeychainWrapper.swift */; };
 		062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */; };
 		063A25DF210A99FD00967041 /* SystemIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 063A25DE210A99FC00967041 /* SystemIcons.xcassets */; };
+		063A25E7210AB60E00967041 /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063A25E6210AB60E00967041 /* NotificationUtil.swift */; };
 		064082FE20C263BB00F568CB /* TestAnswers in Resources */ = {isa = PBXBuildFile; fileRef = 064082FB20C263AA00F568CB /* TestAnswers */; };
 		064082FF20C263BB00F568CB /* TestInputs in Resources */ = {isa = PBXBuildFile; fileRef = 064082FC20C263AA00F568CB /* TestInputs */; };
 		0640830120C36D2800F568CB /* Cwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640830020C36D2700F568CB /* Cwrapper.swift */; };
@@ -98,6 +99,7 @@
 		062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
 		063A25DE210A99FC00967041 /* SystemIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SystemIcons.xcassets; sourceTree = "<group>"; };
+		063A25E6210AB60E00967041 /* NotificationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUtil.swift; sourceTree = "<group>"; };
 		064082FB20C263AA00F568CB /* TestAnswers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestAnswers; path = ../Backend/parserTests/TestAnswers; sourceTree = "<group>"; };
 		064082FC20C263AA00F568CB /* TestInputs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestInputs; path = ../Backend/parserTests/TestInputs; sourceTree = "<group>"; };
 		0640830020C36D2700F568CB /* Cwrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cwrapper.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				06B38A371F82361E009EDC60 /* CommonUtil.swift */,
 				061F3E7F1F8AF09C00BD0D09 /* DataUtil.swift */,
 				53D4B37F20760D9A0063E45F /* TimeDateUtil.swift */,
+				063A25E6210AB60E00967041 /* NotificationUtil.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				53D4B38220760FBF0063E45F /* NavigationService.swift in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
 				06D61711210974D300F58A30 /* OnePasswordExtension.m in Sources */,
+				063A25E7210AB60E00967041 /* NotificationUtil.swift in Sources */,
 				0640830120C36D2800F568CB /* Cwrapper.swift in Sources */,
 				53D4B38020760D9A0063E45F /* TimeDateUtil.swift in Sources */,
 				061F3E801F8AF09C00BD0D09 /* DataUtil.swift in Sources */,

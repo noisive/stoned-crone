@@ -61,9 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Register settings bundle.
         UserDefaults.standard.register(defaults: [String : Any]())
         // Register intent to use notifications
-        application.registerUserNotificationSettings( UIUserNotificationSettings(
-                types: [.alert, .badge, .sound], categories: nil))
-        
+        requestNotificationPermission(application: application)
+
         return true
     }
     

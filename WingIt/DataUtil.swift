@@ -11,7 +11,7 @@ import Foundation
 /** Adds the events retrieved from the C++ lib into the correct timeslots. */
 func initWeekData(VC: TimetableView) {
     // Cancel all previously scheduled notifications so that duplicates don't get added when we recreate the events
-    UIApplication.shared.cancelAllLocalNotifications()
+    clearLocalNotifications()
     loadWeekData(VC: VC)
     VC.collectionView.reloadData()
 }
