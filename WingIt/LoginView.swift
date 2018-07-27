@@ -78,6 +78,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         super.viewDidAppear(animated)
         self.hideCancelOnNoData()
         self.checkNetworkAlert()
+        print(getPendingNotificationTimes())
     }
     
     override func viewDidLoad() {

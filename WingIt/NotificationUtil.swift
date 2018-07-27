@@ -84,11 +84,16 @@ func scheduleNotification(datetime: Date, message: String, soundName: String? = 
         
         let identifier = "WingItLocalNotification\(eventID)"
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        center.add(request, withCompletionHandler: { (error) in
+        center.add(request) { (error) in
             if let error = error {
                 print(error)
             }
-        })
+        }
+//        center.add(request, withCompletionHandler: { (error) in
+//            if let error = error {
+//                print(error)
+//            }
+//        })
         // DEBUG: print notification description
         center.getPendingNotificationRequests(completionHandler: { notifs in
             for notif in notifs { print(notif) }
@@ -124,11 +129,8 @@ func getPendingNotificationTimes() -> [Date]{
         let center = UNUserNotificationCenter.current()
         center.getPendingNotificationRequests(completionHandler: { notifs in
             for notif in notifs {
-                // DEBUG: print notification description
-                print(notif)
-                let calTrig = notif.trigger as! UNCalendarNotificationTrigger
-//                let comps = notif.trigger.dateComponents
-//                notifDates.append(notif.trigger.nextTriggerDate()!)
+                let notifDate = (notif.trigger as! UNCalendarNotificationTrigger).nextTriggerDate()!
+                notifDates.append(notifDate)
             }
         })
 //        let schedNotifs = center.getPendingNotificationRequests(completionHandler: <#([UNNotificationRequest]) -> Void#>)
