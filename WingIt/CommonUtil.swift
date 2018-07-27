@@ -19,6 +19,8 @@ public func getBackgroundColorFromLesson(type: String, fallback: Lesson) -> UICo
         return AppColors.TUTORIAL_COLOR.withAlphaComponent(0.2)
     case "Practical":
         return AppColors.LAB_COLOR.withAlphaComponent(0.2)
+    case "Examination":
+        return AppColors.EXAM_COLOR.withAlphaComponent(0.2)
     default:
         return UIColor.init(hexString: fallback.colour)
     }
