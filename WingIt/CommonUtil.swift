@@ -232,26 +232,31 @@ func checkAndRemoveBadDateData() -> Bool{
 // Delete all files in app cache dir, including our data csvs.
 func clearCache(){
     let fileManager = FileManager.default
-    let cacheURL = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-    do {
-        let cachePath = cacheURL.path
-        let fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
-        
-        for fileName in fileNames {
-            if fileName == "data.csv" || fileName == ".version" {
-                let filePathName = "\(cachePath)/\(fileName)"
-                try? fileManager.removeItem(atPath: filePathName)
-                URLCache.shared.removeAllCachedResponses()
-                if let cookies = HTTPCookieStorage.shared.cookies {
-                    for cookie in cookies {
-                        HTTPCookieStorage.shared.deleteCookie(cookie)
-                    }
-                }
-
-            }
+    URLCache.shared.removeAllCachedResponses()
+    if let cookies = HTTPCookieStorage.shared.cookies {
+        for cookie in cookies {
+            HTTPCookieStorage.shared.deleteCookie(cookie)
         }
+    }
+    let cacheURL = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    var fileNames = Array<String>()
+    let cachePath = cacheURL.path
+    do {
+        fileNames = try fileManager.contentsOfDirectory(atPath: "\(cachePath)")
     } catch {
-        print("Could not clear: \(error)")
+        print("Could not load filenames to clear: \(error)")
+    }
+    
+    for fileName in fileNames {
+//        if fileName == "data.csv" || fileName == ".version" {
+            let filePathName = "\(cachePath)/\(fileName)"
+            do {
+                try fileManager.removeItem(atPath: filePathName)
+            } catch {
+                print("Could not clear: \(error)")
+            }
+
+//        }
     }
 }
 
