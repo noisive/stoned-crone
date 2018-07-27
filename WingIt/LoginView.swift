@@ -199,6 +199,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         }
     }
     private func checkNetworkAlert(){
+        return
         if reachability.connection == .none || noReachabilityArg {
             let alert = UIAlertController(title:  "No Internet Connection", message:  "Make sure your device is connected to the internet.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
