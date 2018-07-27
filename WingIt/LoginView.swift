@@ -199,7 +199,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         }
     }
     private func checkNetworkAlert(){
-        if reachability.connection == .none || CommandLine.arguments.contains("-no-reachability") {
+        if reachability.connection == .none || noReachabilityArg {
             let alert = UIAlertController(title:  "No Internet Connection", message:  "Make sure your device is connected to the internet.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
                 self.reloadInputViews()
@@ -351,7 +351,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                     let _ = parseEvents(data: jsonString)
                     #if DEBUG
                     //                                if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
-                    if CommandLine.arguments.contains("testing") {
+                    if testing {
                         //                                if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
                         validateTimetable()
                     }

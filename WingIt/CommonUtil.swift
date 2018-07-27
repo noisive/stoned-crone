@@ -280,6 +280,8 @@ func copyTestData(fakeDataURL: URL? = nil){
     }
 }
 
+var noReachabilityArg = false
+var testing = false
 func HandleLaunchArgs() {
     //    let userDefaults: UserDefaults
     var args = CommandLine.arguments
@@ -291,13 +293,18 @@ func HandleLaunchArgs() {
         removeStoredUserPass()
         clearCache()
     }
-    
-    
     if args.contains("-UITests") {
         UIApplication.shared.keyWindow?.layer.speed = 100
     }
-    
-    
+    if args.contains("-testing") {
+        testing = true
+    }
+    if args.contains("-skipLogin") {
+        skipLogin = true
+    }
+    if args.contains("-noReachability"){
+        noReachabilityArg = true
+    }
     if args.contains("-fakeData") {
         copyTestData()
         if !args.contains("-mockDate") {
