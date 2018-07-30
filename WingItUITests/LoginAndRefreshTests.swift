@@ -65,8 +65,8 @@ class LoginAndRefreshTests: WingItUITestsSuper {
             passwordSecureTextField.typeText("IAmNiceToDevelopers")
         }
         let rememSwitch = app.switches["Remember Login Button"]
-        let isOn = (rememSwitch.value as! String).toBool()
-        if !isOn! {
+        let isOn = (rememSwitch.value as! String).toBool()!
+        if !isOn {
             rememSwitch.tap()
         }
             app.buttons["Login"].tap()
@@ -111,13 +111,14 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     }
     
     func testLoginUpdate(){
-//        app.launchArguments.append("-fakeData")
+        app.launchArguments.append("-fakeLogin")
         app.launch()
         login()
         app.buttons["Refresh"].tap()
         // Should automatically update now
         _ = app.otherElements["dayView"].waitForExistence(timeout: 10)
         XCTAssertTrue(app.isDisplayingTT)
+        XCTAssertFalse(app.scrollViews["Login View"].exists)
         
     }
     
@@ -146,13 +147,13 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     }
     
     func testReturnsToCurrentDayAfterUpdate(){
+        app.launchArguments.append("-fakeLogin")
         app.launchArguments += ["-mockDate", "2018-10-05"]
         setUpFakeData()
         app.swipeRight()
         XCTAssertTrue(app.otherElements["Thursday"].exists)
         app.buttons["Refresh"].tap()
         login()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.otherElements["Friday"].exists)
     }
     

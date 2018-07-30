@@ -15,6 +15,8 @@
  Function "textFieldShouldReturn" is triggered when enter/return is pressed when typing in a login field.
  This either moves to the next field or calls beginLogin() as well,
  but has some extra checks and messages in place for empty fields.
+ 
+ As per usual, viewDidAppear and viewDidLoad() are the first functions called in this file.
  */
 
 import UIKit
@@ -82,7 +84,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     private var initialLoad: Bool = false
     
     
-    //MARK: View loading
+    //MARK: View loading.
+    // These are the first functions called.
     //==========================================================================
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,14 +96,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLogic()
         setupLooks()
-        
-        self.genericpasswordSigninButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
-        
-        SVProgressHUD.setDefaultStyle(.dark)
-        SVProgressHUD.show(withStatus: "Loading eVision...")
-        self.loginContainer.alpha = 0
+        setupLogic()
     }
     
     //MARK: Delegates
@@ -136,14 +133,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             
             //Web view initial load, grab stored details
             if (header == "" && !initialLoad) {
-                restoreSavedDetails()
                 initialLoad = true
-                // If details remembered, bypass manual login, do the steps automatically
-                if !self.PWIsStored {
-                    enableLoginContainer()
-                }else{
-                    beginLogin()
-                }
+                enableLoginContainer()
             }
             
             switch header {
@@ -178,18 +169,25 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         if self.isUpdatingMode == nil {
             self.isUpdatingMode = false
         }
+        if (retrieveStoredUsername() != "" && retrieveStoredPassword() != "") {
+            self.PWIsStored = true
+        }
         
         // Remove keyboard when tapping away
         let dismissGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
         self.scrollView.addGestureRecognizer(dismissGesture)
         
+        if fakeLogin { // Skip loading evision
+//            sleep(1) // Otherwise too fast to close view before it opens
+            enableLoginContainer(startTyping: true)
+            return
+        }
         //Setup webview with initial load. Moves to viewDidFinishLoading when done.
         let urlBase: URL? = URL(string: "https://evision.otago.ac.nz")
         if let url = urlBase {
             let loadRequest: URLRequest = URLRequest(url: url)
             webView.loadRequest(loadRequest)
         }
-        
     }
     
     private func setupLooks() {
@@ -201,6 +199,12 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         loginContainer.layer.cornerRadius = CORNER_RADIUS;
         
         loginButton.layer.cornerRadius = CORNER_RADIUS;
+        
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show(withStatus: "Loading eVision...")
+        self.loginContainer.alpha = 0
+        
+        self.genericpasswordSigninButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
         
         if self.isUpdatingMode {
             self.loginTitle.text = "Log in to Update"
@@ -256,11 +260,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             }
             if user.lowercased() == "wingitdemo" && password == "IAmNiceToDevelopers" {
                 copyTestData()
-                initTimetable()
-                // Should be segue, not dismiss. TODO.
-                self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
-                appDelegate.firstLoadSoScrollToToday = true
-//                dismiss(self)
+                endWithSuccessfulLogin()
                 return
             }
             disableLoginContainer(message: "Logging you in...")
@@ -285,6 +285,16 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     }
 
     func enableLoginContainer(withErrorMessage errorMessage: String? = nil, startTyping: Bool = true){
+        
+        if self.PWIsStored {
+            restoreSavedDetails()
+        }
+        // NOTE: If details are remembered, this func will skip the login
+        // box and do the rest of the logging in automatically.
+        if self.PWIsStored {
+            beginLogin()
+            return
+        }
         // Manual login time
         SVProgressHUD.dismiss()
         UIView.animate(withDuration: 0.3, animations: {
@@ -353,18 +363,22 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                 validateTimetable()
             }
             #endif
-            initTimetable()
-            self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
             SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
             webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
             webView.stringByEvaluatingJavaScript(from: webLogout)
-            appDelegate.firstLoadSoScrollToToday = true
+            endWithSuccessfulLogin()
         } else {
             //Issue with getting JSON. Display error and log out
             enableLoginContainer(withErrorMessage:  "Something went wrong getting your timetable...")
             webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
             webView.stringByEvaluatingJavaScript(from: webLogout)
         }
+    }
+    
+    private func endWithSuccessfulLogin(){
+        initTimetable()
+        appDelegate.firstLoadSoScrollToToday = true
+        self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
     }
     
     private func checkNetworkAlert(){

@@ -288,7 +288,7 @@ func copyTestData(fakeDataURL: URL? = nil){
 
 var noReachabilityArg = false
 var testing = false
-var skipLogin = false
+var fakeLogin = false
 func HandleLaunchArgs() {
     //    let userDefaults: UserDefaults
     var args = CommandLine.arguments
@@ -306,8 +306,8 @@ func HandleLaunchArgs() {
     if args.contains("-testing") {
         testing = true
     }
-    if args.contains("-skipLogin") {
-        skipLogin = true
+    if args.contains("-fakeLogin") {
+//        fakeLogin = true
     }
     if args.contains("-noReachability"){
         noReachabilityArg = true
