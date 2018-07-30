@@ -256,6 +256,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             }
             if user.lowercased() == "wingitdemo" && password == "IAmNiceToDevelopers" {
                 copyTestData()
+                initTimetable()
                 // Should be segue, not dismiss. TODO.
                 self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
                 appDelegate.firstLoadSoScrollToToday = true
