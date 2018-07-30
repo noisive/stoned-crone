@@ -68,7 +68,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         "})" +
     "}"
     private let loadNextWeek: String = "window.loadNextWeek()"
-    private var once: Bool = false
+    private var initialLoad: Bool = false
     
     
     //MARK: View loading
@@ -188,14 +188,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     }
     private func beginLogin() {
         self.endEditing()
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.loginContainer.alpha = 0
-            self.loginButton.isEnabled = false
-        }) { (success) in
-            SVProgressHUD.show(withStatus: "Logging you in...")
-        }
-        
+
         if let user = usernameField.text, let password = passwordField.text {
             self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
             self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(password)';")
@@ -221,7 +214,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
 
             //Fire request
             webView.stringByEvaluatingJavaScript(from: self.webClickLogin)
-        } else {
+        } else { // Error getting text from one of the fields
             SVProgressHUD.dismiss()
             self.handleAlert(title: "Login Error", description: "Please ensure your login details are entered correctly.")
         }
@@ -275,12 +268,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         }
             //Issue with getting JSON. Display error and log out
         else {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.loginContainer.alpha = 1
-            }) { (success) in
-                SVProgressHUD.showError(withStatus: "Something went wrong getting your timetable...")
-                self.loginButton.isEnabled = true
-            }
+            enableLoginContainer(withErrorMessage:  "Something went wrong getting your timetable...")
             webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
             webView.stringByEvaluatingJavaScript(from: webLogout)
         }
@@ -296,18 +284,20 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         }
     }
     
-    func enableLoginContainer(message: String? = nil){
+    func enableLoginContainer(withErrorMessage errorMessage: String? = nil, startTyping: Bool = true){
         // Manual login time
         SVProgressHUD.dismiss()
         UIView.animate(withDuration: 0.3, animations: {
             self.loginContainer.alpha = 1
         }, completion: { (success) in
             self.loginButton.isEnabled = true
-            if message != nil {
-                SVProgressHUD.showError(withStatus: message)
+            if errorMessage != nil {
+                SVProgressHUD.showError(withStatus: errorMessage)
             }
-            self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
-            self.usernameField.becomeFirstResponder()
+            if startTyping {
+                self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
+                self.usernameField.becomeFirstResponder()
+            }
         })
     }
     func disableLoginContainer(message: String){
@@ -371,12 +361,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                 // Get the error given by eVision.
                 let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webErrorReason)!) as String
                 
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.loginContainer.alpha = 1
-                }) { (success) in
-                    SVProgressHUD.showError(withStatus: reason)
-                    self.loginButton.isEnabled = true
-                }
+                enableLoginContainer(withErrorMessage: reason, startTyping: false)
                 return
             }
             
@@ -384,29 +369,20 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
             
             //Web view initial load, grab stored details
-            if (header == "" && !once) {
+            if (header == "" && !initialLoad) {
                 restoreSavedDetails()
-                once = true
-                
+                initialLoad = true
                 // Bypass manual login, do the steps automatically
                 if !self.PWIsStored {
-                    SVProgressHUD.dismiss()
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.loginContainer.alpha = 1
-                    }, completion: { (success) in
-                        self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
-                        self.usernameField.becomeFirstResponder()
-                    })
+                    enableLoginContainer()
                 }else{
                     beginLogin()
                 }
             }
             
             switch header {
-                
             case "System Message":
                 break;
-                
             case "Home":
                 webView.stringByEvaluatingJavaScript(from: self.webClickTimetable)
                 if self.isUpdatingMode {
@@ -415,14 +391,11 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                     SVProgressHUD.setStatus("Retrieving your timetable...")
                 }
                 break;
-                
             case "Timetable":
                 grabTTJsonFromEvisionPage()
                 break;
-                
             default:
                 break;
-                
             }
         }
     }
