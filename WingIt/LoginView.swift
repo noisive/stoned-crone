@@ -166,9 +166,6 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         passwordField.delegate = self
         webView.delegate = self
         
-        if self.isUpdatingMode == nil {
-            self.isUpdatingMode = false
-        }
         if (retrieveStoredUsername() != "" && retrieveStoredPassword() != "") {
             self.PWIsStored = true
         }
@@ -206,6 +203,9 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         
         self.genericpasswordSigninButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
         
+        if self.isUpdatingMode == nil {
+            self.isUpdatingMode = false
+        }
         if self.isUpdatingMode {
             self.loginTitle.text = "Log in to Update"
             self.loginButton.setTitle("UPDATE", for: .normal)
