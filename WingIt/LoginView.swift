@@ -29,7 +29,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     public var isUpdatingMode: Bool!
     private var PWIsStored: Bool = false
     override var preferredStatusBarStyle: UIStatusBarStyle{return .default}
-
+    
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let reachability = Reachability()!
     
@@ -84,9 +84,9 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         super.viewDidLoad()
         setupLogic()
         setupLooks()
-
+        
         self.genericpasswordSigninButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
-
+        
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.show(withStatus: "Loading eVision...")
         self.loginContainer.alpha = 0
@@ -105,6 +105,14 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         
         loginButton.layer.cornerRadius = CORNER_RADIUS;
         
+        if self.isUpdatingMode {
+            self.loginTitle.text = "Log in to Update"
+            self.loginButton.setTitle("UPDATE", for: .normal)
+        }else{
+            self.loginButton.setTitle("LOG IN", for: .normal)
+            self.loginTitle.text = "Log in to eVision"
+        }
+        
     }
     
     private func setupLogic() {
@@ -116,17 +124,10 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         if self.isUpdatingMode == nil {
             self.isUpdatingMode = false
         }
-        
-        if self.isUpdatingMode {
-            self.loginTitle.text = "Log in to Update"
-            self.loginButton.setTitle("UPDATE", for: .normal)
-        }else{
-            self.loginButton.setTitle("LOG IN", for: .normal)
-            self.loginTitle.text = "Log in to eVision"
-        }
-//        self.PWIsStored = true
+        //        self.PWIsStored = true
         
         //Setup gestures
+        // Remove keyboard when tapping away
         let dismissGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
         self.scrollView.addGestureRecognizer(dismissGesture)
         
@@ -162,7 +163,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {    
         guard let usernameText = self.usernameField.text else { return false }
         guard let passwordText = self.passwordField.text else { return false }
-
+        
         switch textField {
         case self.usernameField:
             if (usernameText.isEmpty) {
@@ -196,14 +197,6 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         }
         
         if let user = usernameField.text, let password = passwordField.text {
-            if user == "WingItDemo" && password == "IAmNiceToDevelopers" {
-                copyTestData()
-                SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
-                storeUserPass(username: user, password: password)
-                self.PWIsStored = true
-                dismiss(self)
-                return
-            }
             self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
             self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(password)';")
             
@@ -215,6 +208,17 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                 removeStoredUserPass()
             }
             
+            if user.lowercased() == "wingitdemo" && password == "IAmNiceToDevelopers" {
+                SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
+                SVProgressHUD.show(withStatus: "Timetable Downloaded")
+                copyTestData()
+                // Should be segue, not dismiss. TODO.
+                dismiss(self)
+                return
+            }
+            
+            disableLoginContainer(message: "Logging you in...")
+
             //Fire request
             webView.stringByEvaluatingJavaScript(from: self.webClickLogin)
         } else {
@@ -247,7 +251,74 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             }
         }
     }
-
+    
+    private func grabTTJsonFromEvisionPage(){
+        webView.stringByEvaluatingJavaScript(from: self.webInsertFunctions)
+        
+        //Check if the json was grabbed
+        if let jsonString:String = webView.stringByEvaluatingJavaScript(from: webGrabCode) {
+            
+            let _ = parseEvents(data: jsonString)
+            #if DEBUG
+            //                                if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
+            if testing {
+                //                                if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+                validateTimetable()
+            }
+            #endif
+            initTimetable()
+            self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
+            SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
+            webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
+            webView.stringByEvaluatingJavaScript(from: webLogout)
+            appDelegate.firstLoadSoScrollToToday = true
+        }
+            //Issue with getting JSON. Display error and log out
+        else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.loginContainer.alpha = 1
+            }) { (success) in
+                SVProgressHUD.showError(withStatus: "Something went wrong getting your timetable...")
+                self.loginButton.isEnabled = true
+            }
+            webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
+            webView.stringByEvaluatingJavaScript(from: webLogout)
+        }
+    }
+    
+    func restoreSavedDetails(){
+        usernameField.text = retrieveStoredUsername()
+        passwordField.text = retrieveStoredPassword()
+        
+        if (retrieveStoredUsername() != "" && retrieveStoredPassword() != "") {
+            self.savePasswordSwitch.isOn = true
+            self.PWIsStored = true
+        }
+    }
+    
+    func enableLoginContainer(message: String? = nil){
+        // Manual login time
+        SVProgressHUD.dismiss()
+        UIView.animate(withDuration: 0.3, animations: {
+            self.loginContainer.alpha = 1
+        }, completion: { (success) in
+            self.loginButton.isEnabled = true
+            if message != nil {
+                SVProgressHUD.showError(withStatus: message)
+            }
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
+            self.usernameField.becomeFirstResponder()
+        })
+    }
+    func disableLoginContainer(message: String){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.loginContainer.alpha = 0
+            self.loginButton.isEnabled = false
+        }) { (success) in
+            SVProgressHUD.show(withStatus: message)
+        }
+    }
+    
     //MARK: Actions
     //==========================================================================
     
@@ -260,9 +331,9 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         //        var error: NSError
         OnePasswordExtension.shared().findLogin(forURLString: "https://evision.otago.ac.nz", for: self, sender: sender, completion: { (loginDict, error) in
             if loginDict == nil {
-//                if error!.code != AppExtensionErrorCodeCancelledByUser {
-//                    print("Error invoking GenericPassword App Extension for find login: \(error)");
-//                }
+                //                if error!.code != AppExtensionErrorCodeCancelledByUser {
+                //                    print("Error invoking GenericPassword App Extension for find login: \(error)");
+                //                }
                 return
             }
             self.usernameField.text = loginDict![AppExtensionUsernameKey] as? String
@@ -281,7 +352,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
     }
     
-
+    // Starts webview loading with a specific requested URL. Calls webViewDidFinishLoad when finished.
     internal func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print("CALLED \(String(describing: request.url?.absoluteString))")
         
@@ -289,9 +360,9 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             print("JS CALLBACK")
             return false
         }
+        // Calls webViewDidFinishLoad when finished.
         return true
     }
-    
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if (!webView.isLoading) {
             
@@ -314,13 +385,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             
             //Web view initial load, grab stored details
             if (header == "" && !once) {
-                usernameField.text = retrieveStoredUsername()
-                passwordField.text = retrieveStoredPassword()
-                
-                if (retrieveStoredUsername() != "" && retrieveStoredPassword() != "") {
-                    self.savePasswordSwitch.isOn = true
-                    self.PWIsStored = true
-                }
+                restoreSavedDetails()
                 once = true
                 
                 // Bypass manual login, do the steps automatically
@@ -352,38 +417,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                 break;
                 
             case "Timetable":
-                webView.stringByEvaluatingJavaScript(from: self.webInsertFunctions)
-                
-                //Check if the json was grabbed
-                if let jsonString:String = webView.stringByEvaluatingJavaScript(from: webGrabCode) {
-                    
-                    let _ = parseEvents(data: jsonString)
-                    #if DEBUG
-                    //                                if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
-                    if testing {
-                        //                                if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
-                        validateTimetable()
-                    }
-                    #endif
-                    initTimetable()
-                    self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
-                    SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
-                    webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
-                    webView.stringByEvaluatingJavaScript(from: webLogout)
-                    appDelegate.firstLoadSoScrollToToday = true
-                }
-                    //Issue with getting JSON. Display error and log out
-                else {
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.loginContainer.alpha = 1
-                    }) { (success) in
-                        SVProgressHUD.showError(withStatus: "Something went wrong getting your timetable...")
-                        self.loginButton.isEnabled = true
-                    }
-                    webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
-                    webView.stringByEvaluatingJavaScript(from: webLogout)
-                }
-                
+                grabTTJsonFromEvisionPage()
                 break;
                 
             default:
