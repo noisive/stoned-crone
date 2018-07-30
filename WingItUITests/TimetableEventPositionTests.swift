@@ -24,7 +24,7 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         for i in 0...4 {
 //            XCTAssert(app.otherElements[days[i]].exists)
             // Tests all in 9am slot.
-            XCTAssert(lessonExists(withCode: lessons[i], atTime: 9))
+            XCTAssert(lessonExists(withCode: lessons[i], atTime: 9), "does \(lessons[i]) exist at the expected time?")
             app.otherElements["dayView"].swipeLeft()
         }
     }
