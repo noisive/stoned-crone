@@ -45,6 +45,11 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         setUpFakeData()
         XCTAssertTrue(app.otherElements["Monday"].exists)
     }
+    func testOpensToCurrentDayStaleData(){
+        app.launchArguments += ["-mockDate", "2018-10-10"]
+        setUpFakeData()
+        XCTAssertTrue(app.otherElements["Wednesday"].exists)
+    }
     
     func test8amSlot(){
         setUpFakeData()

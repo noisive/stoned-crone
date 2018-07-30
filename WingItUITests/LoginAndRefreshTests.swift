@@ -137,6 +137,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     }
     
     func testLogout(){
+        //        app.launchArguments.append("-fakeLogin") // TODO: Check this won't affect the test
         setUpFakeData()
         menuButton.tap()
         app.tables["Menu"].staticTexts["Log out/change login"].tap()
@@ -144,6 +145,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         XCTAssertFalse(usernameTextField.exists)
         let loginFieldExists = usernameTextField.waitForExistence(timeout: 40)
         XCTAssert(loginFieldExists)
+        XCTAssertFalse(app.buttons["Cancel Button"].exists)
     }
     
     func testReturnsToCurrentDayAfterUpdate(){
