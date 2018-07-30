@@ -40,6 +40,9 @@ class WingItUITestsSuper: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         app.launchArguments.removeAll()
+        if let failureCount = testRun?.failureCount, failureCount > 0 {
+            takeScreenshot()
+        }
         app.terminate()
         super.tearDown()
     }
@@ -79,6 +82,12 @@ class WingItUITestsSuper: XCTestCase {
     }
     func lessonExists(withCode: String, atTime: Int) -> Bool{
         return lessonExists(withCode: withCode, atIndex: atTime-8)
+    }
+
+    func takeScreenshot(){
+        let screenshot = XCUIScreen.main.screenshot()
+        let attach = XCTAttachment(screenshot: screenshot)
+        add(attach)
     }
 
 //    func testingPlayground(){
