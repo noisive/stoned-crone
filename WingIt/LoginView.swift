@@ -144,6 +144,47 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
+    private func checkNetworkAlert(){
+        return
+        if reachability.connection == .none || noReachabilityArg {
+            let alert = UIAlertController(title:  "No Internet Connection", message:  "Make sure your device is connected to the internet.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
+                self.reloadInputViews()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                self.dismiss(self)
+            }))
+            //            alert.accessibilityIdentifier = "No network alert"
+            self.present(alert, animated: true)
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {    
+        guard let usernameText = self.usernameField.text else { return false }
+        guard let passwordText = self.passwordField.text else { return false }
+
+        switch textField {
+        case self.usernameField:
+            if (usernameText.isEmpty) {
+                self.handleAlert(title: "Username Empty", description: "Please enter your eVision username.")
+            } else if (!usernameText.isEmpty && passwordText.isEmpty) {
+                self.passwordField.becomeFirstResponder()
+            } else {
+                self.beginLogin()
+            }
+        case self.passwordField:
+            if (passwordText.isEmpty) {
+                self.handleAlert(title: "Password Empty", description: "Please enter your eVision password.")
+            } else if (usernameText.isEmpty && !passwordText.isEmpty) {
+                self.usernameField.becomeFirstResponder()
+            } else {
+                self.beginLogin()
+            }
+        default:
+            print("Unknown text field")
+        }
+        return true
+    }
     private func beginLogin() {
         self.endEditing()
         
@@ -155,6 +196,14 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         }
         
         if let user = usernameField.text, let password = passwordField.text {
+            if user == "WingItDemo" && password == "IAmNiceToDevelopers" {
+                copyTestData()
+                SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
+                storeUserPass(username: user, password: password)
+                self.PWIsStored = true
+                dismiss(self)
+                return
+            }
             self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
             self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(password)';")
             
@@ -198,21 +247,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             }
         }
     }
-    private func checkNetworkAlert(){
-        return
-        if reachability.connection == .none || noReachabilityArg {
-            let alert = UIAlertController(title:  "No Internet Connection", message:  "Make sure your device is connected to the internet.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
-                self.reloadInputViews()
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                self.dismiss(self)
-            }))
-            //            alert.accessibilityIdentifier = "No network alert"
-            self.present(alert, animated: true)
-        }
-    }
-    
+
     //MARK: Actions
     //==========================================================================
     
@@ -246,34 +281,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        guard let usernameText = self.usernameField.text else { return false }
-        guard let passwordText = self.passwordField.text else { return false }
-        
-        switch textField {
-        case self.usernameField:
-            if (usernameText.isEmpty) {
-                self.handleAlert(title: "Username Empty", description: "Please enter your eVision username.")
-            } else if (!usernameText.isEmpty && passwordText.isEmpty) {
-                self.passwordField.becomeFirstResponder()
-            } else {
-                self.beginLogin()
-            }
-        case self.passwordField:
-            if (passwordText.isEmpty) {
-                self.handleAlert(title: "Password Empty", description: "Please enter your eVision password.")
-            } else if (usernameText.isEmpty && !passwordText.isEmpty) {
-                self.usernameField.becomeFirstResponder()
-            } else {
-                self.beginLogin()
-            }
-        default:
-            print("Unknown text field")
-        }
-        return true
-    }
-    
+
     internal func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print("CALLED \(String(describing: request.url?.absoluteString))")
         

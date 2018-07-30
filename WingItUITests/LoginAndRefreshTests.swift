@@ -39,7 +39,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         super.tearDown()
     }
     
-    func login(){
+    func login(realData: Bool = false){
         
         _ = app.textFields["Username"].waitForExistence(timeout: 60)
         let usernameTextField = app.textFields["Username"]
@@ -53,9 +53,17 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         }
         
         usernameTextField.tap()
-        usernameTextField.typeText(self.eVisionUsername)
+        if realData {
+            usernameTextField.typeText(self.eVisionUsername)
+        }else{
+            usernameTextField.typeText("WingItDemo")
+        }
         passwordSecureTextField.tap()
-        passwordSecureTextField.typeText(self.eVisionPassword)
+        if realData {
+            passwordSecureTextField.typeText(self.eVisionPassword)
+        }else{
+            passwordSecureTextField.typeText("IAmNiceToDevelopers")
+        }
         let rememSwitch = app.switches["Remember Login Button"]
         let isOn = (rememSwitch.value as! String).toBool()
         if !isOn! {
@@ -97,7 +105,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         }
         //        launchFinished() // wait for app to load and notification to show.
         app.tap() // need to interact with the app for the handler to fire.
-        login()
+        login(realData: true)
         XCTAssertTrue(app.isDisplayingTT)
         
     }
@@ -108,7 +116,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         login()
         app.buttons["Refresh"].tap()
         // Should automatically update now
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 10)
         XCTAssertTrue(app.isDisplayingTT)
         
     }
