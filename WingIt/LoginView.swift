@@ -45,7 +45,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     
     private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let reachability = Reachability()!
-    
+
     //Constants
     private let CORNER_RADIUS: CGFloat = 3.5;
     
@@ -213,7 +213,19 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             self.loginButton.setTitle("LOG IN", for: .normal)
             self.loginTitle.text = "Log in to eVision"
         }
-        
+//        #if debug
+        if debugLogin {
+            scrollView.isHidden = true
+            scrollView.isOpaque = false
+            SVProgressHUD.dismiss()
+            loginContainer.isHidden = true
+            loginContainer.isOpaque = false
+            webView.isHidden = false
+            webView.frame = self.view.bounds
+            webView.scalesPageToFit = true
+//            scrollView.drawsBackground = false
+        }
+//        #endif
     }
 
     // Triggered when enter/return pressed when typing in login field
@@ -295,6 +307,12 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             beginLogin()
             return
         }
+//        #if debug
+        if debugLogin {
+            // Return here if you want to see without login box at all.
+            return
+        }
+//        #endif
         // Manual login time
         SVProgressHUD.dismiss()
         UIView.animate(withDuration: 0.3, animations: {

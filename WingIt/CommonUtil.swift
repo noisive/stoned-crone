@@ -308,7 +308,7 @@ func HandleLaunchArgs() {
         testing = true
     }
     if args.contains("-debugLogin") {
-                debugLogin = true
+        debugLogin = true
     }
     if args.contains("-fakeLogin") {
 //        fakeLogin = true

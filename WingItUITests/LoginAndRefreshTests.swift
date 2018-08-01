@@ -73,28 +73,6 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         _ = app.otherElements["dayView"].waitForExistence(timeout: 80)
     }
     
-    // Special webview window without any coverplate. For debugging webview login.
-    func testLoginRaw(){
-        // Argument to enter raw
-        app.launchArguments.append("-debugLogin")
-        app.launch()
-        print("hi")
-        
-        let webViewsQuery = app.webViews
-        
-        let element2 = webViewsQuery.otherElements["Otago Student Administration - The University of Otago"].children(matching: .other).element(boundBy: 6)
-        let textField = element2.children(matching: .textField).element
-        // Need to wait
-        textField.tap()
-        textField.typeText(eVisionUsername)
-        element2.children(matching: .secureTextField).element.typeText(eVisionPassword)
-        app.typeText("\r")
-        
-        //XCTAssertEqual(data.json, )
-        
-    }
-
-    
     // Test that a fresh login reaches a timetable.
     func testLoginFresh(){
         app.launch()
