@@ -81,6 +81,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     //=================================================================
     
     @IBAction func dismiss(_ sender: Any) {
+//        self.performSegue(withIdentifier: "DismissMenu", sender: self)
         self.performSegue(withIdentifier: "ShowTimetable", sender: self)
     }
     
@@ -152,10 +153,14 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
 //    //MARK: Pass data
 //    //=================================================================
 //
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "LogOut" {
 //            let destination = segue.destination as! LoginView
 //            destination.isUpdatingMode = false
 //        }
-//    }
+        if segue.identifier == "ShowTimetable" {
+//        if segue.identifier == "DismissMenu" {
+            appDelegate.firstLoadSoScrollToToday = true
+        }
+    }
 }
