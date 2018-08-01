@@ -1022,6 +1022,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gy1-2d-Whg">
                                         <rect key="frame" x="25" y="60" width="24" height="24"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="Menu Cancel" label="Cancel menu"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="6bc-NS-D4U"/>
                                             <constraint firstAttribute="height" constant="24" id="feJ-OO-uOq"/>
@@ -1210,6 +1211,6 @@
         <image name="user_male" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="n5x-aR-4gq"/>
+        <segue reference="GLa-4W-1Kc"/>
     </inferredMetricsTieBreakers>
 </document>
