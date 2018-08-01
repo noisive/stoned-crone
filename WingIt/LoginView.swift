@@ -258,7 +258,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
                 self.PWIsStored = false
                 removeStoredUserPass()
             }
-            if user.lowercased() == "wingitdemo" && password == "IAmNiceToDevelopers" {
+            if user.lowercased() == "wingitdemo" && password == "Ilikedevs" {
                 copyTestData()
                 endWithSuccessfulLogin()
                 return

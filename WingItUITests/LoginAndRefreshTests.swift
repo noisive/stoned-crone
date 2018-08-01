@@ -62,7 +62,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         if realData {
             passwordSecureTextField.typeText(self.eVisionPassword)
         }else{
-            passwordSecureTextField.typeText("IAmNiceToDevelopers")
+            passwordSecureTextField.typeText("Ilikedevs")
         }
         let rememSwitch = app.switches["Remember Login Button"]
         let isOn = (rememSwitch.value as! String).toBool()!
