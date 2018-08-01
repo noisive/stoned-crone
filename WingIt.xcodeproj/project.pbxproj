@@ -488,7 +488,7 @@
 				53F8A0041EC3D0010001604A /* Sources */,
 				53F8A0051EC3D0010001604A /* Frameworks */,
 				53F8A0061EC3D0010001604A /* Resources */,
-				060979BD204D9239002C411F /* Update Version num from git tag */,
+				060979BD204D9239002C411F /* Set Version num from git tag */,
 			);
 			buildRules = (
 			);
@@ -522,6 +522,7 @@
 					};
 					53F8A0071EC3D0010001604A = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 9L3BH5LC27;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -588,19 +589,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		060979BD204D9239002C411F /* Update Version num from git tag */ = {
+		060979BD204D9239002C411F /* Set Version num from git tag */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Update Version num from git tag";
+			name = "Set Version num from git tag";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = setVersionFromGitTag.sh;
+			shellScript = $PROJECT_DIR/setVersionFromGitTag.sh;
 		};
 /* End PBXShellScriptBuildPhase section */
 
