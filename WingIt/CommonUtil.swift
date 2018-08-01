@@ -307,12 +307,15 @@ func HandleLaunchArgs() {
     if args.contains("-testing") {
         testing = true
     }
+    // Removes coverplate (and, optionally, loginBox - see LoginView.swift/setupLooks()) for login view
     if args.contains("-debugLogin") {
         debugLogin = true
     }
+    // Enables skipping initial evision load in login
     if args.contains("-fakeLogin") {
 //        fakeLogin = true
     }
+    // Tests failure of internet code in login.
     if args.contains("-noReachability"){
         noReachabilityArg = true
     }
