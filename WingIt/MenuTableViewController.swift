@@ -21,7 +21,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //Constants
     private let NAVIGATION_DATA: [(title: String, image: UIImage)] = [
-        (title: "Timetable", image: #imageLiteral(resourceName: "Meeting_000000_100")),
+        (title: "Today", image: #imageLiteral(resourceName: "Meeting_000000_100")),
         (title: "Log out/change login", image: #imageLiteral(resourceName: "Meeting_000000_100")),
         (title: "About", image: #imageLiteral(resourceName: "Meeting_000000_100"))
     ]
@@ -33,6 +33,7 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     private let CELL_HEIGHT: CGFloat = 60.0
     private let ICON_CORNER_RADIUS: CGFloat = 8.0
     private let NUMBER_OF_SECTIONS: Int = 1;
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     //MARK: View loading
     //=================================================================
@@ -129,6 +130,9 @@ class MenuTableViewController: UIViewController, UITableViewDelegate, UITableVie
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
+            // TODO: Make this a better solution. CUrrently, current day isn't remembered when entering menu.
+            // But then, maybe this is an ok solution? But exit button should return to current...
+            appDelegate.firstLoadSoScrollToToday = true
             self.performSegue(withIdentifier: "ShowTimetable", sender: self)
         } else if indexPath.row == 1 {
             clearCache()

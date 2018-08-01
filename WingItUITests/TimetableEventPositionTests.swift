@@ -84,7 +84,18 @@ class TimetableEventPositionTests: WingItUITestsSuper {
 //        XCTAssertTrue(app.otherElements["Tuesday"].exists)
     }
 
-    func testRemainsOnDayAfterMenu(){
+    func testMenuTodayButton(){
+        app.launchArguments += ["-mockDate", "2018-10-05"]
+        setUpFakeData()
+        app.swipeRight()
+        XCTAssertTrue(app.otherElements["Thursday"].exists)
+        menuButton.tap()
+        app.tables["Menu"].staticTexts["Today"].tap()
+        XCTAssertFalse(lessonExists(withCode: "MOND001", atIndex: 1))
+        XCTAssert(lessonExists(withCode: "FRID001", atIndex: 1))
+    }
+
+    func testMenuCancelReturnsToSameDay(){
         setUpFakeData()
         app.swipeLeft()
         XCTAssertTrue(app.otherElements["Tuesday"].exists)
