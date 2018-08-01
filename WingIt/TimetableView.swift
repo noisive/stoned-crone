@@ -42,6 +42,12 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        if self.isBeingPresented {
+            print("What happens here?")
+        }
         if appDelegate.firstLoadSoScrollToToday {
             self.scrollToCurrentDay()
             appDelegate.firstLoadSoScrollToToday = false
@@ -180,6 +186,11 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.NUMBER_OF_DAYS_IN_SECTION
     }
+
+    // Use to change to week view?
+    // setCollectionViewLayout(UICollectionViewLayout, animated: Bool)
+    // May want func startInteractiveTransition(to: UICollectionViewLayout, completion: UICollectionView.LayoutInteractiveTransitionCompletion? = nil) -> UICollectionViewTransitionLayout
+    // If using pinch gesture
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell : DayCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: AppCells.DAY_CELL, for: indexPath) as! DayCollectionViewCell
