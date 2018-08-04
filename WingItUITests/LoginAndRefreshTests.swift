@@ -94,8 +94,8 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         login()
         app.buttons["Refresh"].tap()
         // Should automatically update now
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 10)
-        XCTAssertTrue(app.isDisplayingTT)
+        _ =
+        XCTAssertTrue(app.otherElements["dayView"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.scrollViews["Login View"].exists)
         
     }
@@ -106,12 +106,16 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         app.launch()
         app.buttons["Refresh"].tap()
         let cancelOption = app.alerts["No Internet Connection"].buttons["Cancel"]
-        XCTAssertTrue(cancelOption.exists)
+        XCTAssertTrue(cancelOption.waitForExistence(timeout: 1))
         cancelOption.tap()
         XCTAssertTrue(app.isDisplayingTT)
+        app.buttons["Refresh"].tap()
         let retryButton = app.alerts["No Internet Connection"].buttons["Retry"]
-        XCTAssertTrue(retryButton.exists)
+        XCTAssertTrue(retryButton.waitForExistence(timeout: 1))
         retryButton.tap()
+        let usernameTextField = app.textFields["Username"]
+        XCTAssertFalse(usernameTextField.exists)
+        XCTAssertTrue(usernameTextField.waitForExistence(timeout: 30))
     }
     
     func testLogout(){
@@ -121,8 +125,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         app.tables["Menu"].staticTexts["Log out/change login"].tap()
         let usernameTextField = app.textFields["Username"]
         XCTAssertFalse(usernameTextField.exists)
-        let loginFieldExists = usernameTextField.waitForExistence(timeout: 40)
-        XCTAssert(loginFieldExists)
+        XCTAssert(usernameTextField.waitForExistence(timeout: 30))
         XCTAssertFalse(app.buttons["Cancel Button"].exists)
     }
     
@@ -140,8 +143,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     func testDataPersistenceOnRestart(){
         app.launchArguments.append("-fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
-        XCTAssertTrue(app.isDisplayingTT)
+        XCTAssertTrue(app.otherElements["dayView"].waitForExistence(timeout: 20))
         
     }
     
