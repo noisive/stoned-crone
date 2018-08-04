@@ -42,16 +42,19 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+//        if appDelegate.firstLoadSoScrollToToday {
+//            self.scrollToCurrentDay()
+//            appDelegate.firstLoadSoScrollToToday = false
+//        }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        if self.isBeingPresented {
-            print("What happens here?")
-        }
+    
+    override func viewDidLayoutSubviews() {
         if appDelegate.firstLoadSoScrollToToday {
             self.scrollToCurrentDay()
             appDelegate.firstLoadSoScrollToToday = false
         }
+        self.collectionView.reloadData()
     }
 
     override func viewDidLoad() {
@@ -61,11 +64,7 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         self.getClassCountForDay()
         self.doesDataNeedUpdate()
     }
-    
-    override func viewDidLayoutSubviews() {
-        self.collectionView.reloadData()
-    }
-    
+
     //MARK: Functions
     //=============================================================
     
