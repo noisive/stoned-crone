@@ -81,7 +81,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         "})" +
     "}"
     private let loadNextWeek: String = "window.loadNextWeek()"
-    private var initialLoad: Bool = false
+    private var initialLoad: Bool = true
     
     
     //MARK: View loading.
@@ -91,7 +91,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.hideCancelOnNoData()
-        self.checkNetworkAlert()
+//        self.checkNetworkAlert()
     }
     
     override func viewDidLoad() {
@@ -107,10 +107,15 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
     }
     
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        checkNetworkAlert(failedLoad: true)
+    }
+    
     // Starts webview loading with a specific requested URL. Calls webViewDidFinishLoad when finished.
     internal func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print("CALLED \(String(describing: request.url?.absoluteString))")
-        
+
+        checkNetworkAlert()
         if request.url?.absoluteString == "https://com.noisive" {
             print("JS CALLBACK")
             return false
@@ -120,6 +125,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     }
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if (!webView.isLoading) {
+            checkNetworkAlert()
             
             let error:Bool = NSString(string: webView.stringByEvaluatingJavaScript(from: webCheckError)!).boolValue
             if (error) {
@@ -132,8 +138,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
             
             //Web view initial load, grab stored details
-            if (header == "" && !initialLoad) {
-                initialLoad = true
+            if (header == "" && initialLoad) {
+                initialLoad = false
                 enableLoginContainer()
             }
             
@@ -165,6 +171,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         usernameField.delegate = self
         passwordField.delegate = self
         webView.delegate = self
+        initialLoad = true
         
         if (retrieveStoredUsername() != "" && retrieveStoredPassword() != "") {
             self.PWIsStored = true
@@ -399,12 +406,26 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
     }
     
-    private func checkNetworkAlert(){
-        return
-        if reachability.connection == .none || noReachabilityArg {
-            let alert = UIAlertController(title:  "No Internet Connection", message:  "Make sure your device is connected to the internet.", preferredStyle: .alert)
+    private func checkNetworkAlert(failedLoad: Bool = false){
+        // return
+        if reachability.connection == .none || noReachabilityArg || failedLoad{
+            SVProgressHUD.dismiss()
+//           self.webView.stopLoading()
+            var title, message: String
+            if failedLoad {
+                title = "Failed to load page"
+                message = "Make sure your device is connected to the internet and try again"
+            }else{
+                title = "No Internet Connection"
+                message = "Make sure your device is connected to the internet."
+            }
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
-                self.reloadInputViews()
+                self.webView.stopLoading()
+                self.setupLooks()
+                self.setupLogic()
+                noReachabilityArg = false
+                return
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 self.dismiss(self)
@@ -420,6 +441,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     
     @IBAction func dismiss(_ sender: Any) {
         SVProgressHUD.dismiss()
+        //    self.scrollView.removeFromSuperview()
         self.dismiss(animated: true, completion: nil)
     }
     
