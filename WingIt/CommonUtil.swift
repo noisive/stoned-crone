@@ -288,7 +288,8 @@ func copyTestData(fakeDataURL: URL? = nil){
 
 var noReachabilityArg = false
 var testing = false
-var skipLogin = false
+var fakeLogin = false
+var debugLogin = false
 func HandleLaunchArgs() {
     //    let userDefaults: UserDefaults
     var args = CommandLine.arguments
@@ -306,9 +307,15 @@ func HandleLaunchArgs() {
     if args.contains("-testing") {
         testing = true
     }
-    if args.contains("-skipLogin") {
-        skipLogin = true
+    // Removes coverplate (and, optionally, loginBox - see LoginView.swift/setupLooks()) for login view
+    if args.contains("-debugLogin") {
+        debugLogin = true
     }
+    // Enables skipping initial evision load in login
+    if args.contains("-fakeLogin") {
+//        fakeLogin = true
+    }
+    // Tests failure of internet code in login.
     if args.contains("-noReachability"){
         noReachabilityArg = true
     }

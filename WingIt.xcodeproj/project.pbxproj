@@ -20,7 +20,6 @@
 		0675D6E721006406003B0233 /* testData.csv in Resources */ = {isa = PBXBuildFile; fileRef = 0675D6E421005669003B0233 /* testData.csv */; };
 		06934D7D1F86730B00D308BD /* LoginAndRefreshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06934D7C1F86730B00D308BD /* LoginAndRefreshTests.swift */; };
 		06940F682101883500EF3E96 /* DateTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06940F672101883500EF3E96 /* DateTimeTests.swift */; };
-		069827651F87041000777DAD /* LoginDebugController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069827641F87041000777DAD /* LoginDebugController.swift */; };
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
 		06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* CommonUtil.swift */; };
@@ -108,7 +107,6 @@
 		06934D7C1F86730B00D308BD /* LoginAndRefreshTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAndRefreshTests.swift; sourceTree = "<group>"; };
 		06934D7E1F86730B00D308BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06940F672101883500EF3E96 /* DateTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeTests.swift; sourceTree = "<group>"; };
-		069827641F87041000777DAD /* LoginDebugController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDebugController.swift; sourceTree = "<group>"; };
 		06A5475D1F7B1D9600967FD7 /* libBackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBackend.a; path = "../../Library/Developer/Xcode/DerivedData/Project-faabexjzkhonsfdsetxpryushahl/Build/Products/Debug-iphonesimulator/libBackend.a"; sourceTree = "<group>"; };
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
 		06B38A371F82361E009EDC60 /* CommonUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
@@ -365,7 +363,6 @@
 				53F8A00D1EC3D0010001604A /* TimetableView.swift */,
 				534A442020873F03009E719E /* NavigationCell.swift */,
 				53DED0D9207F660000C363AF /* AboutView.swift */,
-				069827641F87041000777DAD /* LoginDebugController.swift */,
 				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
 				297C56921ED9126200C44420 /* LoginView.swift */,
 				53BB7A201ED1536C00370F7B /* DetailView.swift */,
@@ -488,7 +485,7 @@
 				53F8A0041EC3D0010001604A /* Sources */,
 				53F8A0051EC3D0010001604A /* Frameworks */,
 				53F8A0061EC3D0010001604A /* Resources */,
-				060979BD204D9239002C411F /* Update Version num from git tag */,
+				060979BD204D9239002C411F /* Set Version num from git tag */,
 			);
 			buildRules = (
 			);
@@ -522,6 +519,7 @@
 					};
 					53F8A0071EC3D0010001604A = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 9L3BH5LC27;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -588,19 +586,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		060979BD204D9239002C411F /* Update Version num from git tag */ = {
+		060979BD204D9239002C411F /* Set Version num from git tag */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Update Version num from git tag";
+			name = "Set Version num from git tag";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# Update the CFBundleShortVersionString in the generated Info.plist using the most recent Git tag.\n# Idea taken from http://tinyurl.com/3usjj9d by Joachim Bondo.\n\n# Get the current release description from Git.\nGIT_RELEASE_SHORT_VERSION=`git describe --tags | awk '{split($0,a,\"-\"); print a[1]}'`\nGIT_RELEASE_VERSION=`git rev-list HEAD | wc -l | tr -d ' '`\n\n# Set the CFBundleShortVersionString in the generated Info.plist (stripping off the leading \"v\").\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleShortVersionString\" \"$GIT_RELEASE_SHORT_VERSION\"\ndefaults write \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}\" \"CFBundleVersion\" \"$GIT_RELEASE_VERSION\"\n\ntouch \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}.plist\"";
+			shellScript = $PROJECT_DIR/setVersionFromGitTag.sh;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -649,7 +647,6 @@
 				53C7D0391EC9B6A500D0BD9C /* Lesson.swift in Sources */,
 				533C92DE20762A9400394325 /* SVProgressHUD.m in Sources */,
 				53D4B38620761F700063E45F /* NavigationProtocols.swift in Sources */,
-				069827651F87041000777DAD /* LoginDebugController.swift in Sources */,
 				53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */,
 				534BB69D2081E31B00757932 /* UITabBarController+PPTopMostController.m in Sources */,
 				534BB69C2081E31B00757932 /* UINavigationController+PPTopMostController.m in Sources */,

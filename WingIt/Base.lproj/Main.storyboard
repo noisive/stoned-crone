@@ -133,21 +133,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1c5-uh-vDW">
-                                <rect key="frame" x="0.0" y="44" width="10" height="10"/>
+                                <rect key="frame" x="16" y="44" width="343" height="734"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="10" id="Bim-IK-uVt"/>
-                                    <constraint firstAttribute="height" constant="10" id="ZS7-el-pbd"/>
-                                </constraints>
                             </webView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vt-l9-ZVc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDN-j8-zPN">
-                                        <rect key="frame" x="8" y="253.66666666666663" width="359" height="306"/>
+                                        <rect key="frame" x="8" y="253" width="359" height="306"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVd-jW-wzG">
-                                                <rect key="frame" x="16" y="201.00000000000003" width="327" height="50"/>
+                                                <rect key="frame" x="16" y="201" width="327" height="50"/>
                                                 <color key="backgroundColor" red="0.002853669343" green="0.54101066440000001" blue="0.99908632040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <accessibility key="accessibilityConfiguration" label="Login"/>
                                                 <constraints>
@@ -180,7 +176,7 @@
                                                 <color key="onTintColor" red="0.002853669343" green="0.54101066440000001" blue="0.99908632040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </switch>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d34-OI-LDL">
-                                                <rect key="frame" x="16" y="60.000000000000028" width="327" height="50"/>
+                                                <rect key="frame" x="16" y="60" width="327" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="dkB-Uh-avX">
                                                         <rect key="frame" x="46" y="0.0" width="273" height="50"/>
@@ -209,7 +205,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEh-kV-siF">
-                                                <rect key="frame" x="16" y="118.00000000000003" width="327" height="50"/>
+                                                <rect key="frame" x="16" y="118" width="327" height="50"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="U7K-Wh-I2e">
                                                         <rect key="frame" x="8" y="10" width="30" height="30"/>
@@ -249,14 +245,14 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gb-oa-8TB">
-                                                <rect key="frame" x="16" y="184.00000000000003" width="327" height="1"/>
+                                                <rect key="frame" x="16" y="184" width="327" height="1"/>
                                                 <color key="backgroundColor" white="0.67000000000000004" alpha="0.25" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="8CT-uQ-yox"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to eVision" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5S-zD-cYt">
-                                                <rect key="frame" x="16" y="8.0000000000000284" width="327" height="44"/>
+                                                <rect key="frame" x="16" y="8" width="327" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="dCk-5x-9zA"/>
                                                 </constraints>
@@ -320,12 +316,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration" identifier="Login View"/>
                         <constraints>
-                            <constraint firstItem="1c5-uh-vDW" firstAttribute="top" secondItem="HQp-gX-4Dh" secondAttribute="bottom" id="PjV-G4-1aD"/>
+                            <constraint firstItem="1c5-uh-vDW" firstAttribute="top" secondItem="HQp-gX-4Dh" secondAttribute="bottom" id="De4-VO-mdo"/>
                             <constraint firstAttribute="bottom" secondItem="3vt-l9-ZVc" secondAttribute="bottom" id="S5E-wU-dvy"/>
+                            <constraint firstItem="1c5-uh-vDW" firstAttribute="leading" secondItem="V9B-Ts-DLQ" secondAttribute="leadingMargin" id="aU4-G3-195"/>
                             <constraint firstItem="O0K-EG-fZA" firstAttribute="top" secondItem="HQp-gX-4Dh" secondAttribute="bottom" constant="8" id="gJd-VS-euZ"/>
-                            <constraint firstItem="1c5-uh-vDW" firstAttribute="leading" secondItem="V9B-Ts-DLQ" secondAttribute="leading" id="hlg-hg-RZT"/>
                             <constraint firstItem="3vt-l9-ZVc" firstAttribute="top" secondItem="V9B-Ts-DLQ" secondAttribute="top" id="nK5-jk-4pr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1c5-uh-vDW" secondAttribute="trailing" id="nWj-Ql-e7e"/>
                             <constraint firstAttribute="trailing" secondItem="3vt-l9-ZVc" secondAttribute="trailing" id="pSy-G9-Taf"/>
+                            <constraint firstItem="jXX-ph-5Lw" firstAttribute="top" secondItem="1c5-uh-vDW" secondAttribute="bottom" id="qrU-XW-vXo"/>
                             <constraint firstItem="O0K-EG-fZA" firstAttribute="leading" secondItem="V9B-Ts-DLQ" secondAttribute="leadingMargin" constant="8" id="r4u-oT-kOS"/>
                             <constraint firstItem="3vt-l9-ZVc" firstAttribute="leading" secondItem="V9B-Ts-DLQ" secondAttribute="leading" id="t6s-JT-JXo"/>
                         </constraints>
@@ -954,48 +952,6 @@
             </objects>
             <point key="canvasLocation" x="545" y="760"/>
         </scene>
-        <!--DebugLogin-->
-        <scene sceneID="Smd-XA-imW">
-            <objects>
-                <viewController storyboardIdentifier="LoginDebugVC" title="DebugLogin" id="FKd-F5-GoM" customClass="LoginDebugController" customModule="WingIt" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jwi-et-7Yl"/>
-                        <viewControllerLayoutGuide type="bottom" id="cpg-A6-av6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ad1-NU-lct" customClass="LoginDebug">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZM2-SO-7MU">
-                                <rect key="frame" x="0.0" y="50" width="375" height="728"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bmy-dv-xC2">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Log in to eVision" id="LBy-nG-qXu">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="FVN-Ia-Kvj"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ZM2-SO-7MU" firstAttribute="bottom" secondItem="cpg-A6-av6" secondAttribute="top" id="EVm-xT-LoG"/>
-                            <constraint firstItem="ZM2-SO-7MU" firstAttribute="leading" secondItem="ad1-NU-lct" secondAttribute="leading" id="NOg-DF-gFT"/>
-                            <constraint firstAttribute="trailing" secondItem="ZM2-SO-7MU" secondAttribute="trailing" id="dL7-xy-Puu"/>
-                            <constraint firstItem="ZM2-SO-7MU" firstAttribute="top" secondItem="ad1-NU-lct" secondAttribute="top" constant="50" id="i3I-SA-c51"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="webView" destination="ZM2-SO-7MU" id="XQA-hY-gUu"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XeA-gB-Mid" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2700" y="17"/>
-        </scene>
         <!--Menu Table View Controller-->
         <scene sceneID="rF0-kz-t6B">
             <objects>
@@ -1022,6 +978,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gy1-2d-Whg">
                                         <rect key="frame" x="25" y="60" width="24" height="24"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="Menu Cancel" label="Cancel menu"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="6bc-NS-D4U"/>
                                             <constraint firstAttribute="height" constant="24" id="feJ-OO-uOq"/>
@@ -1210,6 +1167,6 @@
         <image name="user_male" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="n5x-aR-4gq"/>
+        <segue reference="GLa-4W-1Kc"/>
     </inferredMetricsTieBreakers>
 </document>

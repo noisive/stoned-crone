@@ -44,20 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        // Bring up different initial view for this test - used for debugging login
-        if CommandLine.arguments.contains("debugLogin") {
-            clearCache()
-            // Open debug window
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "LoginDebugVC")
-            
-            self.window?.rootViewController = initialViewController
-            self.window?.makeKeyAndVisible()
-        }
-        
         // Register settings bundle.
         UserDefaults.standard.register(defaults: [String : Any]())
         // Register intent to use notifications

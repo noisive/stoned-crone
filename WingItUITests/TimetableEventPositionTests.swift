@@ -24,7 +24,7 @@ class TimetableEventPositionTests: WingItUITestsSuper {
         for i in 0...4 {
 //            XCTAssert(app.otherElements[days[i]].exists)
             // Tests all in 9am slot.
-            XCTAssert(lessonExists(withCode: lessons[i], atTime: 9))
+            XCTAssert(lessonExists(withCode: lessons[i], atTime: 9), "does \(lessons[i]) exist at the expected time?")
             app.otherElements["dayView"].swipeLeft()
         }
     }
@@ -44,6 +44,11 @@ class TimetableEventPositionTests: WingItUITestsSuper {
     func testOpensToCurrentDayMon(){
         setUpFakeData()
         XCTAssertTrue(app.otherElements["Monday"].exists)
+    }
+    func testOpensToCurrentDayStaleData(){
+        app.launchArguments += ["-mockDate", "2018-10-10"]
+        setUpFakeData()
+        XCTAssertTrue(app.otherElements["Wednesday"].exists)
     }
     
     func test8amSlot(){
@@ -77,6 +82,28 @@ class TimetableEventPositionTests: WingItUITestsSuper {
 //        XCTAssertFalse(app.otherElements["Monday"].exists)
 //        XCTAssertTrue(app.otherElements["Wednesday"].exists)
 //        XCTAssertTrue(app.otherElements["Tuesday"].exists)
+    }
+
+    func testMenuTodayButton(){
+        app.launchArguments += ["-mockDate", "2018-10-05"]
+        setUpFakeData()
+        app.swipeRight()
+        XCTAssertTrue(app.otherElements["Thursday"].exists)
+        menuButton.tap()
+        app.tables["Menu"].staticTexts["Today"].tap()
+        XCTAssertFalse(lessonExists(withCode: "MOND001", atIndex: 1))
+        XCTAssert(lessonExists(withCode: "FRID001", atIndex: 1))
+    }
+
+    func testMenuCancelReturnsToSameDay(){
+        app.launchArguments += ["-mockDate", "2018-10-05"]
+        setUpFakeData()
+        app.swipeRight()
+        XCTAssertTrue(app.otherElements["Thursday"].exists)
+        menuButton.tap()
+        app.buttons["Menu Cancel"].tap()
+        XCTAssertFalse(lessonExists(withCode: "MOND001", atIndex: 1))
+        XCTAssert(lessonExists(withCode: "FRID001", atIndex: 1))
     }
     
 }

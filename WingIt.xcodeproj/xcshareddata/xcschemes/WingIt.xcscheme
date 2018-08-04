@@ -80,6 +80,9 @@
                   Identifier = "TimetableEventPositionTests/test2HourCellAppearsInBoth()">
                </Test>
                <Test
+                  Identifier = "TimetableEventPositionTests/testMenuCancelReturnsToSameDay()">
+               </Test>
+               <Test
                   Identifier = "WingItUITests/testLoginRaw()">
                </Test>
                <Test

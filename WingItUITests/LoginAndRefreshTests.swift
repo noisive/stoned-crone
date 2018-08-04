@@ -39,7 +39,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         super.tearDown()
     }
     
-    func login(){
+    func login(realData: Bool = false){
         
         _ = app.textFields["Username"].waitForExistence(timeout: 60)
         let usernameTextField = app.textFields["Username"]
@@ -53,39 +53,25 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         }
         
         usernameTextField.tap()
-        usernameTextField.typeText(self.eVisionUsername)
+        if realData {
+            usernameTextField.typeText(self.eVisionUsername)
+        }else{
+            usernameTextField.typeText("WingItDemo")
+        }
         passwordSecureTextField.tap()
-        passwordSecureTextField.typeText(self.eVisionPassword)
+        if realData {
+            passwordSecureTextField.typeText(self.eVisionPassword)
+        }else{
+            passwordSecureTextField.typeText("Ilikedevs")
+        }
         let rememSwitch = app.switches["Remember Login Button"]
-        let isOn = (rememSwitch.value as! String).toBool()
-        if !isOn! {
+        let isOn = (rememSwitch.value as! String).toBool()!
+        if !isOn {
             rememSwitch.tap()
         }
             app.buttons["Login"].tap()
         _ = app.otherElements["dayView"].waitForExistence(timeout: 80)
     }
-    
-    // Special webview window without any coverplate. For debugging webview login.
-    func testLoginRaw(){
-        // Argument to enter raw
-        app.launchArguments.append("-debugLogin")
-        app.launch()
-        print("hi")
-        
-        let webViewsQuery = app.webViews
-        
-        let element2 = webViewsQuery.otherElements["Otago Student Administration - The University of Otago"].children(matching: .other).element(boundBy: 6)
-        let textField = element2.children(matching: .textField).element
-        // Need to wait
-        textField.tap()
-        textField.typeText(eVisionUsername)
-        element2.children(matching: .secureTextField).element.typeText(eVisionPassword)
-        app.typeText("\r")
-        
-        //XCTAssertEqual(data.json, )
-        
-    }
-
     
     // Test that a fresh login reaches a timetable.
     func testLoginFresh(){
@@ -97,19 +83,20 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         }
         //        launchFinished() // wait for app to load and notification to show.
         app.tap() // need to interact with the app for the handler to fire.
-        login()
+        login(realData: true)
         XCTAssertTrue(app.isDisplayingTT)
         
     }
     
     func testLoginUpdate(){
-//        app.launchArguments.append("-fakeData")
+        app.launchArguments.append("-fakeLogin")
         app.launch()
         login()
         app.buttons["Refresh"].tap()
         // Should automatically update now
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
-        XCTAssertTrue(app.isDisplayingTT)
+        _ =
+        XCTAssertTrue(app.otherElements["dayView"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.scrollViews["Login View"].exists)
         
     }
     
@@ -119,40 +106,44 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         app.launch()
         app.buttons["Refresh"].tap()
         let cancelOption = app.alerts["No Internet Connection"].buttons["Cancel"]
-        XCTAssertTrue(cancelOption.exists)
+        XCTAssertTrue(cancelOption.waitForExistence(timeout: 1))
         cancelOption.tap()
         XCTAssertTrue(app.isDisplayingTT)
+        app.buttons["Refresh"].tap()
         let retryButton = app.alerts["No Internet Connection"].buttons["Retry"]
-        XCTAssertTrue(retryButton.exists)
+        XCTAssertTrue(retryButton.waitForExistence(timeout: 1))
         retryButton.tap()
+        let usernameTextField = app.textFields["Username"]
+        XCTAssertFalse(usernameTextField.exists)
+        XCTAssertTrue(usernameTextField.waitForExistence(timeout: 30))
     }
     
     func testLogout(){
+        //        app.launchArguments.append("-fakeLogin") // TODO: Check this won't affect the test
         setUpFakeData()
         menuButton.tap()
         app.tables["Menu"].staticTexts["Log out/change login"].tap()
         let usernameTextField = app.textFields["Username"]
         XCTAssertFalse(usernameTextField.exists)
-        let loginFieldExists = usernameTextField.waitForExistence(timeout: 40)
-        XCTAssert(loginFieldExists)
+        XCTAssert(usernameTextField.waitForExistence(timeout: 30))
+        XCTAssertFalse(app.buttons["Cancel Button"].exists)
     }
     
     func testReturnsToCurrentDayAfterUpdate(){
+        app.launchArguments.append("-fakeLogin")
         app.launchArguments += ["-mockDate", "2018-10-05"]
         setUpFakeData()
         app.swipeRight()
         XCTAssertTrue(app.otherElements["Thursday"].exists)
         app.buttons["Refresh"].tap()
         login()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 60)
         XCTAssertTrue(app.otherElements["Friday"].exists)
     }
     
     func testDataPersistenceOnRestart(){
         app.launchArguments.append("-fakeData")
         app.launch()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
-        XCTAssertTrue(app.isDisplayingTT)
+        XCTAssertTrue(app.otherElements["dayView"].waitForExistence(timeout: 20))
         
     }
     
