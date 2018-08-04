@@ -39,7 +39,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     @IBOutlet weak var genericpasswordSigninButton: UIButton!
     @IBOutlet weak var viewContainer: UIView!
     var webView: WKWebView!
-    
+
     //Variables
     public var isUpdatingMode: Bool!
     private var PWIsStored: Bool = false
@@ -84,6 +84,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     "}"
     private let loadNextWeek: String = "window.loadNextWeek()"
     private var initialLoad: Bool = true
+    private let testJS = "document.body.style.backgroundColor = \"red\";"
     
     // Used to filter images and css from loaded pages, to help speed.
     // Only works on ios 11 and older.
@@ -152,45 +153,24 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
         }
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
-        if (!webView.isLoading) {
+//        if (!webView.isLoading) {
             checkNetworkAlert()
-            
-            let error = self.stringFromJSEvaluation(code: webCheckError)
-            if error != nil {
-                // Get the error given by eVision.
-                let reason = self.stringFromJSEvaluation(code: self.webErrorReason)!
-                enableLoginContainer(withErrorMessage: reason, startTyping: false)
+        
+        webView.evaluateJavaScript(self.webCheckError, completionHandler: { (result: Any?, failureError: Error?) in
+            if failureError != nil {
+                print("Error obtaining evision error: \(String(describing: failureError))")
                 return
             }
-            
-            _ = self.stringFromJSEvaluation(code: "document.documentElement.outerHTML.toString()")
-            var header = self.stringFromJSEvaluation(code: self.webCheckHeader)!
-            header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-            
-            //Web view initial load, grab stored details
-            if (header == "" && initialLoad) {
-                initialLoad = false
-                enableLoginContainer()
+            if result != nil { // Was an error
+                // Get the error given by eVision.
+                webView.evaluateJavaScript(self.webErrorReason, completionHandler: { (result: Any?, err: Error?) in
+                    let reason = result as! String
+                    self.enableLoginContainer(withErrorMessage: reason, startTyping: false)
+                    return
+                })
             }
-            
-            switch header {
-            case "System Message":
-                break;
-            case "Home":
-                webView.evaluateJavaScript(self.webClickTimetable)
-                if self.isUpdatingMode {
-                    SVProgressHUD.setStatus("Updating your timetable...")
-                }else{
-                    SVProgressHUD.setStatus("Retrieving your timetable...")
-                }
-                break;
-            case "Timetable":
-                grabTTJsonFromEvisionPage()
-                break;
-            default:
-                break;
-            }
-        }
+        })
+        respondToHeaderChange()
     }
     
     //MARK: Functions
@@ -231,7 +211,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
             loginContainer.isOpaque = false
             webView.isHidden = false
             webView.frame = self.view.bounds
-//            webView.scalesPageToFit = true
+            //            webView.scalesPageToFit = true
             //            scrollView.drawsBackground = false
         }
         //        #endif
@@ -252,7 +232,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
         self.scrollView.addGestureRecognizer(dismissGesture)
         
         if fakeLogin { // Skip loading evision
-//            sleep(1) // Otherwise too fast to close view before it opens
+            //            sleep(1) // Otherwise too fast to close view before it opens
             enableLoginContainer(startTyping: true)
             return
         }
@@ -272,12 +252,12 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
         webView.uiDelegate = self
         webView.navigationDelegate = self
         self.view.addSubview(webView)
-
+        
         webView.topAnchor.constraint(equalTo: viewContainer.topAnchor).isActive = true
         webView.rightAnchor.constraint(equalTo: viewContainer.rightAnchor).isActive = true
         webView.leftAnchor.constraint(equalTo: viewContainer.leftAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor).isActive = true
-
+        
         webView.isHidden = true
         webView.isUserInteractionEnabled = false
         
@@ -350,60 +330,53 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
         }
     }
     
+    // Asynchronous JS. Will get the header as result once finished.
+    private func respondToHeaderChange(){
+        webView.evaluateJavaScript(self.webCheckHeader, completionHandler: { (result: Any?, error: Error?) in
+            if error != nil {
+                print("Error evaluating JS: \(String(describing: error))")
+                return
+            }
+            var header = result as! String
+            header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+            //Web view initial load, grab stored details
+            if (header == "" && self.initialLoad) {
+                self.initialLoad = false
+                self.enableLoginContainer()
+            }
+            
+            switch header {
+            case "System Message":
+                break;
+            case "Home":
+                self.webView.evaluateJavaScript(self.webClickTimetable)
+                if self.isUpdatingMode {
+                    SVProgressHUD.setStatus("Updating your timetable...")
+                }else{
+                    SVProgressHUD.setStatus("Retrieving your timetable...")
+                }
+                break;
+            case "Timetable":
+                self.grabTTJsonFromEvisionPage()
+                break;
+            default:
+                break;
+            }
+        })
+    }
+    
     private func handleAlert(title: String, description: String) {
         let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     @objc private func endEditing() {
         self.view.endEditing(true)
         // Move login box back to centre of screen.
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
-    
-    func takeData(completionHandler: @escaping (_ userName: String?) -> Void){
-        webView.evaluateJavaScript("document.documentElement.outerHTML") { (value, error) in
-            if let valueName = value as? String {
-                completionHandler(valueName)
-            }
-            print(value)
-            print(error)
-            completionHandler(nil)
-        }
-    }
-    
-    func strJS(completionHandler: @escaping (_ userName: String?) -> Void){
-        webView.evaluateJavaScript("window.webkit.messageHandlers.newJsMethod.postMessage(\"Fuuuuuuccckkkk offfff\")") { (result, error) in
-            print(result!)
-            if let resultString = result as? String {
-                completionHandler(resultString)
-            }else{
-                print("Error evaluation JS: \(String(describing: error))")
-            }
-        }
-    }
-    
-    private func stringFromJSEvaluation(code: String) -> String?{
-        takeData(completionHandler: { userName in
-            print(userName)
-        })
-        var outcome: String? = nil
-        strJS(completionHandler: {userName in
-            print(userName)
-            outcome = userName
-        })
-        webView.evaluateJavaScript(code, completionHandler: { (result: Any?, error: Error?) in
-            print(result!)
-            if let resultString = result as? String {
-                outcome = resultString
-            }else{
-                print("Error evaluation JS: \(String(describing: error))")
-            }
-        })
-        return outcome
-    }
-    
+
     func enableLoginContainer(withErrorMessage errorMessage: String? = nil, startTyping: Bool = true){
         
         if self.PWIsStored {
@@ -478,9 +451,16 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     
     private func grabTTJsonFromEvisionPage(){
         webView.evaluateJavaScript(self.webInsertFunctions)
-        
-        //Check if the json was grabbed
-        if let jsonString = self.stringFromJSEvaluation(code: self.webGrabCode) {
+        webView.evaluateJavaScript(self.webGrabCode, completionHandler: { (result: Any?, error: Error?) in
+            if error != nil {
+                print("Error grabbing json: \(String(describing: error))")
+                //Issue with getting JSON. Display error and log out
+                self.enableLoginContainer(withErrorMessage:  "Something went wrong getting your timetable...")
+                self.webView.evaluateJavaScript(self.webClickNextWeek)
+                self.webView.evaluateJavaScript(self.webLogout)
+                return
+            }
+            let jsonString = result as! String
             let _ = parseEvents(data: jsonString)
             #if DEBUG
             //             if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
@@ -490,15 +470,10 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
             }
             #endif
             SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
-            webView.evaluateJavaScript(webClickNextWeek)
-            webView.evaluateJavaScript(webLogout)
-            endWithSuccessfulLogin()
-        } else {
-            //Issue with getting JSON. Display error and log out
-            enableLoginContainer(withErrorMessage:  "Something went wrong getting your timetable...")
-            webView.evaluateJavaScript(webClickNextWeek)
-            webView.evaluateJavaScript(webLogout)
-        }
+            self.self.webView.evaluateJavaScript(self.webClickNextWeek)
+            self.self.webView.evaluateJavaScript(self.webLogout)
+            self.endWithSuccessfulLogin()
+        })
     }
     
     private func endWithSuccessfulLogin(){
