@@ -25,11 +25,7 @@
 		06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* CommonUtil.swift */; };
 		06D37CD71F873C7F009318AC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06D37CD61F873C7F009318AC /* Settings.bundle */; };
 		06D61711210974D300F58A30 /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D6170A210974D200F58A30 /* OnePasswordExtension.m */; };
-		06D61712210974D300F58A30 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170B210974D200F58A30 /* README.md */; };
 		06D61713210974D300F58A30 /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170C210974D200F58A30 /* 1Password.xcassets */; };
-		06D61714210974D300F58A30 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170D210974D200F58A30 /* .gitignore */; };
-		06D61715210974D300F58A30 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170E210974D200F58A30 /* LICENSE.txt */; };
-		06D61716210974D300F58A30 /* 1PasswordExtension.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */; };
 		06D61718210979CB00F58A30 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D61717210979CB00F58A30 /* Reachability.swift */; };
 		06E5E2F020C1504500C77382 /* WingItTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E5E2EF20C1504500C77382 /* WingItTests.swift */; };
 		06E758982107E8E6007BDF76 /* WingItTestsSuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E758972107E8E6007BDF76 /* WingItTestsSuper.swift */; };
@@ -112,11 +108,7 @@
 		06B38A371F82361E009EDC60 /* CommonUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
 		06D37CD61F873C7F009318AC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		06D6170A210974D200F58A30 /* OnePasswordExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnePasswordExtension.m; sourceTree = "<group>"; };
-		06D6170B210974D200F58A30 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		06D6170C210974D200F58A30 /* 1Password.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = 1Password.xcassets; sourceTree = "<group>"; };
-		06D6170D210974D200F58A30 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		06D6170E210974D200F58A30 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1PasswordExtension.podspec; sourceTree = "<group>"; };
 		06D61710210974D200F58A30 /* OnePasswordExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnePasswordExtension.h; sourceTree = "<group>"; };
 		06D61717210979CB00F58A30 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		06E5E2ED20C1504500C77382 /* WingItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WingItTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,11 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				06D6170A210974D200F58A30 /* OnePasswordExtension.m */,
-				06D6170B210974D200F58A30 /* README.md */,
 				06D6170C210974D200F58A30 /* 1Password.xcassets */,
-				06D6170D210974D200F58A30 /* .gitignore */,
-				06D6170E210974D200F58A30 /* LICENSE.txt */,
-				06D6170F210974D200F58A30 /* 1PasswordExtension.podspec */,
 				06D61710210974D200F58A30 /* OnePasswordExtension.h */,
 			);
 			name = "onepassword-app-extension";
@@ -566,18 +554,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06D61715210974D300F58A30 /* LICENSE.txt in Resources */,
 				063A25DF210A99FD00967041 /* SystemIcons.xcassets in Resources */,
 				06D61713210974D300F58A30 /* 1Password.xcassets in Resources */,
 				0675D6E721006406003B0233 /* testData.csv in Resources */,
-				06D61716210974D300F58A30 /* 1PasswordExtension.podspec in Resources */,
 				533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */,
 				534BB6902081E28A00757932 /* RMessageDefaultDesign.json in Resources */,
-				06D61714210974D300F58A30 /* .gitignore in Resources */,
 				06D37CD71F873C7F009318AC /* Settings.bundle in Resources */,
 				53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */,
 				534BB68E2081E28A00757932 /* RMessageView.xib in Resources */,
-				06D61712210974D300F58A30 /* README.md in Resources */,
 				53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */,
 				53F8A0111EC3D0010001604A /* Main.storyboard in Resources */,
 			);
