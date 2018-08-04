@@ -166,6 +166,47 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     //MARK: Functions
     //==========================================================================
     
+    private func setupLooks() {
+        loginContainer.layer.shadowColor = UIColor.black.cgColor
+        loginContainer.layer.shadowOpacity = 0.3
+        loginContainer.layer.shadowOffset = CGSize.zero
+        loginContainer.layer.shadowRadius = 3
+        loginContainer.clipsToBounds = false
+        loginContainer.layer.cornerRadius = CORNER_RADIUS;
+        
+        loginButton.layer.cornerRadius = CORNER_RADIUS;
+        
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.show(withStatus: "Loading eVision...")
+        self.loginContainer.alpha = 0
+        
+        self.genericpasswordSigninButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
+        
+        if self.isUpdatingMode == nil {
+            self.isUpdatingMode = false
+        }
+        if self.isUpdatingMode {
+            self.loginTitle.text = "Log in to Update"
+            self.loginButton.setTitle("UPDATE", for: .normal)
+        }else{
+            self.loginButton.setTitle("LOG IN", for: .normal)
+            self.loginTitle.text = "Log in to eVision"
+        }
+        //        #if debug
+        if debugLogin {
+            scrollView.isHidden = true
+            scrollView.isOpaque = false
+            SVProgressHUD.dismiss()
+            loginContainer.isHidden = true
+            loginContainer.isOpaque = false
+            webView.isHidden = false
+            webView.frame = self.view.bounds
+            webView.scalesPageToFit = true
+            //            scrollView.drawsBackground = false
+        }
+        //        #endif
+    }
+    
     private func setupLogic() {
         //Setup delegates
         usernameField.delegate = self
@@ -194,47 +235,6 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         }
     }
     
-    private func setupLooks() {
-        loginContainer.layer.shadowColor = UIColor.black.cgColor
-        loginContainer.layer.shadowOpacity = 0.3
-        loginContainer.layer.shadowOffset = CGSize.zero
-        loginContainer.layer.shadowRadius = 3
-        loginContainer.clipsToBounds = false
-        loginContainer.layer.cornerRadius = CORNER_RADIUS;
-        
-        loginButton.layer.cornerRadius = CORNER_RADIUS;
-        
-        SVProgressHUD.setDefaultStyle(.dark)
-        SVProgressHUD.show(withStatus: "Loading eVision...")
-        self.loginContainer.alpha = 0
-        
-        self.genericpasswordSigninButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
-        
-        if self.isUpdatingMode == nil {
-            self.isUpdatingMode = false
-        }
-        if self.isUpdatingMode {
-            self.loginTitle.text = "Log in to Update"
-            self.loginButton.setTitle("UPDATE", for: .normal)
-        }else{
-            self.loginButton.setTitle("LOG IN", for: .normal)
-            self.loginTitle.text = "Log in to eVision"
-        }
-//        #if debug
-        if debugLogin {
-            scrollView.isHidden = true
-            scrollView.isOpaque = false
-            SVProgressHUD.dismiss()
-            loginContainer.isHidden = true
-            loginContainer.isOpaque = false
-            webView.isHidden = false
-            webView.frame = self.view.bounds
-            webView.scalesPageToFit = true
-//            scrollView.drawsBackground = false
-        }
-//        #endif
-    }
-
     // Triggered when enter/return pressed when typing in login field
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {    
         guard let usernameText = self.usernameField.text else { return false }
@@ -422,10 +422,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { action in
                 self.webView.stopLoading()
-                self.setupLooks()
-                self.setupLogic()
+                self.viewDidLoad() // Reset view and try again.
                 noReachabilityArg = false
-                return
             }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 self.dismiss(self)
