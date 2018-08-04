@@ -20,8 +20,9 @@
  */
 
 import UIKit
+import WebKit
 
-class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLoginState {
+class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFieldDelegate, PLoginState {
     
     //MARK: Outlets and Variables
     //==========================================================================
@@ -34,9 +35,10 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var savePasswordSwitch: UISwitch!
-    @IBOutlet weak var webView: UIWebView!
     @IBOutlet weak var loginTitle: UILabel!
     @IBOutlet weak var genericpasswordSigninButton: UIButton!
+    @IBOutlet weak var viewContainer: UIView!
+    var webView: WKWebView!
     
     //Variables
     public var isUpdatingMode: Bool!
@@ -83,6 +85,29 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     private let loadNextWeek: String = "window.loadNextWeek()"
     private var initialLoad: Bool = true
     
+    // Used to filter images and css from loaded pages, to help speed.
+    // Only works on ios 11 and older.
+    private let blockRules = """
+         [{
+             "trigger": {
+                 "url-filter": ".*",
+                 "resource-type": ["image"]
+             },
+             "action": {
+                 "type": "block"
+             }
+         },
+         {
+             "trigger": {
+                 "url-filter": ".*",
+                 "resource-type": ["style-sheet"]
+             },
+             "action": {
+                 "type": "block"
+             }
+         }]
+      """
+    
     
     //MARK: View loading.
     // These are the first functions called.
@@ -92,6 +117,11 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         super.viewDidAppear(animated)
         self.hideCancelOnNoData()
 //        self.checkNetworkAlert()
+    }
+    
+    override func loadView() {
+        super.loadView()
+        webViewConfigure()
     }
     
     override func viewDidLoad() {
@@ -107,34 +137,34 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 130), animated: true)
     }
     
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         checkNetworkAlert(failedLoad: true)
     }
     
-    // Starts webview loading with a specific requested URL. Calls webViewDidFinishLoad when finished.
-    internal func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        print("CALLED \(String(describing: request.url?.absoluteString))")
-
+    // Starts webview loading with a specific requested URL. Calls webView(didFinish) when finished.
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!){
         checkNetworkAlert()
-        if request.url?.absoluteString == "https://com.noisive" {
-            print("JS CALLBACK")
-            return false
+        if let requestURL = webView.url?.absoluteString {
+            print("CALLED \(requestURL)")
+            if requestURL == "https://com.noisive" {
+                print("JS CALLBACK")
+            }
         }
-        // Calls webViewDidFinishLoad when finished.
-        return true
     }
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
         if (!webView.isLoading) {
             checkNetworkAlert()
             
-            let error:Bool = NSString(string: webView.stringByEvaluatingJavaScript(from: webCheckError)!).boolValue
-            if (error) {
+            let error = self.stringFromJSEvaluation(code: webCheckError)
+            if error != nil {
                 // Get the error given by eVision.
-                let reason:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webErrorReason)!) as String
+                let reason = self.stringFromJSEvaluation(code: self.webErrorReason)!
                 enableLoginContainer(withErrorMessage: reason, startTyping: false)
                 return
             }
-            var header:String = NSString(string: webView.stringByEvaluatingJavaScript(from: self.webCheckHeader)!) as String
+            
+            _ = self.stringFromJSEvaluation(code: "document.documentElement.outerHTML.toString()")
+            var header = self.stringFromJSEvaluation(code: self.webCheckHeader)!
             header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
             
             //Web view initial load, grab stored details
@@ -147,7 +177,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             case "System Message":
                 break;
             case "Home":
-                webView.stringByEvaluatingJavaScript(from: self.webClickTimetable)
+                webView.evaluateJavaScript(self.webClickTimetable)
                 if self.isUpdatingMode {
                     SVProgressHUD.setStatus("Updating your timetable...")
                 }else{
@@ -201,7 +231,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             loginContainer.isOpaque = false
             webView.isHidden = false
             webView.frame = self.view.bounds
-            webView.scalesPageToFit = true
+//            webView.scalesPageToFit = true
             //            scrollView.drawsBackground = false
         }
         //        #endif
@@ -211,7 +241,6 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         //Setup delegates
         usernameField.delegate = self
         passwordField.delegate = self
-        webView.delegate = self
         initialLoad = true
         
         if (retrieveStoredUsername() != "" && retrieveStoredPassword() != "") {
@@ -231,7 +260,37 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         let urlBase: URL? = URL(string: "https://evision.otago.ac.nz")
         if let url = urlBase {
             let loadRequest: URLRequest = URLRequest(url: url)
-            webView.loadRequest(loadRequest)
+            webView.load(loadRequest)
+        }
+    }
+    
+    private func webViewConfigure(){
+        let config = WKWebViewConfiguration()
+        config.suppressesIncrementalRendering = false
+        config.userContentController.add(self, name: "newJsMethod")
+        webView = WKWebView(frame: .zero, configuration: config)
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
+        self.view.addSubview(webView)
+
+        webView.topAnchor.constraint(equalTo: viewContainer.topAnchor).isActive = true
+        webView.rightAnchor.constraint(equalTo: viewContainer.rightAnchor).isActive = true
+        webView.leftAnchor.constraint(equalTo: viewContainer.leftAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor).isActive = true
+
+        webView.isHidden = true
+        webView.isUserInteractionEnabled = false
+        
+        if #available(iOS 11.0, *) {
+            WKContentRuleListStore.default().compileContentRuleList(
+                forIdentifier: "ContentBlockingRules",
+                encodedContentRuleList: blockRules) { (contentRuleList, error) in
+                    if error != nil {
+                        return
+                    }
+                    let configuration = self.webView.configuration
+                    configuration.userContentController.add(contentRuleList!)
+            }
         }
     }
     
@@ -267,8 +326,8 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         self.endEditing()
         if let user = usernameField.text, let password = passwordField.text {
             // Set field text in actual webpage.
-            self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
-            self.webView.stringByEvaluatingJavaScript(from: "document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(password)';")
+            webView.evaluateJavaScript("document.getElementById('MUA_CODE.DUMMY.MENSYS').value = '\(user)';")
+            webView.evaluateJavaScript("document.getElementById('PASSWORD.DUMMY.MENSYS').value = '\(password)';")
             
             if self.savePasswordSwitch.isOn {
                 storeUserPass(username: user, password: password)
@@ -284,7 +343,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             }
             disableLoginContainer(message: "Logging you in...")
             //Fire request to click login
-            webView.stringByEvaluatingJavaScript(from: self.webClickLogin)
+            webView.evaluateJavaScript(self.webClickLogin)
         } else { // Error getting text from one of the fields
             SVProgressHUD.dismiss()
             self.handleAlert(title: "Login Error", description: "Please ensure your login details are entered correctly.")
@@ -302,7 +361,49 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         // Move login box back to centre of screen.
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
-
+    
+    func takeData(completionHandler: @escaping (_ userName: String?) -> Void){
+        webView.evaluateJavaScript("document.documentElement.outerHTML") { (value, error) in
+            if let valueName = value as? String {
+                completionHandler(valueName)
+            }
+            print(value)
+            print(error)
+            completionHandler(nil)
+        }
+    }
+    
+    func strJS(completionHandler: @escaping (_ userName: String?) -> Void){
+        webView.evaluateJavaScript("window.webkit.messageHandlers.newJsMethod.postMessage(\"Fuuuuuuccckkkk offfff\")") { (result, error) in
+            print(result!)
+            if let resultString = result as? String {
+                completionHandler(resultString)
+            }else{
+                print("Error evaluation JS: \(String(describing: error))")
+            }
+        }
+    }
+    
+    private func stringFromJSEvaluation(code: String) -> String?{
+        takeData(completionHandler: { userName in
+            print(userName)
+        })
+        var outcome: String? = nil
+        strJS(completionHandler: {userName in
+            print(userName)
+            outcome = userName
+        })
+        webView.evaluateJavaScript(code, completionHandler: { (result: Any?, error: Error?) in
+            print(result!)
+            if let resultString = result as? String {
+                outcome = resultString
+            }else{
+                print("Error evaluation JS: \(String(describing: error))")
+            }
+        })
+        return outcome
+    }
+    
     func enableLoginContainer(withErrorMessage errorMessage: String? = nil, startTyping: Bool = true){
         
         if self.PWIsStored {
@@ -314,12 +415,12 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
             beginLogin()
             return
         }
-//        #if debug
+        //        #if debug
         if debugLogin {
             // Return here if you want to see without login box at all.
             return
         }
-//        #endif
+        //        #endif
         // Manual login time
         SVProgressHUD.dismiss()
         UIView.animate(withDuration: 0.3, animations: {
@@ -376,27 +477,27 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     }
     
     private func grabTTJsonFromEvisionPage(){
-        webView.stringByEvaluatingJavaScript(from: self.webInsertFunctions)
+        webView.evaluateJavaScript(self.webInsertFunctions)
         
         //Check if the json was grabbed
-        if let jsonString:String = webView.stringByEvaluatingJavaScript(from: webGrabCode) {
+        if let jsonString = self.stringFromJSEvaluation(code: self.webGrabCode) {
             let _ = parseEvents(data: jsonString)
             #if DEBUG
-//             if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
+            //             if ProcessInfo.processInfo.environment["XCInjectBundleInto"] != nil {
             if testing {
-//                  if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
+                //                  if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil {
                 validateTimetable()
             }
             #endif
             SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
-            webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
-            webView.stringByEvaluatingJavaScript(from: webLogout)
+            webView.evaluateJavaScript(webClickNextWeek)
+            webView.evaluateJavaScript(webLogout)
             endWithSuccessfulLogin()
         } else {
             //Issue with getting JSON. Display error and log out
             enableLoginContainer(withErrorMessage:  "Something went wrong getting your timetable...")
-            webView.stringByEvaluatingJavaScript(from: webClickNextWeek)
-            webView.stringByEvaluatingJavaScript(from: webLogout)
+            webView.evaluateJavaScript(webClickNextWeek)
+            webView.evaluateJavaScript(webLogout)
         }
     }
     
@@ -410,7 +511,7 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         // return
         if reachability.connection == .none || noReachabilityArg || failedLoad{
             SVProgressHUD.dismiss()
-//           self.webView.stopLoading()
+            //           self.webView.stopLoading()
             var title, message: String
             if failedLoad {
                 title = "Failed to load page"
@@ -446,9 +547,9 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
     @IBAction func findLoginFromGenericPassword(_ sender: UIButton){
         OnePasswordExtension.shared().findLogin(forURLString: "https://evision.otago.ac.nz", for: self, sender: sender, completion: { (loginDict, error) in
             if loginDict == nil {
-//                if error!.code != AppExtensionErrorCodeCancelledByUser {
-//                    print("Error invoking GenericPassword App Extension for find login: \(error)");
-//                }
+                //                if error!.code != AppExtensionErrorCodeCancelledByUser {
+                //                    print("Error invoking GenericPassword App Extension for find login: \(error)");
+                //                }
                 return
             }
             self.usernameField.text = loginDict![AppExtensionUsernameKey] as? String
@@ -460,4 +561,11 @@ class LoginView: UIViewController, UIWebViewDelegate, UITextFieldDelegate, PLogi
         self.beginLogin()
     }
     
+}
+
+extension UIViewController: WKScriptMessageHandler {
+    public func userContentController(_ userContentController: WKUserContentController,
+                               didReceive message: WKScriptMessage) {
+        print("Received message from native: \(message)")
+    }
 }

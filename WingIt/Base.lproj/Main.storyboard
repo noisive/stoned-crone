@@ -132,10 +132,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1c5-uh-vDW">
-                                <rect key="frame" x="16" y="44" width="343" height="734"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vt-l9-ZVc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
@@ -316,14 +312,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration" identifier="Login View"/>
                         <constraints>
-                            <constraint firstItem="1c5-uh-vDW" firstAttribute="top" secondItem="HQp-gX-4Dh" secondAttribute="bottom" id="De4-VO-mdo"/>
                             <constraint firstAttribute="bottom" secondItem="3vt-l9-ZVc" secondAttribute="bottom" id="S5E-wU-dvy"/>
-                            <constraint firstItem="1c5-uh-vDW" firstAttribute="leading" secondItem="V9B-Ts-DLQ" secondAttribute="leadingMargin" id="aU4-G3-195"/>
                             <constraint firstItem="O0K-EG-fZA" firstAttribute="top" secondItem="HQp-gX-4Dh" secondAttribute="bottom" constant="8" id="gJd-VS-euZ"/>
                             <constraint firstItem="3vt-l9-ZVc" firstAttribute="top" secondItem="V9B-Ts-DLQ" secondAttribute="top" id="nK5-jk-4pr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1c5-uh-vDW" secondAttribute="trailing" id="nWj-Ql-e7e"/>
                             <constraint firstAttribute="trailing" secondItem="3vt-l9-ZVc" secondAttribute="trailing" id="pSy-G9-Taf"/>
-                            <constraint firstItem="jXX-ph-5Lw" firstAttribute="top" secondItem="1c5-uh-vDW" secondAttribute="bottom" id="qrU-XW-vXo"/>
                             <constraint firstItem="O0K-EG-fZA" firstAttribute="leading" secondItem="V9B-Ts-DLQ" secondAttribute="leadingMargin" constant="8" id="r4u-oT-kOS"/>
                             <constraint firstItem="3vt-l9-ZVc" firstAttribute="leading" secondItem="V9B-Ts-DLQ" secondAttribute="leading" id="t6s-JT-JXo"/>
                         </constraints>
@@ -338,7 +330,7 @@
                         <outlet property="savePasswordSwitch" destination="ZZF-fX-oiF" id="zTe-v1-hjU"/>
                         <outlet property="scrollView" destination="3vt-l9-ZVc" id="woL-22-5yG"/>
                         <outlet property="usernameField" destination="dkB-Uh-avX" id="JKD-8y-Wch"/>
-                        <outlet property="webView" destination="1c5-uh-vDW" id="EEv-kz-Xy1"/>
+                        <outlet property="viewContainer" destination="V9B-Ts-DLQ" id="CD0-Wu-aDD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r7W-WX-gOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
