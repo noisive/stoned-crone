@@ -84,8 +84,8 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     "}"
     private let loadNextWeek: String = "window.loadNextWeek()"
     private var initialLoad: Bool = true
-    private let testJS = "document.body.style.backgroundColor = \"red\";"
-    
+    private var errorChecked: Bool = true
+
     // Used to filter images and css from loaded pages, to help speed.
     // Only works on ios 11 and older.
     private let blockRules = """
@@ -155,19 +155,24 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
 //        if (!webView.isLoading) {
             checkNetworkAlert()
-        
+        self.errorChecked = false
         webView.evaluateJavaScript(self.webCheckError, completionHandler: { (result: Any?, failureError: Error?) in
             if failureError != nil {
                 print("Error obtaining evision error: \(String(describing: failureError))")
                 return
             }
-            if result != nil { // Was an error
-                // Get the error given by eVision.
-                webView.evaluateJavaScript(self.webErrorReason, completionHandler: { (result: Any?, err: Error?) in
-                    let reason = result as! String
-                    self.enableLoginContainer(withErrorMessage: reason, startTyping: false)
-                    return
-                })
+            if let isError = result as? Bool {
+                if isError {
+                    // Get the error given by eVision.
+                    webView.evaluateJavaScript(self.webErrorReason, completionHandler: { (resultReason: Any?, err: Error?) in
+                        let reason = resultReason as? String
+                        self.enableLoginContainer(withErrorMessage: reason, startTyping: false)
+                        self.errorChecked = true
+                        return
+                    })
+                }else{
+                    self.errorChecked = true
+                }
             }
         })
         respondToHeaderChange()
@@ -333,6 +338,11 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     // Asynchronous JS. Will get the header as result once finished.
     private func respondToHeaderChange(){
         webView.evaluateJavaScript(self.webCheckHeader, completionHandler: { (result: Any?, error: Error?) in
+            if !self.errorChecked {
+                // Haven't checked error yet, so try again but skip rest of this call?
+                self.respondToHeaderChange()
+                return
+            }
             if error != nil {
                 print("Error evaluating JS: \(String(describing: error))")
                 return
