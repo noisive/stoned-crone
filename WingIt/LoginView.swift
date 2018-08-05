@@ -163,6 +163,9 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
                 if isError {
                     // Get the error given by eVision.
                     webView.evaluateJavaScript(self.webErrorReason, completionHandler: { (resultReason: Any?, err: Error?) in
+                        if err != nil {
+                            print("Error obtaining error reason: \(String(describing: err))")
+                        }
                         let reason = resultReason as? String
                         self.enableLoginContainer(withErrorMessage: reason, startTyping: false)
                         return
