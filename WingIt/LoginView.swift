@@ -214,6 +214,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
             loginContainer.isHidden = true
             loginContainer.isOpaque = false
             webView.isHidden = false
+            webView.isUserInteractionEnabled = true
             webView.frame = self.view.bounds
             //            webView.scalesPageToFit = true
             //            scrollView.drawsBackground = false
@@ -337,49 +338,47 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     // Asynchronous JS. Will get the header as result once finished.
     private func respondToHeaderChange(){
         webView.evaluateJavaScript(self.webCheckHeader, completionHandler: { (result: Any?, error: Error?) in
-            if error != nil {
-                print("Error evaluating JS: \(String(describing: error))")
-                return
-            }
-            var header = result as! String
-            header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-            //Web view initial load, grab stored details
-            if (header == "" && self.initialLoad) {
+            if (self.initialLoad) {
                 self.initialLoad = false
                 self.enableLoginContainer()
             }
-            
-            switch header {
-            case "System Message":
-                break;
-            case "Home":
-                self.webView.evaluateJavaScript(self.webClickTimetable)
-                if self.isUpdatingMode {
-                    SVProgressHUD.setStatus("Updating your timetable...")
-                }else{
-                    SVProgressHUD.setStatus("Retrieving your timetable...")
+            if var header = result as? String {
+                header = header.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+                switch header {
+                case "System Message":
+                    break;
+                case "Home":
+                    self.webView.evaluateJavaScript(self.webClickTimetable)
+                    if self.isUpdatingMode {
+                        SVProgressHUD.setStatus("Updating your timetable...")
+                    }else{
+                        SVProgressHUD.setStatus("Retrieving your timetable...")
+                    }
+                    break;
+                case "Timetable":
+                    self.grabTTJsonFromEvisionPage()
+                    break;
+                default:
+                    break;
                 }
-                break;
-            case "Timetable":
-                self.grabTTJsonFromEvisionPage()
-                break;
-            default:
-                break;
             }
+//            else{
+//                self.respondToHeaderChange() // try again.
+//            }
         })
     }
-    
-    private func handleAlert(title: String, description: String) {
-        let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    @objc private func endEditing() {
-        self.view.endEditing(true)
-        // Move login box back to centre of screen.
-        self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-    }
+
+private func handleAlert(title: String, description: String) {
+    let alert = UIAlertController(title: title, message: description, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+    self.present(alert, animated: true, completion: nil)
+}
+
+@objc private func endEditing() {
+    self.view.endEditing(true)
+    // Move login box back to centre of screen.
+    self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+}
 
     func enableLoginContainer(withErrorMessage errorMessage: String? = nil, startTyping: Bool = true){
         
