@@ -1,19 +1,19 @@
 #!/bin/bash
 # Update the CFBundleShortVersionString in the generated Info.plist using the most recent Git tag.
-# Idea taken from http://tinyurl.com/3usjj9d by Joachim Bondo.
+# Source http://www.mokacoding.com/blog/automatic-xcode-versioning-with-git/
 
-# Get the current release description from Git.
-# GIT_RELEASE_SHORT_VERSION=`git describe --tags | awk '{split($0,a,\"-\"); print a[1]}'`
-GIT_CURRENT_COMMIT_TAG=`git tag --points-at HEAD`
-# If the current head is untagged, is not a release. So specify beta, to prevent inconsistencies.
-if [[ "$GIT_CURRENT_COMMIT_TAG" = "" ]]; then
-    GIT_RELEASE_SHORT_VERSION="BETA"
-else
-    GIT_RELEASE_VERSION=$GIT_CURRENT_COMMIT_TAG
-fi
+git=$(sh /etc/profile; which git)
+number_of_commits=$("$git" rev-list HEAD --count)
+# git_release_version=$("$git" describe --tags --always --abbrev=0)
+# Without abbrev, add commit hash to end to distinguish betas from releases
+git_release_version=$("$git" describe --tags --always)
 
-# Set the CFBundleShortVersionString in the generated Info.plist (stripping off the leading \"v\").
-defaults write "${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}" "CFBundleShortVersionString" "$GIT_RELEASE_SHORT_VERSION"
-defaults write "${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}" "CFBundleVersion" "$GIT_RELEASE_VERSION"
+target_plist="$TARGET_BUILD_DIR/$INFOPLIST_PATH"
+dsym_plist="$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist"
 
-touch "${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH%.*}.plist"
+for plist in "$target_plist" "$dsym_plist"; do
+  if [ -f "$plist" ]; then
+    /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $number_of_commits" "$plist"
+    /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${git_release_version#*v}" "$plist"
+  fi
+done
