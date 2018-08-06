@@ -52,7 +52,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     private let CORNER_RADIUS: CGFloat = 3.5;
     
     private var initialLoad: Bool = true
-    private var secondWeekGrabbed: Bool = false
+    private var weeksToLoad = 2
 
     // Used to filter images and css from loaded pages, to help speed.
     // Only works on ios 11 and newer.
@@ -287,11 +287,14 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
             "webCheckHeader" : "document.getElementsByClassName('sv-h1-small')[0].innerHTML",
             "webLogout" : "document.getElementsByClassName('sv-navbar-text sv-visible-xs-block')[0].getElementsByTagName('a')[0].click()",
             "webGrabJson" : "document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();",
-            "webClickandWaitForNextWeek" : "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-default')[1].click();" +
-            "function getDate () { let element = document.querySelector('.sitsjqtttitle');" +
+            "webClickandWaitForNextWeek" : "function getDate () { let element = document.querySelector('.sitsjqtttitle');" +
             "if (!element) return null; return element.innerHTML; }" +
+            "function blockTillNewWeek () { " +
             "let oldDate = getDate(); let newDate = null;" +
-            "while oldDate !== newDate { newDate = getDate(); } return window.getJSArray();"
+            "while (oldDate == newDate) { newDate = getDate(); } return }" +
+            "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-default')[1].click();" +
+            "blockTillNewWeek(); " +
+            "document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim(); "
             //    "let watcher = setInterval(() => {" +
             //        "function waitTill(condition, thenDo) { if (eval(condition)) { thenDo(); return; }" +
             //        "setTimeout(() => { waitTill(condition, thenDo); newDate = getDate(); } , 10) }" +
@@ -448,13 +451,12 @@ private func handleAlert(title: String, description: String) {
         }
     }
     
-    private func grabTTJsonFromEvisionPage(){
+    private func grabTTJsonFromEvisionPage(end: Bool = false){
         webView.evaluateJavaScript(getJSChunk("webGrabJson"), completionHandler: { (result: Any?, error: Error?) in
             if error != nil {
                 print("Error grabbing json: \(String(describing: error))")
                 //Issue with getting JSON. Display error and log out
                 self.enableLoginContainer(withErrorMessage:  "Something went wrong getting your timetable...")
-                self.webView.evaluateJavaScript(self.getJSChunk("webClickNextWeek"))
                 self.webView.evaluateJavaScript(self.getJSChunk("webLogout"))
                 return
             }
@@ -468,11 +470,11 @@ private func handleAlert(title: String, description: String) {
             }
             #endif
             SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
-            if !self.secondWeekGrabbed {
-                self.loadNextWeek()
-            }else{
+//            if !end {
+            self.loadNextWeeks(weeksLoaded: 1)
+//            }else{
                 self.endWithSuccessfulLogin()
-            }
+//            }
         })
     }
     
@@ -483,19 +485,18 @@ private func handleAlert(title: String, description: String) {
         self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
     }
     
-    private func loadNextWeek(){
+    private func loadNextWeeks(weeksLoaded: Int){
         webView.evaluateJavaScript(getJSChunk("webClickandWaitForNextWeek"), completionHandler: { (result: Any?, error: Error?) in
             if error == nil {
                let resultS = result as? String
-                if let retVal = resultS {
-                    if retVal == "next week" {
-                        print("WOW!")
-                        self.secondWeekGrabbed = true
-                        self.grabTTJsonFromEvisionPage()
+                if let jsonString = resultS {
+                    let _ = parseEvents(data: jsonString)
+                    if weeksLoaded < self.weeksToLoad {
+                        self.loadNextWeeks(weeksLoaded: weeksLoaded + 1)
                     }
                 }
             }else{
-                print(error)
+                print(error!)
             }
         })
     }
