@@ -41,7 +41,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     
     func login(realData: Bool = false){
         
-        _ = app.textFields["Username"].waitForExistence(timeout: 60)
+        _ = app.textFields["Username"].waitForExistence(timeout: 90)
         let usernameTextField = app.textFields["Username"]
         let passwordSecureTextField = app.secureTextFields["Password"]
         
