@@ -22,9 +22,9 @@ class WingItUITestsSuper: XCTestCase {
     var app: XCUIApplication! = XCUIApplication()
     // Track whether app is launched or not. (Some UI tests don't need restarts.)
     static var launched = false
+    static var firstLaunch = true
     var backButton: XCUIElement!
     var menuButton: XCUIElement!
-    
 
     override func setUp() {
         super.setUp()
@@ -33,6 +33,10 @@ class WingItUITestsSuper: XCTestCase {
         app.launchArguments.append("-UITests")
         // In UI tests it is usually best to stop immediately when a failure occurs. (They are time-expensive to ru)
         continueAfterFailure = false
+        if WingItUITestsSuper.firstLaunch {
+            clearNotificationAlert()
+            WingItUITestsSuper.firstLaunch = false
+        }
 
         backButton = app.navigationBars.buttons.element(boundBy: 0)
         menuButton = app.navigationBars.buttons["Menu Button"]
@@ -45,6 +49,18 @@ class WingItUITestsSuper: XCTestCase {
         // }
         app.terminate()
         super.tearDown()
+    }
+    
+    func clearNotificationAlert(){
+        // Waits and checks for allow notifications alert.
+        addUIInterruptionMonitor(withDescription: "Notifications") { (alert) -> Bool in
+            alert.buttons["Allow"].tap()
+            return true
+        }
+        app.launch()
+        app.tap() // need to interact with the app for the handler to fire.
+        app.swipeUp()
+        app.terminate()
     }
     
     func tapLessonCell(index: Int){

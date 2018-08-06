@@ -20,9 +20,9 @@ class TimetableEventPositionTests: WingItUITestsSuper {
     func testClassesAppearEachDay(){
         setUpFakeData()
         let lessons = ["MOND001", "TUES001", "WEDS001", "THURS001", "FRID001"]
-//        let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+        let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
         for i in 0...4 {
-//            XCTAssert(app.otherElements[days[i]].exists)
+            XCTAssert(app.otherElements[days[i]].exists)
             // Tests all in 9am slot.
             XCTAssert(lessonExists(withCode: lessons[i], atTime: 9), "does \(lessons[i]) exist at the expected time?")
             app.otherElements["dayView"].swipeLeft()

@@ -303,6 +303,7 @@ func HandleLaunchArgs() {
     }
     if args.contains("-UITests") {
         UIApplication.shared.keyWindow?.layer.speed = 100
+        UIView.setAnimationsEnabled(false)
     }
     if args.contains("-testing") {
         testing = true
