@@ -451,7 +451,7 @@ private func handleAlert(title: String, description: String) {
         }
     }
     
-    private func grabTTJsonFromEvisionPage(end: Bool = false){
+    private func grabTTJsonFromEvisionPage(){
         webView.evaluateJavaScript(getJSChunk("webGrabJson"), completionHandler: { (result: Any?, error: Error?) in
             if error != nil {
                 print("Error grabbing json: \(String(describing: error))")
@@ -470,11 +470,8 @@ private func handleAlert(title: String, description: String) {
             }
             #endif
             SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
-//            if !end {
             self.loadNextWeeks(weeksLoaded: 1)
-//            }else{
-                self.endWithSuccessfulLogin()
-//            }
+//                self.endWithSuccessfulLogin()
         })
     }
     
@@ -493,6 +490,8 @@ private func handleAlert(title: String, description: String) {
                     let _ = parseEvents(data: jsonString)
                     if weeksLoaded < self.weeksToLoad {
                         self.loadNextWeeks(weeksLoaded: weeksLoaded + 1)
+                    }else{
+                        self.endWithSuccessfulLogin()
                     }
                 }
             }else{
