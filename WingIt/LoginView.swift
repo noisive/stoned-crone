@@ -52,7 +52,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     private let CORNER_RADIUS: CGFloat = 3.5;
     
     private var initialLoad: Bool = true
-    private var weeksToLoad = 2
+    private var weeksToLoad = 5
 
     // Used to filter images and css from loaded pages, to help speed.
     // Only works on ios 11 and newer.

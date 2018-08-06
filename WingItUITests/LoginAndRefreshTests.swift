@@ -70,7 +70,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
             rememSwitch.tap()
         }
             app.buttons["Login"].tap()
-        _ = app.otherElements["dayView"].waitForExistence(timeout: 80)
+        _ = app.otherElements["dayView"].waitForExistence(timeout: 180)
     }
     
     // Test that a fresh login reaches a timetable.
