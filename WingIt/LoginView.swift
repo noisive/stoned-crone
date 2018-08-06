@@ -51,42 +51,11 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     //Constants
     private let CORNER_RADIUS: CGFloat = 3.5;
     
-    //HTML and JS
-    private let webCheckError: String = "document.getElementsByClassName('sv-panel-danger').length > 0;"
-    private let webErrorReason: String = "document.getElementsByClassName('sv-panel sv-panel-danger')[0].getElementsByTagName('strong')[0].innerHTML"
-    private let webClickLogin: String = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-primary')[0].click();"
-    private let webClickTimetable: String = "document.getElementsByClassName('uo_see_more')[document.getElementsByClassName('uo_see_more').length - 1].getElementsByTagName('a')[0].click();"
-    private let webClickNextWeek: String = "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-default')[1].click();"
-    private let webCheckHeader: String = "document.getElementsByClassName('sv-h1-small')[0].innerHTML"
-    private let webLogout: String = "document.getElementsByClassName('sv-navbar-text sv-visible-xs-block')[0].getElementsByTagName('a')[0].click()"
-    private let webInsertFunctions: String = "window.getJSArray = function() {\n" +
-    "return content = document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();}"
-    private let webGrabCode: String = "window.getJSArray()"
-    private let monitorScript: String = "var intervalHandle" +
-        "var monitorState = 0" +
-        "window.monitorUpdate = function(cb) {" +
-        "intervalHandle = setInterval(() => {" +
-        "var newDate = document.getElementsByClassName('sitsjqtttitle')[0].innerHTML" +
-        "if (newDate.indexOf('Updating') !== -1) {" +
-        "monitorState = 1" +
-        "} else if (monitorState === 1) {" +
-        "monitorState = 0" +
-        "clearInterval(intervalHandle)" +
-        "cb()" +
-        "}" +
-        "}, 50)" +
-        "}" +
-        "window.loadNextWeek = function() {" +
-        "ttb_timetable_move('N')" +
-        "monitorUpdate(() => {" +
-        "window.location.href = 'https://com.noisive'" +
-        "})" +
-    "}"
-    private let loadNextWeek: String = "window.loadNextWeek()"
     private var initialLoad: Bool = true
+    private var secondWeekGrabbed: Bool = false
 
     // Used to filter images and css from loaded pages, to help speed.
-    // Only works on ios 11 and older.
+    // Only works on ios 11 and newer.
     private let blockRules = """
          [{
              "trigger": {
@@ -154,7 +123,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!){
 //        if (!webView.isLoading) {
             checkNetworkAlert()
-        webView.evaluateJavaScript(self.webCheckError, completionHandler: { (result: Any?, failureError: Error?) in
+        webView.evaluateJavaScript(getJSChunk("webCheckError"), completionHandler: { (result: Any?, failureError: Error?) in
             if failureError != nil {
                 print("Error obtaining evision error: \(String(describing: failureError))")
                 return
@@ -162,7 +131,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
             if let isError = result as? Bool {
                 if isError {
                     // Get the error given by eVision.
-                    webView.evaluateJavaScript(self.webErrorReason, completionHandler: { (resultReason: Any?, err: Error?) in
+                    webView.evaluateJavaScript(self.getJSChunk("webErrorReason"), completionHandler: { (resultReason: Any?, err: Error?) in
                         if err != nil {
                             print("Error obtaining error reason: \(String(describing: err))")
                         }
@@ -175,6 +144,34 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
                 }
             }
         })
+    }
+    
+    // Triggered when enter/return pressed when typing in login field
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let usernameText = self.usernameField.text else { return false }
+        guard let passwordText = self.passwordField.text else { return false }
+        
+        switch textField {
+        case self.usernameField:
+            if (usernameText.isEmpty) {
+                self.handleAlert(title: "Username Empty", description: "Please enter your eVision username.")
+            } else if (!usernameText.isEmpty && passwordText.isEmpty) {
+                self.passwordField.becomeFirstResponder()
+            } else {
+                self.beginLogin()
+            }
+        case self.passwordField:
+            if (passwordText.isEmpty) {
+                self.handleAlert(title: "Password Empty", description: "Please enter your eVision password.")
+            } else if (usernameText.isEmpty && !passwordText.isEmpty) {
+                self.usernameField.becomeFirstResponder()
+            } else {
+                self.beginLogin()
+            }
+        default:
+            print("Unknown text field")
+        }
+        return true
     }
     
     //MARK: Functions
@@ -279,33 +276,32 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
         }
     }
     
-    // Triggered when enter/return pressed when typing in login field
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {    
-        guard let usernameText = self.usernameField.text else { return false }
-        guard let passwordText = self.passwordField.text else { return false }
+    private func getJSChunk(_ identifier: String) -> String{
+    //HTML and JS
+        let chunks = [
+            "webCheckError" : "document.getElementsByClassName('sv-panel-danger').length > 0;",
+            "webErrorReason" : "document.getElementsByClassName('sv-panel sv-panel-danger')[0].getElementsByTagName('strong')[0].innerHTML",
+            "webClickLogin" : "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-primary')[0].click();",
+            "webClickTimetable" : "document.getElementsByClassName('uo_see_more')[document.getElementsByClassName('uo_see_more').length - 1].getElementsByTagName('a')[0].click();",
+            "webClickNextWeek" : "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-default')[1].click();",
+            "webCheckHeader" : "document.getElementsByClassName('sv-h1-small')[0].innerHTML",
+            "webLogout" : "document.getElementsByClassName('sv-navbar-text sv-visible-xs-block')[0].getElementsByTagName('a')[0].click()",
+            "webGrabJson" : "document.getElementById('ttb_timetable').getElementsByTagName('script')[0].innerHTML.trim();",
+            "webClickandWaitForNextWeek" : "document.getElementsByClassName('sv-btn sv-btn-block sv-btn-default')[1].click();" +
+            "function getDate () { let element = document.querySelector('.sitsjqtttitle');" +
+            "if (!element) return null; return element.innerHTML; }" +
+            "let oldDate = getDate(); let newDate = null;" +
+            "while oldDate !== newDate { newDate = getDate(); } return window.getJSArray();"
+            //    "let watcher = setInterval(() => {" +
+            //        "function waitTill(condition, thenDo) { if (eval(condition)) { thenDo(); return; }" +
+            //        "setTimeout(() => { waitTill(condition, thenDo); newDate = getDate(); } , 10) }" +
+            //        "waitTill(newDate == oldDate, returnDone());" +
+            //    "function returnDone(){ return 'next week'; }"
+        ]
+        return chunks[identifier]!
         
-        switch textField {
-        case self.usernameField:
-            if (usernameText.isEmpty) {
-                self.handleAlert(title: "Username Empty", description: "Please enter your eVision username.")
-            } else if (!usernameText.isEmpty && passwordText.isEmpty) {
-                self.passwordField.becomeFirstResponder()
-            } else {
-                self.beginLogin()
-            }
-        case self.passwordField:
-            if (passwordText.isEmpty) {
-                self.handleAlert(title: "Password Empty", description: "Please enter your eVision password.")
-            } else if (usernameText.isEmpty && !passwordText.isEmpty) {
-                self.usernameField.becomeFirstResponder()
-            } else {
-                self.beginLogin()
-            }
-        default:
-            print("Unknown text field")
-        }
-        return true
     }
+
     
     private func beginLogin() {
         self.endEditing()
@@ -328,7 +324,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
             }
             disableLoginContainer(message: "Logging you in...")
             //Fire request to click login
-            webView.evaluateJavaScript(self.webClickLogin)
+            webView.evaluateJavaScript(getJSChunk("webClickLogin"))
         } else { // Error getting text from one of the fields
             SVProgressHUD.dismiss()
             self.handleAlert(title: "Login Error", description: "Please ensure your login details are entered correctly.")
@@ -337,7 +333,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
     
     // Asynchronous JS. Will get the header as result once finished.
     private func respondToHeaderChange(){
-        webView.evaluateJavaScript(self.webCheckHeader, completionHandler: { (result: Any?, error: Error?) in
+        webView.evaluateJavaScript(getJSChunk("webCheckHeader"), completionHandler: { (result: Any?, error: Error?) in
             if (self.initialLoad) {
                 self.initialLoad = false
                 self.enableLoginContainer()
@@ -348,7 +344,7 @@ class LoginView: UIViewController, WKUIDelegate, WKNavigationDelegate, UITextFie
                 case "System Message":
                     break;
                 case "Home":
-                    self.webView.evaluateJavaScript(self.webClickTimetable)
+                    self.webView.evaluateJavaScript(self.getJSChunk("webClickTimetable"))
                     if self.isUpdatingMode {
                         SVProgressHUD.setStatus("Updating your timetable...")
                     }else{
@@ -453,14 +449,13 @@ private func handleAlert(title: String, description: String) {
     }
     
     private func grabTTJsonFromEvisionPage(){
-        webView.evaluateJavaScript(self.webInsertFunctions)
-        webView.evaluateJavaScript(self.webGrabCode, completionHandler: { (result: Any?, error: Error?) in
+        webView.evaluateJavaScript(getJSChunk("webGrabJson"), completionHandler: { (result: Any?, error: Error?) in
             if error != nil {
                 print("Error grabbing json: \(String(describing: error))")
                 //Issue with getting JSON. Display error and log out
                 self.enableLoginContainer(withErrorMessage:  "Something went wrong getting your timetable...")
-                self.webView.evaluateJavaScript(self.webClickNextWeek)
-                self.webView.evaluateJavaScript(self.webLogout)
+                self.webView.evaluateJavaScript(self.getJSChunk("webClickNextWeek"))
+                self.webView.evaluateJavaScript(self.getJSChunk("webLogout"))
                 return
             }
             let jsonString = result as! String
@@ -473,16 +468,36 @@ private func handleAlert(title: String, description: String) {
             }
             #endif
             SVProgressHUD.showSuccess(withStatus: "Timetable Downloaded")
-            self.self.webView.evaluateJavaScript(self.webClickNextWeek)
-            self.self.webView.evaluateJavaScript(self.webLogout)
-            self.endWithSuccessfulLogin()
+            if !self.secondWeekGrabbed {
+                self.loadNextWeek()
+            }else{
+                self.endWithSuccessfulLogin()
+            }
         })
     }
     
     private func endWithSuccessfulLogin(){
+        self.webView.evaluateJavaScript(getJSChunk("webLogout"))
         initTimetable()
         appDelegate.firstLoadSoScrollToToday = true
         self.present(NavigationService.displayEntryView(), animated: true, completion: nil)
+    }
+    
+    private func loadNextWeek(){
+        webView.evaluateJavaScript(getJSChunk("webClickandWaitForNextWeek"), completionHandler: { (result: Any?, error: Error?) in
+            if error == nil {
+               let resultS = result as? String
+                if let retVal = resultS {
+                    if retVal == "next week" {
+                        print("WOW!")
+                        self.secondWeekGrabbed = true
+                        self.grabTTJsonFromEvisionPage()
+                    }
+                }
+            }else{
+                print(error)
+            }
+        })
     }
     
     private func checkNetworkAlert(failedLoad: Bool = false){
