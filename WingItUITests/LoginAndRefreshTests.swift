@@ -76,13 +76,6 @@ class LoginAndRefreshTests: WingItUITestsSuper {
     // Test that a fresh login reaches a timetable.
     func testLoginFresh(){
         app.launch()
-        // Waits and checks for allow notifications alert.
-        addUIInterruptionMonitor(withDescription: "Notifications") { (alert) -> Bool in
-            alert.buttons["Allow"].tap()
-            return true
-        }
-        //        launchFinished() // wait for app to load and notification to show.
-        app.tap() // need to interact with the app for the handler to fire.
         login(realData: true)
         XCTAssertTrue(app.isDisplayingTT)
         
@@ -94,8 +87,7 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         login()
         app.buttons["Refresh"].tap()
         // Should automatically update now
-        _ =
-        XCTAssertTrue(app.otherElements["dayView"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.otherElements["dayView"].waitForExistence(timeout: 20))
         XCTAssertFalse(app.scrollViews["Login View"].exists)
         
     }
@@ -139,25 +131,16 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         login()
         XCTAssertTrue(app.otherElements["Friday"].exists)
     }
-    
-    func testDataPersistenceOnRestart(){
-        app.launchArguments.append("-fakeData")
-        app.launch()
-        XCTAssertTrue(app.otherElements["dayView"].waitForExistence(timeout: 20))
-        
-    }
+//    
+//    func testDataPersistenceOnRestart(){
+//        app.launchArguments.append("-fakeData")
+//        app.launch()
+//        XCTAssertTrue(app.otherElements["dayView"].waitForExistence(timeout: 20))
+//        
+//    }
     
     func testCancelButtonNotPresentFresh(){
         app.launch()
-        
-        // Waits and checks for allow notifications alert.
-        addUIInterruptionMonitor(withDescription: "Notifications") { (alert) -> Bool in
-            alert.buttons["Allow"].tap()
-            return true
-        }
-        //        launchFinished() // wait for app to load and notification to show.
-        app.tap() // need to interact with the app for the handler to fire.
-        
         XCTAssertFalse(app.buttons["Cancel Button"].exists)
     }
     
@@ -167,6 +150,8 @@ class LoginAndRefreshTests: WingItUITestsSuper {
         _ = app.otherElements["dayView"].waitForExistence(timeout: 20)
         app.buttons["Refresh"].tap()
         XCTAssertTrue(app.buttons["Cancel Button"].exists)
+        app.buttons["Cancel Button"].tap()
+        XCTAssertTrue(app.isDisplayingTT)
     }
     
     
