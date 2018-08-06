@@ -33,6 +33,9 @@ extern "C" void initTimetable() {
 extern "C" void validateTimetable() {
     timetable.validate();
 }
+extern "C" void clearTimetable() {
+    timetable.clear();
+}
 
 extern "C" int queryDate(const char* dateString) {
     return (int) timetable.queryByDate(dateString);

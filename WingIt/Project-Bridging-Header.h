@@ -10,6 +10,7 @@
 
 const char* B_parseEvents(const char* data);
 void initTimetable();
+void clearTimetable();
 void validateTimetable();
 int queryDate(const char* dateString);
 const char* B_queryResult(int index);
