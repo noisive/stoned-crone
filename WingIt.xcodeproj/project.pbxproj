@@ -12,8 +12,6 @@
 		062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9441F8B414B005F350E /* KeychainWrapper.swift */; };
 		062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */; };
 		063A25DF210A99FD00967041 /* SystemIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 063A25DE210A99FC00967041 /* SystemIcons.xcassets */; };
-		064082FE20C263BB00F568CB /* TestAnswers in Resources */ = {isa = PBXBuildFile; fileRef = 064082FB20C263AA00F568CB /* TestAnswers */; };
-		064082FF20C263BB00F568CB /* TestInputs in Resources */ = {isa = PBXBuildFile; fileRef = 064082FC20C263AA00F568CB /* TestInputs */; };
 		0640830120C36D2800F568CB /* Cwrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0640830020C36D2700F568CB /* Cwrapper.swift */; };
 		0660DB1821054C9D006D9D56 /* WingItUITestsSuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0660DB1721054C9D006D9D56 /* WingItUITestsSuper.swift */; };
 		0660DB1A21054E70006D9D56 /* StabilityAndSanityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0660DB1921054E70006D9D56 /* StabilityAndSanityTests.swift */; };
@@ -23,6 +21,20 @@
 		06A5475E1F7B1D9600967FD7 /* libBackend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06A5475D1F7B1D9600967FD7 /* libBackend.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06A637F81F7DD15F00C5F15F /* wrapper.cpp */; };
 		06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B38A371F82361E009EDC60 /* CommonUtil.swift */; };
+		06CDA372211C0B5B007410C9 /* RMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA363211C0B5A007410C9 /* RMessageView.m */; };
+		06CDA373211C0B5B007410C9 /* UITabBarController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA365211C0B5A007410C9 /* UITabBarController+PPTopMostController.m */; };
+		06CDA374211C0B5B007410C9 /* RMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA367211C0B5A007410C9 /* RMessage.m */; };
+		06CDA375211C0B5B007410C9 /* RMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06CDA368211C0B5A007410C9 /* RMessageView.xib */; };
+		06CDA376211C0B5B007410C9 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA36A211C0B5A007410C9 /* HexColors.m */; };
+		06CDA377211C0B5B007410C9 /* RMessageDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 06CDA36C211C0B5A007410C9 /* RMessageDefaultDesign.json */; };
+		06CDA378211C0B5B007410C9 /* UINavigationController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA36D211C0B5A007410C9 /* UINavigationController+PPTopMostController.m */; };
+		06CDA379211C0B5B007410C9 /* UIViewController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA36F211C0B5A007410C9 /* UIViewController+PPTopMostController.m */; };
+		06CDA37D211C0C09007410C9 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA37C211C0C09007410C9 /* SWRevealViewController.m */; };
+		06CDA388211C0C10007410C9 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA37F211C0C0F007410C9 /* SVRadialGradientLayer.m */; };
+		06CDA389211C0C10007410C9 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA380211C0C0F007410C9 /* SVProgressAnimatedView.m */; };
+		06CDA38A211C0C10007410C9 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA382211C0C0F007410C9 /* SVIndefiniteAnimatedView.m */; };
+		06CDA38B211C0C10007410C9 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CDA383211C0C0F007410C9 /* SVProgressHUD.m */; };
+		06CDA38C211C0C10007410C9 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06CDA386211C0C0F007410C9 /* SVProgressHUD.bundle */; };
 		06D37CD71F873C7F009318AC /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 06D37CD61F873C7F009318AC /* Settings.bundle */; };
 		06D61711210974D300F58A30 /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 06D6170A210974D200F58A30 /* OnePasswordExtension.m */; };
 		06D61712210974D300F58A30 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 06D6170B210974D200F58A30 /* README.md */; };
@@ -35,20 +47,7 @@
 		06E758982107E8E6007BDF76 /* WingItTestsSuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E758972107E8E6007BDF76 /* WingItTestsSuper.swift */; };
 		06E7589D21083958007BDF76 /* SegueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E7589C21083957007BDF76 /* SegueTests.swift */; };
 		297C56931ED9126200C44420 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C56921ED9126200C44420 /* LoginView.swift */; };
-		533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 533C92D320762A9200394325 /* SVProgressHUD.bundle */; };
-		533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D420762A9300394325 /* SVProgressAnimatedView.m */; };
-		533C92DE20762A9400394325 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D620762A9300394325 /* SVProgressHUD.m */; };
-		533C92DF20762A9400394325 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92D720762A9300394325 /* SVIndefiniteAnimatedView.m */; };
-		533C92E020762A9400394325 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 533C92DB20762A9400394325 /* SVRadialGradientLayer.m */; };
 		534A442120873F03009E719E /* NavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534A442020873F03009E719E /* NavigationCell.swift */; };
-		534BB68D2081E28A00757932 /* RMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6882081E28900757932 /* RMessage.m */; };
-		534BB68E2081E28A00757932 /* RMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 534BB68A2081E28900757932 /* RMessageView.xib */; };
-		534BB68F2081E28A00757932 /* RMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB68B2081E28900757932 /* RMessageView.m */; };
-		534BB6902081E28A00757932 /* RMessageDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 534BB68C2081E28900757932 /* RMessageDefaultDesign.json */; };
-		534BB6932081E2D400757932 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6912081E2D400757932 /* HexColors.m */; };
-		534BB69B2081E31B00757932 /* UIViewController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6962081E31A00757932 /* UIViewController+PPTopMostController.m */; };
-		534BB69C2081E31B00757932 /* UINavigationController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6972081E31A00757932 /* UINavigationController+PPTopMostController.m */; };
-		534BB69D2081E31B00757932 /* UITabBarController+PPTopMostController.m in Sources */ = {isa = PBXBuildFile; fileRef = 534BB6992081E31A00757932 /* UITabBarController+PPTopMostController.m */; };
 		53B30672207754A0006E05B7 /* LessonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B30671207754A0006E05B7 /* LessonCell.swift */; };
 		53B306742077584C006E05B7 /* AppCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B306732077584C006E05B7 /* AppCells.swift */; };
 		53B306762077643A006E05B7 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B306752077643A006E05B7 /* AppColors.swift */; };
@@ -56,7 +55,6 @@
 		53BB7A191ED14C3800370F7B /* ClashCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB7A181ED14C3700370F7B /* ClashCell.swift */; };
 		53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB7A201ED1536C00370F7B /* DetailView.swift */; };
 		53C7D0391EC9B6A500D0BD9C /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7D0381EC9B6A500D0BD9C /* Lesson.swift */; };
-		53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */; };
 		53C7D03F1EC9BD8400D0BD9C /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */; };
 		53D4B38020760D9A0063E45F /* TimeDateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B37F20760D9A0063E45F /* TimeDateUtil.swift */; };
 		53D4B38220760FBF0063E45F /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4B38120760FBF0063E45F /* NavigationService.swift */; };
@@ -97,8 +95,6 @@
 		062EB9451F8B414B005F350E /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		062EB9461F8B414B005F350E /* SwiftKeychainWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftKeychainWrapper.h; sourceTree = "<group>"; };
 		063A25DE210A99FC00967041 /* SystemIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SystemIcons.xcassets; sourceTree = "<group>"; };
-		064082FB20C263AA00F568CB /* TestAnswers */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestAnswers; path = ../Backend/parserTests/TestAnswers; sourceTree = "<group>"; };
-		064082FC20C263AA00F568CB /* TestInputs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TestInputs; path = ../Backend/parserTests/TestInputs; sourceTree = "<group>"; };
 		0640830020C36D2700F568CB /* Cwrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cwrapper.swift; sourceTree = "<group>"; };
 		0660DB1721054C9D006D9D56 /* WingItUITestsSuper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItUITestsSuper.swift; sourceTree = "<group>"; };
 		0660DB1921054E70006D9D56 /* StabilityAndSanityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StabilityAndSanityTests.swift; sourceTree = "<group>"; };
@@ -110,6 +106,34 @@
 		06A5475D1F7B1D9600967FD7 /* libBackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBackend.a; path = "../../Library/Developer/Xcode/DerivedData/Project-faabexjzkhonsfdsetxpryushahl/Build/Products/Debug-iphonesimulator/libBackend.a"; sourceTree = "<group>"; };
 		06A637F81F7DD15F00C5F15F /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wrapper.cpp; sourceTree = "<group>"; };
 		06B38A371F82361E009EDC60 /* CommonUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtil.swift; sourceTree = "<group>"; };
+		06CDA363211C0B5A007410C9 /* RMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMessageView.m; sourceTree = "<group>"; };
+		06CDA364211C0B5A007410C9 /* HexColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexColors.h; sourceTree = "<group>"; };
+		06CDA365211C0B5A007410C9 /* UITabBarController+PPTopMostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+PPTopMostController.m"; sourceTree = "<group>"; };
+		06CDA366211C0B5A007410C9 /* UINavigationController+PPTopMostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+PPTopMostController.h"; sourceTree = "<group>"; };
+		06CDA367211C0B5A007410C9 /* RMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMessage.m; sourceTree = "<group>"; };
+		06CDA368211C0B5A007410C9 /* RMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
+		06CDA369211C0B5A007410C9 /* UIViewController+PPTopMostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PPTopMostController.h"; sourceTree = "<group>"; };
+		06CDA36A211C0B5A007410C9 /* HexColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexColors.m; sourceTree = "<group>"; };
+		06CDA36B211C0B5A007410C9 /* UITabBarController+PPTopMostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+PPTopMostController.h"; sourceTree = "<group>"; };
+		06CDA36C211C0B5A007410C9 /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
+		06CDA36D211C0B5A007410C9 /* UINavigationController+PPTopMostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+PPTopMostController.m"; sourceTree = "<group>"; };
+		06CDA36E211C0B5A007410C9 /* RMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMessage.h; sourceTree = "<group>"; };
+		06CDA36F211C0B5A007410C9 /* UIViewController+PPTopMostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PPTopMostController.m"; sourceTree = "<group>"; };
+		06CDA370211C0B5A007410C9 /* RMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMessageView.h; sourceTree = "<group>"; };
+		06CDA371211C0B5A007410C9 /* PPTopMostControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPTopMostControllerProtocol.h; sourceTree = "<group>"; };
+		06CDA37B211C0C09007410C9 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		06CDA37C211C0C09007410C9 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		06CDA37F211C0C0F007410C9 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
+		06CDA380211C0C0F007410C9 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressAnimatedView.m; sourceTree = "<group>"; };
+		06CDA381211C0C0F007410C9 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		06CDA382211C0C0F007410C9 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		06CDA383211C0C0F007410C9 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		06CDA384211C0C0F007410C9 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		06CDA385211C0C0F007410C9 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
+		06CDA386211C0C0F007410C9 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		06CDA387211C0C0F007410C9 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
+		06CDA3AB211C0D79007410C9 /* TestAnswers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestAnswers; sourceTree = "<group>"; };
+		06CDA3AC211C0D79007410C9 /* TestInputs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestInputs; sourceTree = "<group>"; };
 		06D37CD61F873C7F009318AC /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		06D6170A210974D200F58A30 /* OnePasswordExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnePasswordExtension.m; sourceTree = "<group>"; };
 		06D6170B210974D200F58A30 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -125,35 +149,7 @@
 		06E758972107E8E6007BDF76 /* WingItTestsSuper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WingItTestsSuper.swift; sourceTree = "<group>"; };
 		06E7589C21083957007BDF76 /* SegueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueTests.swift; sourceTree = "<group>"; };
 		297C56921ED9126200C44420 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		533C92D220762A9200394325 /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
-		533C92D320762A9200394325 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		533C92D420762A9300394325 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressAnimatedView.m; sourceTree = "<group>"; };
-		533C92D520762A9300394325 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
-		533C92D620762A9300394325 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
-		533C92D720762A9300394325 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
-		533C92D820762A9300394325 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
-		533C92D920762A9300394325 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		533C92DB20762A9400394325 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
-		534635A32079A8FC00497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
-		534635A42079A90E00497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
-		534635A52079A91200497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
-		534635A62079A91700497A8D /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SVProgressHUD-Prefix.pch"; path = "../../../Downloads/SVProgressHUD-master 2/SVProgressHUD/SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
 		534A442020873F03009E719E /* NavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCell.swift; sourceTree = "<group>"; };
-		534BB6872081E28900757932 /* RMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMessage.h; sourceTree = "<group>"; };
-		534BB6882081E28900757932 /* RMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMessage.m; sourceTree = "<group>"; };
-		534BB6892081E28900757932 /* RMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMessageView.h; sourceTree = "<group>"; };
-		534BB68A2081E28900757932 /* RMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RMessageView.xib; sourceTree = "<group>"; };
-		534BB68B2081E28900757932 /* RMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMessageView.m; sourceTree = "<group>"; };
-		534BB68C2081E28900757932 /* RMessageDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RMessageDefaultDesign.json; sourceTree = "<group>"; };
-		534BB6912081E2D400757932 /* HexColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexColors.m; sourceTree = "<group>"; };
-		534BB6922081E2D400757932 /* HexColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexColors.h; sourceTree = "<group>"; };
-		534BB6942081E30600757932 /* PPTopMostControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PPTopMostControllerProtocol.h; sourceTree = "<group>"; };
-		534BB6952081E31A00757932 /* UIViewController+PPTopMostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PPTopMostController.h"; sourceTree = "<group>"; };
-		534BB6962081E31A00757932 /* UIViewController+PPTopMostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PPTopMostController.m"; sourceTree = "<group>"; };
-		534BB6972081E31A00757932 /* UINavigationController+PPTopMostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+PPTopMostController.m"; sourceTree = "<group>"; };
-		534BB6982081E31A00757932 /* UITabBarController+PPTopMostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+PPTopMostController.h"; sourceTree = "<group>"; };
-		534BB6992081E31A00757932 /* UITabBarController+PPTopMostController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+PPTopMostController.m"; sourceTree = "<group>"; };
-		534BB69A2081E31A00757932 /* UINavigationController+PPTopMostController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+PPTopMostController.h"; sourceTree = "<group>"; };
 		53B30671207754A0006E05B7 /* LessonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCell.swift; sourceTree = "<group>"; };
 		53B306732077584C006E05B7 /* AppCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCells.swift; sourceTree = "<group>"; };
 		53B306752077643A006E05B7 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
@@ -161,9 +157,7 @@
 		53BB7A181ED14C3700370F7B /* ClashCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClashCell.swift; sourceTree = "<group>"; };
 		53BB7A201ED1536C00370F7B /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		53C7D0381EC9B6A500D0BD9C /* Lesson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
-		53C7D03A1EC9B79D00D0BD9C /* Project-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Project-Bridging-Header.h"; sourceTree = "<group>"; };
-		53C7D03B1EC9B79E00D0BD9C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		53C7D03A1EC9B79D00D0BD9C /* C-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "C-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		53D4B37F20760D9A0063E45F /* TimeDateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDateUtil.swift; sourceTree = "<group>"; };
 		53D4B38120760FBF0063E45F /* NavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
@@ -218,13 +212,59 @@
 			path = SwiftKeychainWrapper;
 			sourceTree = "<group>";
 		};
-		064082FD20C263AA00F568CB /* Test files */ = {
+		065192E1211C0683000629B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				064082FB20C263AA00F568CB /* TestAnswers */,
-				064082FC20C263AA00F568CB /* TestInputs */,
+				53F8A00D1EC3D0010001604A /* TimetableView.swift */,
+				534A442020873F03009E719E /* NavigationCell.swift */,
+				53DED0D9207F660000C363AF /* AboutView.swift */,
+				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
+				297C56921ED9126200C44420 /* LoginView.swift */,
+				53BB7A201ED1536C00370F7B /* DetailView.swift */,
 			);
-			path = "Test files";
+			path = Views;
+			sourceTree = "<group>";
+		};
+		065192E2211C06A6000629B6 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				53D4B38120760FBF0063E45F /* NavigationService.swift */,
+				53D4B38520761F700063E45F /* NavigationProtocols.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		065192E3211C06B8000629B6 /* App Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				53B306732077584C006E05B7 /* AppCells.swift */,
+				53D4B383207610140063E45F /* AppStates.swift */,
+				53B306752077643A006E05B7 /* AppColors.swift */,
+			);
+			path = "App Definitions";
+			sourceTree = "<group>";
+		};
+		065192E4211C06D3000629B6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				53BB7A181ED14C3700370F7B /* ClashCell.swift */,
+				53F8A0201EC3DE930001604A /* DayCollectionViewCell.swift */,
+				53B30671207754A0006E05B7 /* LessonCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		067CFB61211C05D000D7FF8A /* 3rd party libraries */ = {
+			isa = PBXGroup;
+			children = (
+				06CDA37E211C0C0F007410C9 /* SVProgressHUD Indicator */,
+				06CDA37A211C0C09007410C9 /* SW Reveal Control burger menu */,
+				06CDA362211C0B5A007410C9 /* RMessage Notifications */,
+				06D61709210974D200F58A30 /* onepassword-app-extension */,
+				062EB9421F8B414B005F350E /* SwiftKeychainWrapper */,
+				06D61717210979CB00F58A30 /* Reachability.swift */,
+			);
+			path = "3rd party libraries";
 			sourceTree = "<group>";
 		};
 		06934D7B1F86730B00D308BD /* WingItUITests */ = {
@@ -241,6 +281,91 @@
 			path = WingItUITests;
 			sourceTree = "<group>";
 		};
+		06CDA35A211C0772007410C9 /* Data Structures */ = {
+			isa = PBXGroup;
+			children = (
+				53C7D0381EC9B6A500D0BD9C /* Lesson.swift */,
+				53BB7A161ED133A900370F7B /* Constants.swift */,
+			);
+			path = "Data Structures";
+			sourceTree = "<group>";
+		};
+		06CDA35B211C0843007410C9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				06B38A371F82361E009EDC60 /* CommonUtil.swift */,
+				061F3E7F1F8AF09C00BD0D09 /* DataUtil.swift */,
+				53D4B37F20760D9A0063E45F /* TimeDateUtil.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		06CDA35C211C0867007410C9 /* C bridge */ = {
+			isa = PBXGroup;
+			children = (
+				06A637F81F7DD15F00C5F15F /* wrapper.cpp */,
+				0640830020C36D2700F568CB /* Cwrapper.swift */,
+				53C7D03A1EC9B79D00D0BD9C /* C-Swift-Bridging-Header.h */,
+			);
+			path = "C bridge";
+			sourceTree = "<group>";
+		};
+		06CDA362211C0B5A007410C9 /* RMessage Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				06CDA363211C0B5A007410C9 /* RMessageView.m */,
+				06CDA364211C0B5A007410C9 /* HexColors.h */,
+				06CDA365211C0B5A007410C9 /* UITabBarController+PPTopMostController.m */,
+				06CDA366211C0B5A007410C9 /* UINavigationController+PPTopMostController.h */,
+				06CDA367211C0B5A007410C9 /* RMessage.m */,
+				06CDA368211C0B5A007410C9 /* RMessageView.xib */,
+				06CDA369211C0B5A007410C9 /* UIViewController+PPTopMostController.h */,
+				06CDA36A211C0B5A007410C9 /* HexColors.m */,
+				06CDA36B211C0B5A007410C9 /* UITabBarController+PPTopMostController.h */,
+				06CDA36C211C0B5A007410C9 /* RMessageDefaultDesign.json */,
+				06CDA36D211C0B5A007410C9 /* UINavigationController+PPTopMostController.m */,
+				06CDA36E211C0B5A007410C9 /* RMessage.h */,
+				06CDA36F211C0B5A007410C9 /* UIViewController+PPTopMostController.m */,
+				06CDA370211C0B5A007410C9 /* RMessageView.h */,
+				06CDA371211C0B5A007410C9 /* PPTopMostControllerProtocol.h */,
+			);
+			path = "RMessage Notifications";
+			sourceTree = "<group>";
+		};
+		06CDA37A211C0C09007410C9 /* SW Reveal Control burger menu */ = {
+			isa = PBXGroup;
+			children = (
+				06CDA37B211C0C09007410C9 /* SWRevealViewController.h */,
+				06CDA37C211C0C09007410C9 /* SWRevealViewController.m */,
+			);
+			path = "SW Reveal Control burger menu";
+			sourceTree = "<group>";
+		};
+		06CDA37E211C0C0F007410C9 /* SVProgressHUD Indicator */ = {
+			isa = PBXGroup;
+			children = (
+				06CDA37F211C0C0F007410C9 /* SVRadialGradientLayer.m */,
+				06CDA380211C0C0F007410C9 /* SVProgressAnimatedView.m */,
+				06CDA381211C0C0F007410C9 /* SVProgressHUD.h */,
+				06CDA382211C0C0F007410C9 /* SVIndefiniteAnimatedView.m */,
+				06CDA383211C0C0F007410C9 /* SVProgressHUD.m */,
+				06CDA384211C0C0F007410C9 /* SVIndefiniteAnimatedView.h */,
+				06CDA385211C0C0F007410C9 /* SVProgressAnimatedView.h */,
+				06CDA386211C0C0F007410C9 /* SVProgressHUD.bundle */,
+				06CDA387211C0C0F007410C9 /* SVRadialGradientLayer.h */,
+			);
+			path = "SVProgressHUD Indicator";
+			sourceTree = "<group>";
+		};
+		06CDA3AD211C0D79007410C9 /* Test files */ = {
+			isa = PBXGroup;
+			children = (
+				06CDA3AB211C0D79007410C9 /* TestAnswers */,
+				06CDA3AC211C0D79007410C9 /* TestInputs */,
+			);
+			path = "Test files";
+			sourceTree = "<group>";
+		};
 		06D61709210974D200F58A30 /* onepassword-app-extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,7 +378,7 @@
 				06D61710210974D200F58A30 /* OnePasswordExtension.h */,
 			);
 			name = "onepassword-app-extension";
-			path = "WingIt/onepassword-app-extension";
+			path = "WingIt/3rd party libraries/onepassword-app-extension";
 			sourceTree = SOURCE_ROOT;
 		};
 		06E5E2EE20C1504500C77382 /* WingItTests */ = {
@@ -267,125 +392,12 @@
 			path = WingItTests;
 			sourceTree = "<group>";
 		};
-		534635A12079A8EC00497A8D /* SW Reveal Controll */ = {
-			isa = PBXGroup;
-			children = (
-				53C7D03B1EC9B79E00D0BD9C /* SWRevealViewController.h */,
-				53C7D03C1EC9B79E00D0BD9C /* SWRevealViewController.m */,
-			);
-			name = "SW Reveal Controll";
-			sourceTree = "<group>";
-		};
-		534635A22079A8FB00497A8D /* Progress indicator */ = {
-			isa = PBXGroup;
-			children = (
-				534635A42079A90E00497A8D /* SVProgressHUD-Prefix.pch */,
-				534635A52079A91200497A8D /* SVProgressHUD-Prefix.pch */,
-				534635A62079A91700497A8D /* SVProgressHUD-Prefix.pch */,
-				533C92D820762A9300394325 /* SVIndefiniteAnimatedView.h */,
-				533C92D720762A9300394325 /* SVIndefiniteAnimatedView.m */,
-				533C92D520762A9300394325 /* SVProgressAnimatedView.h */,
-				533C92D420762A9300394325 /* SVProgressAnimatedView.m */,
-				534635A32079A8FC00497A8D /* SVProgressHUD-Prefix.pch */,
-				533C92D320762A9200394325 /* SVProgressHUD.bundle */,
-				533C92D920762A9300394325 /* SVProgressHUD.h */,
-				533C92D620762A9300394325 /* SVProgressHUD.m */,
-				533C92D220762A9200394325 /* SVRadialGradientLayer.h */,
-				533C92DB20762A9400394325 /* SVRadialGradientLayer.m */,
-			);
-			name = "Progress indicator";
-			sourceTree = "<group>";
-		};
-		534635A92079A94800497A8D /* App Definitions */ = {
-			isa = PBXGroup;
-			children = (
-				53B306732077584C006E05B7 /* AppCells.swift */,
-				53D4B383207610140063E45F /* AppStates.swift */,
-				53B306752077643A006E05B7 /* AppColors.swift */,
-			);
-			name = "App Definitions";
-			sourceTree = "<group>";
-		};
-		534635AA2079A96000497A8D /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				53D4B38120760FBF0063E45F /* NavigationService.swift */,
-				53D4B38520761F700063E45F /* NavigationProtocols.swift */,
-			);
-			name = Navigation;
-			sourceTree = "<group>";
-		};
-		534635AB2079A9C300497A8D /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				06B38A371F82361E009EDC60 /* CommonUtil.swift */,
-				061F3E7F1F8AF09C00BD0D09 /* DataUtil.swift */,
-				53D4B37F20760D9A0063E45F /* TimeDateUtil.swift */,
-			);
-			name = Utilities;
-			sourceTree = "<group>";
-		};
-		534BB6862081E21F00757932 /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				534BB6872081E28900757932 /* RMessage.h */,
-				534BB6882081E28900757932 /* RMessage.m */,
-				534BB6942081E30600757932 /* PPTopMostControllerProtocol.h */,
-				534BB68C2081E28900757932 /* RMessageDefaultDesign.json */,
-				534BB6892081E28900757932 /* RMessageView.h */,
-				534BB68B2081E28900757932 /* RMessageView.m */,
-				534BB69A2081E31A00757932 /* UINavigationController+PPTopMostController.h */,
-				534BB6972081E31A00757932 /* UINavigationController+PPTopMostController.m */,
-				534BB6982081E31A00757932 /* UITabBarController+PPTopMostController.h */,
-				534BB6992081E31A00757932 /* UITabBarController+PPTopMostController.m */,
-				534BB6952081E31A00757932 /* UIViewController+PPTopMostController.h */,
-				534BB6962081E31A00757932 /* UIViewController+PPTopMostController.m */,
-				534BB6922081E2D400757932 /* HexColors.h */,
-				534BB6912081E2D400757932 /* HexColors.m */,
-				534BB68A2081E28900757932 /* RMessageView.xib */,
-			);
-			name = Notifications;
-			sourceTree = "<group>";
-		};
-		53CDC1E41EDC1EB300A2ED5A /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				53BB7A181ED14C3700370F7B /* ClashCell.swift */,
-				53F8A0201EC3DE930001604A /* DayCollectionViewCell.swift */,
-				53B30671207754A0006E05B7 /* LessonCell.swift */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
-		53CDC1E51EDC1EC000A2ED5A /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				53F8A00D1EC3D0010001604A /* TimetableView.swift */,
-				534A442020873F03009E719E /* NavigationCell.swift */,
-				53DED0D9207F660000C363AF /* AboutView.swift */,
-				53C7D03E1EC9BD8400D0BD9C /* MenuTableViewController.swift */,
-				297C56921ED9126200C44420 /* LoginView.swift */,
-				53BB7A201ED1536C00370F7B /* DetailView.swift */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		53CDC1E61EDC1EC900A2ED5A /* Data Structures */ = {
-			isa = PBXGroup;
-			children = (
-				53C7D0381EC9B6A500D0BD9C /* Lesson.swift */,
-				53BB7A161ED133A900370F7B /* Constants.swift */,
-			);
-			name = "Data Structures";
-			sourceTree = "<group>";
-		};
 		53F89FFF1EC3D0010001604A = {
 			isa = PBXGroup;
 			children = (
-				064082FD20C263AA00F568CB /* Test files */,
+				06CDA3AD211C0D79007410C9 /* Test files */,
 				06D37CD61F873C7F009318AC /* Settings.bundle */,
 				53F8A00A1EC3D0010001604A /* WingIt */,
-				06D61717210979CB00F58A30 /* Reachability.swift */,
 				06934D7B1F86730B00D308BD /* WingItUITests */,
 				06E5E2EE20C1504500C77382 /* WingItTests */,
 				53F8A0091EC3D0010001604A /* Products */,
@@ -406,27 +418,21 @@
 		53F8A00A1EC3D0010001604A /* WingIt */ = {
 			isa = PBXGroup;
 			children = (
+				06CDA35C211C0867007410C9 /* C bridge */,
 				53F8A00B1EC3D0010001604A /* AppDelegate.swift */,
 				53F8A00F1EC3D0010001604A /* Main.storyboard */,
-				534635AB2079A9C300497A8D /* Utilities */,
-				53CDC1E51EDC1EC000A2ED5A /* Views */,
-				534635AA2079A96000497A8D /* Navigation */,
-				534635A92079A94800497A8D /* App Definitions */,
-				53CDC1E41EDC1EB300A2ED5A /* Cells */,
-				53CDC1E61EDC1EC900A2ED5A /* Data Structures */,
+				06CDA35B211C0843007410C9 /* Utilities */,
+				065192E1211C0683000629B6 /* Views */,
+				065192E2211C06A6000629B6 /* Navigation */,
+				065192E4211C06D3000629B6 /* Cells */,
+				065192E3211C06B8000629B6 /* App Definitions */,
+				06CDA35A211C0772007410C9 /* Data Structures */,
+				53F8A01A1EC3D0010001604A /* Info.plist */,
+				53F8A0171EC3D0010001604A /* LaunchScreen.storyboard */,
+				53F8A0121EC3D0010001604A /* Project.xcdatamodeld */,
 				063A25DE210A99FC00967041 /* SystemIcons.xcassets */,
 				53F8A0151EC3D0010001604A /* Assets.xcassets */,
-				53F8A0171EC3D0010001604A /* LaunchScreen.storyboard */,
-				53F8A01A1EC3D0010001604A /* Info.plist */,
-				53F8A0121EC3D0010001604A /* Project.xcdatamodeld */,
-				06A637F81F7DD15F00C5F15F /* wrapper.cpp */,
-				0640830020C36D2700F568CB /* Cwrapper.swift */,
-				53C7D03A1EC9B79D00D0BD9C /* Project-Bridging-Header.h */,
-				534635A12079A8EC00497A8D /* SW Reveal Controll */,
-				534635A22079A8FB00497A8D /* Progress indicator */,
-				534BB6862081E21F00757932 /* Notifications */,
-				06D61709210974D200F58A30 /* onepassword-app-extension */,
-				062EB9421F8B414B005F350E /* SwiftKeychainWrapper */,
+				067CFB61211C05D000D7FF8A /* 3rd party libraries */,
 			);
 			path = WingIt;
 			sourceTree = "<group>";
@@ -557,8 +563,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				064082FE20C263BB00F568CB /* TestAnswers in Resources */,
-				064082FF20C263BB00F568CB /* TestInputs in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,13 +575,13 @@
 				06D61713210974D300F58A30 /* 1Password.xcassets in Resources */,
 				0675D6E721006406003B0233 /* testData.csv in Resources */,
 				06D61716210974D300F58A30 /* 1PasswordExtension.podspec in Resources */,
-				533C92DC20762A9400394325 /* SVProgressHUD.bundle in Resources */,
-				534BB6902081E28A00757932 /* RMessageDefaultDesign.json in Resources */,
 				06D61714210974D300F58A30 /* .gitignore in Resources */,
 				06D37CD71F873C7F009318AC /* Settings.bundle in Resources */,
+				06CDA38C211C0C10007410C9 /* SVProgressHUD.bundle in Resources */,
+				06CDA377211C0B5B007410C9 /* RMessageDefaultDesign.json in Resources */,
 				53F8A0191EC3D0010001604A /* LaunchScreen.storyboard in Resources */,
-				534BB68E2081E28A00757932 /* RMessageView.xib in Resources */,
 				06D61712210974D300F58A30 /* README.md in Resources */,
+				06CDA375211C0B5B007410C9 /* RMessageView.xib in Resources */,
 				53F8A0161EC3D0010001604A /* Assets.xcassets in Resources */,
 				53F8A0111EC3D0010001604A /* Main.storyboard in Resources */,
 			);
@@ -630,13 +634,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				062EB9471F8B415F005F350E /* KeychainWrapper.swift in Sources */,
-				533C92DF20762A9400394325 /* SVIndefiniteAnimatedView.m in Sources */,
 				062EB9481F8B415F005F350E /* KeychainItemAccessibility.swift in Sources */,
 				53DED0DA207F660000C363AF /* AboutView.swift in Sources */,
+				06CDA378211C0B5B007410C9 /* UINavigationController+PPTopMostController.m in Sources */,
 				53B306762077643A006E05B7 /* AppColors.swift in Sources */,
-				53C7D03D1EC9B79E00D0BD9C /* SWRevealViewController.m in Sources */,
-				534BB68D2081E28A00757932 /* RMessage.m in Sources */,
 				53F8A00E1EC3D0010001604A /* TimetableView.swift in Sources */,
+				06CDA37D211C0C09007410C9 /* SWRevealViewController.m in Sources */,
 				06B38A381F82361E009EDC60 /* CommonUtil.swift in Sources */,
 				53F8A0141EC3D0010001604A /* Project.xcdatamodeld in Sources */,
 				53B30672207754A0006E05B7 /* LessonCell.swift in Sources */,
@@ -645,16 +648,15 @@
 				53C7D03F1EC9BD8400D0BD9C /* MenuTableViewController.swift in Sources */,
 				53D4B384207610140063E45F /* AppStates.swift in Sources */,
 				53C7D0391EC9B6A500D0BD9C /* Lesson.swift in Sources */,
-				533C92DE20762A9400394325 /* SVProgressHUD.m in Sources */,
 				53D4B38620761F700063E45F /* NavigationProtocols.swift in Sources */,
 				53F8A0211EC3DE930001604A /* DayCollectionViewCell.swift in Sources */,
-				534BB69D2081E31B00757932 /* UITabBarController+PPTopMostController.m in Sources */,
-				534BB69C2081E31B00757932 /* UINavigationController+PPTopMostController.m in Sources */,
 				297C56931ED9126200C44420 /* LoginView.swift in Sources */,
+				06CDA388211C0C10007410C9 /* SVRadialGradientLayer.m in Sources */,
+				06CDA373211C0B5B007410C9 /* UITabBarController+PPTopMostController.m in Sources */,
+				06CDA38A211C0C10007410C9 /* SVIndefiniteAnimatedView.m in Sources */,
 				534A442120873F03009E719E /* NavigationCell.swift in Sources */,
-				533C92E020762A9400394325 /* SVRadialGradientLayer.m in Sources */,
 				06A637F91F7DD15F00C5F15F /* wrapper.cpp in Sources */,
-				534BB68F2081E28A00757932 /* RMessageView.m in Sources */,
+				06CDA374211C0B5B007410C9 /* RMessage.m in Sources */,
 				53D4B38220760FBF0063E45F /* NavigationService.swift in Sources */,
 				53BB7A171ED133A900370F7B /* Constants.swift in Sources */,
 				06D61711210974D300F58A30 /* OnePasswordExtension.m in Sources */,
@@ -662,11 +664,13 @@
 				53D4B38020760D9A0063E45F /* TimeDateUtil.swift in Sources */,
 				061F3E801F8AF09C00BD0D09 /* DataUtil.swift in Sources */,
 				53BB7A211ED1536C00370F7B /* DetailView.swift in Sources */,
-				534BB69B2081E31B00757932 /* UIViewController+PPTopMostController.m in Sources */,
-				534BB6932081E2D400757932 /* HexColors.m in Sources */,
-				533C92DD20762A9400394325 /* SVProgressAnimatedView.m in Sources */,
+				06CDA376211C0B5B007410C9 /* HexColors.m in Sources */,
 				53B306742077584C006E05B7 /* AppCells.swift in Sources */,
 				06D61718210979CB00F58A30 /* Reachability.swift in Sources */,
+				06CDA38B211C0C10007410C9 /* SVProgressHUD.m in Sources */,
+				06CDA372211C0B5B007410C9 /* RMessageView.m in Sources */,
+				06CDA389211C0C10007410C9 /* SVProgressAnimatedView.m in Sources */,
+				06CDA379211C0B5B007410C9 /* UIViewController+PPTopMostController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -909,6 +913,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WingIt",
 				);
+				HEADER_SEARCH_PATHS = $PROJECT_DIR/Backend/src;
 				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -917,7 +922,7 @@
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
-				SWIFT_OBJC_BRIDGING_HEADER = "WingIt/Project-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$PROJECT_DIR/WingIt/C bridge/C-Swift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -939,13 +944,14 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/WingIt",
 				);
+				HEADER_SEARCH_PATHS = $PROJECT_DIR/Backend/src;
 				INFOPLIST_FILE = WingIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stonedcrone.WingIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				RUN_CLANG_STATIC_ANALYZER = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "WingIt/Project-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$PROJECT_DIR/WingIt/C bridge/C-Swift-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
