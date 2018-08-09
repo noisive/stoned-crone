@@ -229,8 +229,8 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
    
     //Scroll view
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let dayArray = Constants.Formats.dayArray
         let dayIndex = getCurrentXPage()
         if dayIndex < self.NUMBER_OF_DAYS_IN_SECTION {
