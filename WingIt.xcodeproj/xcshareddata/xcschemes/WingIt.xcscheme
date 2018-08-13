@@ -53,16 +53,43 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "LoginAndRefreshTests/testCancelButtonExistsOnRefresh()">
+               </Test>
+               <Test
+                  Identifier = "LoginAndRefreshTests/testCancelButtonNotPresentFresh()">
+               </Test>
+               <Test
+                  Identifier = "LoginAndRefreshTests/testDataPersistenceOnRestart()">
+               </Test>
+               <Test
                   Identifier = "LoginAndRefreshTests/testLoginRaw()">
                </Test>
                <Test
+                  Identifier = "LoginAndRefreshTests/testLoginUpdate()">
+               </Test>
+               <Test
+                  Identifier = "LoginAndRefreshTests/testLogout()">
+               </Test>
+               <Test
+                  Identifier = "LoginAndRefreshTests/testReturnsToCurrentDayAfterUpdate()">
+               </Test>
+               <Test
                   Identifier = "LoginAndRefreshTests/testSwipePastEndOfArrayFast()">
+               </Test>
+               <Test
+                  Identifier = "LoginAndRefreshTests/testUpdateBannerRefreshesOnTap()">
                </Test>
                <Test
                   Identifier = "LoginAndRefreshTests/testUpdateNoInternet()">
                </Test>
                <Test
                   Identifier = "LoginAndRefreshTests/testingPlayground()">
+               </Test>
+               <Test
+                  Identifier = "SegueTests">
+               </Test>
+               <Test
+                  Identifier = "StabilityAndSanityTests">
                </Test>
                <Test
                   Identifier = "StabilityAndSanityTests/testSwipePastEndOfArrayFast()">
@@ -75,6 +102,9 @@
                </Test>
                <Test
                   Identifier = "StabilityTests/testingPlayground()">
+               </Test>
+               <Test
+                  Identifier = "TimetableEventPositionTests">
                </Test>
                <Test
                   Identifier = "TimetableEventPositionTests/test2HourCellAppearsInBoth()">
@@ -96,21 +126,6 @@
                </Test>
                <Test
                   Identifier = "WingItUITestsSuper/testingPlayground()">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "06E5E2EC20C1504500C77382"
-               BuildableName = "WingItTests.xctest"
-               BlueprintName = "WingItTests"
-               ReferencedContainer = "container:WingIt.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "BackendTest/testPerformanceExample()">
                </Test>
             </SkippedTests>
          </TestableReference>
