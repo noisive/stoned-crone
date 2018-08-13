@@ -1,14 +1,14 @@
-deliver(
+# deliver(
 force = true
 # baseLanguage = "en-Au"
-app_identifier = "com.stonedcrone.WingIt"
 app = 1292454564
+app_identifier = "com.stonedcrone.WingIt"
 skip_binary_upload = true
 build_number = "${XCODE_BUILD_NUMBER}"
 submit_for_review = true
 automatic_release = true
 team_name = "Eli Labes"
-metadata_path: "./metadata"
+metadata_path = "./metadata"
 submission_information({
     add_id_info_serves_ads: false,
     add_id_info_uses_idfa: false,
