@@ -98,6 +98,16 @@ func convertNZTtoUTC(date current: Date) -> Date{
     let updated = Calendar.current.date(byAdding: timeDiff, to: current)
     return (updated)!
 }
+func convertUTCtoNZT(date current: Date) -> Date{
+    var timeDiff = DateComponents()
+    if Calendar.current.timeZone.isDaylightSavingTime() {
+        timeDiff.hour = +13
+    }else{
+        timeDiff.hour = +12
+    }
+    let updated = Calendar.current.date(byAdding: timeDiff, to: current)
+    return (updated)!
+}
 
 //func convertUTCtoNZT(date current: Date) -> Date{
 //    var timeDiff = DateComponents()
@@ -117,7 +127,9 @@ func todaysDate() -> Date {
     if let _ = mockDate {
         date = mockDate!
     }else{
-        date = Date()
+        // We're treating UTC as NZT, so add the right num of hours.
+        // See top of file.
+        date=convertUTCtoNZT(date: Date())
     }
     #if debug
     let formatter = DateFormatter()

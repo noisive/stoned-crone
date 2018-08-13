@@ -42,10 +42,6 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        if appDelegate.firstLoadSoScrollToToday {
-//            self.scrollToCurrentDay()
-//            appDelegate.firstLoadSoScrollToToday = false
-//        }
     }
 
     
@@ -229,14 +225,14 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
     }
    
     //Scroll view
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let dayArray = Constants.Formats.dayArray
         let dayIndex = getCurrentXPage()
         if dayIndex < self.NUMBER_OF_DAYS_IN_SECTION {
             self.navigationItem.title = dayArray[dayIndex]
+            self.getClassCountForDay()
         }
-        self.getClassCountForDay()
     }
     
     func getCurrentXPage() -> Int {

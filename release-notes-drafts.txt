@@ -1,2 +1,0 @@
-* Fixed issue where timetable was loading the wrong day on the initial load
-
