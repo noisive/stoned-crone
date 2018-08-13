@@ -235,8 +235,8 @@ class TimetableView: UIViewController, UIToolbarDelegate, UICollectionViewDelega
         let dayIndex = getCurrentXPage()
         if dayIndex < self.NUMBER_OF_DAYS_IN_SECTION {
             self.navigationItem.title = dayArray[dayIndex]
+            self.getClassCountForDay()
         }
-        self.getClassCountForDay()
     }
     
     func getCurrentXPage() -> Int {
