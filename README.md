@@ -1,5 +1,5 @@
 # WingIt
-[![Travis Build Status](https://travis-ci.org/noisive/stoned-crone.svg?branch=master)](https://travis-ci.org/noisive/stoned-crone) [![Bitrise Test Status](https://www.bitrise.io/app/a3ababae6d64c2f6.svg?token=lN03MX0cNkoqBQ8__H_Htw)]()
+[![Bitrise Test Status](https://app.bitrise.io/app/a3ababae6d64c2f6/status.svg?token=lN03MX0cNkoqBQ8__H_Htw&branch=master)]()
 
 ## README
 
