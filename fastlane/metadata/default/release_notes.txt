@@ -1,2 +1,1 @@
-- Fix crash when swiping past Sunday
-- Fix annoying bug where classes wouldn't refresh properly in the morning or on a Monday. (Timezones are fun)
+- Patch for latest evision change
