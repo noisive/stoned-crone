@@ -3,7 +3,7 @@
 //  WingIt
 //
 //  Created by Eli Labes on 12/04/18.
-//  Copyright © 2018 Noisive. All rights reserved.
+//  Copyright © 2019 Noisive. All rights reserved.
 //
 
 
